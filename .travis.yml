@@ -9,4 +9,5 @@ test:
   - npm run test
 
 deploy:
-  - git push push heroku master
+  provider: heroku
+  app: fiuba-taller-2-web-admin
