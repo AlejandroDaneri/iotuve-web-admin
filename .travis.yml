@@ -1,6 +1,8 @@
 languaje: node_js
 
 install:
+  - pwd
+  - ls
   - npm install
 
 test:
