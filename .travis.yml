@@ -1,0 +1,12 @@
+languaje: node_js
+node_js:
+  - 13
+
+install:
+  - npm install
+
+test:
+  - npm run test
+
+deploy:
+  - git push push heroku master
