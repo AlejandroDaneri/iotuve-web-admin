@@ -3,9 +3,10 @@ node_js:
   - 13
 
 install:
-  - pwd
-  - ls
   - npm install
 
 test:
   - npm run test
+
+deploy:
+  - git push push heroku master
