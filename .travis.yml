@@ -1,7 +1,6 @@
 languaje: node_js
-
-node_version:
-  - n 13
+node_js:
+  - 13
 
 install:
   - pwd
