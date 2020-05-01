@@ -1,5 +1,3 @@
-.PHONY: run
-
 install:
 	docker build -t web-admin:dev .
 
