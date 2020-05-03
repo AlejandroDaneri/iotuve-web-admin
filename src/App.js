@@ -24,12 +24,14 @@ const filesMock = [
 ]
 
 function App () {
+  const baseUrl = process.env.MEDIA_SERVER_STAGING
+    ? process.env.MEDIA_SERVER_STAGING
+    : ''
   const [files, changeFiles] = useState([])
   useEffect(() => {
     axios
-      .get('/list')
+      .get(baseUrl + '/list')
       .then(response => {
-        console.error(response.data.videos)
         changeFiles(response.data.videos)
       })
       .catch(err => {
