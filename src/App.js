@@ -1,28 +1,42 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './App.css'
+import axios from 'axios'
 
-const files = [
+const filesMock = [
   {
     id: '12313',
     name: 'Batman Inicia Trailer',
-    duration: '1:21',
-    author: 'Sebastian Ripari'
+    size: 12313,
+    url: 'www.google.com'
   },
   {
     id: '12343',
     name: ' Joker Trailer',
-    duration: '3:24',
-    author: 'Alejandro Daneri'
+    size: 10313,
+    url: 'www.google.com'
   },
   {
     id: '42343',
     name: 'Boca VS River',
-    duration: '1:20:24',
-    author: 'Martin Gonzales'
+    size: 15313,
+    url: 'www.google.com'
   }
 ]
 
 function App () {
+  const [files, changeFiles] = useState([])
+  useEffect(() => {
+    axios
+      .get('/list')
+      .then(response => {
+        console.error(response.data.videos)
+        changeFiles(response.data.videos)
+      })
+      .catch(err => {
+        console.error(err)
+      })
+  }, [])
+
   return (
     <div className='App'>
       <header className='App-header'>
@@ -30,16 +44,18 @@ function App () {
         <h2>Files</h2>
         <table>
           <tr>
-            <th>Title</th>
-            <th>Duration</th>
-            <th>Author</th>
+            <th>Name</th>
+            <th>Size</th>
+            <th>URL</th>
           </tr>
           {files.map(file => {
             return (
               <tr key={file.id}>
                 <td>{file.name}</td>
-                <td>{file.duration}</td>
-                <td>{file.author}</td>
+                <td>{file.size}</td>
+                <td>
+                  <a href={file.url}>Link</a>
+                </td>
               </tr>
             )
           })}
