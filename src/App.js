@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import './App.css'
 import axios from 'axios'
+require('dotenv').config()
 
+/*
 const filesMock = [
   {
     id: '12313',
@@ -22,6 +24,7 @@ const filesMock = [
     url: 'www.google.com'
   }
 ]
+*/
 
 function App () {
   const baseUrl = process.env.MEDIA_SERVER_STAGING
@@ -38,7 +41,7 @@ function App () {
       .catch(err => {
         console.error(err)
       })
-  }, [])
+  }, [baseUrl])
 
   return (
     <div className='App'>
