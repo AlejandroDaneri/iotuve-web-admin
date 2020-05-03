@@ -27,6 +27,7 @@ function App () {
   const baseUrl = process.env.MEDIA_SERVER_STAGING
     ? process.env.MEDIA_SERVER_STAGING
     : ''
+  console.error(baseUrl)
   const [files, changeFiles] = useState([])
   useEffect(() => {
     axios
