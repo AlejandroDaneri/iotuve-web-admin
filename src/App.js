@@ -27,9 +27,7 @@ const filesMock = [
 */
 
 function App () {
-  const baseUrl = process.env.MEDIA_SERVER_STAGING
-    ? process.env.MEDIA_SERVER_STAGING
-    : ''
+  const baseUrl = process.env.REACT_APP_MEDIA_SERVER_STAGING
   console.error(baseUrl)
   const [files, changeFiles] = useState([])
   useEffect(() => {
