@@ -12,3 +12,12 @@ deploy:
   provider: heroku
   api_key: 34ec8ede-a497-4d11-8dd6-7d803b5a53f5
   app: fiuba-taller-2-web-admin
+  on:
+    branch: master
+  
+  provider: heroku
+  api_key: 34ec8ede-a497-4d11-8dd6-7d803b5a53f5
+  app: fiuba-taller-2-web-admin-st
+  on:
+    branch: develop
+

@@ -17,8 +17,8 @@ const App = () => {
       .then(response => {
         changeFiles(response.data.videos)
       })
-      .catch(err => {
-        console.error(err)
+      .catch(_ => {
+        console.error('Video list request fail')
       })
   }, [])
 
