@@ -14,10 +14,6 @@ const AppHeaderWrapper = styled.section`
   font-size: calc(10px + 2vmin);
   color: #61dafb;
 
-  > table {
-    width: 50%;
-  }
-
   > a,
   a:link,
   a:visited {
