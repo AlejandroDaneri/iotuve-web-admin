@@ -2,6 +2,22 @@ import React, { useEffect, useState } from 'react'
 import './App.css'
 import axios from 'axios'
 import CircleLoader from 'react-spinners/CircleLoader'
+import styled from 'styled-components'
+
+const AppHeaderWrapper = styled.section`
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: #61dafb;
+
+  > table {
+    width: 50%;
+  }
+`
 
 function baseUrl () {
   if (process.env.NODE_ENV === 'production')
@@ -24,7 +40,7 @@ const App = () => {
 
   return (
     <div className='App'>
-      <header className='App-header'>
+      <AppHeaderWrapper>
         <h1>Web Admin</h1>
         <h2>Files</h2>
         {!files && <CircleLoader color='#61dafb' size={250} />}
@@ -54,7 +70,7 @@ const App = () => {
             </tbody>
           </table>
         )}
-      </header>
+      </AppHeaderWrapper>
     </div>
   )
 }
