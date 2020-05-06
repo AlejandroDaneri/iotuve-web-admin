@@ -10,6 +10,10 @@ export const AppWrapper = styled.section`
   font-size: calc(10px + 2vmin);
   color: #61dafb;
 
+  > h1 {
+    font-size: 50px;
+  }
+
   > a,
   a:link,
   a:visited {
