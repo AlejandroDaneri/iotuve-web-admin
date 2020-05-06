@@ -41,7 +41,9 @@ const App = () => {
               {(files || []).map(file => {
                 return (
                   <tr key={file.id}>
-                    <td>{file.name}</td>
+                    <td>
+                      {file.name.split('/')[file.name.split('/').length - 1]}
+                    </td>
                     <td>{file.size}</td>
                     <td>
                       <a href={file.url}>Link</a>
