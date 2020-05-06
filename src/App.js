@@ -5,7 +5,7 @@ import CircleLoader from 'react-spinners/CircleLoader'
 
 function baseUrl () {
   if (process.env.NODE_ENV === 'production')
-    return process.env.REACT_APP_MEDIA_SERVER_STAGING
+    return process.env.REACT_APP_MEDIA_SERVER
   return ''
 }
 
