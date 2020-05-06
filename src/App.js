@@ -33,7 +33,7 @@ const App = () => {
             <thead>
               <tr>
                 <th>Name</th>
-                <th>Size</th>
+                <th>Size (MB)</th>
                 <th>URL</th>
               </tr>
             </thead>
@@ -44,7 +44,7 @@ const App = () => {
                     <td>
                       {file.name.split('/')[file.name.split('/').length - 1]}
                     </td>
-                    <td>{file.size}</td>
+                    <td>{(file.size / 1000 / 1000).toPrecision(3)}</td>
                     <td>
                       <a href={file.url}>Link</a>
                     </td>
