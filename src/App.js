@@ -30,22 +30,26 @@ const App = () => {
         {!files && <CircleLoader color='#61dafb' size={250} />}
         {files && (
           <table>
-            <tr>
-              <th>Name</th>
-              <th>Size</th>
-              <th>URL</th>
-            </tr>
-            {(files || []).map(file => {
-              return (
-                <tr key={file.id}>
-                  <td>{file.name}</td>
-                  <td>{file.size}</td>
-                  <td>
-                    <a href={file.url}>Link</a>
-                  </td>
-                </tr>
-              )
-            })}
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Size</th>
+                <th>URL</th>
+              </tr>
+            </thead>
+            <tbody>
+              {(files || []).map(file => {
+                return (
+                  <tr key={file.id}>
+                    <td>{file.name}</td>
+                    <td>{file.size}</td>
+                    <td>
+                      <a href={file.url}>Link</a>
+                    </td>
+                  </tr>
+                )
+              })}
+            </tbody>
           </table>
         )}
       </header>
