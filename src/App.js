@@ -17,6 +17,13 @@ const AppHeaderWrapper = styled.section`
   > table {
     width: 50%;
   }
+
+  > a,
+  a:link,
+  a:visited {
+    color: white;
+    text-decoration: none;
+  }
 `
 
 function baseUrl () {
