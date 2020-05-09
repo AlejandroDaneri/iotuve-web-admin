@@ -1,6 +1,27 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import CircleLoader from 'react-spinners/CircleLoader'
+import { Link } from 'react-router-dom'
+
+import styled from 'styled-components'
+
+export const Button = styled.div`
+  background-color: #61dafb;
+  color: black;
+  cursor: pointer;
+`
+
+export const FilesWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+
+  .link {
+    width: 10%;
+  }
+`
 
 function baseUrl () {
   if (process.env.NODE_ENV === 'production')
@@ -21,7 +42,10 @@ const Files = () => {
       })
   }, [])
   return (
-    <div>
+    <FilesWrapper>
+      <Link to='/' className='link'>
+        <Button>Home</Button>
+      </Link>
       <h2>Files</h2>
       {!files && <CircleLoader color='#61dafb' size={250} />}
       {files && (
@@ -52,7 +76,7 @@ const Files = () => {
           </tbody>
         </table>
       )}
-    </div>
+    </FilesWrapper>
   )
 }
 

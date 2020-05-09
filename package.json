@@ -12,6 +12,7 @@
     "pretty-quick": "^2.0.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.1",
     "react-spinners": "^0.8.3",
     "styled-components": "^5.1.0"

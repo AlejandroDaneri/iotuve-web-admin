@@ -14,6 +14,10 @@ export const AppWrapper = styled.section`
     font-size: 50px;
   }
 
+  .link {
+    width: 10%;
+  }
+
   > a,
   a:link,
   a:visited {
