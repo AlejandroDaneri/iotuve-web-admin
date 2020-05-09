@@ -35,6 +35,7 @@ const App = () => {
               <tr>
                 <th>Name</th>
                 <th>Size (MB)</th>
+                <th>Type</th>
                 <th>URL</th>
               </tr>
             </thead>
@@ -46,6 +47,7 @@ const App = () => {
                       {file.name.split('/')[file.name.split('/').length - 1]}
                     </td>
                     <td>{(file.size / 1000 / 1000).toPrecision(3)}</td>
+                    <td>{file.type}</td>
                     <td>
                       <a href={file.url}>Link</a>
                     </td>
