@@ -9,6 +9,7 @@ export const Button = styled.div`
   background-color: #61dafb;
   color: black;
   cursor: pointer;
+  margin: 4%;
 `
 
 const App = () => {
@@ -19,9 +20,14 @@ const App = () => {
           <h1>Web Admin</h1>
           <Switch>
             <Route exact path='/'>
-              <Link to='/files' className='link'>
-                <Button>Files</Button>
-              </Link>
+              <div className='menu'>
+                <Link to='/files' className='link'>
+                  <Button>Files</Button>
+                </Link>
+                <Link to='/health' className='link'>
+                  <Button>Health</Button>
+                </Link>
+              </div>
             </Route>
             <Route path='/files' component={Files} />
           </Switch>

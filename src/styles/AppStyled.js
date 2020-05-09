@@ -24,4 +24,12 @@ export const AppWrapper = styled.section`
     color: white;
     text-decoration: none;
   }
+
+  & .menu {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
 `
