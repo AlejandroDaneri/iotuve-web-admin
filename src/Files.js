@@ -35,7 +35,8 @@ const Files = () => {
     axios
       .get(baseUrl() + '/list')
       .then(response => {
-        changeFiles(response.data.videos)
+        const { data } = response
+        changeFiles(Object.values(data))
       })
       .catch(_ => {
         console.error('Video list request fail')
@@ -56,6 +57,7 @@ const Files = () => {
               <th>Size (MB)</th>
               <th>Type</th>
               <th>URL</th>
+              <th>Imagen</th>
             </tr>
           </thead>
           <tbody>
@@ -69,6 +71,9 @@ const Files = () => {
                   <td>{file.type}</td>
                   <td>
                     <a href={file.url}>Link</a>
+                  </td>
+                  <td>
+                    <img width='80px' height='40px' src={file.thumb} />
                   </td>
                 </tr>
               )
