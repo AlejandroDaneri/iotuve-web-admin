@@ -1,16 +1,43 @@
+sudo: required
 languaje: node_js
 node_js:
   - 13
 
+services:
+  - docker
+
+before_install:
+  # install heroku CLI
+  - wget -qO- https://toolbelt.heroku.com/install.sh | sh
+  # login to docker registries (dockerhub + heroku)
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - echo "$HEROKU_PASSWORD" | docker login -u "$HEROKU_USERNAME" --password-stdin registry.heroku.com
+
 install:
   - npm install
 
-test:
-  - npm run test
+script:
+  - npm test
 
 deploy:
-  provider: heroku
-  api_key: 34ec8ede-a497-4d11-8dd6-7d803b5a53f5
-  app:
-    develop: fiuba-taller-2-web-admin-st
-    master: fiuba-taller-2-web-admin
+  - provider: script
+    script:
+      # build docker images, push to dockerhub & heroku
+      docker build -t docker push alejandrodaneri/web-admin-chotuve:staging .;
+      docker tag alejandrodaneri/web-admin-chotuve:staging  registry.heroku.com/$HEROKU_APP_NAME_STAGING/web;
+      docker push alejandrodaneri/web-admin-chotuve:staging;
+      docker push registry.heroku.com/$HEROKU_APP_NAME_STAGING/web;
+      heroku container:release web --app $HEROKU_APP_NAME_STAGING
+    on:
+      branch: develop
+
+  - provider: script
+    script:
+      # build docker images, push to dockerhub & heroku
+      docker build -t alejandrodaneri/web-admin-chotuve:production .;
+      docker tag alejandrodaneri/web-admin-chotuve:production  registry.heroku.com/$HEROKU_APP_NAME/web;
+      docker push alejandrodaneri/web-admin-chotuve:production;
+      docker push registry.heroku.com/$HEROKU_APP_NAME/web;
+      heroku container:release web --app $HEROKU_APP_NAME
+    on:
+      branch: master

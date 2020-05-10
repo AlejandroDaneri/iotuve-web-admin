@@ -1,6 +1,6 @@
 {
   "name": "fiuba-taller-2-web-admin",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "proxy": "https://fiuba-taller-2-media-server-st.herokuapp.com",
   "dependencies": {
@@ -27,11 +27,11 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "prettier-standard --lint"
+    "lint": "prettier-standard --lint --staged"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "npm run lint"
     }
   },
   "lint-staged": {
