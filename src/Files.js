@@ -73,12 +73,14 @@ const Files = () => {
                     <a href={file.url}>Link</a>
                   </td>
                   <td>
-                    <img
-                      alt='thumb'
-                      width='80px'
-                      height='40px'
-                      src={file.thumb}
-                    />
+                    <a href={file.thumb}>
+                      <img
+                        alt='thumb'
+                        width='80px'
+                        height='40px'
+                        src={file.thumb}
+                      />
+                    </a>
                   </td>
                 </tr>
               )
