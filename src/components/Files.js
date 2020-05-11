@@ -2,26 +2,8 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import CircleLoader from 'react-spinners/CircleLoader'
 import { Link } from 'react-router-dom'
-
-import styled from 'styled-components'
-
-export const Button = styled.div`
-  background-color: #61dafb;
-  color: black;
-  cursor: pointer;
-`
-
-export const FilesWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-
-  .link {
-    width: 10%;
-  }
-`
+import { FilesWrapper } from '../styles/FilesStyled'
+import { Button } from '../styles/ButtonStyled'
 
 function baseUrl () {
   if (process.env.NODE_ENV === 'production')
