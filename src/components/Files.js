@@ -7,6 +7,7 @@ import { getVideos } from '../webapi'
 
 const Files = () => {
   const [files, changeFiles] = useState()
+
   useEffect(() => {
     getVideos()
       .then(response => {
@@ -17,6 +18,7 @@ const Files = () => {
         console.error('Video list request fail')
       })
   }, [])
+
   return (
     <FilesWrapper>
       <Link to='/' className='link'>
