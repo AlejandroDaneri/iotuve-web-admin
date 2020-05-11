@@ -1,5 +1,4 @@
 import React from 'react'
-import './App.css'
 import { AppWrapper } from './styles/AppStyled'
 import { Button } from './styles/ButtonStyled'
 import Files from './components/Files'
