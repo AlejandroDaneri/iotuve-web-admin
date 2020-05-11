@@ -19,8 +19,8 @@ const App = () => {
               <Link to='/health' className='link'>
                 <Button>Health</Button>
               </Link>
-              <Login />
             </div>
+            <Login />
           </Route>
           <Route path='/files' component={Files} />
         </Switch>
