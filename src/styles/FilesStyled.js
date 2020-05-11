@@ -6,8 +6,4 @@ export const FilesWrapper = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-
-  .link {
-    width: 10%;
-  }
 `
