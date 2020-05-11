@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import './App.css'
 import { AppWrapper } from './styles/AppStyled'
-import Files from './Files'
+import Files from './components/Files'
 import styled from 'styled-components'
 import { Link, BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
