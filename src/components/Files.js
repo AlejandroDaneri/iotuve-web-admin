@@ -1,21 +1,14 @@
 import React, { useEffect, useState } from 'react'
-import axios from 'axios'
 import CircleLoader from 'react-spinners/CircleLoader'
 import { Link } from 'react-router-dom'
 import { FilesWrapper } from '../styles/FilesStyled'
 import { Button } from '../styles/ButtonStyled'
-
-function baseUrl () {
-  if (process.env.NODE_ENV === 'production')
-    return process.env.REACT_APP_MEDIA_SERVER
-  return ''
-}
+import { getVideos } from '../webapi'
 
 const Files = () => {
   const [files, changeFiles] = useState()
   useEffect(() => {
-    axios
-      .get(baseUrl() + '/list')
+    getVideos()
       .then(response => {
         const { data } = response
         changeFiles(Object.values(data))
