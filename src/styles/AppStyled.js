@@ -14,32 +14,21 @@ export const AppWrapper = styled.section`
     font-size: 50px;
   }
 
-  & .form {
-    margin: 2%;
-    padding: 1%;
+  > input {
+    margin: 0.4%;
+    padding: 0.3% 1%;
     border: 2px solid #61dafb;
-    display: flex;
-    flex-direction: column;
-    width: 50%;
-    justify-content: center;
-    align-items: center;
+    background-color: #282c34;
+    color: #61dafb;
+    font-size: calc(10px + 1vmin);
+  }
 
-    > input {
-      margin: 0.4%;
-      padding: 0.3% 1%;
-      border: 2px solid #61dafb;
-      background-color: #282c34;
-      color: #61dafb;
-      font-size: calc(10px + 1vmin);
-    }
-
-    & .button {
-      background-color: #61dafb;
-      border-color: #61dafb;
-      color: black;
-      cursor: pointer;
-      width: 20%;
-    }
+  & .button {
+    background-color: #61dafb;
+    border-color: #61dafb;
+    color: black;
+    cursor: pointer;
+    width: 20%;
   }
 
   .link {

@@ -7,27 +7,25 @@ import Login from './components/Login'
 
 const App = () => {
   return (
-    <div className='App'>
-      <AppWrapper>
-        <Router>
-          <h1>Web Admin</h1>
-          <Switch>
-            <Route exact path='/'>
-              <div className='menu'>
-                <Link to='/files' className='link'>
-                  <Button>Files</Button>
-                </Link>
-                <Link to='/health' className='link'>
-                  <Button>Health</Button>
-                </Link>
-                <Login />
-              </div>
-            </Route>
-            <Route path='/files' component={Files} />
-          </Switch>
-        </Router>
-      </AppWrapper>
-    </div>
+    <AppWrapper>
+      <Router>
+        <h1>Web Admin</h1>
+        <Switch>
+          <Route exact path='/'>
+            <div className='menu'>
+              <Link to='/files' className='link'>
+                <Button>Files</Button>
+              </Link>
+              <Link to='/health' className='link'>
+                <Button>Health</Button>
+              </Link>
+              <Login />
+            </div>
+          </Route>
+          <Route path='/files' component={Files} />
+        </Switch>
+      </Router>
+    </AppWrapper>
   )
 }
 
