@@ -3,6 +3,7 @@ import { Button } from '../styles/ButtonStyled'
 import { HealthWrapper } from '../styles/HealthStyled'
 import { Link } from 'react-router-dom'
 import { getMediaStatus, getAppStatus, getAuthStatus } from '../webapi'
+import CircleLoader from 'react-spinners/CircleLoader'
 
 const Health = () => {
   const [mediaStatus, changeMediaStatus] = useState('')
@@ -44,9 +45,15 @@ const Health = () => {
         <Button>Home</Button>
       </Link>
       <div className='status'>
-        <div>{mediaStatus}</div>
-        <div>{appStatus}</div>
-        <div>{authStatus}</div>
+        {mediaStatus && appStatus && authStatus ? (
+          <div>
+            <div>{mediaStatus}</div>
+            <div>{appStatus}</div>
+            <div>{authStatus}</div>
+          </div>
+        ) : (
+          <CircleLoader color='#61dafb' size={250} />
+        )}
       </div>
     </HealthWrapper>
   )
