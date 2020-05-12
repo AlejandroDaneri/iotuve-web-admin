@@ -9,3 +9,7 @@ export function baseUrl () {
 export function getVideos () {
   return axios.get(baseUrl() + '/list')
 }
+
+export function getMediaStatus () {
+  return axios.get(baseUrl() + '/status')
+}

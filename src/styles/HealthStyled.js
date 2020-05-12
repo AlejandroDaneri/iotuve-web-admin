@@ -6,4 +6,8 @@ export const HealthWrapper = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
+
+  & .status {
+    padding: 2%;
+  }
 `
