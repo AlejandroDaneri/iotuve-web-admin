@@ -6,17 +6,17 @@ const AUTH_SERVER = process.env.REACT_APP_AUTH_SERVER
 
 export function mediaBaseUrl () {
   if (process.env.NODE_ENV === 'production') return MEDIA_SERVER
-  return ''
+  return 'https://fiuba-taller-2-media-server-st.herokuapp.com'
 }
 
 export function appBaseUrl () {
   if (process.env.NODE_ENV === 'production') return APP_SERVER
-  return 'https://fiuba-taller-2-auth-server-st.herokuapp.com'
+  return 'https://fiuba-taller-2-app-server-st.herokuapp.com'
 }
 
 export function authBaseUrl () {
   if (process.env.NODE_ENV === 'production') return AUTH_SERVER
-  return 'https://fiuba-taller-2-app-server-st.herokuapp.com'
+  return 'https://fiuba-taller-2-auth-server-st.herokuapp.com'
 }
 
 export function getVideos () {
