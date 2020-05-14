@@ -34,3 +34,7 @@ export function getAuthStatus () {
 export function getAppStatus () {
   return axios.get(appBaseUrl() + '/status')
 }
+
+export function doAuth (user) {
+  return axios.post(appBaseUrl() + '/api/v1/sessions', user)
+}
