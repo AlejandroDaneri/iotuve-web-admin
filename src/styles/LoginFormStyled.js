@@ -9,6 +9,10 @@ export const LoginWrapper = styled.form`
     align-items: center;
     width: 30%;
 
+    & .loader {
+      padding: 5%;
+    }
+
     > input {
       margin: 1%;
       padding: 1%;
