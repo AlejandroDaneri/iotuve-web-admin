@@ -51,5 +51,13 @@ export const AppWrapper = styled.section`
     justify-content: center;
     align-items: center;
     width: 100%;
+
+    > span {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      padding: 2%;
+      font-size: 30px;
+    }
   }
 `

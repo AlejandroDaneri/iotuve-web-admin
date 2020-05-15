@@ -25,6 +25,7 @@ const App = () => {
                 <Link to='/health' className='link'>
                   <Button>Health</Button>
                 </Link>
+                <span class='material-icons'>power_settings_new</span>
               </div>
             ) : (
               <Login />
