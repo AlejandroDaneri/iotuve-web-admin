@@ -2,7 +2,7 @@ import React from 'react'
 import { AppWrapper } from './styles/AppStyled'
 import { Button } from './styles/ButtonStyled'
 import { Link, BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import Files from './components/Files'
 import Login from './components/Login'
 import Health from './components/Health'
@@ -10,6 +10,14 @@ import { isAuthed } from './stateapi/auth'
 
 const App = () => {
   const authed = useSelector(isAuthed)
+
+  const dispatch = useDispatch()
+
+  function logOut () {
+    dispatch({
+      type: 'AUTH_LOGOUT'
+    })
+  }
 
   return (
     <AppWrapper>
@@ -25,7 +33,9 @@ const App = () => {
                 <Link to='/health' className='link'>
                   <Button>Health</Button>
                 </Link>
-                <span class='material-icons'>power_settings_new</span>
+                <span onClick={() => logOut()} className='material-icons'>
+                  power_settings_new
+                </span>
               </div>
             ) : (
               <Login />

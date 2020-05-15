@@ -10,6 +10,11 @@ const auth = (state = INITIAL_STATE, action) => {
         authed: true
       }
     }
+    case 'AUTH_LOGOUT': {
+      return {
+        authed: false
+      }
+    }
     default: {
       return state
     }

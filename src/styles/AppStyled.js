@@ -53,6 +53,7 @@ export const AppWrapper = styled.section`
     width: 100%;
 
     > span {
+      cursor: pointer;
       position: absolute;
       bottom: 0;
       left: 0;
