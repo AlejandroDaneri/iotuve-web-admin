@@ -2,16 +2,18 @@ import React, { useState } from 'react'
 import { LoginWrapper } from '../styles/LoginFormStyled'
 import { doAuth } from '../webapi'
 import { useDispatch } from 'react-redux'
+import CircleLoader from 'react-spinners/CircleLoader'
 
 const Login = () => {
   const [username, changeUsername] = useState('')
   const [password, changePassword] = useState('')
+  const [authing, changeAuthing] = useState(false)
 
   const dispatch = useDispatch()
 
   function onSubmit (e) {
     e.preventDefault()
-
+    changeAuthing(true)
     doAuth({ username: username, password: password })
       .then(_ => {
         dispatch({
@@ -38,7 +40,13 @@ const Login = () => {
         type='password'
         placeholder='Password'
       />
-      <button type='submit'>Log In</button>
+      {authing ? (
+        <div className='loader'>
+          <CircleLoader size={60} color='#61dafb' />
+        </div>
+      ) : (
+        <button type='submit'>Log In</button>
+      )}
     </LoginWrapper>
   )
 }
