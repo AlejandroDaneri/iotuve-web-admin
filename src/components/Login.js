@@ -19,9 +19,11 @@ const Login = () => {
         dispatch({
           type: 'AUTH_SUCCESS'
         })
+        changeAuthing(false)
       })
       .catch(_ => {
         console.error('Auth Fail')
+        changeAuthing(false)
       })
   }
 
