@@ -25,8 +25,7 @@ const Files = () => {
         <Button>Home</Button>
       </Link>
       <h2>Files</h2>
-      {!files && <CircleLoader color='#61dafb' size={250} />}
-      {files && (
+      {files ? (
         <table>
           <thead>
             <tr>
@@ -64,6 +63,8 @@ const Files = () => {
             })}
           </tbody>
         </table>
+      ) : (
+        <CircleLoader color='#61dafb' size={250} />
       )}
     </FilesWrapper>
   )
