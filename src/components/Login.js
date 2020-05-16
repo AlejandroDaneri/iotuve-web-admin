@@ -3,11 +3,13 @@ import { LoginWrapper } from '../styles/LoginFormStyled'
 import { doAuth } from '../webapi'
 import { useDispatch } from 'react-redux'
 import CircleLoader from 'react-spinners/CircleLoader'
+import { Snackbar, SnackbarContent } from '@material-ui/core'
 
 const Login = () => {
   const [username, changeUsername] = useState('')
   const [password, changePassword] = useState('')
   const [authing, changeAuthing] = useState(false)
+  const [authError, changeAuthError] = useState(false)
 
   const dispatch = useDispatch()
 
@@ -24,6 +26,7 @@ const Login = () => {
       .catch(_ => {
         console.error('Auth Fail')
         changeAuthing(false)
+        changeAuthError(true)
       })
   }
 
@@ -49,6 +52,21 @@ const Login = () => {
       ) : (
         <button type='submit'>Log In</button>
       )}
+      <Snackbar
+        open={authError}
+        onClose={() => changeAuthError(false)}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+        autoHideDuration={6000}
+      >
+        <SnackbarContent
+          message='Usuario o Contraseña incorrectos'
+          style={{
+            color: 'black',
+            backgroundColor: '#61dafb',
+            fontSize: '14px'
+          }}
+        />
+      </Snackbar>
     </LoginWrapper>
   )
 }
