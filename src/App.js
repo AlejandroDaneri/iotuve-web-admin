@@ -1,12 +1,28 @@
 import React from 'react'
 import { AppWrapper } from './styles/AppStyled'
 import { Button } from './styles/ButtonStyled'
-import { Link, BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import {
+  Link,
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect
+} from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import Files from './components/Files'
 import Login from './components/Login'
 import Health from './components/Health'
 import { isAuthed } from './stateapi/auth'
+
+const PrivateRoute = ({ ...rest }) => {
+  const authed = useSelector(isAuthed)
+
+  if (authed) {
+    return <Route {...rest} />
+  } else {
+    return <Redirect to='/' />
+  }
+}
 
 const App = () => {
   const authed = useSelector(isAuthed)
@@ -41,8 +57,8 @@ const App = () => {
               <Login />
             )}
           </Route>
-          <Route path='/files' component={Files} />
-          <Route path='/health' component={Health} />
+          <PrivateRoute path='/files' component={Files} />
+          <PrivateRoute path='/health' component={Health} />
         </Switch>
       </Router>
     </AppWrapper>
