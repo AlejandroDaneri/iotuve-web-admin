@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Button } from '../styles/ButtonStyled'
 import { HealthWrapper } from '../styles/HealthStyled'
-import { Link } from 'react-router-dom'
 import { getMediaStatus, getAppStatus, getAuthStatus } from '../webapi'
 import CircleLoader from 'react-spinners/CircleLoader'
 
@@ -41,9 +39,6 @@ const Health = () => {
 
   return (
     <HealthWrapper>
-      <Link to='/' className='link'>
-        <Button>Inicio</Button>
-      </Link>
       <div className='status'>
         {mediaStatus && appStatus && authStatus ? (
           <div>

@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import CircleLoader from 'react-spinners/CircleLoader'
-import { Link } from 'react-router-dom'
 import { FilesWrapper } from '../styles/FilesStyled'
-import { Button } from '../styles/ButtonStyled'
 import { getVideos } from '../webapi'
 
 const Files = () => {
@@ -21,9 +19,6 @@ const Files = () => {
 
   return (
     <FilesWrapper>
-      <Link to='/' className='link'>
-        <Button>Inicio</Button>
-      </Link>
       <h2>Archivos</h2>
       {files ? (
         <table>

@@ -39,24 +39,25 @@ const App = () => {
     <AppWrapper>
       <Router>
         <h1>Web Admin</h1>
+        {authed ? (
+          <div className='menu'>
+            <Link to='/' className='link'>
+              <Button>Inicio</Button>
+            </Link>
+            <Link to='/files' className='link'>
+              <Button>Archivos</Button>
+            </Link>
+            <Link to='/health' className='link'>
+              <Button>Estado</Button>
+            </Link>
+            <span onClick={() => logOut()} className='material-icons'>
+              power_settings_new
+            </span>
+          </div>
+        ) : (
+          <Login />
+        )}
         <Switch>
-          <Route exact path='/'>
-            {authed ? (
-              <div className='menu'>
-                <Link to='/files' className='link'>
-                  <Button>Archivos</Button>
-                </Link>
-                <Link to='/health' className='link'>
-                  <Button>Estado</Button>
-                </Link>
-                <span onClick={() => logOut()} className='material-icons'>
-                  power_settings_new
-                </span>
-              </div>
-            ) : (
-              <Login />
-            )}
-          </Route>
           <PrivateRoute path='/files' component={Files} />
           <PrivateRoute path='/health' component={Health} />
         </Switch>
