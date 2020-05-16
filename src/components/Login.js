@@ -50,7 +50,7 @@ const Login = () => {
           <CircleLoader size={60} color='#61dafb' />
         </div>
       ) : (
-        <button type='submit'>Log In</button>
+        <button type='submit'>Iniciar Sesion</button>
       )}
       <Snackbar
         open={authError}

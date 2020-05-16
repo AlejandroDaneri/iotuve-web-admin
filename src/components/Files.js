@@ -22,16 +22,16 @@ const Files = () => {
   return (
     <FilesWrapper>
       <Link to='/' className='link'>
-        <Button>Home</Button>
+        <Button>Inicio</Button>
       </Link>
-      <h2>Files</h2>
+      <h2>Archivos</h2>
       {files ? (
         <table>
           <thead>
             <tr>
-              <th>Name</th>
-              <th>Size (MB)</th>
-              <th>Type</th>
+              <th>Nombre</th>
+              <th>Tamaño (MB)</th>
+              <th>Tipo</th>
               <th>URL</th>
               <th>Imagen</th>
             </tr>

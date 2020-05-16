@@ -28,10 +28,10 @@ const App = () => {
             {authed ? (
               <div className='menu'>
                 <Link to='/files' className='link'>
-                  <Button>Files</Button>
+                  <Button>Archivos</Button>
                 </Link>
                 <Link to='/health' className='link'>
-                  <Button>Health</Button>
+                  <Button>Estado</Button>
                 </Link>
                 <span onClick={() => logOut()} className='material-icons'>
                   power_settings_new

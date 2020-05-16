@@ -42,7 +42,7 @@ const Health = () => {
   return (
     <HealthWrapper>
       <Link to='/' className='link'>
-        <Button>Home</Button>
+        <Button>Inicio</Button>
       </Link>
       <div className='status'>
         {mediaStatus && appStatus && authStatus ? (
