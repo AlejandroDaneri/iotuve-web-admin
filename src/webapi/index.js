@@ -44,3 +44,10 @@ export function getUsers (token) {
     headers: { 'X-Auth-Token': token }
   })
 }
+
+export function doChangePassword (key, username, password) {
+  return axios.post(authBaseUrl() + `/api/v1/recovery/${username}`, {
+    recovery_key: key,
+    new_password: password
+  })
+}

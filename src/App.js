@@ -13,6 +13,7 @@ import Files from './components/Files'
 import Login from './components/Login'
 import Health from './components/Health'
 import Users from './components/Users'
+import ChangePassword from './components/ChangePassword'
 import { isAuthed } from './stateapi/auth'
 
 const PrivateRoute = ({ ...rest }) => {
@@ -65,6 +66,7 @@ const App = () => {
           <PrivateRoute path='/files' component={Files} />
           <PrivateRoute path='/users' component={Users} />
           <PrivateRoute path='/health' component={Health} />
+          <Route path='/change_password' component={ChangePassword} />
         </Switch>
       </Router>
     </AppWrapper>
