@@ -1,17 +1,21 @@
 const INITIAL_STATE = {
-  authed: false
+  authed: false,
+  token: ''
 }
 
 const auth = (state = INITIAL_STATE, action) => {
-  const { type } = action
+  const { type, payload } = action
   switch (type) {
     case 'AUTH_SUCCESS': {
       return {
-        authed: true
+        ...state,
+        authed: true,
+        token: payload.token
       }
     }
     case 'AUTH_LOGOUT': {
       return {
+        ...state,
         authed: false
       }
     }

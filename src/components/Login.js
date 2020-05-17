@@ -17,9 +17,13 @@ const Login = () => {
     e.preventDefault()
     changeAuthing(true)
     doAuth({ username: username, password: password })
-      .then(_ => {
+      .then(response => {
+        const { data } = response
         dispatch({
-          type: 'AUTH_SUCCESS'
+          type: 'AUTH_SUCCESS',
+          payload: {
+            token: data.session_token
+          }
         })
         changeAuthing(false)
       })

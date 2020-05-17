@@ -1,10 +1,52 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
+import { getUsers } from '../webapi'
+import { getToken } from '../stateapi/auth'
+import { UsersWrapper } from '../styles/UsersStyled'
 
 const Users = () => {
+  const token = useSelector(getToken)
+  const [users, changeUsers] = useState([])
+
+  useEffect(() => {
+    getUsers(token)
+      .then(response => {
+        const { data } = response
+        changeUsers(data)
+      })
+      .catch(_ => {
+        console.error('Users Get Error')
+      })
+  }, [token])
+
   return (
-    <div>
-      <h2>Users</h2>
-    </div>
+    <UsersWrapper>
+      <h2>Usuarios</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Nombre de Usuario</th>
+            <th>Nombre</th>
+            <th>Email</th>
+            <th>Telefono</th>
+          </tr>
+        </thead>
+        <tbody>
+          {(users || []).map(user => {
+            return (
+              <tr key={user.id}>
+                <td>{user.username}</td>
+                <td>
+                  {user.first_name} {user.last_name}
+                </td>
+                <td>{user.contact.email}</td>
+                <td>{user.contact.phone}</td>
+              </tr>
+            )
+          })}
+        </tbody>
+      </table>
+    </UsersWrapper>
   )
 }
 

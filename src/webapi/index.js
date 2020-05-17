@@ -38,3 +38,9 @@ export function getAppStatus () {
 export function doAuth (user) {
   return axios.post(appBaseUrl() + '/api/v1/sessions', user)
 }
+
+export function getUsers (token) {
+  return axios.get(appBaseUrl() + '/api/v1/users', {
+    headers: { 'X-Auth-Token': token }
+  })
+}
