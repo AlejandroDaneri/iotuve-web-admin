@@ -20,6 +20,11 @@ const Users = () => {
       })
   }, [token])
 
+  function parseTimestamp (timestamp) {
+    const date = new Date(timestamp)
+    return date.toUTCString()
+  }
+
   return (
     <UsersWrapper>
       <h2>Usuarios</h2>
@@ -31,6 +36,7 @@ const Users = () => {
               <th>Nombre</th>
               <th>Email</th>
               <th>Telefono</th>
+              <th>Fecha de Creacion</th>
             </tr>
           </thead>
           <tbody>
@@ -43,6 +49,7 @@ const Users = () => {
                   </td>
                   <td>{user.contact.email}</td>
                   <td>{user.contact.phone}</td>
+                  <td>{parseTimestamp(user.date_created)}</td>
                 </tr>
               )
             })}
