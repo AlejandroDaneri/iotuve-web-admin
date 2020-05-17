@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import Files from './components/Files'
 import Login from './components/Login'
 import Health from './components/Health'
+import Users from './components/Users'
 import { isAuthed } from './stateapi/auth'
 
 const PrivateRoute = ({ ...rest }) => {
@@ -47,6 +48,9 @@ const App = () => {
             <Link to='/files' className='link'>
               <Button>Archivos</Button>
             </Link>
+            <Link to='/users' className='link'>
+              <Button>Usuarios</Button>
+            </Link>
             <Link to='/health' className='link'>
               <Button>Estado</Button>
             </Link>
@@ -59,6 +63,7 @@ const App = () => {
         )}
         <Switch>
           <PrivateRoute path='/files' component={Files} />
+          <PrivateRoute path='/users' component={Users} />
           <PrivateRoute path='/health' component={Health} />
         </Switch>
       </Router>
