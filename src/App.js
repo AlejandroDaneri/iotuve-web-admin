@@ -61,7 +61,7 @@ const App = () => {
           </div>
         )}
         <Switch>
-          <Route exact path='/' component={Login} />
+          {!authed && <Route exact path='/' component={Login} />}
           <PrivateRoute path='/files' component={Files} />
           <PrivateRoute path='/users' component={Users} />
           <PrivateRoute path='/health' component={Health} />
