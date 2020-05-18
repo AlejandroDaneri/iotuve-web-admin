@@ -41,7 +41,7 @@ const App = () => {
     <AppWrapper>
       <Router>
         <h1>Web Admin</h1>
-        {authed ? (
+        {authed && (
           <div className='menu'>
             <Link to='/' className='link'>
               <Button>Inicio</Button>
@@ -59,10 +59,9 @@ const App = () => {
               power_settings_new
             </span>
           </div>
-        ) : (
-          <Login />
         )}
         <Switch>
+          <Route exact path='/' component={Login} />
           <PrivateRoute path='/files' component={Files} />
           <PrivateRoute path='/users' component={Users} />
           <PrivateRoute path='/health' component={Health} />
