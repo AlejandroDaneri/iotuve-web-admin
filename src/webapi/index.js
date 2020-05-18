@@ -46,7 +46,7 @@ export function getUsers (token) {
 }
 
 export function doChangePassword (key, username, password) {
-  return axios.post(authBaseUrl() + `/api/v1/recovery/${username}`, {
+  return axios.post(appBaseUrl() + `/api/v1/recovery/${username}`, {
     recovery_key: key,
     new_password: password
   })
