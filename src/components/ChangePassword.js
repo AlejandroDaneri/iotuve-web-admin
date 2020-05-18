@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import qs from 'qs'
 import { doChangePassword } from '../webapi'
+import { ChangePasswordWrapper } from '../styles/ChangePasswordStyled'
 
 const ChangePassword = location => {
   const [username, changeUsername] = useState('')
@@ -23,30 +24,27 @@ const ChangePassword = location => {
   }
 
   return (
-    <div>
-      <h2>Cambiar Contraseña</h2>
-      <form onSubmit={onSubmit}>
-        <input
-          name='username'
-          value={username}
-          onChange={e => changeUsername(e.target.value)}
-          placeholder='Nombre de Usuario'
-        />
-        <input
-          name='password'
-          value={password}
-          onChange={e => changePassword(e.target.value)}
-          placeholder='Contraseña'
-        />
-        <input
-          name='confirm-password'
-          value={confirmPassword}
-          onChange={e => changeConfirmPassword(e.target.value)}
-          placeholder='Confirmar Contraseña'
-        />
-        <button type='submit'>Cambiar Contraseña</button>
-      </form>
-    </div>
+    <ChangePasswordWrapper onSubmit={onSubmit}>
+      <input
+        name='username'
+        value={username}
+        onChange={e => changeUsername(e.target.value)}
+        placeholder='Nombre de Usuario'
+      />
+      <input
+        name='password'
+        value={password}
+        onChange={e => changePassword(e.target.value)}
+        placeholder='Contraseña'
+      />
+      <input
+        name='confirm-password'
+        value={confirmPassword}
+        onChange={e => changeConfirmPassword(e.target.value)}
+        placeholder='Confirmar Contraseña'
+      />
+      <button type='submit'>Cambiar Contraseña</button>
+    </ChangePasswordWrapper>
   )
 }
 
