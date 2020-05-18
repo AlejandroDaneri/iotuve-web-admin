@@ -39,6 +39,7 @@ const Health = () => {
 
   return (
     <HealthWrapper>
+      <h2>Estado</h2>
       <div className='status'>
         {mediaStatus && appStatus && authStatus ? (
           <div>
