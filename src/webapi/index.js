@@ -45,6 +45,12 @@ export function getUsers (token) {
   })
 }
 
+export function getUsersAdmin (token) {
+  return axios.get(appBaseUrl() + '/api/v1/adminusers', {
+    headers: { 'X-Auth-Token': token }
+  })
+}
+
 export function doChangePassword (key, username, password) {
   return axios.post(appBaseUrl() + `/api/v1/recovery/${username}`, {
     recovery_key: key,

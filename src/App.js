@@ -13,6 +13,7 @@ import Files from './components/Files'
 import Login from './components/Login'
 import Health from './components/Health'
 import Users from './components/Users'
+import UsersAdmin from './components/UsersAdmin'
 import ChangePassword from './components/ChangePassword'
 import { isAuthed } from './stateapi/auth'
 
@@ -52,6 +53,9 @@ const App = () => {
             <Link to='/users' className='link'>
               <Button>Usuarios</Button>
             </Link>
+            <Link to='/users_admin' className='link'>
+              <Button>Admines</Button>
+            </Link>
             <Link to='/health' className='link'>
               <Button>Estado</Button>
             </Link>
@@ -64,6 +68,7 @@ const App = () => {
           {!authed && <Route exact path='/' component={Login} />}
           <PrivateRoute path='/files' component={Files} />
           <PrivateRoute path='/users' component={Users} />
+          <PrivateRoute path='/users_admin' component={UsersAdmin} />
           <PrivateRoute path='/health' component={Health} />
           <Route path='/change_password' component={ChangePassword} />
         </Switch>
