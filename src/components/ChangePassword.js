@@ -12,6 +12,14 @@ const ChangePassword = location => {
     ignoreQueryPrefix: true
   })
 
+  function isDisabled () {
+    if (!username) return true
+    if (!password) return true
+    if (!confirmPassword) return true
+    if (password !== confirmPassword) return true
+    return false
+  }
+
   function onSubmit (e) {
     e.preventDefault()
     doChangePassword(key, username, password)
@@ -33,17 +41,24 @@ const ChangePassword = location => {
       />
       <input
         name='password'
+        type='password'
         value={password}
         onChange={e => changePassword(e.target.value)}
         placeholder='Contraseña'
       />
       <input
         name='confirm-password'
+        type='password'
         value={confirmPassword}
         onChange={e => changeConfirmPassword(e.target.value)}
         placeholder='Confirmar Contraseña'
       />
-      <button type='submit'>Cambiar Contraseña</button>
+      <input
+        className='submit'
+        type='submit'
+        disabled={isDisabled()}
+        value='Cambiar Contraseña'
+      />
     </ChangePasswordWrapper>
   )
 }

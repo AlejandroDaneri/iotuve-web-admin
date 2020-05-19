@@ -19,7 +19,7 @@ export const ChangePasswordWrapper = styled.form`
       width: 80%;
     }
 
-    > button {
+    & .submit {
       margin: 2%;
       background-color: #61dafb;
       border: 0;
