@@ -21,10 +21,11 @@ export const ChangePasswordWrapper = styled.form`
 
     & .submit {
       margin: 2%;
-      background-color: #61dafb;
+      transition: background-color 0.5s ease;
+      background-color: ${({ valid }) => (valid ? '#61dafb' : 'gray')};
       border: 0;
       color: black;
-      cursor: pointer;
+      cursor: ${({ valid }) => (valid ? 'pointer' : '')};;
       width: 40%;
       font-size: calc(10px + 1vmin);
     }

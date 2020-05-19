@@ -32,7 +32,7 @@ const ChangePassword = location => {
   }
 
   return (
-    <ChangePasswordWrapper onSubmit={onSubmit}>
+    <ChangePasswordWrapper onSubmit={onSubmit} valid={!isDisabled()}>
       <input
         name='username'
         value={username}
