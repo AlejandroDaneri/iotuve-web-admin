@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { getToken } from '../stateapi/auth'
+import { UsersAdminWrapper } from '../styles/UsersAdminStyled'
 import { getUsersAdmin } from '../webapi'
 
 const AdminUsers = () => {
@@ -24,7 +25,7 @@ const AdminUsers = () => {
   }
 
   return (
-    <div>
+    <UsersAdminWrapper>
       <h2>Usuarios Admin</h2>
       <table>
         <thead>
@@ -50,7 +51,7 @@ const AdminUsers = () => {
           })}
         </tbody>
       </table>
-    </div>
+    </UsersAdminWrapper>
   )
 }
 
