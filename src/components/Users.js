@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { getUsers } from '../webapi'
 import { getToken } from '../stateapi/auth'
 import { UsersWrapper } from '../styles/UsersStyled'
@@ -9,6 +9,8 @@ const Users = () => {
   const token = useSelector(getToken)
   const [users, changeUsers] = useState()
 
+  const dispatch = useDispatch()
+
   useEffect(() => {
     getUsers(token)
       .then(response => {
@@ -16,9 +18,11 @@ const Users = () => {
         changeUsers(data)
       })
       .catch(_ => {
-        console.error('Users Get Error')
+        dispatch({
+          type: 'AUTH_LOGOUT'
+        })
       })
-  }, [token])
+  }, [token, dispatch])
 
   function parseTimestamp (timestamp) {
     const date = new Date(timestamp)

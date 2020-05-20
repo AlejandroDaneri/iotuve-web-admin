@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux'
 import CircleLoader from 'react-spinners/CircleLoader'
 import { FilesWrapper } from '../styles/FilesStyled'
 import { getVideos } from '../webapi'
 
 const Files = () => {
   const [files, changeFiles] = useState()
+
+  const dispatch = useDispatch()
 
   useEffect(() => {
     getVideos()
@@ -13,9 +16,11 @@ const Files = () => {
         changeFiles(Object.values(data))
       })
       .catch(_ => {
-        console.error('Video list request fail')
+        dispatch({
+          type: 'AUTH_LOGOUT'
+        })
       })
-  }, [])
+  }, [dispatch])
 
   return (
     <FilesWrapper>

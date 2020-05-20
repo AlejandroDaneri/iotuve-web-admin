@@ -16,7 +16,8 @@ const auth = (state = INITIAL_STATE, action) => {
     case 'AUTH_LOGOUT': {
       return {
         ...state,
-        authed: false
+        authed: false,
+        token: ''
       }
     }
     default: {
