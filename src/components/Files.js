@@ -13,7 +13,7 @@ const Files = () => {
     getVideos()
       .then(response => {
         const { data } = response
-        changeFiles(Object.values(data))
+        changeFiles(Object.values(data.videos))
       })
       .catch(_ => {
         dispatch({
@@ -39,11 +39,9 @@ const Files = () => {
           <tbody>
             {(files || []).map(file => {
               return (
-                <tr key={file.id}>
-                  <td>
-                    {file.name.split('/')[file.name.split('/').length - 1]}
-                  </td>
-                  <td>{(file.size / 1000 / 1000).toPrecision(3)}</td>
+                <tr key={file.video_id}>
+                  <td>{file.name}</td>
+                  <td>{(file.size / 1024 / 1024).toPrecision(3)}</td>
                   <td>{file.type}</td>
                   <td>
                     <a href={file.url}>Link</a>

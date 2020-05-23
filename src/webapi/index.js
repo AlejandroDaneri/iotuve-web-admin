@@ -20,7 +20,7 @@ export function authBaseUrl () {
 }
 
 export function getVideos () {
-  return axios.get(mediaBaseUrl() + '/list')
+  return axios.get(mediaBaseUrl() + '/videos')
 }
 
 export function getMediaStatus () {
