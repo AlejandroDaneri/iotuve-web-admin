@@ -36,7 +36,7 @@ const Users = () => {
         <table>
           <thead>
             <tr>
-              <th>Nombre de Usuario</th>
+              <th>Usuario</th>
               <th>Nombre</th>
               <th>Email</th>
               <th>Telefono</th>
