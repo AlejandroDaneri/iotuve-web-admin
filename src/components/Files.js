@@ -29,25 +29,18 @@ const Files = () => {
         <table>
           <thead>
             <tr>
+              <th>Archivo</th>
               <th>Nombre</th>
               <th>Tamaño (MB)</th>
-              <th>Tipo</th>
-              <th>URL</th>
-              <th>Imagen</th>
+              <th>Formato</th>
             </tr>
           </thead>
           <tbody>
             {(files || []).map(file => {
               return (
                 <tr key={file.video_id}>
-                  <td>{file.name}</td>
-                  <td>{(file.size / 1024 / 1024).toPrecision(3)}</td>
-                  <td>{file.type}</td>
                   <td>
-                    <a href={file.url}>Link</a>
-                  </td>
-                  <td>
-                    <a href={file.thumb}>
+                    <a href={file.url}>
                       <img
                         alt='thumb'
                         width='80px'
@@ -56,6 +49,9 @@ const Files = () => {
                       />
                     </a>
                   </td>
+                  <td>{file.name}</td>
+                  <td>{(file.size / 1024 / 1024).toPrecision(3)}</td>
+                  <td>{file.type}</td>
                 </tr>
               )
             })}

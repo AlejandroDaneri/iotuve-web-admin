@@ -54,7 +54,7 @@ const App = () => {
               <Button>Usuarios</Button>
             </Link>
             <Link to='/users_admin' className='link'>
-              <Button>Admines</Button>
+              <Button>Admins</Button>
             </Link>
             <Link to='/health' className='link'>
               <Button>Estado</Button>
