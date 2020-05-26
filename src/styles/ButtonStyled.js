@@ -8,4 +8,5 @@ export const Button = styled.div`
   color: black;
   cursor: pointer;
   width: 80%;
+  font-size: 2vmin;
 `
