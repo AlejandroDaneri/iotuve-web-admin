@@ -1,7 +1,13 @@
 import styled from 'styled-components'
 
-export const LoginWrapper = styled.form`
-    margin: 2%;
+export const LoginWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+
+  > form {
     border: 1px solid #61dafb;
     display: flex;
     flex-direction: column;
@@ -28,5 +34,12 @@ export const LoginWrapper = styled.form`
       width: 40%;
       font-size: calc(10px + 1vmin);
     }
+  }
+    
+
+
+    
+
+   
   }
 `

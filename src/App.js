@@ -41,7 +41,7 @@ const App = () => {
   return (
     <AppWrapper>
       <Router>
-        <h1>Web Admin</h1>
+        <h1>ChoTuve - Web Admin</h1>
         {authed && (
           <div className='menu'>
             <Link to='/' className='link'>

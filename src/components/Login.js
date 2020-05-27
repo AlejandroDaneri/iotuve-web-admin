@@ -35,42 +35,45 @@ const Login = () => {
   }
 
   return (
-    <LoginWrapper onSubmit={onSubmit}>
-      <input
-        name='username'
-        value={username}
-        onChange={e => changeUsername(e.target.value)}
-        placeholder='Username'
-      />
-      <input
-        name='password'
-        value={password}
-        onChange={e => changePassword(e.target.value)}
-        type='password'
-        placeholder='Password'
-      />
-      {authing ? (
-        <div className='loader'>
-          <CircleLoader size={60} color='#61dafb' />
-        </div>
-      ) : (
-        <button type='submit'>Iniciar Sesion</button>
-      )}
-      <Snackbar
-        open={authError}
-        onClose={() => changeAuthError(false)}
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
-        autoHideDuration={6000}
-      >
-        <SnackbarContent
-          message='Usuario o Contraseña incorrectos'
-          style={{
-            color: 'black',
-            backgroundColor: '#61dafb',
-            fontSize: '14px'
-          }}
+    <LoginWrapper>
+      <h3>Iniciar Sesion</h3>
+      <form onSubmit={onSubmit}>
+        <input
+          name='username'
+          value={username}
+          onChange={e => changeUsername(e.target.value)}
+          placeholder='Username'
         />
-      </Snackbar>
+        <input
+          name='password'
+          value={password}
+          onChange={e => changePassword(e.target.value)}
+          type='password'
+          placeholder='Password'
+        />
+        {authing ? (
+          <div className='loader'>
+            <CircleLoader size={60} color='#61dafb' />
+          </div>
+        ) : (
+          <button type='submit'>Enviar</button>
+        )}
+        <Snackbar
+          open={authError}
+          onClose={() => changeAuthError(false)}
+          anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+          autoHideDuration={6000}
+        >
+          <SnackbarContent
+            message='Usuario o Contraseña incorrectos'
+            style={{
+              color: 'black',
+              backgroundColor: '#61dafb',
+              fontSize: '14px'
+            }}
+          />
+        </Snackbar>
+      </form>
     </LoginWrapper>
   )
 }
