@@ -39,7 +39,7 @@ const Login = () => {
   return (
     <LoginWrapper>
       <Particles className='particles' params={ParticlesConfig} />
-      <h3>Iniciar Sesion</h3>
+      <h2>Iniciar Sesion</h2>
       <form onSubmit={onSubmit}>
         <input
           name='username'
