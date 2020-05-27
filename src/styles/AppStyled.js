@@ -11,7 +11,7 @@ export const AppWrapper = styled.section`
   color: #61dafb;
 
   > h1 {
-    font-size: 50px;
+    font-size: 4vmin;
   }
 
   > input {
