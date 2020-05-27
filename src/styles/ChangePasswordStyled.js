@@ -1,33 +1,41 @@
 import styled from 'styled-components'
 
-export const ChangePasswordWrapper = styled.form`
-    margin: 2%;
-    border: 1px solid #61dafb;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 30%;
+export const ChangePasswordWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
 
-    & .loader {
-      padding: 5%;
-    }
-
-    > input {
-      margin: 1%;
-      padding: 1%;
-      width: 80%;
-    }
-
-    & .submit {
+    > form {
       margin: 2%;
-      transition: background-color 0.5s ease;
-      background-color: ${({ valid }) => (valid ? '#61dafb' : 'gray')};
-      border: 0;
-      color: black;
-      cursor: ${({ valid }) => (valid ? 'pointer' : '')};;
-      width: 40%;
-      font-size: calc(10px + 1vmin);
+      border: 1px solid #61dafb;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 30%;
+
+      & .loader {
+        padding: 5%;
+      }
+
+      > input {
+        margin: 1%;
+        padding: 1%;
+        width: 80%;
+      }
+
+      & .submit {
+        margin: 2%;
+        transition: background-color 0.5s ease;
+        background-color: ${({ valid }) => (valid ? '#61dafb' : 'gray')};
+        border: 0;
+        color: black;
+        cursor: ${({ valid }) => (valid ? 'pointer' : '')};;
+        width: 40%;
+        font-size: 2vmin;
+      }
     }
   }
 `

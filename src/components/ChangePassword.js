@@ -32,33 +32,36 @@ const ChangePassword = location => {
   }
 
   return (
-    <ChangePasswordWrapper onSubmit={onSubmit} valid={!isDisabled()}>
-      <input
-        name='username'
-        value={username}
-        onChange={e => changeUsername(e.target.value)}
-        placeholder='Nombre de Usuario'
-      />
-      <input
-        name='password'
-        type='password'
-        value={password}
-        onChange={e => changePassword(e.target.value)}
-        placeholder='Contraseña'
-      />
-      <input
-        name='confirm-password'
-        type='password'
-        value={confirmPassword}
-        onChange={e => changeConfirmPassword(e.target.value)}
-        placeholder='Confirmar Contraseña'
-      />
-      <input
-        className='submit'
-        type='submit'
-        disabled={isDisabled()}
-        value='Cambiar Contraseña'
-      />
+    <ChangePasswordWrapper>
+      <h2>Cambiar Contraseña</h2>
+      <form onSubmit={onSubmit} valid={!isDisabled()}>
+        <input
+          name='username'
+          value={username}
+          onChange={e => changeUsername(e.target.value)}
+          placeholder='Nombre de Usuario'
+        />
+        <input
+          name='password'
+          type='password'
+          value={password}
+          onChange={e => changePassword(e.target.value)}
+          placeholder='Contraseña'
+        />
+        <input
+          name='confirm-password'
+          type='password'
+          value={confirmPassword}
+          onChange={e => changeConfirmPassword(e.target.value)}
+          placeholder='Confirmar Contraseña'
+        />
+        <input
+          className='submit'
+          type='submit'
+          disabled={isDisabled()}
+          value='Enviar'
+        />
+      </form>
     </ChangePasswordWrapper>
   )
 }
