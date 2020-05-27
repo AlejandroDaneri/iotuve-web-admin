@@ -4,6 +4,8 @@ import { doAuth } from '../webapi'
 import { useDispatch } from 'react-redux'
 import CircleLoader from 'react-spinners/CircleLoader'
 import { Snackbar, SnackbarContent } from '@material-ui/core'
+import Particles from 'react-particles-js'
+import ParticlesConfig from '../ParticlesConfig'
 
 const Login = () => {
   const [username, changeUsername] = useState('')
@@ -36,6 +38,7 @@ const Login = () => {
 
   return (
     <LoginWrapper>
+      <Particles className='particles' params={ParticlesConfig} />
       <h3>Iniciar Sesion</h3>
       <form onSubmit={onSubmit}>
         <input
