@@ -13,7 +13,7 @@ export const LoginWrapper = styled.div`
     width: 100%;
     height: 100%;
     z-index: 1;
-  } 
+  }
 
   > form {
     z-index: 2;
@@ -43,12 +43,5 @@ export const LoginWrapper = styled.div`
       width: 40%;
       font-size: calc(10px + 1vmin);
     }
-  }
-    
-
-
-    
-
-   
   }
 `

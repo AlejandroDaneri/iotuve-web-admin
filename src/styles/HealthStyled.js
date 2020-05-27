@@ -7,6 +7,10 @@ export const HealthWrapper = styled.div`
   align-items: center;
   width: 100%;
 
+  & > h2 {
+    font-size: 3vmin;
+  }
+
   & .status {
     padding: 2%;
   }

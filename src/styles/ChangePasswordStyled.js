@@ -7,8 +7,11 @@ export const ChangePasswordWrapper = styled.div`
   justify-content: center;
   align-items: center;
 
-    > form {
-      margin: 2%;
+  & > h2 {
+    font-size: 3vmin;
+  }
+
+    & > form {
       border: 1px solid #61dafb;
       display: flex;
       flex-direction: column;
@@ -20,7 +23,7 @@ export const ChangePasswordWrapper = styled.div`
         padding: 5%;
       }
 
-      > input {
+      & > input {
         margin: 1%;
         padding: 1%;
         width: 80%;
@@ -34,7 +37,6 @@ export const ChangePasswordWrapper = styled.div`
         color: black;
         cursor: ${({ valid }) => (valid ? 'pointer' : '')};;
         width: 40%;
-        font-size: 2vmin;
       }
     }
   }

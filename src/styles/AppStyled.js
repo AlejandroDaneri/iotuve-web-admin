@@ -7,14 +7,26 @@ export const AppWrapper = styled.section`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  font-size: calc(10px + 1vmin);
   color: #61dafb;
 
-  > h1 {
+  & > h1 {
     font-size: 4vmin;
   }
 
-  > input {
+  & > h2 {
+    font-size: 3vmin;
+  }
+
+  & > h3 {
+    font-size: 2vmin;
+  }
+
+  & > h4 {
+    font-size: 1vmin;
+  }
+
+  & > input {
     margin: 0.4%;
     padding: 0.3% 1%;
     border: 2px solid #61dafb;
@@ -52,13 +64,12 @@ export const AppWrapper = styled.section`
     align-items: center;
     width: 100%;
 
-    > span {
+    & > span {
       cursor: pointer;
       position: absolute;
       bottom: 0;
       left: 0;
       padding: 2%;
-      font-size: 30px;
     }
   }
 `
