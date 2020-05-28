@@ -40,17 +40,17 @@ const Health = () => {
   return (
     <HealthWrapper>
       <h2>Estado</h2>
-      <div className='status'>
-        {mediaStatus && appStatus && authStatus ? (
+      {mediaStatus && appStatus && authStatus ? (
+        <div className='status'>
           <div>
             <div>{mediaStatus}</div>
             <div>{appStatus}</div>
             <div>{authStatus}</div>
           </div>
-        ) : (
-          <CircleLoader color='#61dafb' size={250} />
-        )}
-      </div>
+        </div>
+      ) : (
+        <CircleLoader color='#61dafb' size={250} />
+      )}
     </HealthWrapper>
   )
 }
