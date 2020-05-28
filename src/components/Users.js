@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { getUsers } from '../webapi'
+import { getUsers, removeUser } from '../webapi'
 import { getToken } from '../stateapi/auth'
 import { UsersWrapper } from '../styles/UsersStyled'
 import CircleLoader from 'react-spinners/CircleLoader'
@@ -29,6 +29,18 @@ const Users = () => {
     return date.toUTCString()
   }
 
+  function remove (username) {
+    removeUser(token, username)
+      .then(_ => {
+        console.error('Remove Successfully')
+      })
+      .catch(_ => {
+        dispatch({
+          type: 'AUTH_LOGOUT'
+        })
+      })
+  }
+
   return (
     <UsersWrapper>
       <h2>Usuarios</h2>
@@ -41,6 +53,7 @@ const Users = () => {
               <th>Email</th>
               <th>Telefono</th>
               <th>Fecha de Creacion</th>
+              <th>Acciones</th>
             </tr>
           </thead>
           <tbody>
@@ -54,6 +67,14 @@ const Users = () => {
                   <td>{user.contact.email}</td>
                   <td>{user.contact.phone}</td>
                   <td>{parseTimestamp(user.date_created)}</td>
+                  <td>
+                    <div
+                      className='delete'
+                      onClick={() => remove(user.username)}
+                    >
+                      X
+                    </div>
+                  </td>
                 </tr>
               )
             })}

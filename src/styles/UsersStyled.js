@@ -22,5 +22,15 @@ export const UsersWrapper = styled.div`
         }
       }
     }
+
+    > tbody {
+      > tr {
+        > td {
+          & .delete {
+            cursor: pointer;
+          }
+        }
+      }
+    }
   }
 `

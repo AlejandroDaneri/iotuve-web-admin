@@ -57,3 +57,9 @@ export function doChangePassword (key, username, password) {
     new_password: password
   })
 }
+
+export function removeUser (token, username) {
+  return axios.delete(appBaseUrl() + `/api/v1/users/${username}`, {
+    headers: { 'X-Auth-Token': token }
+  })
+}
