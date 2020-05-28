@@ -42,11 +42,9 @@ const Health = () => {
       <h2>Estado</h2>
       {mediaStatus && appStatus && authStatus ? (
         <div className='status'>
-          <div>
-            <div>{mediaStatus}</div>
-            <div>{appStatus}</div>
-            <div>{authStatus}</div>
-          </div>
+          <div>{mediaStatus}</div>
+          <div>{appStatus}</div>
+          <div>{authStatus}</div>
         </div>
       ) : (
         <CircleLoader color='#61dafb' size={250} />
