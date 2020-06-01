@@ -68,10 +68,13 @@ const Users = () => {
                   <td>{user.contact.email}</td>
                   <td>{user.contact.phone}</td>
                   <td>{parseTimestamp(user.date_created)}</td>
-                  <td>
-                    <div className='delete' onClick={() => remove(user)}>
-                      X
-                    </div>
+                  <td className='delete'>
+                    <span
+                      onClick={() => remove(user)}
+                      className='material-icons'
+                    >
+                      delete_forever
+                    </span>
                   </td>
                 </tr>
               )

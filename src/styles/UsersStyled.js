@@ -25,10 +25,9 @@ export const UsersWrapper = styled.div`
 
     > tbody {
       > tr {
-        > td {
-          & .delete {
-            cursor: pointer;
-          }
+        > td.delete {
+          cursor: pointer;
+          color: red;
         }
       }
     }
