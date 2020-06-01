@@ -4,6 +4,7 @@ import { getUsers, removeUser } from '../webapi'
 import { getToken } from '../stateapi/auth'
 import { UsersWrapper } from '../styles/UsersStyled'
 import CircleLoader from 'react-spinners/CircleLoader'
+import _ from 'lodash'
 
 const Users = () => {
   const token = useSelector(getToken)
@@ -29,10 +30,10 @@ const Users = () => {
     return date.toUTCString()
   }
 
-  function remove (username) {
-    removeUser(token, username)
-      .then(_ => {
-        console.error('Remove Successfully')
+  function remove (user) {
+    removeUser(token, user.username)
+      .then(response => {
+        changeUsers(_.without(users, user))
       })
       .catch(_ => {
         dispatch({
@@ -68,10 +69,7 @@ const Users = () => {
                   <td>{user.contact.phone}</td>
                   <td>{parseTimestamp(user.date_created)}</td>
                   <td>
-                    <div
-                      className='delete'
-                      onClick={() => remove(user.username)}
-                    >
+                    <div className='delete' onClick={() => remove(user)}>
                       X
                     </div>
                   </td>
