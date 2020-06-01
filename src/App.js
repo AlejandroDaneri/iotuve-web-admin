@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import Files from './components/Files'
 import Login from './components/Login'
 import Health from './components/Health'
+import User from './components/User'
 import Users from './components/Users'
 import UsersAdmin from './components/UsersAdmin'
 import ChangePassword from './components/ChangePassword'
@@ -68,6 +69,7 @@ const App = () => {
           {!authed && <Route exact path='/' component={Login} />}
           <PrivateRoute path='/files' component={Files} />
           <PrivateRoute path='/users' component={Users} />
+          <PrivateRoute path='/user' component={User} />
           <PrivateRoute path='/users_admin' component={UsersAdmin} />
           <PrivateRoute path='/health' component={Health} />
           <Route path='/change_password' component={ChangePassword} />

@@ -6,6 +6,7 @@ import { UsersWrapper } from '../styles/UsersStyled'
 import CircleLoader from 'react-spinners/CircleLoader'
 import _ from 'lodash'
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 
 const ButtonDelete = styled.span`
   color: red;
@@ -78,12 +79,9 @@ const Users = () => {
                   <td>{user.contact.phone}</td>
                   <td>{parseTimestamp(user.date_created)}</td>
                   <td className='actions'>
-                    <ButtonEdit
-                      onClick={() => remove(user)}
-                      className='material-icons'
-                    >
-                      edit
-                    </ButtonEdit>
+                    <Link to={`/user/${user.username}`}>
+                      <ButtonEdit className='material-icons'>edit</ButtonEdit>
+                    </Link>
                     <ButtonDelete
                       onClick={() => remove(user)}
                       className='material-icons'
