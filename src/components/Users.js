@@ -5,6 +5,15 @@ import { getToken } from '../stateapi/auth'
 import { UsersWrapper } from '../styles/UsersStyled'
 import CircleLoader from 'react-spinners/CircleLoader'
 import _ from 'lodash'
+import styled from 'styled-components'
+
+const ButtonDelete = styled.span`
+  color: red;
+`
+
+const ButtonEdit = styled.span`
+  color: brown;
+`
 
 const Users = () => {
   const token = useSelector(getToken)
@@ -68,13 +77,19 @@ const Users = () => {
                   <td>{user.contact.email}</td>
                   <td>{user.contact.phone}</td>
                   <td>{parseTimestamp(user.date_created)}</td>
-                  <td className='delete'>
-                    <span
+                  <td className='actions'>
+                    <ButtonEdit
+                      onClick={() => remove(user)}
+                      className='material-icons'
+                    >
+                      edit
+                    </ButtonEdit>
+                    <ButtonDelete
                       onClick={() => remove(user)}
                       className='material-icons'
                     >
                       delete_forever
-                    </span>
+                    </ButtonDelete>
                   </td>
                 </tr>
               )
