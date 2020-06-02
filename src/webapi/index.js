@@ -20,11 +20,11 @@ export function authBaseUrl () {
 }
 
 export function getVideos () {
-  return axios.get(mediaBaseUrl() + '/videos')
+  return axios.get(mediaBaseUrl() + '/api/v1/videos')
 }
 
 export function getMediaStatus () {
-  return axios.get(mediaBaseUrl() + '/status')
+  return axios.get(mediaBaseUrl() + '/api/v1/status')
 }
 
 export function getAuthStatus () {
