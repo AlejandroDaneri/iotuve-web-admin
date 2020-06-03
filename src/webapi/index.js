@@ -36,7 +36,9 @@ export function getAppStatus () {
 }
 
 export function doAuth (user) {
-  return axios.post(appBaseUrl() + '/api/v1/sessions', user)
+  return axios.post(appBaseUrl() + '/api/v1/sessions', user, {
+    headers: { 'X-Admin': 'true' }
+  })
 }
 
 export function getUsers (token) {
