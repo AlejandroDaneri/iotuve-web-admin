@@ -69,7 +69,7 @@ const App = () => {
           {!authed && <Route exact path='/' component={Login} />}
           <PrivateRoute path='/files' component={Files} />
           <PrivateRoute path='/users' component={Users} />
-          <PrivateRoute path='/user' component={User} />
+          <PrivateRoute path='/user/:username' component={User} />
           <PrivateRoute path='/users_admin' component={UsersAdmin} />
           <PrivateRoute path='/health' component={Health} />
           <Route path='/change_password' component={ChangePassword} />
