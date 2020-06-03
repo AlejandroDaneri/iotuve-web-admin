@@ -36,6 +36,7 @@ const User = () => {
       <div>Telefono: {user.contact.phone}</div>
       <div>Nombre: {user.first_name}</div>
       <div>Apellido: {user.last_name}</div>
+      <div>Servicio de LogIn: {user.login_service ? 'Si' : 'No'}</div>
     </UserWrapper>
   )
 }
