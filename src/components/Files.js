@@ -33,6 +33,7 @@ const Files = () => {
               <th>Nombre</th>
               <th>Tamaño (MB)</th>
               <th>Formato</th>
+              <th>Fecha de Creacion</th>
             </tr>
           </thead>
           <tbody>
@@ -52,6 +53,7 @@ const Files = () => {
                   <td>{file.name}</td>
                   <td>{(file.size / 1024 / 1024).toPrecision(3)}</td>
                   <td>{file.type}</td>
+                  <td>{file.date_created}</td>
                 </tr>
               )
             })}
