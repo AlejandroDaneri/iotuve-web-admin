@@ -4,11 +4,13 @@ import { getToken } from '../stateapi/auth'
 import { getUser } from '../webapi'
 import { useParams } from 'react-router-dom'
 
+import { UserWrapper } from '../styles/UserStyled'
+
 const User = () => {
   const token = useSelector(getToken)
   const { username } = useParams()
 
-  const [user, changeUser] = useState({})
+  const [user, changeUser] = useState({ contact: {} })
 
   const dispatch = useDispatch()
 
@@ -24,9 +26,18 @@ const User = () => {
           type: 'AUTH_LOGOUT'
         })
       })
-  }, [token, dispatch])
+  }, [token, username, dispatch])
 
-  return <div>{user.username}</div>
+  return (
+    <UserWrapper>
+      <h2>Usuario</h2>
+      <div>Usuario: {user.username}</div>
+      <div>Mail: {user.contact.email}</div>
+      <div>Telefono: {user.contact.phone}</div>
+      <div>Nombre: {user.first_name}</div>
+      <div>Apellido: {user.last_name}</div>
+    </UserWrapper>
+  )
 }
 
 export default User
