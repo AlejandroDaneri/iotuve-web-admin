@@ -107,8 +107,10 @@ const User = () => {
             </div>
             <div>Servicio de LogIn: {user.login_service ? 'Si' : 'No'}</div>
           </div>
-          <button onClick={() => changeEdit(!edit)}>Edit</button>
-          <button onClick={() => save()}>Save</button>
+          <div>
+            <button onClick={() => changeEdit(!edit)}>Edit</button>
+            <button onClick={() => save()}>Save</button>
+          </div>
         </>
       ) : (
         <CircleLoader color='#61dafb' size={250} />
