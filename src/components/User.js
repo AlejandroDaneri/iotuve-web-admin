@@ -3,14 +3,14 @@ import { useSelector, useDispatch } from 'react-redux'
 import { getToken } from '../stateapi/auth'
 import { getUser, saveUser } from '../webapi'
 import { useParams } from 'react-router-dom'
-
+import CircleLoader from 'react-spinners/CircleLoader'
 import { UserWrapper } from '../styles/UserStyled'
 
 const User = () => {
   const token = useSelector(getToken)
   const { username } = useParams()
 
-  const [user, changeUser] = useState({ contact: {} })
+  const [user, changeUser] = useState()
   const [edit, changeEdit] = useState(false)
 
   const [Username, changeUsername] = useState()
@@ -57,50 +57,62 @@ const User = () => {
   return (
     <UserWrapper>
       <h2>Usuario</h2>
-      <div>
-        <div>Usuario: {Username}</div>
-        <div>
-          Mail:{' '}
-          {edit ? (
-            <input value={email} onChange={e => changeEmail(e.target.value)} />
-          ) : (
-            email
-          )}
-        </div>
-        <div>
-          Telefono:{' '}
-          {edit ? (
-            <input value={phone} onChange={e => changePhone(e.target.value)} />
-          ) : (
-            phone
-          )}
-        </div>
-        <div>
-          Nombre:{' '}
-          {edit ? (
-            <input
-              value={firstName}
-              onChange={e => changeFirstName(e.target.value)}
-            />
-          ) : (
-            firstName
-          )}
-        </div>
-        <div>
-          Apellido:{' '}
-          {edit ? (
-            <input
-              value={lastName}
-              onChange={e => changeLastName(e.target.value)}
-            />
-          ) : (
-            lastName
-          )}
-        </div>
-        <div>Servicio de LogIn: {user.login_service ? 'Si' : 'No'}</div>
-      </div>
-      <button onClick={() => changeEdit(!edit)}>Edit</button>
-      {edit && <button onClick={() => save()}>Save</button>}
+      {user ? (
+        <>
+          <div>
+            <div>Usuario: {Username}</div>
+            <div>
+              Mail:{' '}
+              {edit ? (
+                <input
+                  value={email}
+                  onChange={e => changeEmail(e.target.value)}
+                />
+              ) : (
+                email
+              )}
+            </div>
+            <div>
+              Telefono:{' '}
+              {edit ? (
+                <input
+                  value={phone}
+                  onChange={e => changePhone(e.target.value)}
+                />
+              ) : (
+                phone
+              )}
+            </div>
+            <div>
+              Nombre:{' '}
+              {edit ? (
+                <input
+                  value={firstName}
+                  onChange={e => changeFirstName(e.target.value)}
+                />
+              ) : (
+                firstName
+              )}
+            </div>
+            <div>
+              Apellido:{' '}
+              {edit ? (
+                <input
+                  value={lastName}
+                  onChange={e => changeLastName(e.target.value)}
+                />
+              ) : (
+                lastName
+              )}
+            </div>
+            <div>Servicio de LogIn: {user.login_service ? 'Si' : 'No'}</div>
+          </div>
+          <button onClick={() => changeEdit(!edit)}>Edit</button>
+          <button onClick={() => save()}>Save</button>
+        </>
+      ) : (
+        <CircleLoader color='#61dafb' size={250} />
+      )}
     </UserWrapper>
   )
 }
