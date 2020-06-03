@@ -58,17 +58,7 @@ const User = () => {
     <UserWrapper>
       <h2>Usuario</h2>
       <div>
-        <div>
-          Usuario:{' '}
-          {edit ? (
-            <input
-              value={Username}
-              onChange={e => changeUsername(e.target.value)}
-            />
-          ) : (
-            Username
-          )}
-        </div>
+        <div>Usuario: {Username}</div>
         <div>
           Mail:{' '}
           {edit ? (
