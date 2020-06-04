@@ -109,11 +109,13 @@ const User = () => {
             </div>
             <div>Servicio de LogIn: {loginService ? 'Si' : 'No'}</div>
           </div>
-          <div>
-            <button onClick={() => changeEdit(!edit)}>
-              {edit ? 'Cancel' : 'Edit'}
+          <div className='actions'>
+            <button className='action' onClick={() => changeEdit(!edit)}>
+              {edit ? 'Cancelar' : 'Editar'}
             </button>
-            <button onClick={() => save()}>Save</button>
+            <button className='action' onClick={() => save()}>
+              Guardar
+            </button>
           </div>
         </>
       ) : (
