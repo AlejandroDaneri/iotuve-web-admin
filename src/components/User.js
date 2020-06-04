@@ -110,7 +110,9 @@ const User = () => {
             <div>Servicio de LogIn: {loginService ? 'Si' : 'No'}</div>
           </div>
           <div>
-            <button onClick={() => changeEdit(!edit)}>Edit</button>
+            <button onClick={() => changeEdit(!edit)}>
+              {edit ? 'Cancel' : 'Edit'}
+            </button>
             <button onClick={() => save()}>Save</button>
           </div>
         </>
