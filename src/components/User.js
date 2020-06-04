@@ -113,9 +113,11 @@ const User = () => {
             <button className='action' onClick={() => changeEdit(!edit)}>
               {edit ? 'Cancelar' : 'Editar'}
             </button>
-            <button className='action' onClick={() => save()}>
-              Guardar
-            </button>
+            {edit && (
+              <button className='action' onClick={() => save()}>
+                Guardar
+              </button>
+            )}
           </div>
         </>
       ) : (
