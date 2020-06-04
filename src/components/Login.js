@@ -17,6 +17,7 @@ const Login = () => {
 
   function onSubmit (e) {
     e.preventDefault()
+    dispatch({ type: 'AUTH_REQUEST' })
     changeAuthing(true)
     doAuth({ username: username, password: password })
       .then(response => {

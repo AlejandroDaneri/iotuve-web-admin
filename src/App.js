@@ -16,12 +16,15 @@ import User from './components/User'
 import Users from './components/Users'
 import UsersAdmin from './components/UsersAdmin'
 import ChangePassword from './components/ChangePassword'
-import { isAuthed } from './stateapi/auth'
+import { isAuthed, isAuthing } from './stateapi/auth'
 
 const PrivateRoute = ({ ...rest }) => {
   const authed = useSelector(isAuthed)
+  const authing = useSelector(isAuthing)
 
-  if (authed) {
+  if (authing) {
+    return 'Authing'
+  } else if (authed) {
     return <Route {...rest} />
   } else {
     return <Redirect to='/' />
