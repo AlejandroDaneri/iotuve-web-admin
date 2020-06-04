@@ -5,6 +5,7 @@ import { getUser, saveUser } from '../webapi'
 import { useParams } from 'react-router-dom'
 import CircleLoader from 'react-spinners/CircleLoader'
 import { UserWrapper } from '../styles/UserStyled'
+import { Snackbar, SnackbarContent } from '@material-ui/core'
 
 const User = () => {
   const token = useSelector(getToken)
@@ -19,6 +20,8 @@ const User = () => {
   const [firstName, changeFirstName] = useState()
   const [lastName, changeLastName] = useState()
   const [loginService, changeLoginService] = useState(false)
+
+  const [success, changeSuccess] = useState(false)
 
   const dispatch = useDispatch()
 
@@ -53,6 +56,7 @@ const User = () => {
       }
     })
       .then(_ => {
+        changeSuccess(true)
         changeEdit(false)
       })
       .catch(_ => {
@@ -123,6 +127,21 @@ const User = () => {
               </div>
             )}
           </div>
+          <Snackbar
+            open={success}
+            onClose={() => changeSuccess(false)}
+            anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+            autoHideDuration={6000}
+          >
+            <SnackbarContent
+              message='Usuario editado con exito'
+              style={{
+                color: 'black',
+                backgroundColor: '#61dafb',
+                fontSize: '14px'
+              }}
+            />
+          </Snackbar>
         </>
       ) : (
         <CircleLoader color='#61dafb' size={250} />
