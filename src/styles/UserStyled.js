@@ -23,6 +23,7 @@ export const UserWrapper = styled.div`
       padding-right: 1%;
       background-color: #61dafb;
       cursor: pointer;
+      color: black;
     }
   }
 `
