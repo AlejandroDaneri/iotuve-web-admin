@@ -52,8 +52,12 @@ const User = () => {
         phone: phone
       }
     })
-      .then(_ => {})
-      .catch(_ => {})
+      .then(_ => {
+        changeEdit(false)
+      })
+      .catch(_ => {
+        changeEdit(false)
+      })
   }
 
   return (
