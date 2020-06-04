@@ -18,6 +18,7 @@ const User = () => {
   const [phone, changePhone] = useState()
   const [firstName, changeFirstName] = useState()
   const [lastName, changeLastName] = useState()
+  const [loginService, changeLoginService] = useState(false)
 
   const dispatch = useDispatch()
 
@@ -33,6 +34,7 @@ const User = () => {
         changePhone(phone)
         changeFirstName(data.first_name)
         changeLastName(data.last_name)
+        changeLoginService(data.login_service)
       })
       .catch(_ => {
         dispatch({
@@ -105,7 +107,7 @@ const User = () => {
                 lastName
               )}
             </div>
-            <div>Servicio de LogIn: {user.login_service ? 'Si' : 'No'}</div>
+            <div>Servicio de LogIn: {loginService ? 'Si' : 'No'}</div>
           </div>
           <div>
             <button onClick={() => changeEdit(!edit)}>Edit</button>
