@@ -7,11 +7,47 @@ export const AppWrapper = styled.section`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  font-size: calc(10px + 1vmin);
   color: #61dafb;
 
-  > h1 {
-    font-size: 50px;
+  & > h1 {
+    font-size: 4vmin;
+  }
+
+  & > h2 {
+    font-size: 3vmin;
+  }
+
+  & > h3 {
+    font-size: 2vmin;
+  }
+
+  & > h4 {
+    font-size: 1vmin;
+  }
+
+  & > input {
+    margin: 0.4%;
+    padding: 0.3% 1%;
+    border: 2px solid #61dafb;
+    background-color: #282c34;
+    color: #61dafb;
+    font-size: calc(10px + 1vmin);
+  }
+
+  & .button {
+    background-color: #61dafb;
+    border-color: #61dafb;
+    color: black;
+    cursor: pointer;
+    width: 20%;
+  }
+
+  .link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 10%;
   }
 
   > a,
@@ -19,5 +55,21 @@ export const AppWrapper = styled.section`
   a:visited {
     color: white;
     text-decoration: none;
+  }
+
+  & .menu {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+
+    & > span {
+      cursor: pointer;
+      position: absolute;
+      top: 0;
+      right: 0;
+      padding: 2%;
+    }
   }
 `
