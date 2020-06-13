@@ -8,6 +8,7 @@ import _ from 'lodash'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import Modal from 'styled-react-modal'
+import { Snackbar, SnackbarContent } from '@material-ui/core'
 
 const StyledModal = Modal.styled`
   display: flex;
@@ -62,6 +63,7 @@ const Users = () => {
   const [users, changeUsers] = useState()
   const [selected, changeSelected] = useState()
   const [modalOpen, changeModalOpen] = useState(false)
+  const [informOpen, changeInformOpen] = useState(false)
 
   const dispatch = useDispatch()
 
@@ -88,6 +90,7 @@ const Users = () => {
       .then(response => {
         changeUsers(_.without(users, selected))
         changeModalOpen(false)
+        changeInformOpen(true)
       })
       .catch(_ => {
         dispatch({
@@ -103,6 +106,21 @@ const Users = () => {
         modalOpen={modalOpen}
         changeModalOpen={changeModalOpen}
       />
+      <Snackbar
+        open={informOpen}
+        onClose={() => changeInformOpen(false)}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+        autoHideDuration={6000}
+      >
+        <SnackbarContent
+          message='Usuario borrado con exito'
+          style={{
+            color: 'black',
+            backgroundColor: '#61dafb',
+            fontSize: '14px'
+          }}
+        />
+      </Snackbar>
       <h2>Usuarios</h2>
       {users ? (
         <table>
