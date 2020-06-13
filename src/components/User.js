@@ -39,10 +39,13 @@ const User = () => {
         changeLastName(data.last_name)
         changeLoginService(data.login_service)
       })
-      .catch(_ => {
-        dispatch({
-          type: 'AUTH_LOGOUT'
-        })
+      .catch(err => {
+        console.error(err)
+        if (err.response !== 500) {
+          dispatch({
+            type: 'AUTH_LOGOUT'
+          })
+        }
       })
   }, [token, username, dispatch])
 

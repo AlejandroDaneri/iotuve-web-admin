@@ -73,10 +73,13 @@ const Users = () => {
         const { data } = response
         changeUsers(data)
       })
-      .catch(_ => {
-        dispatch({
-          type: 'AUTH_LOGOUT'
-        })
+      .catch(err => {
+        console.error(err)
+        if (err.response !== 500) {
+          dispatch({
+            type: 'AUTH_LOGOUT'
+          })
+        }
       })
   }, [token, dispatch])
 
@@ -92,10 +95,13 @@ const Users = () => {
         changeModalOpen(false)
         changeInformOpen(true)
       })
-      .catch(_ => {
-        dispatch({
-          type: 'AUTH_LOGOUT'
-        })
+      .catch(err => {
+        console.error(err)
+        if (err.response !== 500) {
+          dispatch({
+            type: 'AUTH_LOGOUT'
+          })
+        }
       })
   }
 

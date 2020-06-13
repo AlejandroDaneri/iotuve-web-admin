@@ -15,10 +15,13 @@ const Files = () => {
         const { data } = response
         changeFiles(Object.values(data.videos))
       })
-      .catch(_ => {
-        dispatch({
-          type: 'AUTH_LOGOUT'
-        })
+      .catch(err => {
+        console.error(err)
+        if (err.response !== 500) {
+          dispatch({
+            type: 'AUTH_LOGOUT'
+          })
+        }
       })
   }, [dispatch])
 
