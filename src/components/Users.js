@@ -7,6 +7,31 @@ import CircleLoader from 'react-spinners/CircleLoader'
 import _ from 'lodash'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
+import Modal from 'styled-react-modal'
+
+const StyledModal = Modal.styled`
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  height: 10%;
+  align-items: center;
+  justify-content: center;
+  background-color: #282c34;
+  color: #61dafb;
+
+  & .actions {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    padding: 1%;
+
+    > button {
+      margin: 1%;
+    }
+  }
+`
 
 const ButtonDelete = styled.span`
   color: red;
@@ -16,9 +41,27 @@ const ButtonEdit = styled.span`
   color: brown;
 `
 
+const UserModal = ({ modalOpen, changeModalOpen, remove }) => {
+  return (
+    <StyledModal
+      isOpen={modalOpen}
+      onBackgroundClick={null}
+      onEscapeKeydown={null}
+    >
+      <span>Esta seguro que desea borrar el Usuario?</span>
+      <div className='actions'>
+        <button onClick={() => changeModalOpen(false)}>Cancelar</button>
+        <button onClick={remove}>Aceptar</button>
+      </div>
+    </StyledModal>
+  )
+}
+
 const Users = () => {
   const token = useSelector(getToken)
   const [users, changeUsers] = useState()
+  const [selected, changeSelected] = useState()
+  const [modalOpen, changeModalOpen] = useState(false)
 
   const dispatch = useDispatch()
 
@@ -40,10 +83,11 @@ const Users = () => {
     return date.toUTCString()
   }
 
-  function remove (user) {
-    removeUser(token, user.username)
+  function remove () {
+    removeUser(token, selected.username)
       .then(response => {
-        changeUsers(_.without(users, user))
+        changeUsers(_.without(users, selected))
+        changeModalOpen(false)
       })
       .catch(_ => {
         dispatch({
@@ -54,6 +98,11 @@ const Users = () => {
 
   return (
     <UsersWrapper>
+      <UserModal
+        remove={remove}
+        modalOpen={modalOpen}
+        changeModalOpen={changeModalOpen}
+      />
       <h2>Usuarios</h2>
       {users ? (
         <table>
@@ -83,7 +132,10 @@ const Users = () => {
                       <ButtonEdit className='material-icons'>edit</ButtonEdit>
                     </Link>
                     <ButtonDelete
-                      onClick={() => remove(user)}
+                      onClick={() => {
+                        changeSelected(user)
+                        changeModalOpen(true)
+                      }}
                       className='material-icons'
                     >
                       delete_forever

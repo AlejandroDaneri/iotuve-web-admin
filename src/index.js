@@ -8,6 +8,7 @@ import { createStore } from 'redux'
 import rootReducer from './reducers'
 import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage' // defaults to localStorage for web
+import { ModalProvider } from 'styled-react-modal'
 
 const persistConfig = {
   key: 'chotuve',
@@ -24,7 +25,9 @@ persistStore(store)
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <ModalProvider>
+        <App />
+      </ModalProvider>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')
