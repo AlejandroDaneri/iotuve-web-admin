@@ -20,7 +20,9 @@ export function authBaseUrl () {
 }
 
 export function getVideos () {
-  return axios.get(mediaBaseUrl() + '/api/v1/videos')
+  return axios.get(mediaBaseUrl() + '/api/v1/videos', {
+    headers: { 'X-Auth-Token': '38d1fcaf-3a8b-4dfe-9ca4-2e0473b442ba' }
+  })
 }
 
 export function getMediaStatus () {
