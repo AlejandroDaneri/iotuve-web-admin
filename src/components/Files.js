@@ -32,11 +32,8 @@ const Files = () => {
         <table>
           <thead>
             <tr>
-              <th>Archivo</th>
-              <th>Nombre</th>
-              <th>Tamaño (MB)</th>
-              <th>Formato</th>
-              <th>Fecha de Creacion</th>
+              <th>Server</th>
+              <th>Estado</th>
             </tr>
           </thead>
           <tbody>

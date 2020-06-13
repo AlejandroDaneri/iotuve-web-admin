@@ -14,4 +14,17 @@ export const HealthWrapper = styled.div`
   & .status {
     padding: 2%;
   }
+
+  > table {
+    width: 90%;
+    text-align: center;
+
+    > thead {
+      > tr {
+        > th {
+          border-bottom: 1px solid #61dafb;
+        }
+      }
+    }
+  }
 `

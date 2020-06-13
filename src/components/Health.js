@@ -11,29 +11,29 @@ const Health = () => {
   useEffect(() => {
     getMediaStatus()
       .then(_ => {
-        changeMediaStatus('Media Server UP')
+        changeMediaStatus('UP')
       })
       .catch(_ => {
         console.error('Media status request fail')
-        changeMediaStatus('Media Server DOWN')
+        changeMediaStatus('DOWN')
       })
 
     getAppStatus()
       .then(_ => {
-        changeAppStatus('App Server UP')
+        changeAppStatus('UP')
       })
       .catch(_ => {
         console.error('App status request fail')
-        changeAppStatus('App Server DOWN')
+        changeAppStatus('DOWN')
       })
 
     getAuthStatus()
       .then(_ => {
-        changeAuthStatus('Auth Server UP')
+        changeAuthStatus('UP')
       })
       .catch(_ => {
         console.error('App status request fail')
-        changeAuthStatus('Auth Server DOWN')
+        changeAuthStatus('DOWN')
       })
   }, [])
 
@@ -41,11 +41,28 @@ const Health = () => {
     <HealthWrapper>
       <h2>Estado</h2>
       {mediaStatus && appStatus && authStatus ? (
-        <div className='status'>
-          <div>{mediaStatus}</div>
-          <div>{appStatus}</div>
-          <div>{authStatus}</div>
-        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Server</th>
+              <th>Estado</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Media</td>
+              <td>{mediaStatus}</td>
+            </tr>
+            <tr>
+              <td>App</td>
+              <td>{appStatus}</td>
+            </tr>
+            <tr>
+              <td>Auth</td>
+              <td>{authStatus}</td>
+            </tr>
+          </tbody>
+        </table>
       ) : (
         <CircleLoader color='#61dafb' size={250} />
       )}
