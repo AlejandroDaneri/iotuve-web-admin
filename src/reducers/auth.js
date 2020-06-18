@@ -18,7 +18,8 @@ const auth = (state = INITIAL_STATE, action) => {
         ...state,
         authed: true,
         authing: false,
-        token: payload.token
+        token: payload.token,
+        username: payload.username
       }
     }
     case 'AUTH_LOGOUT': {

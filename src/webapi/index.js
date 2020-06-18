@@ -55,8 +55,20 @@ export function getUser (token, username) {
   })
 }
 
+export function getAdminUser (token, username) {
+  return axios.get(appBaseUrl() + `/api/v1/adminusers/${username}`, {
+    headers: { 'X-Auth-Token': token }
+  })
+}
+
 export function saveUser (token, username, user) {
   return axios.put(appBaseUrl() + `/api/v1/users/${username}`, user, {
+    headers: { 'X-Auth-Token': token }
+  })
+}
+
+export function saveAdminUser (token, username, user) {
+  return axios.put(appBaseUrl() + `/api/v1/adminusers/${username}`, user, {
     headers: { 'X-Auth-Token': token }
   })
 }

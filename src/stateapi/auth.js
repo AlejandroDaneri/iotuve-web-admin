@@ -9,3 +9,7 @@ export function isAuthing (state) {
 export function getToken (state) {
   return state.auth.token
 }
+
+export function getUsername (state) {
+  return state.auth.username
+}

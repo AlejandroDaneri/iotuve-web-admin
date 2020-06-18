@@ -25,7 +25,8 @@ const Login = () => {
         dispatch({
           type: 'AUTH_SUCCESS',
           payload: {
-            token: data.session_token
+            token: data.session_token,
+            username: data.username
           }
         })
         changeAuthing(false)

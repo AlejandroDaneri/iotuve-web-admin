@@ -8,6 +8,11 @@ import styled from 'styled-components'
 import Modal from 'styled-react-modal'
 import _ from 'lodash'
 import { Snackbar, SnackbarContent } from '@material-ui/core'
+import { Link } from 'react-router-dom'
+
+const ButtonEdit = styled.span`
+  color: brown;
+`
 
 const ButtonDelete = styled.span`
   color: red;
@@ -145,6 +150,9 @@ const AdminUsers = () => {
                   <td>{user.email}</td>
                   <td>{parseTimestamp(user.date_created)}</td>
                   <td className='actions'>
+                    <Link to={`/user_admin/${user.username}`}>
+                      <ButtonEdit className='material-icons'>edit</ButtonEdit>
+                    </Link>
                     <ButtonDelete
                       onClick={() => {
                         changeSelected(user)
