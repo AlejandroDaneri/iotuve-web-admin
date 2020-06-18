@@ -17,8 +17,11 @@ import UserAdmin from './components/UserAdmin'
 import Users from './components/Users'
 import UsersAdmin from './components/UsersAdmin'
 import ChangePassword from './components/ChangePassword'
-import { isAuthed, isAuthing } from './stateapi/auth'
+import { getUsername, isAuthed, isAuthing } from './stateapi/auth'
 // import LogOut from './components/LogOut'
+import ArrowUpwardSharpIcon from '@material-ui/icons/ArrowUpwardSharp'
+import ArrowDownwardSharpIcon from '@material-ui/icons/ArrowDownwardSharp'
+
 import {
   Drawer,
   List,
@@ -34,6 +37,7 @@ import PersonIcon from '@material-ui/icons/Person'
 import DoneIcon from '@material-ui/icons/Done'
 import ExitToAppIcon from '@material-ui/icons/ExitToApp'
 import LogOut from './components/LogOut'
+import Divider from '@material-ui/core/Divider'
 
 const PrivateRoute = ({ ...rest }) => {
   const authed = useSelector(isAuthed)
@@ -49,28 +53,33 @@ const PrivateRoute = ({ ...rest }) => {
 }
 
 const useStyles = makeStyles(theme => ({
-  sidebar: { backgroundColor: '#3450bf', width: 'inherit' }
+  sidebar: { backgroundColor: '#8697e0', width: 'inherit' }
 }))
 
 const App = () => {
   const authed = useSelector(isAuthed)
   const classes = useStyles()
+  const username = useSelector(getUsername)
   return (
     <AppWrapper>
       <Router>
         <div style={{ display: 'flex' }}>
           {authed && (
             <Drawer
-              style={{ width: '200px' }}
+              style={{ width: '215px' }}
               variant='persistent'
               anchor='left'
               open='true'
               classes={{ paper: classes.sidebar }}
             >
+              <div style={{ placeSelf: 'end', padding: '10px' }}>
+                <LogOut />
+              </div>
               <h1>
                 <center>Web Admin</center>
               </h1>
-
+              <Divider />
+              <Divider />
               <List>
                 <Link to='/files'>
                   <ListItem button>
@@ -102,16 +111,6 @@ const App = () => {
                 </Link>
               </List>
               <List>
-                <Link to='/health'>
-                  <ListItem button>
-                    <ListItemIcon>
-                      <DoneIcon />
-                    </ListItemIcon>
-                    <ListItemText primary='Estado' />
-                  </ListItem>
-                </Link>
-              </List>
-              <List>
                 <ListItem button>
                   <ListItemIcon>
                     <ShowChartIcon />
@@ -119,16 +118,29 @@ const App = () => {
                   <ListItemText primary='Estadisticas' />
                 </ListItem>
               </List>
+              <Divider />
+              <Divider />
               <List>
-                <Link to='/'>
+                <Link to='/health'>
                   <ListItem button>
                     <ListItemIcon>
-                      <ExitToAppIcon />
+                      <DoneIcon />
                     </ListItemIcon>
-                    <ListItemText primary='Cerrar sesion' />
+                    <ListItemText primary='Estado actual' />
                   </ListItem>
                 </Link>
               </List>
+              <div align='center'>
+                <p>
+                  Media server: <ArrowUpwardSharpIcon />
+                </p>
+                <p>
+                  Application server: <ArrowUpwardSharpIcon />
+                </p>
+                <p>
+                  Auth server: <ArrowDownwardSharpIcon />
+                </p>
+              </div>
               <LogOut />
             </Drawer>
           )}
