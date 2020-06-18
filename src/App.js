@@ -58,89 +58,91 @@ const App = () => {
   return (
     <AppWrapper>
       <Router>
-        {authed && (
-          <Drawer
-            style={{ width: '200px' }}
-            variant='persistent'
-            anchor='left'
-            open='true'
-            classes={{ paper: classes.sidebar }}
-          >
-            <h1>
-              <center>Web Admin</center>
-            </h1>
+        <div style={{ display: 'flex' }}>
+          {authed && (
+            <Drawer
+              style={{ width: '200px' }}
+              variant='persistent'
+              anchor='left'
+              open='true'
+              classes={{ paper: classes.sidebar }}
+            >
+              <h1>
+                <center>Web Admin</center>
+              </h1>
 
-            <List>
-              <Link to='/files'>
+              <List>
+                <Link to='/files'>
+                  <ListItem button>
+                    <ListItemIcon>
+                      <VideoLibraryIcon />
+                    </ListItemIcon>
+                    <ListItemText primary='Archivos' />
+                  </ListItem>
+                </Link>
+              </List>
+              <List>
+                <Link to='/users'>
+                  <ListItem button>
+                    <ListItemIcon>
+                      <PersonIcon />
+                    </ListItemIcon>
+                    <ListItemText primary='Usuarios' />
+                  </ListItem>
+                </Link>
+              </List>
+              <List>
+                <Link to='/users_admin'>
+                  <ListItem button>
+                    <ListItemIcon>
+                      <SupervisorAccountIcon />
+                    </ListItemIcon>
+                    <ListItemText primary='Admins' />
+                  </ListItem>
+                </Link>
+              </List>
+              <List>
+                <Link to='/health'>
+                  <ListItem button>
+                    <ListItemIcon>
+                      <DoneIcon />
+                    </ListItemIcon>
+                    <ListItemText primary='Estado' />
+                  </ListItem>
+                </Link>
+              </List>
+              <List>
                 <ListItem button>
                   <ListItemIcon>
-                    <VideoLibraryIcon />
+                    <ShowChartIcon />
                   </ListItemIcon>
-                  <ListItemText primary='Archivos' />
+                  <ListItemText primary='Estadisticas' />
                 </ListItem>
-              </Link>
-            </List>
-            <List>
-              <Link to='/users'>
-                <ListItem button>
-                  <ListItemIcon>
-                    <PersonIcon />
-                  </ListItemIcon>
-                  <ListItemText primary='Usuarios' />
-                </ListItem>
-              </Link>
-            </List>
-            <List>
-              <Link to='/users_admin'>
-                <ListItem button>
-                  <ListItemIcon>
-                    <SupervisorAccountIcon />
-                  </ListItemIcon>
-                  <ListItemText primary='Admins' />
-                </ListItem>
-              </Link>
-            </List>
-            <List>
-              <Link to='/health'>
-                <ListItem button>
-                  <ListItemIcon>
-                    <DoneIcon />
-                  </ListItemIcon>
-                  <ListItemText primary='Estado' />
-                </ListItem>
-              </Link>
-            </List>
-            <List>
-              <ListItem button>
-                <ListItemIcon>
-                  <ShowChartIcon />
-                </ListItemIcon>
-                <ListItemText primary='Estadisticas' />
-              </ListItem>
-            </List>
-            <List>
-              <Link to='/'>
-                <ListItem button>
-                  <ListItemIcon>
-                    <ExitToAppIcon />
-                  </ListItemIcon>
-                  <ListItemText primary='Cerrar sesion' />
-                </ListItem>
-              </Link>
-            </List>
-            <LogOut />
-          </Drawer>
-        )}
-        <Switch>
-          {!authed && <Route exact path='/' component={Login} />}
-          <PrivateRoute path='/files' component={Files} />
-          <PrivateRoute path='/users' component={Users} />
-          <PrivateRoute path='/user/:username' component={User} />
-          <PrivateRoute path='/user_admin/:username' component={UserAdmin} />
-          <PrivateRoute path='/users_admin' component={UsersAdmin} />
-          <PrivateRoute path='/health' component={Health} />
-          <Route path='/change_password' component={ChangePassword} />
-        </Switch>
+              </List>
+              <List>
+                <Link to='/'>
+                  <ListItem button>
+                    <ListItemIcon>
+                      <ExitToAppIcon />
+                    </ListItemIcon>
+                    <ListItemText primary='Cerrar sesion' />
+                  </ListItem>
+                </Link>
+              </List>
+              <LogOut />
+            </Drawer>
+          )}
+          <Switch>
+            {!authed && <Route exact path='/' component={Login} />}
+            <PrivateRoute path='/files' component={Files} />
+            <PrivateRoute path='/users' component={Users} />
+            <PrivateRoute path='/user/:username' component={User} />
+            <PrivateRoute path='/user_admin/:username' component={UserAdmin} />
+            <PrivateRoute path='/users_admin' component={UsersAdmin} />
+            <PrivateRoute path='/health' component={Health} />
+            <Route path='/change_password' component={ChangePassword} />
+          </Switch>
+        </div>
       </Router>
     </AppWrapper>
   )
