@@ -8,7 +8,7 @@ import {
   Route,
   Redirect
 } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import Files from './components/Files'
 import Login from './components/Login'
 import Health from './components/Health'
@@ -18,6 +18,7 @@ import Users from './components/Users'
 import UsersAdmin from './components/UsersAdmin'
 import ChangePassword from './components/ChangePassword'
 import { isAuthed, isAuthing } from './stateapi/auth'
+import LogOut from './components/LogOut'
 
 const PrivateRoute = ({ ...rest }) => {
   const authed = useSelector(isAuthed)
@@ -34,14 +35,6 @@ const PrivateRoute = ({ ...rest }) => {
 
 const App = () => {
   const authed = useSelector(isAuthed)
-
-  const dispatch = useDispatch()
-
-  function logOut () {
-    dispatch({
-      type: 'AUTH_LOGOUT'
-    })
-  }
 
   return (
     <AppWrapper>
@@ -64,9 +57,7 @@ const App = () => {
             <Link to='/health' className='link'>
               <Button>Estado</Button>
             </Link>
-            <span onClick={() => logOut()} className='material-icons'>
-              power_settings_new
-            </span>
+            <LogOut />
           </div>
         )}
         <Switch>
