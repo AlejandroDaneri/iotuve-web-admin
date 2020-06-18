@@ -22,5 +22,13 @@ export const UsersAdminWrapper = styled.div`
         }
       }
     }
+
+    > tbody {
+      > tr {
+        & > td.actions {
+          cursor: pointer;
+        }
+      }
+    }
   }
 `

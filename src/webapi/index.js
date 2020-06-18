@@ -79,3 +79,9 @@ export function removeUser (token, username) {
     headers: { 'X-Auth-Token': token }
   })
 }
+
+export function removeAdminUser (token, username) {
+  return axios.delete(appBaseUrl() + `/api/v1/adminusers/${username}`, {
+    headers: { 'X-Auth-Token': token }
+  })
+}
