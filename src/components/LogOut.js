@@ -1,18 +1,28 @@
 import React from 'react'
 
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 import styled from 'styled-components'
 
-export const LogOutWrapper = styled.span`
+import { getUsername } from '../stateapi/auth'
+
+export const LogOutWrapper = styled.div`
+  margin: 2%;
   cursor: pointer;
   position: absolute;
   top: 0;
   right: 0;
-  padding: 2%;
+
+  display: flex;
+
+  & .username {
+    color: white;
+    margin-right: 6%;
+  }
 `
 
 const LogOut = () => {
+  const username = useSelector(getUsername)
   const dispatch = useDispatch()
 
   function logOut () {
@@ -22,8 +32,11 @@ const LogOut = () => {
   }
 
   return (
-    <LogOutWrapper onClick={() => logOut()} className='material-icons'>
-      power_settings_new
+    <LogOutWrapper>
+      <div className='username'>{username}</div>
+      <span onClick={() => logOut()} className='material-icons'>
+        power_settings_new
+      </span>
     </LogOutWrapper>
   )
 }
