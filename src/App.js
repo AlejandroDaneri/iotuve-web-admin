@@ -1,6 +1,6 @@
 import React from 'react'
 import { AppWrapper } from './styles/AppStyled'
-import { Button } from './styles/ButtonStyled'
+// import { Button } from './styles/ButtonStyled'
 import {
   Link,
   BrowserRouter as Router,
@@ -18,6 +18,21 @@ import Users from './components/Users'
 import UsersAdmin from './components/UsersAdmin'
 import ChangePassword from './components/ChangePassword'
 import { isAuthed, isAuthing } from './stateapi/auth'
+// import LogOut from './components/LogOut'
+import {
+  Drawer,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText
+} from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles'
+import ShowChartIcon from '@material-ui/icons/ShowChart'
+import VideoLibraryIcon from '@material-ui/icons/VideoLibrary'
+import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount'
+import PersonIcon from '@material-ui/icons/Person'
+import DoneIcon from '@material-ui/icons/Done'
+import ExitToAppIcon from '@material-ui/icons/ExitToApp'
 import LogOut from './components/LogOut'
 
 const PrivateRoute = ({ ...rest }) => {
@@ -33,32 +48,88 @@ const PrivateRoute = ({ ...rest }) => {
   }
 }
 
+const useStyles = makeStyles(theme => ({
+  sidebar: { backgroundColor: '#3450bf', width: 'inherit' }
+}))
+
 const App = () => {
   const authed = useSelector(isAuthed)
-
+  const classes = useStyles()
   return (
     <AppWrapper>
       <Router>
-        <h1>ChoTuve - Web Admin</h1>
         {authed && (
-          <div className='menu'>
-            <Link to='/' className='link'>
-              <Button>Inicio</Button>
-            </Link>
-            <Link to='/files' className='link'>
-              <Button>Archivos</Button>
-            </Link>
-            <Link to='/users' className='link'>
-              <Button>Usuarios</Button>
-            </Link>
-            <Link to='/users_admin' className='link'>
-              <Button>Admins</Button>
-            </Link>
-            <Link to='/health' className='link'>
-              <Button>Estado</Button>
-            </Link>
+          <Drawer
+            style={{ width: '200px' }}
+            variant='persistent'
+            anchor='left'
+            open='true'
+            classes={{ paper: classes.sidebar }}
+          >
+            <h1>
+              <center>Web Admin</center>
+            </h1>
+
+            <List>
+              <Link to='/files'>
+                <ListItem button>
+                  <ListItemIcon>
+                    <VideoLibraryIcon />
+                  </ListItemIcon>
+                  <ListItemText primary='Archivos' />
+                </ListItem>
+              </Link>
+            </List>
+            <List>
+              <Link to='/users'>
+                <ListItem button>
+                  <ListItemIcon>
+                    <PersonIcon />
+                  </ListItemIcon>
+                  <ListItemText primary='Usuarios' />
+                </ListItem>
+              </Link>
+            </List>
+            <List>
+              <Link to='/users_admin'>
+                <ListItem button>
+                  <ListItemIcon>
+                    <SupervisorAccountIcon />
+                  </ListItemIcon>
+                  <ListItemText primary='Admins' />
+                </ListItem>
+              </Link>
+            </List>
+            <List>
+              <Link to='/health'>
+                <ListItem button>
+                  <ListItemIcon>
+                    <DoneIcon />
+                  </ListItemIcon>
+                  <ListItemText primary='Estado' />
+                </ListItem>
+              </Link>
+            </List>
+            <List>
+              <ListItem button>
+                <ListItemIcon>
+                  <ShowChartIcon />
+                </ListItemIcon>
+                <ListItemText primary='Estadisticas' />
+              </ListItem>
+            </List>
+            <List>
+              <Link to='/'>
+                <ListItem button>
+                  <ListItemIcon>
+                    <ExitToAppIcon />
+                  </ListItemIcon>
+                  <ListItemText primary='Cerrar sesion' />
+                </ListItem>
+              </Link>
+            </List>
             <LogOut />
-          </div>
+          </Drawer>
         )}
         <Switch>
           {!authed && <Route exact path='/' component={Login} />}

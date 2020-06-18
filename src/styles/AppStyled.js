@@ -53,7 +53,7 @@ export const AppWrapper = styled.section`
   > a,
   a:link,
   a:visited {
-    color: white;
+    color: black;
     text-decoration: none;
   }
 
