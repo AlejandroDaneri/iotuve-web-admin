@@ -20,6 +20,7 @@ const User = () => {
   const [firstName, changeFirstName] = useState()
   const [lastName, changeLastName] = useState()
   const [loginService, changeLoginService] = useState(false)
+  const [url, changeUrl] = useState()
 
   const [success, changeSuccess] = useState(false)
 
@@ -28,9 +29,12 @@ const User = () => {
   useEffect(() => {
     getUser(token, username)
       .then(response => {
+        console.log(response)
         const { data } = response
-        const { username, contact } = data
+        const { username, contact, avatar } = data
         const { email, phone } = contact
+        const { url } = avatar
+        changeUrl(url)
         changeUser(data)
         changeUsername(username)
         changeEmail(email)
@@ -118,7 +122,13 @@ const User = () => {
                 lastName
               )}
             </div>
-            <div>Servicio de LogIn: {loginService ? 'Si' : 'No'}</div>
+            <div>Servicio de Login: {loginService ? 'Si' : 'No'}</div>
+            <div>
+              Avatar:{' '}
+              <a href={url}>
+                <img alt='Avatar thumb' width='80px' height='40px' src={url} />
+              </a>
+            </div>
           </div>
           <div className='actions'>
             <div className='action' onClick={() => changeEdit(!edit)}>
@@ -130,6 +140,7 @@ const User = () => {
               </div>
             )}
           </div>
+
           <Snackbar
             open={success}
             onClose={() => changeSuccess(false)}
