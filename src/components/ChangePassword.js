@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import qs from 'qs'
-import { doChangePassword } from '../webapi'
+import { doRecoveryPassword } from '../webapi'
 import { ChangePasswordWrapper } from '../styles/ChangePasswordStyled'
 
 const ChangePassword = location => {
@@ -22,7 +22,7 @@ const ChangePassword = location => {
 
   function onSubmit (e) {
     e.preventDefault()
-    doChangePassword(key, username, password)
+    doRecoveryPassword(key, username, password)
       .then(_ => {
         console.error('Change Password Success')
       })

@@ -79,11 +79,24 @@ export function getUsersAdmin (token) {
   })
 }
 
-export function doChangePassword (key, username, password) {
+export function doRecoveryPassword (key, username, password) {
   return axios.post(appBaseUrl() + `/api/v1/recovery/${username}`, {
     recovery_key: key,
     new_password: password
   })
+}
+export function doChangeAdminPassword (token, username, password) {
+  return axios.patch(
+    appBaseUrl() + `/api/v1/adminusers/${username}`,
+    {
+      op: 'replace',
+      path: '/password',
+      value: password
+    },
+    {
+      headers: { 'X-Auth-Token': token }
+    }
+  )
 }
 
 export function removeUser (token, username) {

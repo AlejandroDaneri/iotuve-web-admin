@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { getToken } from '../stateapi/auth'
-import { getAdminUser, saveAdminUser } from '../webapi'
+import { doChangeAdminPassword, getAdminUser, saveAdminUser } from '../webapi'
 import { useParams } from 'react-router-dom'
 import CircleLoader from 'react-spinners/CircleLoader'
 import { UserWrapper } from '../styles/UserStyled'
 import { Snackbar, SnackbarContent } from '@material-ui/core'
+import Button from '@material-ui/core/Button'
 
 const UserAdmin = () => {
   const token = useSelector(getToken)
@@ -20,6 +21,10 @@ const UserAdmin = () => {
   const [lastName, changeLastName] = useState()
 
   const [success, changeSuccess] = useState(false)
+
+  const [password, changePassword] = useState('')
+  const [confirmPassword, changeConfirmPassword] = useState('')
+  const [pwdSuccess, changePwdSuccess] = useState(false)
 
   const dispatch = useDispatch()
 
@@ -58,7 +63,28 @@ const UserAdmin = () => {
         changeEdit(false)
       })
   }
+  function onSubmit (e) {
+    e.preventDefault()
+    doChangeAdminPassword(token, username, password)
+      .then(_ => {
+        console.log('Change Password Success')
+        changePwdSuccess(true)
+        changeEdit(false)
+        changePassword('')
+        changeConfirmPassword('')
+      })
+      .catch(_ => {
+        console.error('Change Password Error')
+      })
+  }
 
+  function isDisabled () {
+    if (!username) return true
+    if (!password) return true
+    if (!confirmPassword) return true
+    if (password !== confirmPassword) return true
+    return false
+  }
   return (
     <UserWrapper>
       <h2>Usuario</h2>
@@ -110,6 +136,7 @@ const UserAdmin = () => {
               </div>
             )}
           </div>
+
           <Snackbar
             open={success}
             onClose={() => changeSuccess(false)}
@@ -118,6 +145,70 @@ const UserAdmin = () => {
           >
             <SnackbarContent
               message='Usuario editado con exito'
+              style={{
+                color: 'black',
+                backgroundColor: '#61dafb',
+                fontSize: '14px'
+              }}
+            />
+          </Snackbar>
+
+          {/* ---Password change section--- */}
+
+          {edit && (
+            <form noValidate autoComplete='off'>
+              <div
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  padding: 10
+                }}
+              >
+                <input
+                  id='new_pwd'
+                  placeholder='Nueva contraseña'
+                  onChange={e => changePassword(e.target.value)}
+                />
+                <input
+                  id='chk_pwd'
+                  placeholder='Reingrese contraseña'
+                  onChange={e => changeConfirmPassword(e.target.value)}
+                />
+              </div>
+            </form>
+          )}
+
+          {edit && (
+            <div className='actions'>
+              {isDisabled() ? (
+                <Button
+                  variant='outlined'
+                  style={{ borderColor: 'red', color: 'white' }}
+                  disabled='true'
+                >
+                  Cambiar contraseña
+                </Button>
+              ) : (
+                <Button
+                  variant='contained'
+                  style={{ backgroundColor: 'red', color: 'white' }}
+                  disabled='false'
+                  onClick={onSubmit}
+                >
+                  Cambiar contraseña
+                </Button>
+              )}
+            </div>
+          )}
+
+          <Snackbar
+            open={pwdSuccess}
+            onClose={() => changePwdSuccess(false)}
+            anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+            autoHideDuration={6000}
+          >
+            <SnackbarContent
+              message='Contraseña cambiada con exito'
               style={{
                 color: 'black',
                 backgroundColor: '#61dafb',
