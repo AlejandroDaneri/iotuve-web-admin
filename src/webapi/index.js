@@ -26,7 +26,7 @@ export function getVideos () {
 }
 
 export function getMediaStatus () {
-  return axios.get(mediaBaseUrl() + '/api/v1/status')
+  return axios.get(mediaBaseUrl() + '/status')
 }
 
 export function getAuthStatus () {
