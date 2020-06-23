@@ -6,13 +6,13 @@ import { useParams } from 'react-router-dom'
 import CircleLoader from 'react-spinners/CircleLoader'
 import { UserWrapper } from '../styles/UserStyled'
 import { Snackbar, SnackbarContent } from '@material-ui/core'
+import Button from '@material-ui/core/Button'
 
 const User = () => {
   const token = useSelector(getToken)
   const { username } = useParams()
 
   const [user, changeUser] = useState()
-  const [edit, changeEdit] = useState(false)
 
   const [Username, changeUsername] = useState()
   const [email, changeEmail] = useState()
@@ -64,11 +64,8 @@ const User = () => {
     })
       .then(_ => {
         changeSuccess(true)
-        changeEdit(false)
       })
-      .catch(_ => {
-        changeEdit(false)
-      })
+      .catch(_ => {})
   }
 
   return (
@@ -80,47 +77,31 @@ const User = () => {
             <div>Usuario: {Username}</div>
             <div>
               Mail:{' '}
-              {edit ? (
-                <input
-                  value={email}
-                  onChange={e => changeEmail(e.target.value)}
-                />
-              ) : (
-                email
-              )}
+              <input
+                value={email}
+                onChange={e => changeEmail(e.target.value)}
+              />
             </div>
             <div>
               Telefono:{' '}
-              {edit ? (
-                <input
-                  value={phone}
-                  onChange={e => changePhone(e.target.value)}
-                />
-              ) : (
-                phone
-              )}
+              <input
+                value={phone}
+                onChange={e => changePhone(e.target.value)}
+              />
             </div>
             <div>
               Nombre:{' '}
-              {edit ? (
-                <input
-                  value={firstName}
-                  onChange={e => changeFirstName(e.target.value)}
-                />
-              ) : (
-                firstName
-              )}
+              <input
+                value={firstName}
+                onChange={e => changeFirstName(e.target.value)}
+              />
             </div>
             <div>
               Apellido:{' '}
-              {edit ? (
-                <input
-                  value={lastName}
-                  onChange={e => changeLastName(e.target.value)}
-                />
-              ) : (
-                lastName
-              )}
+              <input
+                value={lastName}
+                onChange={e => changeLastName(e.target.value)}
+              />
             </div>
             <div>Servicio de Login: {loginService ? 'Si' : 'No'}</div>
             <div>
@@ -131,14 +112,12 @@ const User = () => {
             </div>
           </div>
           <div className='actions'>
-            <div className='action' onClick={() => changeEdit(!edit)}>
-              {edit ? 'Cancelar' : 'Editar'}
+            <div className='action'>
+              <Button href='/users'>Cancelar</Button>
             </div>
-            {edit && (
-              <div className='action' onClick={() => save()}>
-                Guardar
-              </div>
-            )}
+            <div className='action' onClick={() => save()}>
+              <Button href='/users'>Guardar</Button>
+            </div>
           </div>
 
           <Snackbar

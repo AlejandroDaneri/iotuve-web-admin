@@ -13,7 +13,6 @@ const UserAdmin = () => {
   const { username } = useParams()
 
   const [user, changeUser] = useState()
-  const [edit, changeEdit] = useState(false)
 
   const [Username, changeUsername] = useState()
   const [email, changeEmail] = useState()
@@ -57,11 +56,8 @@ const UserAdmin = () => {
     })
       .then(_ => {
         changeSuccess(true)
-        changeEdit(false)
       })
-      .catch(_ => {
-        changeEdit(false)
-      })
+      .catch(_ => {})
   }
   function onSubmit (e) {
     e.preventDefault()
@@ -69,7 +65,6 @@ const UserAdmin = () => {
       .then(_ => {
         console.log('Change Password Success')
         changePwdSuccess(true)
-        changeEdit(false)
         changePassword('')
         changeConfirmPassword('')
       })
@@ -94,47 +89,33 @@ const UserAdmin = () => {
             <div>Usuario: {Username}</div>
             <div>
               Mail:{' '}
-              {edit ? (
-                <input
-                  value={email}
-                  onChange={e => changeEmail(e.target.value)}
-                />
-              ) : (
-                email
-              )}
+              <input
+                value={email}
+                onChange={e => changeEmail(e.target.value)}
+              />
             </div>
             <div>
               Nombre:{' '}
-              {edit ? (
-                <input
-                  value={firstName}
-                  onChange={e => changeFirstName(e.target.value)}
-                />
-              ) : (
-                firstName
-              )}
+              <input
+                value={firstName}
+                onChange={e => changeFirstName(e.target.value)}
+              />
             </div>
             <div>
               Apellido:{' '}
-              {edit ? (
-                <input
-                  value={lastName}
-                  onChange={e => changeLastName(e.target.value)}
-                />
-              ) : (
-                lastName
-              )}
+              <input
+                value={lastName}
+                onChange={e => changeLastName(e.target.value)}
+              />
             </div>
           </div>
           <div className='actions'>
-            <div className='action' onClick={() => changeEdit(!edit)}>
-              {edit ? 'Cancelar' : 'Editar'}
+            <div className='action'>
+              <Button href='/users_admin'>Cancelar</Button>
             </div>
-            {edit && (
-              <div className='action' onClick={() => save()}>
-                Guardar
-              </div>
-            )}
+            <div className='action' onClick={() => save()}>
+              <Button href='/users_admin'>Guardar</Button>
+            </div>
           </div>
 
           <Snackbar
@@ -155,51 +136,47 @@ const UserAdmin = () => {
 
           {/* ---Password change section--- */}
 
-          {edit && (
-            <form noValidate autoComplete='off'>
-              <div
-                style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  padding: 10
-                }}
-              >
-                <input
-                  id='new_pwd'
-                  placeholder='Nueva contraseña'
-                  onChange={e => changePassword(e.target.value)}
-                />
-                <input
-                  id='chk_pwd'
-                  placeholder='Reingrese contraseña'
-                  onChange={e => changeConfirmPassword(e.target.value)}
-                />
-              </div>
-            </form>
-          )}
-
-          {edit && (
-            <div className='actions'>
-              {isDisabled() ? (
-                <Button
-                  variant='outlined'
-                  style={{ borderColor: 'red', color: 'white' }}
-                  disabled='true'
-                >
-                  Cambiar contraseña
-                </Button>
-              ) : (
-                <Button
-                  variant='contained'
-                  style={{ backgroundColor: 'red', color: 'white' }}
-                  disabled='false'
-                  onClick={onSubmit}
-                >
-                  Cambiar contraseña
-                </Button>
-              )}
+          <form noValidate autoComplete='off'>
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                padding: 10
+              }}
+            >
+              <input
+                id='new_pwd'
+                placeholder='Nueva contraseña'
+                onChange={e => changePassword(e.target.value)}
+              />
+              <input
+                id='chk_pwd'
+                placeholder='Reingrese contraseña'
+                onChange={e => changeConfirmPassword(e.target.value)}
+              />
             </div>
-          )}
+          </form>
+
+          <div className='actions'>
+            {isDisabled() ? (
+              <Button
+                variant='outlined'
+                style={{ borderColor: 'red', color: 'white' }}
+                disabled='true'
+              >
+                Cambiar contraseña
+              </Button>
+            ) : (
+              <Button
+                variant='contained'
+                style={{ backgroundColor: 'red', color: 'white' }}
+                disabled='false'
+                onClick={onSubmit}
+              >
+                Cambiar contraseña
+              </Button>
+            )}
+          </div>
 
           <Snackbar
             open={pwdSuccess}
