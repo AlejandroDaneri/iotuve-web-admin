@@ -82,12 +82,12 @@ const UserAdmin = () => {
   }
   return (
     <UserWrapper>
-      <h2>Usuario</h2>
+      <h2>Admin</h2>
       {user ? (
         <>
           <div>
             <div>
-              Usuario:
+              Nombre de usuario:
               <br />
               {Username}
               <p />
