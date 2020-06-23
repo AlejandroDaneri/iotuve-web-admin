@@ -18,7 +18,7 @@ export const FilesWrapper = styled.div`
     > thead {
       > tr {
         > th {
-          border-bottom: 1px solid #61dafb;
+          border-bottom: 1px solid #000000;
         }
       }
     }

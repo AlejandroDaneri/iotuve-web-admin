@@ -3,6 +3,34 @@ import { useDispatch } from 'react-redux'
 import CircleLoader from 'react-spinners/CircleLoader'
 import { FilesWrapper } from '../styles/FilesStyled'
 import { getVideos } from '../webapi'
+import { withStyles } from '@material-ui/core/styles'
+import TableCell from '@material-ui/core/TableCell'
+import TableRow from '@material-ui/core/TableRow'
+import Table from '@material-ui/core/Table'
+import TableHead from '@material-ui/core/TableHead'
+import TableBody from '@material-ui/core/TableBody'
+
+const StyledTableCell = withStyles(theme => ({
+  head: {
+    backgroundColor: theme.palette.common.black,
+    color: theme.palette.common.white
+  },
+  body: {
+    fontSize: 14,
+    color: '#61dafb'
+  }
+}))(TableCell)
+
+const StyledTableRow = withStyles(theme => ({
+  root: {
+    '&:nth-of-type(even)': {
+      backgroundColor: '#343944'
+    },
+    '&:hover': {
+      backgroundColor: '#414855'
+    }
+  }
+}))(TableRow)
 
 const Files = () => {
   const [files, changeFiles] = useState()
@@ -29,21 +57,21 @@ const Files = () => {
     <FilesWrapper>
       <h2>Archivos</h2>
       {files ? (
-        <table>
-          <thead>
-            <tr>
-              <th>Archivo</th>
-              <th>Nombre</th>
-              <th>Tamaño</th>
-              <th>Formato</th>
-              <th>Fecha de Creacion</th>
-            </tr>
-          </thead>
-          <tbody>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <StyledTableCell>Archivo</StyledTableCell>
+              <StyledTableCell>Nombre</StyledTableCell>
+              <StyledTableCell>Tamaño</StyledTableCell>
+              <StyledTableCell>Formato</StyledTableCell>
+              <StyledTableCell>Fecha de creación</StyledTableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
             {(files || []).map(file => {
               return (
-                <tr key={file.video_id}>
-                  <td>
+                <StyledTableRow key={file.video_id}>
+                  <StyledTableCell>
                     <a href={file.url}>
                       <img
                         alt='thumb'
@@ -52,16 +80,18 @@ const Files = () => {
                         src={file.thumb}
                       />
                     </a>
-                  </td>
-                  <td>{file.name}</td>
-                  <td>{(file.size / 1024 / 1024).toPrecision(3)}</td>
-                  <td>{file.type}</td>
-                  <td>{file.date_created}</td>
-                </tr>
+                  </StyledTableCell>
+                  <StyledTableCell>{file.name}</StyledTableCell>
+                  <StyledTableCell>
+                    {(file.size / 1024 / 1024).toPrecision(3)}
+                  </StyledTableCell>
+                  <StyledTableCell>{file.type}</StyledTableCell>
+                  <StyledTableCell>{file.date_created}</StyledTableCell>
+                </StyledTableRow>
               )
             })}
-          </tbody>
-        </table>
+          </TableBody>
+        </Table>
       ) : (
         <CircleLoader color='#61dafb' size={250} />
       )}

@@ -9,6 +9,12 @@ import Modal from 'styled-react-modal'
 import _ from 'lodash'
 import { Snackbar, SnackbarContent } from '@material-ui/core'
 import { Link } from 'react-router-dom'
+import { withStyles } from '@material-ui/core/styles'
+import TableCell from '@material-ui/core/TableCell'
+import TableRow from '@material-ui/core/TableRow'
+import Table from '@material-ui/core/Table'
+import TableHead from '@material-ui/core/TableHead'
+import TableBody from '@material-ui/core/TableBody'
 
 const ButtonEdit = styled.span`
   color: brown;
@@ -41,6 +47,28 @@ const StyledModal = Modal.styled`
     }
   }
 `
+
+const StyledTableCell = withStyles(theme => ({
+  head: {
+    backgroundColor: theme.palette.common.black,
+    color: theme.palette.common.white
+  },
+  body: {
+    fontSize: 14,
+    color: '#61dafb'
+  }
+}))(TableCell)
+
+const StyledTableRow = withStyles(theme => ({
+  root: {
+    '&:nth-of-type(even)': {
+      backgroundColor: '#343944'
+    },
+    '&:hover': {
+      backgroundColor: '#414855'
+    }
+  }
+}))(TableRow)
 
 const UserModal = ({ modalOpen, changeModalOpen, remove }) => {
   return (
@@ -129,27 +157,29 @@ const AdminUsers = () => {
       </Snackbar>
       <h2>Usuarios Admin</h2>
       {users ? (
-        <table>
-          <thead>
-            <tr>
-              <th>Usuario</th>
-              <th>Nombre</th>
-              <th>Email</th>
-              <th>Fecha de Creacion</th>
-              <th>Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <StyledTableCell>Usuario</StyledTableCell>
+              <StyledTableCell>Nombre</StyledTableCell>
+              <StyledTableCell>Email</StyledTableCell>
+              <StyledTableCell>Fecha de creación</StyledTableCell>
+              <StyledTableCell>Acciones</StyledTableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
             {(users || []).map(user => {
               return (
-                <tr key={user.id}>
-                  <td>{user.username}</td>
-                  <td>
+                <StyledTableRow key={user.id}>
+                  <StyledTableCell>{user.username}</StyledTableCell>
+                  <StyledTableCell>
                     {user.first_name} {user.last_name}
-                  </td>
-                  <td>{user.email}</td>
-                  <td>{parseTimestamp(user.date_created)}</td>
-                  <td className='actions'>
+                  </StyledTableCell>
+                  <StyledTableCell>{user.email}</StyledTableCell>
+                  <StyledTableCell>
+                    {parseTimestamp(user.date_created)}
+                  </StyledTableCell>
+                  <StyledTableCell className='actions'>
                     <Link to={`/user_admin/${user.username}`}>
                       <ButtonEdit className='material-icons'>edit</ButtonEdit>
                     </Link>
@@ -162,12 +192,12 @@ const AdminUsers = () => {
                     >
                       delete_forever
                     </ButtonDelete>
-                  </td>
-                </tr>
+                  </StyledTableCell>
+                </StyledTableRow>
               )
             })}
-          </tbody>
-        </table>
+          </TableBody>
+        </Table>
       ) : (
         <CircleLoader color='#61dafb' size={250} />
       )}
