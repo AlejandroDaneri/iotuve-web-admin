@@ -86,28 +86,39 @@ const UserAdmin = () => {
       {user ? (
         <>
           <div>
-            <div>Usuario: {Username}</div>
             <div>
-              Mail:{' '}
+              Usuario:
+              <br />
+              {Username}
+              <p />
+            </div>
+            <div>
+              Mail
+              <br />
               <input
                 value={email}
                 onChange={e => changeEmail(e.target.value)}
               />
             </div>
+            <p />
             <div>
-              Nombre:{' '}
+              Nombre
+              <br />
               <input
                 value={firstName}
                 onChange={e => changeFirstName(e.target.value)}
               />
             </div>
+            <p />
             <div>
-              Apellido:{' '}
+              Apellido
+              <br />
               <input
                 value={lastName}
                 onChange={e => changeLastName(e.target.value)}
               />
             </div>
+            <p />
           </div>
           <div className='actions'>
             <div className='action'>
@@ -141,7 +152,7 @@ const UserAdmin = () => {
               style={{
                 display: 'flex',
                 flexDirection: 'column',
-                padding: 10
+                padding: '10px'
               }}
             >
               <input

@@ -42,7 +42,7 @@ const ButtonEdit = styled.span`
   color: brown;
 `
 
-const UserModal = ({ modalOpen, changeModalOpen, remove }) => {
+const DeleteModal = ({ modalOpen, changeModalOpen, remove }) => {
   return (
     <StyledModal
       isOpen={modalOpen}
@@ -107,7 +107,7 @@ const Users = () => {
 
   return (
     <UsersWrapper>
-      <UserModal
+      <DeleteModal
         remove={remove}
         modalOpen={modalOpen}
         changeModalOpen={changeModalOpen}

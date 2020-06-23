@@ -5,6 +5,7 @@ export const AppWrapper = styled.section`
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  justify-content: flex-start
   align-items: stretch;
   font-size: calc(10px + 1vmin);
   color: #61dafb;

@@ -74,42 +74,63 @@ const User = () => {
       {user ? (
         <>
           <div>
-            <div>Usuario: {Username}</div>
             <div>
-              Mail:{' '}
+              Nombre de usuario
+              <br />
+              {Username}
+              <p />
+            </div>
+
+            <div>
+              Avatar
+              <br />
+              <a href={url}>
+                <img
+                  alt='Avatar thumb'
+                  width='100px'
+                  height='100px'
+                  src={url}
+                />
+              </a>
+            </div>
+            <p />
+            <div>
+              Mail
+              <br />
               <input
                 value={email}
                 onChange={e => changeEmail(e.target.value)}
               />
             </div>
+            <p />
             <div>
-              Telefono:{' '}
+              Telefono
+              <br />
               <input
                 value={phone}
                 onChange={e => changePhone(e.target.value)}
               />
             </div>
+            <p />
             <div>
-              Nombre:{' '}
+              Nombre
+              <br />
               <input
                 value={firstName}
                 onChange={e => changeFirstName(e.target.value)}
               />
             </div>
+            <p />
             <div>
-              Apellido:{' '}
+              Apellido
+              <br />
               <input
                 value={lastName}
                 onChange={e => changeLastName(e.target.value)}
               />
             </div>
+            <p />
             <div>Servicio de Login: {loginService ? 'Si' : 'No'}</div>
-            <div>
-              Avatar:{' '}
-              <a href={url}>
-                <img alt='Avatar thumb' width='80px' height='40px' src={url} />
-              </a>
-            </div>
           </div>
           <div className='actions'>
             <div className='action'>
