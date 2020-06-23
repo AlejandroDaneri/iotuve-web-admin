@@ -3,6 +3,8 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import styled from 'styled-components'
+import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew'
+import Tooltip from '@material-ui/core/Tooltip'
 
 import { getUsername } from '../stateapi/auth'
 
@@ -34,9 +36,12 @@ const LogOut = () => {
   return (
     <LogOutWrapper>
       <div className='username'>{username}</div>
-      <span onClick={() => logOut()} className='material-icons'>
-        power_settings_new
-      </span>
+      <Tooltip title='Cerrar sesión'>
+        <PowerSettingsNewIcon
+          style={{ color: 'white', padding: '2px', marginRight: '10px' }}
+          onClick={() => logOut()}
+        />
+      </Tooltip>
     </LogOutWrapper>
   )
 }

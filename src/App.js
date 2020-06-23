@@ -17,10 +17,7 @@ import UserAdmin from './components/UserAdmin'
 import Users from './components/Users'
 import UsersAdmin from './components/UsersAdmin'
 import ChangePassword from './components/ChangePassword'
-import { getUsername, isAuthed, isAuthing } from './stateapi/auth'
-// import LogOut from './components/LogOut'
-import ArrowUpwardSharpIcon from '@material-ui/icons/ArrowUpwardSharp'
-import ArrowDownwardSharpIcon from '@material-ui/icons/ArrowDownwardSharp'
+import { isAuthed, isAuthing } from './stateapi/auth'
 
 import {
   Drawer,
@@ -35,9 +32,9 @@ import VideoLibraryIcon from '@material-ui/icons/VideoLibrary'
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount'
 import PersonIcon from '@material-ui/icons/Person'
 import DoneIcon from '@material-ui/icons/Done'
-import ExitToAppIcon from '@material-ui/icons/ExitToApp'
 import LogOut from './components/LogOut'
 import Divider from '@material-ui/core/Divider'
+import Tooltip from '@material-ui/core/Tooltip'
 
 const PrivateRoute = ({ ...rest }) => {
   const authed = useSelector(isAuthed)
@@ -53,13 +50,13 @@ const PrivateRoute = ({ ...rest }) => {
 }
 
 const useStyles = makeStyles(theme => ({
-  sidebar: { backgroundColor: '#8697e0', width: 'inherit' }
+  sidebar: { backgroundColor: '#1e3c5c', width: 'inherit' },
+  menuItem: { color: '#96a1af' }
 }))
 
 const App = () => {
   const authed = useSelector(isAuthed)
   const classes = useStyles()
-  const username = useSelector(getUsername)
   return (
     <AppWrapper>
       <Router>
@@ -75,7 +72,7 @@ const App = () => {
               <div style={{ placeSelf: 'end', padding: '10px' }}>
                 <LogOut />
               </div>
-              <h1>
+              <h1 className={classes.menuItem}>
                 <center>Web Admin</center>
               </h1>
               <Divider />
@@ -83,39 +80,59 @@ const App = () => {
               <List>
                 <Link to='/files'>
                   <ListItem button>
-                    <ListItemIcon>
+                    <ListItemIcon className={classes.menuItem}>
                       <VideoLibraryIcon />
                     </ListItemIcon>
-                    <ListItemText primary='Archivos' />
+                    <Tooltip title='Ver los archivos que fueron subidos'>
+                      <ListItemText
+                        className={classes.menuItem}
+                        primary='Archivos'
+                      />
+                    </Tooltip>
                   </ListItem>
                 </Link>
               </List>
               <List>
                 <Link to='/users'>
                   <ListItem button>
-                    <ListItemIcon>
+                    <ListItemIcon className={classes.menuItem}>
                       <PersonIcon />
                     </ListItemIcon>
-                    <ListItemText primary='Usuarios' />
+                    <Tooltip title='Ver los usarios que están registrados'>
+                      <ListItemText
+                        className={classes.menuItem}
+                        primary='Usuarios'
+                      />
+                    </Tooltip>
                   </ListItem>
                 </Link>
               </List>
               <List>
                 <Link to='/users_admin'>
                   <ListItem button>
-                    <ListItemIcon>
+                    <ListItemIcon className={classes.menuItem}>
                       <SupervisorAccountIcon />
                     </ListItemIcon>
-                    <ListItemText primary='Admins' />
+                    <Tooltip title='Ver los admins que están registrados'>
+                      <ListItemText
+                        className={classes.menuItem}
+                        primary='Admins'
+                      />
+                    </Tooltip>
                   </ListItem>
                 </Link>
               </List>
               <List>
                 <ListItem button>
-                  <ListItemIcon>
+                  <ListItemIcon className={classes.menuItem}>
                     <ShowChartIcon />
                   </ListItemIcon>
-                  <ListItemText primary='Estadisticas' />
+                  <Tooltip title='Ver estadísticas de los servidores'>
+                    <ListItemText
+                      className={classes.menuItem}
+                      primary='Estadisticas'
+                    />
+                  </Tooltip>
                 </ListItem>
               </List>
               <Divider />
@@ -123,24 +140,18 @@ const App = () => {
               <List>
                 <Link to='/health'>
                   <ListItem button>
-                    <ListItemIcon>
+                    <ListItemIcon className={classes.menuItem}>
                       <DoneIcon />
                     </ListItemIcon>
-                    <ListItemText primary='Estado actual' />
+                    <Tooltip title='Ver el estado actual de los servidores'>
+                      <ListItemText
+                        className={classes.menuItem}
+                        primary='Estado actual'
+                      />
+                    </Tooltip>
                   </ListItem>
                 </Link>
               </List>
-              <div align='center'>
-                <p>
-                  Media server: <ArrowUpwardSharpIcon />
-                </p>
-                <p>
-                  Application server: <ArrowUpwardSharpIcon />
-                </p>
-                <p>
-                  Auth server: <ArrowDownwardSharpIcon />
-                </p>
-              </div>
               <LogOut />
             </Drawer>
           )}
