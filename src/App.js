@@ -1,6 +1,6 @@
+/* Import Libs */
 import React from 'react'
-import { AppWrapper } from './styles/AppStyled'
-// import { Button } from './styles/ButtonStyled'
+import { useSelector } from 'react-redux'
 import {
   Link,
   BrowserRouter as Router,
@@ -8,17 +8,6 @@ import {
   Route,
   Redirect
 } from 'react-router-dom'
-import { useSelector } from 'react-redux'
-import Files from './components/Files'
-import Login from './components/Login'
-import Health from './components/Health'
-import User from './components/User'
-import UserAdmin from './components/UserAdmin'
-import Users from './components/Users'
-import UsersAdmin from './components/UsersAdmin'
-import ChangePassword from './components/ChangePassword'
-import { isAuthed, isAuthing } from './stateapi/auth'
-
 import {
   Drawer,
   List,
@@ -32,9 +21,25 @@ import VideoLibraryIcon from '@material-ui/icons/VideoLibrary'
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount'
 import PersonIcon from '@material-ui/icons/Person'
 import DoneIcon from '@material-ui/icons/Done'
-import LogOut from './components/LogOut'
 import Divider from '@material-ui/core/Divider'
 import Tooltip from '@material-ui/core/Tooltip'
+
+/* Import Styled Components */
+import { AppWrapper } from './styles/AppStyled'
+
+/* Import Components */
+import Files from './components/Files'
+import Login from './components/Login'
+import Health from './components/Health'
+import User from './components/User'
+import UserAdmin from './components/UserAdmin'
+import Users from './components/Users'
+import UsersAdmin from './components/UsersAdmin'
+import ChangePassword from './components/ChangePassword'
+import LogOut from './components/LogOut'
+
+/* Import StateApi */
+import { isAuthed, isAuthing } from './stateapi/auth'
 
 const PrivateRoute = ({ ...rest }) => {
   const authed = useSelector(isAuthed)
