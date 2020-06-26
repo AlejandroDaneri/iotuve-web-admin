@@ -19,6 +19,7 @@ const LogOut = () => {
   const dispatch = useDispatch()
 
   function logOut () {
+    console.error('ACA TENGO QUE MANDAR LA PETICION PARA BORRAR LA SESSION')
     dispatch({
       type: AUTH_LOGOUT
     })
