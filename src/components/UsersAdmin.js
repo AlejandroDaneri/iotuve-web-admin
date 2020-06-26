@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { getToken } from '../stateapi/auth'
+import { useDispatch } from 'react-redux'
 import { UsersAdminWrapper } from '../styles/UsersAdminStyled'
 import { getUsersAdmin, removeAdminUser } from '../webapi'
 import CircleLoader from 'react-spinners/CircleLoader'
@@ -87,7 +86,6 @@ const UserModal = ({ modalOpen, changeModalOpen, remove }) => {
 }
 
 const AdminUsers = () => {
-  const token = useSelector(getToken)
   const [users, changeUsers] = useState()
   const [selected, changeSelected] = useState()
   const [modalOpen, changeModalOpen] = useState(false)
@@ -96,7 +94,7 @@ const AdminUsers = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    getUsersAdmin(token)
+    getUsersAdmin()
       .then(response => {
         const { data } = response
         changeUsers(data)
@@ -109,7 +107,7 @@ const AdminUsers = () => {
           })
         }
       })
-  }, [token, dispatch])
+  }, [dispatch])
 
   function parseTimestamp (timestamp) {
     const date = new Date(timestamp)
@@ -117,7 +115,7 @@ const AdminUsers = () => {
   }
 
   function remove () {
-    removeAdminUser(token, selected.username)
+    removeAdminUser(selected.username)
       .then(response => {
         changeUsers(_.without(users, selected))
         changeModalOpen(false)
