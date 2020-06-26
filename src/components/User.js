@@ -1,11 +1,16 @@
+/* Import Libs */
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { getUser, saveUser } from '../webapi'
 import { useParams } from 'react-router-dom'
 import CircleLoader from 'react-spinners/CircleLoader'
-import { UserWrapper } from '../styles/UserStyled'
 import { Snackbar, SnackbarContent } from '@material-ui/core'
 import Button from '@material-ui/core/Button'
+
+/* Import WebApi */
+import { getUser, saveUser } from '../webapi'
+
+/* Import Styled Components */
+import { UserWrapper } from '../styles/UserStyled'
 
 const User = () => {
   const { username } = useParams()

@@ -1,11 +1,11 @@
+/* Import Libs */
 import React from 'react'
-
 import { useDispatch, useSelector } from 'react-redux'
-
 import styled from 'styled-components'
 import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew'
 import Tooltip from '@material-ui/core/Tooltip'
 
+/* Import StateApi */
 import { getUsername } from '../stateapi/auth'
 
 export const LogOutWrapper = styled.div`
