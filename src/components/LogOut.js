@@ -11,13 +11,16 @@ import { getUsername } from '../stateapi/auth'
 /* Import Styled Components */
 import { LogOutWrapper } from '../styles/LogOutStyled'
 
+/* Import Constants */
+import { AUTH_LOGOUT } from '../constants'
+
 const LogOut = () => {
   const username = useSelector(getUsername)
   const dispatch = useDispatch()
 
   function logOut () {
     dispatch({
-      type: 'AUTH_LOGOUT'
+      type: AUTH_LOGOUT
     })
   }
 

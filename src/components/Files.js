@@ -14,6 +14,9 @@ import { StyledTableCell, StyledTableRow } from '../styles/TableStyled'
 /* Import WebApi */
 import { getVideos } from '../webapi'
 
+/* Import Constants */
+import { AUTH_LOGOUT } from '../constants'
+
 const Files = () => {
   const [files, changeFiles] = useState()
 
@@ -29,7 +32,7 @@ const Files = () => {
         console.error(err)
         if (err.response !== 500) {
           dispatch({
-            type: 'AUTH_LOGOUT'
+            type: AUTH_LOGOUT
           })
         }
       })

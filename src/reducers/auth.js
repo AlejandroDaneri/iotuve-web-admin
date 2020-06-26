@@ -1,3 +1,5 @@
+import { AUTH_REQUEST, AUTH_SUCCESS, AUTH_LOGOUT } from '../constants'
+
 const INITIAL_STATE = {
   authed: false,
   authing: true,
@@ -7,13 +9,13 @@ const INITIAL_STATE = {
 const auth = (state = INITIAL_STATE, action) => {
   const { type, payload } = action
   switch (type) {
-    case 'AUTH_REQUEST': {
+    case AUTH_REQUEST: {
       return {
         ...state,
         authing: true
       }
     }
-    case 'AUTH_SUCCESS': {
+    case AUTH_SUCCESS: {
       return {
         ...state,
         authed: true,
@@ -22,7 +24,7 @@ const auth = (state = INITIAL_STATE, action) => {
         username: payload.username
       }
     }
-    case 'AUTH_LOGOUT': {
+    case AUTH_LOGOUT: {
       return {
         ...state,
         authed: false,

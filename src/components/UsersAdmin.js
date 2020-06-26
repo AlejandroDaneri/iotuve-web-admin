@@ -20,6 +20,9 @@ import { UsersAdminWrapper } from '../styles/UsersAdminStyled'
 /* Import WebApi */
 import { getUsersAdmin, removeAdminUser } from '../webapi'
 
+/* Import Constants */
+import { AUTH_LOGOUT } from '../constants'
+
 const ButtonEdit = styled.span`
   color: brown;
 `
@@ -108,7 +111,7 @@ const AdminUsers = () => {
         console.error(err)
         if (err.response !== 500) {
           dispatch({
-            type: 'AUTH_LOGOUT'
+            type: AUTH_LOGOUT
           })
         }
       })
@@ -130,7 +133,7 @@ const AdminUsers = () => {
         console.error(err)
         if (err.response !== 500) {
           dispatch({
-            type: 'AUTH_LOGOUT'
+            type: AUTH_LOGOUT
           })
         }
       })

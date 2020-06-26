@@ -12,6 +12,9 @@ import { getUser, saveUser } from '../webapi'
 /* Import Styled Components */
 import { UserWrapper } from '../styles/UserStyled'
 
+/* Import Constants */
+import { AUTH_LOGOUT } from '../constants'
+
 const User = () => {
   const { username } = useParams()
 
@@ -50,7 +53,7 @@ const User = () => {
         console.error(err)
         if (err.response !== 500) {
           dispatch({
-            type: 'AUTH_LOGOUT'
+            type: AUTH_LOGOUT
           })
         }
       })

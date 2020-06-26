@@ -11,6 +11,9 @@ import { LoginWrapper } from '../styles/LoginFormStyled'
 /* Import WebApi */
 import { doAuth } from '../webapi'
 
+/* Import Constants */
+import { AUTH_REQUEST, AUTH_SUCCESS } from '../constants'
+
 import ParticlesConfig from '../ParticlesConfig'
 
 const Login = () => {
@@ -23,13 +26,13 @@ const Login = () => {
 
   function onSubmit (e) {
     e.preventDefault()
-    dispatch({ type: 'AUTH_REQUEST' })
+    dispatch({ type: AUTH_REQUEST })
     changeAuthing(true)
     doAuth({ username: username, password: password })
       .then(response => {
         const { data } = response
         dispatch({
-          type: 'AUTH_SUCCESS',
+          type: AUTH_SUCCESS,
           payload: {
             token: data.session_token,
             username: data.username
