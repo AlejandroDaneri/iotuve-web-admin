@@ -98,13 +98,9 @@ export function doChangeAdminPassword (token, username, password) {
 }
 
 export function removeUser (token, username) {
-  return axios.delete(appBaseUrl() + `/api/v1/users/${username}`, {
-    headers: { 'X-Auth-Token': token }
-  })
+  return axios.delete(appBaseUrl() + `/api/v1/users/${username}`)
 }
 
 export function removeAdminUser (token, username) {
-  return axios.delete(appBaseUrl() + `/api/v1/adminusers/${username}`, {
-    headers: { 'X-Auth-Token': token }
-  })
+  return axios.delete(appBaseUrl() + `/api/v1/adminusers/${username}`)
 }
