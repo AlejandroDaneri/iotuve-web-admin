@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import CircleLoader from 'react-spinners/CircleLoader'
 import styled from 'styled-components'
-import Modal from 'styled-react-modal'
 import _ from 'lodash'
 import { Link } from 'react-router-dom'
 import { Snackbar, SnackbarContent } from '@material-ui/core'
@@ -16,6 +15,7 @@ import TableBody from '@material-ui/core/TableBody'
 
 /* Import Styled Components */
 import { UsersAdminWrapper } from '../styles/UsersAdminStyled'
+import { StyledModal } from '../styles/ModalStyled'
 
 /* Import WebApi */
 import { getUsersAdmin, removeAdminUser } from '../webapi'
@@ -29,30 +29,6 @@ const ButtonEdit = styled.span`
 
 const ButtonDelete = styled.span`
   color: red;
-`
-
-const StyledModal = Modal.styled`
-  display: flex;
-  flex-direction: column;
-  width: 30%;
-  height: 10%;
-  align-items: center;
-  justify-content: center;
-  background-color: #282c34;
-  color: #61dafb;
-
-  & .actions {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    align-items: center;
-    justify-content: center;
-    padding: 1%;
-
-    > button {
-      margin: 1%;
-    }
-  }
 `
 
 const StyledTableCell = withStyles(theme => ({
