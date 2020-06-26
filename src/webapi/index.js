@@ -1,5 +1,15 @@
 import axios from 'axios'
 
+axios.interceptors.request.use(
+  config => {
+    config.headers['X-Admin'] = 'true'
+    return config
+  },
+  error => {
+    return Promise.reject(error)
+  }
+)
+
 const APP_SERVER = process.env.REACT_APP_APP_SERVER
 const MEDIA_SERVER = process.env.REACT_APP_MEDIA_SERVER
 const AUTH_SERVER = process.env.REACT_APP_AUTH_SERVER
@@ -38,9 +48,7 @@ export function getAppStatus () {
 }
 
 export function doAuth (user) {
-  return axios.post(appBaseUrl() + '/api/v1/sessions', user, {
-    headers: { 'X-Admin': 'true' }
-  })
+  return axios.post(appBaseUrl() + '/api/v1/sessions', user)
 }
 
 export function getUsers (token) {
