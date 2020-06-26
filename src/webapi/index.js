@@ -53,27 +53,27 @@ export function doAuth (user) {
   return axios.post(appBaseUrl() + '/api/v1/sessions', user)
 }
 
-export function getUsers (token) {
+export function getUsers () {
   return axios.get(appBaseUrl() + '/api/v1/users')
 }
 
-export function getUser (token, username) {
+export function getUser (username) {
   return axios.get(appBaseUrl() + `/api/v1/users/${username}`)
 }
 
-export function getAdminUser (token, username) {
+export function getAdminUser (username) {
   return axios.get(appBaseUrl() + `/api/v1/adminusers/${username}`)
 }
 
-export function saveUser (token, username, user) {
+export function saveUser (username, user) {
   return axios.put(appBaseUrl() + `/api/v1/users/${username}`, user)
 }
 
-export function saveAdminUser (token, username, user) {
+export function saveAdminUser (username, user) {
   return axios.put(appBaseUrl() + `/api/v1/adminusers/${username}`, user)
 }
 
-export function getUsersAdmin (token) {
+export function getUsersAdmin () {
   return axios.get(appBaseUrl() + '/api/v1/adminusers')
 }
 

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { getToken } from '../stateapi/auth'
+import { useDispatch } from 'react-redux'
 import { getUser, saveUser } from '../webapi'
 import { useParams } from 'react-router-dom'
 import CircleLoader from 'react-spinners/CircleLoader'
@@ -9,7 +8,6 @@ import { Snackbar, SnackbarContent } from '@material-ui/core'
 import Button from '@material-ui/core/Button'
 
 const User = () => {
-  const token = useSelector(getToken)
   const { username } = useParams()
 
   const [user, changeUser] = useState()
@@ -27,7 +25,7 @@ const User = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    getUser(token, username)
+    getUser(username)
       .then(response => {
         console.log(response)
         const { data } = response
@@ -51,10 +49,10 @@ const User = () => {
           })
         }
       })
-  }, [token, username, dispatch])
+  }, [username, dispatch])
 
   function save () {
-    saveUser(token, username, {
+    saveUser(username, {
       first_name: firstName,
       last_name: lastName,
       contact: {
