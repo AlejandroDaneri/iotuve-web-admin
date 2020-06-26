@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import CircleLoader from 'react-spinners/CircleLoader'
-import styled from 'styled-components'
 import _ from 'lodash'
 import { Link } from 'react-router-dom'
 import { Snackbar, SnackbarContent } from '@material-ui/core'
@@ -16,20 +15,13 @@ import TableBody from '@material-ui/core/TableBody'
 /* Import Styled Components */
 import { UsersAdminWrapper } from '../styles/UsersAdminStyled'
 import { StyledModal } from '../styles/ModalStyled'
+import { ButtonEdit, ButtonDelete } from '../styles/ButtonsStyled'
 
 /* Import WebApi */
 import { getUsersAdmin, removeAdminUser } from '../webapi'
 
 /* Import Constants */
 import { AUTH_LOGOUT } from '../constants'
-
-const ButtonEdit = styled.span`
-  color: brown;
-`
-
-const ButtonDelete = styled.span`
-  color: red;
-`
 
 const StyledTableCell = withStyles(theme => ({
   head: {
