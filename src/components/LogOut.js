@@ -9,11 +9,15 @@ import Tooltip from '@material-ui/core/Tooltip'
 import { getUsername } from '../stateapi/auth'
 
 export const LogOutWrapper = styled.div`
-  margin: 2%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 8%;
   cursor: pointer;
   position: absolute;
-  top: 0;
-  right: 0;
+  bottom: 0;
+  left: 0;
 
   display: flex;
 
@@ -38,7 +42,7 @@ const LogOut = () => {
       <div className='username'>{username}</div>
       <Tooltip title='Cerrar sesión'>
         <PowerSettingsNewIcon
-          style={{ color: 'white', padding: '2px', marginRight: '10px' }}
+          style={{ color: '#61dafb', padding: '2px', marginRight: '10px' }}
           onClick={() => logOut()}
         />
       </Tooltip>
