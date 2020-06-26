@@ -6,22 +6,25 @@ import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew'
 import Tooltip from '@material-ui/core/Tooltip'
 
 /* Import StateApi */
-import { getUsername } from '../stateapi/auth'
+import { getUsername, getToken } from '../stateapi/auth'
 
 /* Import Styled Components */
 import { LogOutWrapper } from '../styles/LogOutStyled'
 
 /* Import Constants */
 import { AUTH_LOGOUT } from '../constants'
+import { doLogOut } from '../webapi'
 
 const LogOut = () => {
   const username = useSelector(getUsername)
+  const token = useSelector(getToken)
   const dispatch = useDispatch()
 
   function logOut () {
-    console.error('ACA TENGO QUE MANDAR LA PETICION PARA BORRAR LA SESSION')
-    dispatch({
-      type: AUTH_LOGOUT
+    doLogOut(token).then(_ => {
+      dispatch({
+        type: AUTH_LOGOUT
+      })
     })
   }
 
