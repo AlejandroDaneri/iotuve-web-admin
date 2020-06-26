@@ -1,10 +1,16 @@
+/* Import Libs */
 import React, { useState } from 'react'
-import { LoginWrapper } from '../styles/LoginFormStyled'
-import { doAuth } from '../webapi'
 import { useDispatch } from 'react-redux'
 import CircleLoader from 'react-spinners/CircleLoader'
 import { Snackbar, SnackbarContent } from '@material-ui/core'
 import Particles from 'react-particles-js'
+
+/* Import Styled Components */
+import { LoginWrapper } from '../styles/LoginFormStyled'
+
+/* Import WebApi */
+import { doAuth } from '../webapi'
+
 import ParticlesConfig from '../ParticlesConfig'
 
 const Login = () => {

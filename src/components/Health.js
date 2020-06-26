@@ -1,7 +1,12 @@
+/* Import Libs */
 import React, { useState, useEffect } from 'react'
-import { HealthWrapper } from '../styles/HealthStyled'
-import { getMediaStatus, getAppStatus, getAuthStatus } from '../webapi'
 import CircleLoader from 'react-spinners/CircleLoader'
+
+/* Import Styled Components */
+import { HealthWrapper } from '../styles/HealthStyled'
+
+/* Import WebApi */
+import { getMediaStatus, getAppStatus, getAuthStatus } from '../webapi'
 
 const Health = () => {
   const [mediaStatus, changeMediaStatus] = useState('')

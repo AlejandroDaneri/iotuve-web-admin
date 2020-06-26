@@ -1,14 +1,19 @@
+/* Import Libs */
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import CircleLoader from 'react-spinners/CircleLoader'
-import { FilesWrapper } from '../styles/FilesStyled'
-import { getVideos } from '../webapi'
 import { withStyles } from '@material-ui/core/styles'
 import TableCell from '@material-ui/core/TableCell'
 import TableRow from '@material-ui/core/TableRow'
 import Table from '@material-ui/core/Table'
 import TableHead from '@material-ui/core/TableHead'
 import TableBody from '@material-ui/core/TableBody'
+
+/* Import Styled Components */
+import { FilesWrapper } from '../styles/FilesStyled'
+
+/* Import WebApi */
+import { getVideos } from '../webapi'
 
 const StyledTableCell = withStyles(theme => ({
   head: {

@@ -1,6 +1,11 @@
+/* Import Libs */
 import React, { useState } from 'react'
 import qs from 'qs'
+
+/* Import WebApi */
 import { doRecoveryPassword } from '../webapi'
+
+/* Import Styled Components */
 import { ChangePasswordWrapper } from '../styles/ChangePasswordStyled'
 
 const ChangePassword = location => {
