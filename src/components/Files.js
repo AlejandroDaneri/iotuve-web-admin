@@ -2,40 +2,17 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import CircleLoader from 'react-spinners/CircleLoader'
-import { withStyles } from '@material-ui/core/styles'
-import TableCell from '@material-ui/core/TableCell'
-import TableRow from '@material-ui/core/TableRow'
 import Table from '@material-ui/core/Table'
 import TableHead from '@material-ui/core/TableHead'
 import TableBody from '@material-ui/core/TableBody'
+import TableRow from '@material-ui/core/TableRow'
 
 /* Import Styled Components */
 import { FilesWrapper } from '../styles/FilesStyled'
+import { StyledTableCell, StyledTableRow } from '../styles/TableStyled'
 
 /* Import WebApi */
 import { getVideos } from '../webapi'
-
-const StyledTableCell = withStyles(theme => ({
-  head: {
-    backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white
-  },
-  body: {
-    fontSize: 14,
-    color: '#61dafb'
-  }
-}))(TableCell)
-
-const StyledTableRow = withStyles(theme => ({
-  root: {
-    '&:nth-of-type(even)': {
-      backgroundColor: '#343944'
-    },
-    '&:hover': {
-      backgroundColor: '#414855'
-    }
-  }
-}))(TableRow)
 
 const Files = () => {
   const [files, changeFiles] = useState()
