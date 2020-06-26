@@ -1,9 +1,12 @@
 import axios from 'axios'
 
+import { store } from '../index'
+
 axios.interceptors.request.use(
   config => {
     config.headers['X-Admin'] = 'true'
     config.headers['X-Client-ID'] = '38d1fcaf-3a8b-4dfe-9ca4-2e0473b442ba'
+    config.headers['X-Auth-Token'] = store.getState().auth.token
     return config
   },
   error => {
@@ -51,9 +54,7 @@ export function doAuth (user) {
 }
 
 export function getUsers (token) {
-  return axios.get(appBaseUrl() + '/api/v1/users', {
-    headers: { 'X-Auth-Token': token }
-  })
+  return axios.get(appBaseUrl() + '/api/v1/users')
 }
 
 export function getUser (token, username) {
