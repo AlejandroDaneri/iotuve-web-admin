@@ -3,6 +3,7 @@ import axios from 'axios'
 axios.interceptors.request.use(
   config => {
     config.headers['X-Admin'] = 'true'
+    config.headers['X-Client-ID'] = '38d1fcaf-3a8b-4dfe-9ca4-2e0473b442ba'
     return config
   },
   error => {
@@ -30,9 +31,7 @@ export function authBaseUrl () {
 }
 
 export function getVideos () {
-  return axios.get(mediaBaseUrl() + '/api/v1/videos', {
-    headers: { 'X-Client-ID': '38d1fcaf-3a8b-4dfe-9ca4-2e0473b442ba' }
-  })
+  return axios.get(mediaBaseUrl() + '/api/v1/videos')
 }
 
 export function getMediaStatus () {
