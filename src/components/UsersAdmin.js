@@ -1,19 +1,24 @@
+/* Import Libs */
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { UsersAdminWrapper } from '../styles/UsersAdminStyled'
-import { getUsersAdmin, removeAdminUser } from '../webapi'
 import CircleLoader from 'react-spinners/CircleLoader'
 import styled from 'styled-components'
 import Modal from 'styled-react-modal'
 import _ from 'lodash'
-import { Snackbar, SnackbarContent } from '@material-ui/core'
 import { Link } from 'react-router-dom'
+import { Snackbar, SnackbarContent } from '@material-ui/core'
 import { withStyles } from '@material-ui/core/styles'
 import TableCell from '@material-ui/core/TableCell'
 import TableRow from '@material-ui/core/TableRow'
 import Table from '@material-ui/core/Table'
 import TableHead from '@material-ui/core/TableHead'
 import TableBody from '@material-ui/core/TableBody'
+
+/* Import Styled Components */
+import { UsersAdminWrapper } from '../styles/UsersAdminStyled'
+
+/* Import WebApi */
+import { getUsersAdmin, removeAdminUser } from '../webapi'
 
 const ButtonEdit = styled.span`
   color: brown;

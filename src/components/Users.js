@@ -1,8 +1,6 @@
+/* Import Libs */
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { getUsers, removeUser } from '../webapi'
-import { getToken } from '../stateapi/auth'
-import { UsersWrapper } from '../styles/UsersStyled'
 import CircleLoader from 'react-spinners/CircleLoader'
 import _ from 'lodash'
 import styled from 'styled-components'
@@ -15,6 +13,15 @@ import TableRow from '@material-ui/core/TableRow'
 import TableCell from '@material-ui/core/TableCell'
 import { withStyles } from '@material-ui/core/styles'
 import TableBody from '@material-ui/core/TableBody'
+
+/* Import WebApi */
+import { getUsers, removeUser } from '../webapi'
+
+/* Import StateApi */
+import { getToken } from '../stateapi/auth'
+
+/* Import Styled Components */
+import { UsersWrapper } from '../styles/UsersStyled'
 
 const StyledModal = Modal.styled`
   display: flex;
