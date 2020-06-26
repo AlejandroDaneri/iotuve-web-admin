@@ -1,31 +1,15 @@
 /* Import Libs */
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import styled from 'styled-components'
+
 import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew'
 import Tooltip from '@material-ui/core/Tooltip'
 
 /* Import StateApi */
 import { getUsername } from '../stateapi/auth'
 
-export const LogOutWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 8%;
-  cursor: pointer;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-
-  display: flex;
-
-  & .username {
-    color: white;
-    margin-right: 6%;
-  }
-`
+/* Import Styled Components */
+import { LogOutWrapper } from '../styles/LogOutStyled'
 
 const LogOut = () => {
   const username = useSelector(getUsername)
