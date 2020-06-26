@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { getToken } from '../stateapi/auth'
+import { useDispatch } from 'react-redux'
 import { doChangeAdminPassword, getAdminUser, saveAdminUser } from '../webapi'
 import { useParams } from 'react-router-dom'
 import CircleLoader from 'react-spinners/CircleLoader'
@@ -9,7 +8,6 @@ import { Snackbar, SnackbarContent } from '@material-ui/core'
 import Button from '@material-ui/core/Button'
 
 const UserAdmin = () => {
-  const token = useSelector(getToken)
   const { username } = useParams()
 
   const [user, changeUser] = useState()
@@ -28,7 +26,7 @@ const UserAdmin = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    getAdminUser(token, username)
+    getAdminUser(username)
       .then(response => {
         const { data } = response
         const { username, email } = data
@@ -46,10 +44,10 @@ const UserAdmin = () => {
           })
         }
       })
-  }, [token, username, dispatch])
+  }, [username, dispatch])
 
   function save () {
-    saveAdminUser(token, username, {
+    saveAdminUser(username, {
       first_name: firstName,
       last_name: lastName,
       email: email
@@ -61,7 +59,7 @@ const UserAdmin = () => {
   }
   function onSubmit (e) {
     e.preventDefault()
-    doChangeAdminPassword(token, username, password)
+    doChangeAdminPassword(username, password)
       .then(_ => {
         console.log('Change Password Success')
         changePwdSuccess(true)
