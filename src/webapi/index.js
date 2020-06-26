@@ -58,33 +58,23 @@ export function getUsers (token) {
 }
 
 export function getUser (token, username) {
-  return axios.get(appBaseUrl() + `/api/v1/users/${username}`, {
-    headers: { 'X-Auth-Token': token }
-  })
+  return axios.get(appBaseUrl() + `/api/v1/users/${username}`)
 }
 
 export function getAdminUser (token, username) {
-  return axios.get(appBaseUrl() + `/api/v1/adminusers/${username}`, {
-    headers: { 'X-Auth-Token': token }
-  })
+  return axios.get(appBaseUrl() + `/api/v1/adminusers/${username}`)
 }
 
 export function saveUser (token, username, user) {
-  return axios.put(appBaseUrl() + `/api/v1/users/${username}`, user, {
-    headers: { 'X-Auth-Token': token }
-  })
+  return axios.put(appBaseUrl() + `/api/v1/users/${username}`, user)
 }
 
 export function saveAdminUser (token, username, user) {
-  return axios.put(appBaseUrl() + `/api/v1/adminusers/${username}`, user, {
-    headers: { 'X-Auth-Token': token }
-  })
+  return axios.put(appBaseUrl() + `/api/v1/adminusers/${username}`, user)
 }
 
 export function getUsersAdmin (token) {
-  return axios.get(appBaseUrl() + '/api/v1/adminusers', {
-    headers: { 'X-Auth-Token': token }
-  })
+  return axios.get(appBaseUrl() + '/api/v1/adminusers')
 }
 
 export function doRecoveryPassword (key, username, password) {
