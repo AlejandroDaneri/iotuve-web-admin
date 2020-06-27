@@ -53,8 +53,8 @@ export function doAuth (user) {
   return axios.post(appBaseUrl() + '/api/v1/sessions', user)
 }
 
-export function doLogOut (token) {
-  return axios.delete(appBaseUrl() + `/api/v1/sessions/${token}`)
+export function doLogOut () {
+  return axios.delete(appBaseUrl() + `/api/v1/sessions`)
 }
 
 export function getUsers () {

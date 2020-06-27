@@ -6,7 +6,7 @@ import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew'
 import Tooltip from '@material-ui/core/Tooltip'
 
 /* Import StateApi */
-import { getUsername, getToken } from '../stateapi/auth'
+import { getUsername } from '../stateapi/auth'
 
 /* Import Styled Components */
 import { LogOutWrapper } from '../styles/LogOutStyled'
@@ -17,11 +17,10 @@ import { doLogOut } from '../webapi'
 
 const LogOut = () => {
   const username = useSelector(getUsername)
-  const token = useSelector(getToken)
   const dispatch = useDispatch()
 
   function logOut () {
-    doLogOut(token).then(_ => {
+    doLogOut().then(_ => {
       dispatch({
         type: AUTH_LOGOUT
       })
