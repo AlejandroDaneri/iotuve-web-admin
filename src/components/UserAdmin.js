@@ -1,6 +1,6 @@
 /* Import Libs */
 import React, { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import CircleLoader from 'react-spinners/CircleLoader'
 import { Snackbar, SnackbarContent } from '@material-ui/core'
@@ -11,6 +11,7 @@ import { doChangeAdminPassword, getAdminUser, saveAdminUser } from '../webapi'
 
 /* Import Styled Components */
 import { UserWrapper } from '../styles/UserStyled'
+import { getToken } from '../stateapi/auth'
 
 const UserAdmin = () => {
   const { username } = useParams()
@@ -29,6 +30,7 @@ const UserAdmin = () => {
   const [pwdSuccess, changePwdSuccess] = useState(false)
 
   const dispatch = useDispatch()
+  const token = useSelector(getToken)
 
   useEffect(() => {
     getAdminUser(username)
@@ -64,7 +66,7 @@ const UserAdmin = () => {
   }
   function onSubmit (e) {
     e.preventDefault()
-    doChangeAdminPassword(username, password)
+    doChangeAdminPassword(token, username, password)
       .then(_ => {
         console.log('Change Password Success')
         changePwdSuccess(true)
@@ -161,11 +163,13 @@ const UserAdmin = () => {
               <input
                 id='new_pwd'
                 placeholder='Nueva contraseña'
+                type='password'
                 onChange={e => changePassword(e.target.value)}
               />
               <input
                 id='chk_pwd'
                 placeholder='Reingrese contraseña'
+                type='password'
                 onChange={e => changeConfirmPassword(e.target.value)}
               />
             </div>
@@ -176,7 +180,7 @@ const UserAdmin = () => {
               <Button
                 variant='outlined'
                 style={{ borderColor: 'red', color: 'white' }}
-                disabled='true'
+                disabled
               >
                 Cambiar contraseña
               </Button>
@@ -184,7 +188,7 @@ const UserAdmin = () => {
               <Button
                 variant='contained'
                 style={{ backgroundColor: 'red', color: 'white' }}
-                disabled='false'
+                disabled={false}
                 onClick={onSubmit}
               >
                 Cambiar contraseña

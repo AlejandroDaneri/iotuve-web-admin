@@ -71,7 +71,7 @@ const App = () => {
               style={{ width: '215px' }}
               variant='persistent'
               anchor='left'
-              open='true'
+              open
               classes={{ paper: classes.sidebar }}
             >
               <div style={{ placeSelf: 'end', padding: '10px' }}>
