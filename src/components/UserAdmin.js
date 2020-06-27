@@ -70,6 +70,8 @@ const UserAdmin = () => {
       .then(_ => {
         console.log('Change Password Success')
         changePwdSuccess(true)
+        document.getElementById('new_pwd').value = ''
+        document.getElementById('chk_pwd').value = ''
         changePassword('')
         changeConfirmPassword('')
       })
