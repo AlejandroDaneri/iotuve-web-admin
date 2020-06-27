@@ -20,11 +20,20 @@ const LogOut = () => {
   const dispatch = useDispatch()
 
   function logOut () {
-    doLogOut().then(_ => {
-      dispatch({
-        type: AUTH_LOGOUT
+    doLogOut()
+      .then(_ => {
+        dispatch({
+          type: AUTH_LOGOUT
+        })
       })
-    })
+      .catch(err => {
+        console.error(err)
+        if (err.response !== 500) {
+          dispatch({
+            type: AUTH_LOGOUT
+          })
+        }
+      })
   }
 
   return (
