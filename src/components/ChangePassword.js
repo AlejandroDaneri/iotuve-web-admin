@@ -9,16 +9,14 @@ import { doRecoveryPassword } from '../webapi'
 import { ChangePasswordWrapper } from '../styles/ChangePasswordStyled'
 
 const ChangePassword = location => {
-  const [username, changeUsername] = useState('')
-  const [password, changePassword] = useState('')
-  const [confirmPassword, changeConfirmPassword] = useState('')
-
-  const { key } = qs.parse(location.location.search, {
+  const { key, username } = qs.parse(location.location.search, {
     ignoreQueryPrefix: true
   })
 
+  const [password, changePassword] = useState('')
+  const [confirmPassword, changeConfirmPassword] = useState('')
+
   function isDisabled () {
-    if (!username) return true
     if (!password) return true
     if (!confirmPassword) return true
     if (password !== confirmPassword) return true
@@ -39,13 +37,9 @@ const ChangePassword = location => {
   return (
     <ChangePasswordWrapper>
       <h2>Cambiar Contraseña</h2>
+
       <form onSubmit={onSubmit} valid={!isDisabled()}>
-        <input
-          name='username'
-          value={username}
-          onChange={e => changeUsername(e.target.value)}
-          placeholder='Nombre de Usuario'
-        />
+        <input name='username' value={username} disabled />
         <input
           name='password'
           type='password'
