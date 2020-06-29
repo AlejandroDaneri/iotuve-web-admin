@@ -76,17 +76,10 @@ const User = () => {
 
   return (
     <UserWrapper>
-      <h2>Usuario</h2>
+      <h2>Usuario: {Username}</h2>
       {user ? (
         <>
           <div>
-            <div>
-              Nombre de usuario
-              <br />
-              {Username}
-              <p />
-            </div>
-
             <div>
               Avatar
               <br />
@@ -98,6 +91,10 @@ const User = () => {
                   src={url}
                 />
               </a>
+            </div>
+            <div>
+              <div>Servicio de Login</div>
+              {loginService ? 'Si' : 'No'}
             </div>
             <p />
             <div>
@@ -136,7 +133,6 @@ const User = () => {
               />
             </div>
             <p />
-            <div>Servicio de Login: {loginService ? 'Si' : 'No'}</div>
           </div>
           <div className='actions'>
             <div className='action'>
