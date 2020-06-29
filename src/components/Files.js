@@ -86,7 +86,7 @@ const Files = () => {
   }, [dispatch])
 
   function remove () {
-    removeVideo(selected.id)
+    removeVideo(selected.video_id)
       .then(response => {
         changeFiles(_.without(files, selected))
         changeModalOpen(false)
