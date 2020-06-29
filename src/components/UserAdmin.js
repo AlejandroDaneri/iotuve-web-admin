@@ -89,42 +89,34 @@ const UserAdmin = () => {
   }
   return (
     <UserWrapper>
-      <h2>Admin</h2>
+      <h2>Admin: {username}</h2>
       {user ? (
         <>
           <div>
-            <div>
-              Nombre de usuario:
-              <br />
-              {Username}
-              <p />
-            </div>
-            <div>
-              Mail
-              <br />
+            <p />
+            <>
+              Mail:
               <input
                 value={email}
                 onChange={e => changeEmail(e.target.value)}
               />
-            </div>
+            </>
             <p />
-            <div>
-              Nombre
-              <br />
+            <>
+              Nombre:
               <input
                 value={firstName}
                 onChange={e => changeFirstName(e.target.value)}
               />
-            </div>
+            </>
             <p />
-            <div>
-              Apellido
-              <br />
+            <>
+              Apellido:
               <input
                 value={lastName}
                 onChange={e => changeLastName(e.target.value)}
               />
-            </div>
+            </>
             <p />
           </div>
           <div className='actions'>
