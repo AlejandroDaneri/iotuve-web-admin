@@ -20,7 +20,6 @@ export const UserWrapper = styled.div`
     & .action {
       margin: 1%;
       background-color: #61dafb;
-      cursor: pointer;
       color: black;
     }
   }
