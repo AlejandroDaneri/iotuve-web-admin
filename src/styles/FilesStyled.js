@@ -22,5 +22,13 @@ export const FilesWrapper = styled.div`
         }
       }
     }
+
+    > tbody {
+      > tr {
+        & > td.actions {
+          cursor: pointer;
+        }
+      }
+    }
   }
 `
