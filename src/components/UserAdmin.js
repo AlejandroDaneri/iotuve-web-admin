@@ -18,7 +18,6 @@ const UserAdmin = () => {
 
   const [user, changeUser] = useState()
 
-  const [Username, changeUsername] = useState()
   const [email, changeEmail] = useState()
   const [firstName, changeFirstName] = useState()
   const [lastName, changeLastName] = useState()
@@ -36,8 +35,7 @@ const UserAdmin = () => {
     getAdminUser(username)
       .then(response => {
         const { data } = response
-        const { username, email } = data
-        changeUsername(username)
+        const { email } = data
         changeFirstName(data.first_name)
         changeLastName(data.last_name)
         changeEmail(email)
