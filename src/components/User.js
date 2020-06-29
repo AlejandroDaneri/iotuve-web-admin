@@ -4,13 +4,13 @@ import { useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import CircleLoader from 'react-spinners/CircleLoader'
 import { Snackbar, SnackbarContent } from '@material-ui/core'
-import Button from '@material-ui/core/Button'
 
 /* Import WebApi */
 import { getUser, saveUser } from '../webapi'
 
 /* Import Styled Components */
 import { UserWrapper } from '../styles/UserStyled'
+import { Button } from '../styles/ButtonStyled'
 
 /* Import Constants */
 import { AUTH_LOGOUT } from '../constants'
