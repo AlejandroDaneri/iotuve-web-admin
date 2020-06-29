@@ -9,4 +9,5 @@ export const Button = styled.div`
   cursor: pointer;
   width: 12vmin;
   font-size: 2vmin;
+  margin: 1%;
 `

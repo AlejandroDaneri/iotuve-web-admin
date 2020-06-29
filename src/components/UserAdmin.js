@@ -95,7 +95,7 @@ const UserAdmin = () => {
           <div>
             <p />
             <>
-              Mail:
+              <div>Mail</div>
               <input
                 value={email}
                 onChange={e => changeEmail(e.target.value)}
@@ -103,7 +103,7 @@ const UserAdmin = () => {
             </>
             <p />
             <>
-              Nombre:
+              <div>Nombre</div>
               <input
                 value={firstName}
                 onChange={e => changeFirstName(e.target.value)}
@@ -111,7 +111,7 @@ const UserAdmin = () => {
             </>
             <p />
             <>
-              Apellido:
+              <div>Apellido</div>
               <input
                 value={lastName}
                 onChange={e => changeLastName(e.target.value)}
@@ -145,8 +145,8 @@ const UserAdmin = () => {
           </Snackbar>
 
           {/* ---Password change section--- */}
-
-          <form noValidate autoComplete='off'>
+          <h2>Cambiar Contraseña</h2>
+          <form autoComplete='off'>
             <div
               style={{
                 display: 'flex',
@@ -154,15 +154,16 @@ const UserAdmin = () => {
                 padding: '10px'
               }}
             >
+              <div>Nueva Contraseña</div>
               <input
                 id='new_pwd'
-                placeholder='Nueva contraseña'
                 type='password'
                 onChange={e => changePassword(e.target.value)}
               />
+              <p />
+              <div>Repita Nueva Contraseña</div>
               <input
                 id='chk_pwd'
-                placeholder='Reingrese contraseña'
                 type='password'
                 onChange={e => changeConfirmPassword(e.target.value)}
               />
@@ -170,24 +171,9 @@ const UserAdmin = () => {
           </form>
 
           <div className='actions'>
-            {isDisabled() ? (
-              <Button
-                variant='outlined'
-                style={{ borderColor: 'red', color: 'white' }}
-                disabled
-              >
-                Cambiar contraseña
-              </Button>
-            ) : (
-              <Button
-                variant='contained'
-                style={{ backgroundColor: 'red', color: 'white' }}
-                disabled={false}
-                onClick={onSubmit}
-              >
-                Cambiar contraseña
-              </Button>
-            )}
+            <Button disabled={isDisabled} onClick={onSubmit}>
+              Aceptar
+            </Button>
           </div>
 
           <Snackbar
