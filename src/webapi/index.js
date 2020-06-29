@@ -105,6 +105,10 @@ export function removeUser (token, username) {
   return axios.delete(appBaseUrl() + `/api/v1/users/${username}`)
 }
 
+export function removeVideo (id) {
+  return axios.delete(appBaseUrl() + `/api/v1/videos/${id}`)
+}
+
 export function removeAdminUser (token, username) {
   return axios.delete(appBaseUrl() + `/api/v1/adminusers/${username}`)
 }
