@@ -56,11 +56,11 @@ const Users = () => {
         })
     })
 
-    usersPromise.then(async users => {
+    usersPromise.then(users => {
       let currentUsers = {
         ...users
       }
-      await Object.keys(users).forEach(async username => {
+      Object.keys(users).forEach(username => {
         getUserSessions(username).then(response => {
           const { data } = response
           const activeState = data.length > 0 ? 'Yes' : 'No'
