@@ -6,7 +6,6 @@ import BeatLoader from 'react-spinners/BeatLoader'
 import _ from 'lodash'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
-import Modal from 'styled-react-modal'
 import { Snackbar, SnackbarContent } from '@material-ui/core'
 import Table from '@material-ui/core/Table'
 import TableHead from '@material-ui/core/TableHead'
@@ -21,6 +20,7 @@ import { getUsers, getUserSessions, removeUser } from '../webapi'
 /* Import Styled Components */
 import { UsersWrapper } from '../styles/UsersStyled'
 import { StyledTableRow } from '../styles/TableStyled'
+import { StyledModal } from '../styles/ModalStyled'
 
 const IS_ACTIVE_LOADING = 'IS_ACTIVE_LOADING'
 const IS_ACTIVE_YES = 'IS_ACTIVE_YES'
@@ -31,30 +31,6 @@ const IS_ACTIVE = {
   [IS_ACTIVE_YES]: 'Si',
   [IS_ACTIVE_NO]: 'No'
 }
-
-const StyledModal = Modal.styled`
-  display: flex;
-  flex-direction: column;
-  width: 30%;
-  height: 10%;
-  align-items: center;
-  justify-content: center;
-  background-color: #282c34;
-  color: #61dafb;
-
-  & .actions {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    align-items: center;
-    justify-content: center;
-    padding: 1%;
-
-    > button {
-      margin: 1%;
-    }
-  }
-`
 
 const ButtonDelete = styled.span`
   color: red;
