@@ -45,14 +45,14 @@ const StyledModal = Modal.styled`
   }
 `
 
-const DeleteModal = ({ modalOpen, changeModalOpen, remove }) => {
+const DeleteModal = ({ name, modalOpen, changeModalOpen, remove }) => {
   return (
     <StyledModal
       isOpen={modalOpen}
       onBackgroundClick={null}
       onEscapeKeydown={null}
     >
-      <span>Esta seguro que desea borrar el Video?</span>
+      <span>Esta seguro que desea borrar el video {name}?</span>
       <div className='actions'>
         <button onClick={() => changeModalOpen(false)}>Cancelar</button>
         <button onClick={remove}>Aceptar</button>
@@ -63,7 +63,7 @@ const DeleteModal = ({ modalOpen, changeModalOpen, remove }) => {
 
 const Files = () => {
   const [files, changeFiles] = useState()
-  const [selected, changeSelected] = useState()
+  const [selected, changeSelected] = useState({})
   const [modalOpen, changeModalOpen] = useState()
   const [informOpen, changeInformOpen] = useState()
 
@@ -105,6 +105,7 @@ const Files = () => {
   return (
     <FilesWrapper>
       <DeleteModal
+        name={selected.name}
         remove={remove}
         modalOpen={modalOpen}
         changeModalOpen={changeModalOpen}
