@@ -9,6 +9,8 @@ const Stats = () => {
   const startDate = '2020-04-29'
   const endDate = '2020-05-30'
 
+  const [loading, changeLoading] = useState(true)
+
   const [activeRecovery, changeActiveRecovery] = useState()
   const [activeSessions, changeActiveSessions] = useState()
 
@@ -48,6 +50,7 @@ const Stats = () => {
         changeRegisteredAdminUsersLoginService(
           data.registered_users_login_service
         )
+        changeLoading(false)
       })
       .catch(_ => {
         console.error('Get Stats Error')
@@ -55,43 +58,48 @@ const Stats = () => {
   }, [])
   return (
     <StatsWrapper>
-      <h2>Estadisticas</h2>
+      {!loading && (
+        <>
+          <h2>Estadisticas</h2>
 
-      <div>
-        Sesiones Activas: <b>{activeSessions}</b>
-      </div>
-      <div>
-        Links de Recuperar Contraseña Activos: <b>{activeRecovery}</b>
-      </div>
+          <div>
+            Sesiones Activas: <b>{activeSessions}</b>
+          </div>
+          <div>
+            Links de Recuperar Contraseña Activos: <b>{activeRecovery}</b>
+          </div>
 
-      <p />
+          <p />
 
-      <h3>Usuarios Admin</h3>
-      <div>
-        Registrados: <b>{registeredAdminUsers}</b>
-      </div>
-      <div>
-        Registrados Activos: <b>{registeredAdminUsersActive}</b>
-      </div>
-      <div>
-        Registrados Cerrados: <b>{registeredAdminUsersClosed}</b>
-      </div>
+          <h3>Usuarios Admin</h3>
+          <div>
+            Registrados: <b>{registeredAdminUsers}</b>
+          </div>
+          <div>
+            Registrados Activos: <b>{registeredAdminUsersActive}</b>
+          </div>
+          <div>
+            Registrados Cerrados: <b>{registeredAdminUsersClosed}</b>
+          </div>
 
-      <p />
+          <p />
 
-      <h3>Usuarios</h3>
-      <div>
-        Registrados: <b>{registeredUsers}</b>
-      </div>
-      <div>
-        Registrados Activos: <b>{registeredUsersActive}</b>
-      </div>
-      <div>
-        Registrados Cerrados: <b>{registeredUsersClosed}</b>
-      </div>
-      <div>
-        Registrados con Login Service: <b>{registeredAdminUsersLoginService}</b>
-      </div>
+          <h3>Usuarios</h3>
+          <div>
+            Registrados: <b>{registeredUsers}</b>
+          </div>
+          <div>
+            Registrados Activos: <b>{registeredUsersActive}</b>
+          </div>
+          <div>
+            Registrados Cerrados: <b>{registeredUsersClosed}</b>
+          </div>
+          <div>
+            Registrados con Login Service:{' '}
+            <b>{registeredAdminUsersLoginService}</b>
+          </div>
+        </>
+      )}
     </StatsWrapper>
   )
 }
