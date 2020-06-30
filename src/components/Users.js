@@ -14,27 +14,13 @@ import TableBody from '@material-ui/core/TableBody'
 /* Import WebApi */
 import { getUsers, getUserSessions, removeUser } from '../webapi'
 
+/* Import Components */
+import DeleteModal from './Modal'
+
 /* Import Styled Components */
 import { UsersWrapper } from '../styles/UsersStyled'
 import { StyledTableRow, StyledTableCell } from '../styles/TableStyled'
-import { StyledModal } from '../styles/ModalStyled'
 import { ButtonEdit, ButtonDelete } from '../styles/ButtonsStyled'
-
-const DeleteModal = ({ name, modalOpen, changeModalOpen, remove }) => {
-  return (
-    <StyledModal
-      isOpen={modalOpen}
-      onBackgroundClick={null}
-      onEscapeKeydown={null}
-    >
-      <span>Esta seguro que desea borrar el usuario {name}?</span>
-      <div className='actions'>
-        <button onClick={() => changeModalOpen(false)}>Cancelar</button>
-        <button onClick={remove}>Aceptar</button>
-      </div>
-    </StyledModal>
-  )
-}
 
 const Users = () => {
   const [users, changeUsers] = useState({})
