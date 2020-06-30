@@ -20,6 +20,7 @@ import { getUsers, getUserSessions, removeUser } from '../webapi'
 
 /* Import Styled Components */
 import { UsersWrapper } from '../styles/UsersStyled'
+import { StyledTableRow } from '../styles/TableStyled'
 
 const IS_ACTIVE_LOADING = 'IS_ACTIVE_LOADING'
 const IS_ACTIVE_YES = 'IS_ACTIVE_YES'
@@ -73,17 +74,6 @@ const StyledTableCell = withStyles(theme => ({
     color: '#61dafb'
   }
 }))(TableCell)
-
-const StyledTableRow = withStyles(theme => ({
-  root: {
-    '&:nth-of-type(even)': {
-      backgroundColor: '#343944'
-    },
-    '&:hover': {
-      backgroundColor: '#414855'
-    }
-  }
-}))(TableRow)
 
 const DeleteModal = ({ name, modalOpen, changeModalOpen, remove }) => {
   return (
