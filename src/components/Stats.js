@@ -5,8 +5,11 @@ import React from 'react'
 import { StatsWrapper } from '../styles/StatsStyled'
 
 const Stats = () => {
-  console.error('Stats')
-  return <StatsWrapper>Stats</StatsWrapper>
+  return (
+    <StatsWrapper>
+      <h2>Stats</h2>
+    </StatsWrapper>
+  )
 }
 
 export default Stats

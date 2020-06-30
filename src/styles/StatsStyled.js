@@ -3,5 +3,11 @@ import styled from 'styled-components'
 export const StatsWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  color: white;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+
+  & > h2 {
+    font-size: 3vmin;
+  }
 `
