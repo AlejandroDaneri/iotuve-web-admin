@@ -4,7 +4,6 @@ import { useDispatch } from 'react-redux'
 import CircleLoader from 'react-spinners/CircleLoader'
 import BeatLoader from 'react-spinners/BeatLoader'
 import _ from 'lodash'
-import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import { Snackbar, SnackbarContent } from '@material-ui/core'
 import Table from '@material-ui/core/Table'
@@ -21,6 +20,7 @@ import { getUsers, getUserSessions, removeUser } from '../webapi'
 import { UsersWrapper } from '../styles/UsersStyled'
 import { StyledTableRow } from '../styles/TableStyled'
 import { StyledModal } from '../styles/ModalStyled'
+import { ButtonEdit, ButtonDelete } from '../styles/ButtonsStyled'
 
 const IS_ACTIVE_LOADING = 'IS_ACTIVE_LOADING'
 const IS_ACTIVE_YES = 'IS_ACTIVE_YES'
@@ -31,14 +31,6 @@ const IS_ACTIVE = {
   [IS_ACTIVE_YES]: 'Si',
   [IS_ACTIVE_NO]: 'No'
 }
-
-const ButtonDelete = styled.span`
-  color: red;
-`
-
-const ButtonEdit = styled.span`
-  color: brown;
-`
 
 const StyledTableCell = withStyles(theme => ({
   head: {
