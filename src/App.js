@@ -29,6 +29,7 @@ import { AppWrapper } from './styles/AppStyled'
 
 /* Import Components */
 import Files from './components/Files'
+import Stats from './components/Stats'
 import Login from './components/Login'
 import Health from './components/Health'
 import User from './components/User'
@@ -128,17 +129,19 @@ const App = () => {
                 </Link>
               </List>
               <List>
-                <ListItem button>
-                  <ListItemIcon className={classes.menuItem}>
-                    <ShowChartIcon />
-                  </ListItemIcon>
-                  <Tooltip title='Ver estadísticas de los servidores'>
-                    <ListItemText
-                      className={classes.menuItem}
-                      primary='Estadisticas'
-                    />
-                  </Tooltip>
-                </ListItem>
+                <Link to='/stats'>
+                  <ListItem button>
+                    <ListItemIcon className={classes.menuItem}>
+                      <ShowChartIcon />
+                    </ListItemIcon>
+                    <Tooltip title='Ver estadísticas de los servidores'>
+                      <ListItemText
+                        className={classes.menuItem}
+                        primary='Estadisticas'
+                      />
+                    </Tooltip>
+                  </ListItem>
+                </Link>
               </List>
               <Divider />
               <Divider />
@@ -168,6 +171,7 @@ const App = () => {
             <PrivateRoute path='/user_admin/:username' component={UserAdmin} />
             <PrivateRoute path='/users_admin' component={UsersAdmin} />
             <PrivateRoute path='/health' component={Health} />
+            <PrivateRoute path='/stats' components={Stats} />
             <Route path='/change_password' component={ChangePassword} />
           </Switch>
         </div>
