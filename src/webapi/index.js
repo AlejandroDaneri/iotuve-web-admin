@@ -65,6 +65,10 @@ export function getUser (username) {
   return axios.get(appBaseUrl() + `/api/v1/users/${username}`)
 }
 
+export function getUserSessions (username) {
+  return axios.get(appBaseUrl() + `/api/v1/users/${username}/sessions`)
+}
+
 export function getAdminUser (username) {
   return axios.get(appBaseUrl() + `/api/v1/adminusers/${username}`)
 }

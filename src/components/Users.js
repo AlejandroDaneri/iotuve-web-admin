@@ -1,7 +1,8 @@
 /* Import Libs */
 import React, { useEffect, useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import CircleLoader from 'react-spinners/CircleLoader'
+import BeatLoader from 'react-spinners/BeatLoader'
 import _ from 'lodash'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
@@ -15,13 +16,20 @@ import { withStyles } from '@material-ui/core/styles'
 import TableBody from '@material-ui/core/TableBody'
 
 /* Import WebApi */
-import { getUsers, removeUser } from '../webapi'
-
-/* Import StateApi */
-import { getToken } from '../stateapi/auth'
+import { getUsers, getUserSessions, removeUser } from '../webapi'
 
 /* Import Styled Components */
 import { UsersWrapper } from '../styles/UsersStyled'
+
+const IS_ACTIVE_LOADING = 'IS_ACTIVE_LOADING'
+const IS_ACTIVE_YES = 'IS_ACTIVE_YES'
+const IS_ACTIVE_NO = 'IS_ACTIVE_NO'
+
+const IS_ACTIVE = {
+  [IS_ACTIVE_LOADING]: <BeatLoader color='#61dafb' />,
+  [IS_ACTIVE_YES]: 'Si',
+  [IS_ACTIVE_NO]: 'No'
+}
 
 const StyledModal = Modal.styled`
   display: flex;
@@ -94,8 +102,7 @@ const DeleteModal = ({ name, modalOpen, changeModalOpen, remove }) => {
 }
 
 const Users = () => {
-  const token = useSelector(getToken)
-  const [users, changeUsers] = useState()
+  const [users, changeUsers] = useState({})
   const [selected, changeSelected] = useState({})
   const [modalOpen, changeModalOpen] = useState(false)
   const [informOpen, changeInformOpen] = useState(false)
@@ -103,20 +110,52 @@ const Users = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    getUsers(token)
-      .then(response => {
-        const { data } = response
-        changeUsers(data)
-      })
-      .catch(err => {
-        console.error(err)
-        if (err.response !== 500) {
-          dispatch({
-            type: 'AUTH_LOGOUT'
+    const usersPromise = new Promise((resolve, reject) => {
+      getUsers()
+        .then(response => {
+          const { data } = response
+          const u = {}
+          data.forEach(user => {
+            u[user.username] = {
+              ...user,
+              activeState: IS_ACTIVE_LOADING
+            }
           })
-        }
+          changeUsers(u)
+          resolve(u)
+        })
+        .catch(err => {
+          console.error(err)
+          if (err.response !== 500) {
+            dispatch({
+              type: 'AUTH_LOGOUT'
+            })
+          }
+          reject(err)
+        })
+    })
+
+    usersPromise.then(async users => {
+      let currentUsers = {
+        ...users
+      }
+      await Object.keys(users).forEach(async username => {
+        await getUserSessions(username).then(response => {
+          const { data } = response
+          const activeState = data.length > 0 ? IS_ACTIVE_YES : IS_ACTIVE_NO
+          currentUsers = {
+            ...currentUsers,
+            [username]: {
+              ...currentUsers[username],
+              activeState
+            }
+          }
+          changeUsers(currentUsers)
+        })
       })
-  }, [token, dispatch])
+      changeUsers(currentUsers)
+    })
+  }, [dispatch])
 
   function parseTimestamp (timestamp) {
     const date = new Date(timestamp)
@@ -124,7 +163,7 @@ const Users = () => {
   }
 
   function remove () {
-    removeUser(token, selected.username)
+    removeUser(selected.username)
       .then(response => {
         changeUsers(_.without(users, selected))
         changeModalOpen(false)
@@ -164,7 +203,7 @@ const Users = () => {
         />
       </Snackbar>
       <h2>Usuarios</h2>
-      {users ? (
+      {Object.keys(users).length > 0 ? (
         <Table>
           <TableHead>
             <TableRow>
@@ -173,11 +212,12 @@ const Users = () => {
               <StyledTableCell>Email</StyledTableCell>
               <StyledTableCell>Teléfono</StyledTableCell>
               <StyledTableCell>Fecha de creación</StyledTableCell>
+              <StyledTableCell>Online</StyledTableCell>
               <StyledTableCell>Acciones</StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {(users || []).map(user => {
+            {(Object.values(users) || []).map(user => {
               return (
                 <StyledTableRow key={user.id}>
                   <StyledTableCell>{user.username}</StyledTableCell>
@@ -188,6 +228,9 @@ const Users = () => {
                   <StyledTableCell>{user.contact.phone}</StyledTableCell>
                   <StyledTableCell>
                     {parseTimestamp(user.date_created)}
+                  </StyledTableCell>
+                  <StyledTableCell>
+                    {IS_ACTIVE[user.activeState]}
                   </StyledTableCell>
                   <StyledTableCell className='actions'>
                     <Link to={`/user/${user.username}`}>
