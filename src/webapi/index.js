@@ -113,9 +113,7 @@ export function removeAdminUser (username) {
   return axios.delete(appBaseUrl() + `/api/v1/adminusers/${username}`)
 }
 
-export function getStats () {
-  const startDate = '2020-05-30'
-  const endDate = '2020-05-31'
+export function getStats (startDate, endDate) {
   return axios.get(
     `${authBaseUrl()}/stats?startdate=${startDate}&enddate=${endDate}`
   )

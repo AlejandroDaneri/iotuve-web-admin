@@ -6,8 +6,11 @@ import { StatsWrapper } from '../styles/StatsStyled'
 import { getStats } from '../webapi'
 
 const Stats = () => {
+  const startDate = '2020-05-30'
+  const endDate = '2020-05-31'
+
   useEffect(() => {
-    getStats()
+    getStats(startDate, endDate)
       .then(_ => {
         console.error('Get Stats Successs')
       })
