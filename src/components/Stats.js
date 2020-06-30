@@ -57,24 +57,40 @@ const Stats = () => {
     <StatsWrapper>
       <h2>Estadisticas</h2>
 
-      <div>Sesiones Activas: {activeSessions}</div>
-      <div>Links de Recuperar Contraseña Activos: {activeRecovery}</div>
+      <div>
+        Sesiones Activas: <b>{activeSessions}</b>
+      </div>
+      <div>
+        Links de Recuperar Contraseña Activos: <b>{activeRecovery}</b>
+      </div>
 
       <p />
 
       <h3>Usuarios Admin</h3>
-      <div>Registrados: {registeredAdminUsers}</div>
-      <div>Registrados Activos: {registeredAdminUsersActive}</div>
-      <div>Registrados Cerrados: {registeredAdminUsersClosed}</div>
+      <div>
+        Registrados: <b>{registeredAdminUsers}</b>
+      </div>
+      <div>
+        Registrados Activos: <b>{registeredAdminUsersActive}</b>
+      </div>
+      <div>
+        Registrados Cerrados: <b>{registeredAdminUsersClosed}</b>
+      </div>
 
       <p />
 
       <h3>Usuarios</h3>
-      <div>Registrados: {registeredUsers}</div>
-      <div>Registrados Activos: {registeredUsersActive}</div>
-      <div>Registrados Cerrados: {registeredUsersClosed}</div>
       <div>
-        Registrados con Login Service: {registeredAdminUsersLoginService}
+        Registrados: <b>{registeredUsers}</b>
+      </div>
+      <div>
+        Registrados Activos: <b>{registeredUsersActive}</b>
+      </div>
+      <div>
+        Registrados Cerrados: <b>{registeredUsersClosed}</b>
+      </div>
+      <div>
+        Registrados con Login Service: <b>{registeredAdminUsersLoginService}</b>
       </div>
     </StatsWrapper>
   )
