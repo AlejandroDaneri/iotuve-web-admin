@@ -5,7 +5,9 @@ export const UserWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  width: calc(100% - 215px);
+  position: absolute;
+  left: 215px;
 
   & > h2 {
     font-size: 3vmin;
