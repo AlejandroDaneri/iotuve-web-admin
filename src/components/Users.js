@@ -17,6 +17,9 @@ import { getUsers, getUserSessions, removeUser } from '../webapi'
 /* Import Components */
 import DeleteModal from './Modal'
 
+/* Import Constants */
+import { AUTH_LOGOUT } from '../constants'
+
 /* Import Styled Components */
 import { UsersWrapper } from '../styles/UsersStyled'
 import { StyledTableRow, StyledTableCell } from '../styles/TableStyled'
@@ -46,7 +49,7 @@ const Users = () => {
           console.error(err)
           if (err.response !== 500) {
             dispatch({
-              type: 'AUTH_LOGOUT'
+              type: AUTH_LOGOUT
             })
           }
           reject(err)
