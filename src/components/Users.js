@@ -77,14 +77,14 @@ const StyledTableRow = withStyles(theme => ({
   }
 }))(TableRow)
 
-const DeleteModal = ({ modalOpen, changeModalOpen, remove }) => {
+const DeleteModal = ({ name, modalOpen, changeModalOpen, remove }) => {
   return (
     <StyledModal
       isOpen={modalOpen}
       onBackgroundClick={null}
       onEscapeKeydown={null}
     >
-      <span>Esta seguro que desea borrar el Usuario?</span>
+      <span>Esta seguro que desea borrar el usuario {name}?</span>
       <div className='actions'>
         <button onClick={() => changeModalOpen(false)}>Cancelar</button>
         <button onClick={remove}>Aceptar</button>
@@ -96,7 +96,7 @@ const DeleteModal = ({ modalOpen, changeModalOpen, remove }) => {
 const Users = () => {
   const token = useSelector(getToken)
   const [users, changeUsers] = useState()
-  const [selected, changeSelected] = useState()
+  const [selected, changeSelected] = useState({})
   const [modalOpen, changeModalOpen] = useState(false)
   const [informOpen, changeInformOpen] = useState(false)
 
@@ -143,6 +143,7 @@ const Users = () => {
   return (
     <UsersWrapper>
       <DeleteModal
+        name={selected.username}
         remove={remove}
         modalOpen={modalOpen}
         changeModalOpen={changeModalOpen}
