@@ -24,14 +24,16 @@ import LogOut from './LogOut'
 /* Import StateApi */
 import { isAuthed } from '../stateapi/auth'
 
-const useStyles = makeStyles(theme => ({
-  sidebar: { backgroundColor: '#1e3c5c', width: 'inherit' },
-  menuItem: { color: '#96a1af' }
-}))
-
 const Sidebar = () => {
   const authed = useSelector(isAuthed)
+
+  const useStyles = makeStyles(_ => ({
+    sidebar: { backgroundColor: '#1e3c5c', width: 'inherit' },
+    menuItem: { color: '#96a1af' }
+  }))
+
   const classes = useStyles()
+
   return (
     <div style={{ display: 'flex' }}>
       {authed && (
