@@ -8,6 +8,7 @@ export const UsersWrapper = styled.div`
   width: calc(100% - 215px);
   position: absolute;
   left: 215px;
+  background-color: #282c34;
 
   & > h2 {
     font-size: 3vmin;
