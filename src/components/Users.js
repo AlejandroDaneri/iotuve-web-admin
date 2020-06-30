@@ -22,15 +22,6 @@ import { StyledTableRow } from '../styles/TableStyled'
 import { StyledModal } from '../styles/ModalStyled'
 import { ButtonEdit, ButtonDelete } from '../styles/ButtonsStyled'
 
-/* Import Constants */
-import { IS_ACTIVE_LOADING, IS_ACTIVE_YES, IS_ACTIVE_NO } from '../constants'
-
-const IS_ACTIVE = {
-  [IS_ACTIVE_LOADING]: <BeatLoader color='#61dafb' />,
-  [IS_ACTIVE_YES]: 'Si',
-  [IS_ACTIVE_NO]: 'No'
-}
-
 const StyledTableCell = withStyles(theme => ({
   head: {
     backgroundColor: theme.palette.common.black,
@@ -73,10 +64,7 @@ const Users = () => {
           const { data } = response
           const u = {}
           data.forEach(user => {
-            u[user.username] = {
-              ...user,
-              activeState: IS_ACTIVE_LOADING
-            }
+            u[user.username] = user
           })
           changeUsers(u)
           resolve(u)
@@ -99,7 +87,7 @@ const Users = () => {
       await Object.keys(users).forEach(async username => {
         await getUserSessions(username).then(response => {
           const { data } = response
-          const activeState = data.length > 0 ? IS_ACTIVE_YES : IS_ACTIVE_NO
+          const activeState = data.length > 0 ? 'Yes' : 'No'
           currentUsers = {
             ...currentUsers,
             [username]: {
@@ -187,7 +175,7 @@ const Users = () => {
                     {parseTimestamp(user.date_created)}
                   </StyledTableCell>
                   <StyledTableCell>
-                    {IS_ACTIVE[user.activeState]}
+                    {user.activeState || <BeatLoader color='#61dafb' />}
                   </StyledTableCell>
                   <StyledTableCell className='actions'>
                     <Link to={`/user/${user.username}`}>
