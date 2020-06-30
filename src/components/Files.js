@@ -73,7 +73,7 @@ const Files = () => {
     getVideos()
       .then(response => {
         const { data } = response
-        changeFiles(Object.values(data.videos))
+        changeFiles(data.data.map(video => video.media))
       })
       .catch(err => {
         console.error(err)
