@@ -74,7 +74,6 @@ const Users = () => {
           changeUsers(currentUsers)
         })
       })
-      changeUsers(currentUsers)
     })
   }, [dispatch])
 
