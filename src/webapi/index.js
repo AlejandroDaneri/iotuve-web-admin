@@ -112,3 +112,7 @@ export function removeVideo (id) {
 export function removeAdminUser (username) {
   return axios.delete(appBaseUrl() + `/api/v1/adminusers/${username}`)
 }
+
+export function getStats () {
+  return axios.get(appBaseUrl() + '/api/v1/stats')
+}
