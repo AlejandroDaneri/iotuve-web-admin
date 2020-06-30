@@ -7,7 +7,7 @@ import { getStats } from '../webapi'
 
 const Stats = () => {
   const startDate = '2020-04-29'
-  const endDate = '2020-04-30'
+  const endDate = '2020-05-30'
 
   const [activeRecovery, changeActiveRecovery] = useState()
   const [activeSessions, changeActiveSessions] = useState()
@@ -57,22 +57,24 @@ const Stats = () => {
     <StatsWrapper>
       <h2>Estadisticas</h2>
 
-      <div>Active Recovery: {activeRecovery}</div>
-      <div>Active Sessions: {activeSessions}</div>
+      <div>Sesiones Activas: {activeSessions}</div>
+      <div>Links de Recuperar Contraseña Activos: {activeRecovery}</div>
 
       <p />
 
-      <div>Registered Admin Users: {registeredAdminUsers}</div>
-      <div>Registered Admin Users Active: {registeredAdminUsersActive}</div>
-      <div>Registered Admin Users Closed: {registeredAdminUsersClosed}</div>
+      <h3>Usuarios Admin</h3>
+      <div>Registrados: {registeredAdminUsers}</div>
+      <div>Registrados Activos: {registeredAdminUsersActive}</div>
+      <div>Registrados Cerrados: {registeredAdminUsersClosed}</div>
 
       <p />
 
-      <div>Registered Users: {registeredUsers}</div>
-      <div>Registered Users Active: {registeredUsersActive}</div>
-      <div>Registered Users Closed: {registeredUsersClosed}</div>
+      <h3>Usuarios</h3>
+      <div>Registrados: {registeredUsers}</div>
+      <div>Registrados Activos: {registeredUsersActive}</div>
+      <div>Registrados Cerrados: {registeredUsersClosed}</div>
       <div>
-        Registered Users with Login Service: {registeredAdminUsersLoginService}
+        Registrados con Login Service: {registeredAdminUsersLoginService}
       </div>
     </StatsWrapper>
   )
