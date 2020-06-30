@@ -61,7 +61,7 @@ const Users = () => {
         ...users
       }
       await Object.keys(users).forEach(async username => {
-        await getUserSessions(username).then(response => {
+        getUserSessions(username).then(response => {
           const { data } = response
           const activeState = data.length > 0 ? 'Yes' : 'No'
           currentUsers = {
