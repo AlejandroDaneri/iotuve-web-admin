@@ -57,21 +57,18 @@ const Users = () => {
     })
 
     usersPromise.then(users => {
-      let currentUsers = {
-        ...users
-      }
       Object.keys(users).forEach(username => {
         getUserSessions(username).then(response => {
           const { data } = response
           const activeState = data.length > 0 ? 'Yes' : 'No'
-          currentUsers = {
-            ...currentUsers,
+          users = {
+            ...users,
             [username]: {
-              ...currentUsers[username],
+              ...users[username],
               activeState
             }
           }
-          changeUsers(currentUsers)
+          changeUsers(users)
         })
       })
     })
