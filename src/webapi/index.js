@@ -114,7 +114,9 @@ export function removeAdminUser (username) {
 }
 
 export function getStats () {
+  const startDate = '2020-05-30'
+  const endDate = '2020-05-31'
   return axios.get(
-    `${authBaseUrl()}/stats?startdate=2020-05-30&enddate=2020-05-31`
+    `${authBaseUrl()}/stats?startdate=${startDate}&enddate=${endDate}`
   )
 }
