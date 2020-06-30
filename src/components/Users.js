@@ -9,8 +9,6 @@ import { Snackbar, SnackbarContent } from '@material-ui/core'
 import Table from '@material-ui/core/Table'
 import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
-import TableCell from '@material-ui/core/TableCell'
-import { withStyles } from '@material-ui/core/styles'
 import TableBody from '@material-ui/core/TableBody'
 
 /* Import WebApi */
@@ -18,20 +16,9 @@ import { getUsers, getUserSessions, removeUser } from '../webapi'
 
 /* Import Styled Components */
 import { UsersWrapper } from '../styles/UsersStyled'
-import { StyledTableRow } from '../styles/TableStyled'
+import { StyledTableRow, StyledTableCell } from '../styles/TableStyled'
 import { StyledModal } from '../styles/ModalStyled'
 import { ButtonEdit, ButtonDelete } from '../styles/ButtonsStyled'
-
-const StyledTableCell = withStyles(theme => ({
-  head: {
-    backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white
-  },
-  body: {
-    fontSize: 14,
-    color: '#61dafb'
-  }
-}))(TableCell)
 
 const DeleteModal = ({ name, modalOpen, changeModalOpen, remove }) => {
   return (
