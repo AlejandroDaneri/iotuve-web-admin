@@ -101,7 +101,7 @@ export function doChangeAdminPassword (token, username, password) {
   )
 }
 
-export function removeUser (token, username) {
+export function removeUser (username) {
   return axios.delete(appBaseUrl() + `/api/v1/users/${username}`)
 }
 
@@ -109,6 +109,6 @@ export function removeVideo (id) {
   return axios.delete(appBaseUrl() + `/api/v1/videos/${id}`)
 }
 
-export function removeAdminUser (token, username) {
+export function removeAdminUser (username) {
   return axios.delete(appBaseUrl() + `/api/v1/adminusers/${username}`)
 }
