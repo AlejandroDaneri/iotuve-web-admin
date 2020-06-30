@@ -22,9 +22,8 @@ import { StyledTableRow } from '../styles/TableStyled'
 import { StyledModal } from '../styles/ModalStyled'
 import { ButtonEdit, ButtonDelete } from '../styles/ButtonsStyled'
 
-const IS_ACTIVE_LOADING = 'IS_ACTIVE_LOADING'
-const IS_ACTIVE_YES = 'IS_ACTIVE_YES'
-const IS_ACTIVE_NO = 'IS_ACTIVE_NO'
+/* Import Constants */
+import { IS_ACTIVE_LOADING, IS_ACTIVE_YES, IS_ACTIVE_NO } from '../constants'
 
 const IS_ACTIVE = {
   [IS_ACTIVE_LOADING]: <BeatLoader color='#61dafb' />,
