@@ -7,6 +7,7 @@ import { doRecoveryPassword } from '../webapi'
 
 /* Import Styled Components */
 import { ChangePasswordWrapper } from '../styles/ChangePasswordStyled'
+import { Button } from '../styles/ButtonStyled'
 
 const ChangePassword = location => {
   const { key, username } = qs.parse(location.location.search, {
@@ -38,28 +39,25 @@ const ChangePassword = location => {
     <ChangePasswordWrapper>
       <h2>Cambiar Contraseña</h2>
 
-      <form onSubmit={onSubmit} valid={!isDisabled()}>
-        <input name='username' value={username} disabled />
+      <form>
+        <input id='username' value={username} readOnly />
         <input
-          name='password'
+          id='password'
           type='password'
           value={password}
           onChange={e => changePassword(e.target.value)}
           placeholder='Contraseña'
         />
         <input
-          name='confirm-password'
+          id='confirm-password'
           type='password'
           value={confirmPassword}
           onChange={e => changeConfirmPassword(e.target.value)}
           placeholder='Confirmar Contraseña'
         />
-        <input
-          className='submit'
-          type='submit'
-          disabled={isDisabled()}
-          value='Enviar'
-        />
+        <Button disabled={isDisabled} onClick={onSubmit}>
+          Aceptar
+        </Button>
       </form>
     </ChangePasswordWrapper>
   )

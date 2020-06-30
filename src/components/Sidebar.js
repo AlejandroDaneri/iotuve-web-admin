@@ -1,6 +1,6 @@
 /* Import Libs */
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import {
   Drawer,
   List,
@@ -24,7 +24,8 @@ import LogOut from './LogOut'
 /* Import StateApi */
 import { isAuthed } from '../stateapi/auth'
 
-const Sidebar = () => {
+const Sidebar = props => {
+  const { location } = props
   const authed = useSelector(isAuthed)
 
   const useStyles = makeStyles(_ => ({
@@ -34,6 +35,9 @@ const Sidebar = () => {
 
   const classes = useStyles()
 
+  if (location.pathname.match(/change_password/)) {
+    return null
+  }
   return (
     <div style={{ display: 'flex' }}>
       {authed && (
@@ -133,4 +137,4 @@ const Sidebar = () => {
   )
 }
 
-export default Sidebar
+export default withRouter(Sidebar)
