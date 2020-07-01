@@ -24,6 +24,8 @@ import { AUTH_LOGOUT } from '../constants'
 import { UsersWrapper } from '../styles/UsersStyled'
 import { StyledTableRow, StyledTableCell } from '../styles/TableStyled'
 import { ButtonEdit, ButtonDelete } from '../styles/ButtonsStyled'
+import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord'
+import Tooltip from '@material-ui/core/Tooltip'
 
 const Users = () => {
   const [users, changeUsers] = useState({})
@@ -60,7 +62,16 @@ const Users = () => {
       Object.keys(users).forEach(username => {
         getUserSessions(username).then(response => {
           const { data } = response
-          const activeState = data.length > 0 ? 'Yes' : 'No'
+          const activeState =
+            data.length > 0 ? (
+              <Tooltip title='Conectado'>
+                <FiberManualRecordIcon style={{ color: 'green' }} />
+              </Tooltip>
+            ) : (
+              <Tooltip title='Desconectado'>
+                <FiberManualRecordIcon style={{ color: 'red' }} />
+              </Tooltip>
+            )
           users = {
             ...users,
             [username]: {
@@ -152,17 +163,21 @@ const Users = () => {
                   </StyledTableCell>
                   <StyledTableCell className='actions'>
                     <Link to={`/user/${user.username}`}>
-                      <ButtonEdit className='material-icons'>edit</ButtonEdit>
+                      <Tooltip title='Editar usuario'>
+                        <ButtonEdit className='material-icons'>edit</ButtonEdit>
+                      </Tooltip>
                     </Link>
-                    <ButtonDelete
-                      onClick={() => {
-                        changeSelected(user)
-                        changeModalOpen(true)
-                      }}
-                      className='material-icons'
-                    >
-                      delete_forever
-                    </ButtonDelete>
+                    <Tooltip title='Borrar usuario'>
+                      <ButtonDelete
+                        onClick={() => {
+                          changeSelected(user)
+                          changeModalOpen(true)
+                        }}
+                        className='material-icons'
+                      >
+                        delete_forever
+                      </ButtonDelete>
+                    </Tooltip>
                   </StyledTableCell>
                 </StyledTableRow>
               )
