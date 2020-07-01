@@ -16,6 +16,9 @@ export const UserWrapper = styled.div`
   & .views {
     display: flex;
     flex-direction: row;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
 
     & .change-password {
       border: 1px solid white;
