@@ -10,10 +10,10 @@ import { getUser, saveUser } from '../webapi'
 
 /* Import Styled Components */
 import { UserWrapper } from '../styles/UserStyled'
-import { Button } from '../styles/ButtonStyled'
 
 /* Import Constants */
 import { AUTH_LOGOUT, COLOR_PRIMARY } from '../constants'
+import Button from '@material-ui/core/Button'
 
 const User = () => {
   const { username } = useParams()
@@ -133,10 +133,22 @@ const User = () => {
           </div>
           <div className='actions'>
             <div className='action'>
-              <Button href='/users'>Cancelar</Button>
+              <Button
+                href='/users'
+                variant='contained'
+                style={{ backgroundColor: COLOR_PRIMARY }}
+              >
+                Cancelar{' '}
+              </Button>
             </div>
             <div className='action' onClick={() => save()}>
-              <Button href='/users'>Guardar</Button>
+              <Button
+                href='/users'
+                variant='contained'
+                style={{ backgroundColor: COLOR_PRIMARY }}
+              >
+                Guardar
+              </Button>
             </div>
           </div>
 
