@@ -1,80 +1,126 @@
 /* Import Libs */
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Button from '@material-ui/core/Button'
 import CircleLoader from 'react-spinners/CircleLoader'
+import { Snackbar, SnackbarContent } from '@material-ui/core'
+import { useDispatch } from 'react-redux'
+
+/* Import WebApi */
+import { getUser, saveUser } from '../../webapi'
 
 /* Import Constants */
-import { COLOR_PRIMARY } from '../../constants'
+import { COLOR_PRIMARY, AUTH_LOGOUT } from '../../constants'
 
-const Perfil = ({
-  loading,
-  url,
-  loginService,
-  email,
-  changeEmail,
-  phone,
-  changePhone,
-  firstName,
-  changeFirstName,
-  lastName,
-  changeLastName,
-  save
-}) => {
+const Perfil = ({ username }) => {
+  const dispatch = useDispatch()
+  const [loading, changeLoading] = useState(true)
+  const [email, changeEmail] = useState()
+  const [phone, changePhone] = useState()
+  const [firstName, changeFirstName] = useState()
+  const [lastName, changeLastName] = useState()
+  const [loginService, changeLoginService] = useState(false)
+  const [url, changeUrl] = useState()
+  const [success, changeSuccess] = useState(false)
+
+  useEffect(() => {
+    getUser(username)
+      .then(response => {
+        const { data } = response
+        const { contact, avatar } = data
+        const { email, phone } = contact
+        const { url } = avatar
+        changeUrl(url)
+        changeEmail(email)
+        changePhone(phone)
+        changeFirstName(data.first_name)
+        changeLastName(data.last_name)
+        changeLoginService(data.login_service)
+        changeLoading(false)
+      })
+      .catch(err => {
+        console.error(err)
+        if (err.response !== 500) {
+          dispatch({
+            type: AUTH_LOGOUT
+          })
+        }
+      })
+  })
+
+  function save () {
+    saveUser(username, {
+      first_name: firstName,
+      last_name: lastName,
+      contact: {
+        email: email,
+        phone: phone
+      }
+    })
+      .then(_ => {
+        changeSuccess(true)
+      })
+      .catch(_ => {})
+  }
+
   return loading ? (
     <CircleLoader color={COLOR_PRIMARY} size={250} />
   ) : (
-    <div>
-      <div>
-        Avatar
-        <br />
-        <a href={url}>
-          <img alt='Avatar thumb' width='100px' height='100px' src={url} />
-        </a>
+    <div className='perfil'>
+      <div className='title'>
+        <h3>Perfil</h3>
+      </div>
+
+      <div className='row'>
+        <div className='field'>
+          Avatar
+          <br />
+          <a href={url}>
+            <img alt='Avatar thumb' width='100px' height='100px' src={url} />
+          </a>
+        </div>
+
+        <div className='field'>
+          <div>Servicio de Login</div>
+          {loginService ? 'Si' : 'No'}
+        </div>
       </div>
 
       <p />
 
-      <div>
-        <div>Servicio de Login</div>
-        {loginService ? 'Si' : 'No'}
+      <div className='row'>
+        <div className='field'>
+          Mail
+          <br />
+          <input value={email} onChange={e => changeEmail(e.target.value)} />
+        </div>
+
+        <div className='field'>
+          Telefono
+          <br />
+          <input value={phone} onChange={e => changePhone(e.target.value)} />
+        </div>
       </div>
 
       <p />
 
-      <div>
-        Mail
-        <br />
-        <input value={email} onChange={e => changeEmail(e.target.value)} />
-      </div>
+      <div className='row'>
+        <div className='field'>
+          Nombre
+          <br />
+          <input
+            value={firstName}
+            onChange={e => changeFirstName(e.target.value)}
+          />
+        </div>
 
-      <p />
-
-      <div>
-        Telefono
-        <br />
-        <input value={phone} onChange={e => changePhone(e.target.value)} />
-      </div>
-
-      <p />
-
-      <div>
-        Nombre
-        <br />
-        <input
-          value={firstName}
-          onChange={e => changeFirstName(e.target.value)}
-        />
-      </div>
-
-      <p />
-
-      <div>
-        Apellido
-        <br />
-        <input
-          value={lastName}
-          onChange={e => changeLastName(e.target.value)}
-        />
+        <div className='field'>
+          Apellido
+          <br />
+          <input
+            value={lastName}
+            onChange={e => changeLastName(e.target.value)}
+          />
+        </div>
       </div>
 
       <p />
@@ -100,6 +146,22 @@ const Perfil = ({
           </Button>
         </div>
       </div>
+
+      <Snackbar
+        open={success}
+        onClose={() => changeSuccess(false)}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+        autoHideDuration={6000}
+      >
+        <SnackbarContent
+          message='Usuario editado con exito'
+          style={{
+            color: 'black',
+            backgroundColor: COLOR_PRIMARY,
+            fontSize: '14px'
+          }}
+        />
+      </Snackbar>
     </div>
   )
 }
