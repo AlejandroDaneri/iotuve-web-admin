@@ -84,7 +84,7 @@ const Health = () => {
       </p>
     </div>
   ) : (
-    <CircleLoader color='#61dafb' size={150} />
+    <CircleLoader color={COLOR_PRIMARY} size={150} />
   )
 }
 
