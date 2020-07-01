@@ -1,11 +1,13 @@
 /* Import Libs */
 import React from 'react'
 import Button from '@material-ui/core/Button'
+import CircleLoader from 'react-spinners/CircleLoader'
 
 /* Import Constants */
 import { COLOR_PRIMARY } from '../../constants'
 
 const Perfil = ({
+  loading,
   url,
   loginService,
   email,
@@ -18,7 +20,9 @@ const Perfil = ({
   changeLastName,
   save
 }) => {
-  return (
+  return loading ? (
+    <CircleLoader color={COLOR_PRIMARY} size={250} />
+  ) : (
     <div>
       <div>
         Avatar

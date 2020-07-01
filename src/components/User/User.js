@@ -20,8 +20,7 @@ import { AUTH_LOGOUT, COLOR_PRIMARY } from '../../constants'
 const User = () => {
   const { username } = useParams()
 
-  const [user, changeUser] = useState()
-
+  const [loading, changeLoading] = useState(true)
   const [email, changeEmail] = useState()
   const [phone, changePhone] = useState()
   const [firstName, changeFirstName] = useState()
@@ -41,12 +40,12 @@ const User = () => {
         const { email, phone } = contact
         const { url } = avatar
         changeUrl(url)
-        changeUser(data)
         changeEmail(email)
         changePhone(phone)
         changeFirstName(data.first_name)
         changeLastName(data.last_name)
         changeLoginService(data.login_service)
+        changeLoading(false)
       })
       .catch(err => {
         console.error(err)
@@ -83,6 +82,7 @@ const User = () => {
       <h2>Usuario: {username}</h2>
 
       <Perfil
+        loading={loading}
         url={url}
         loginService={loginService}
         email={email}
@@ -96,7 +96,7 @@ const User = () => {
         save={save}
       />
 
-      {user ? (
+      {loading ? (
         <Snackbar
           open={success}
           onClose={() => changeSuccess(false)}
