@@ -15,6 +15,7 @@ import { doAuth } from '../webapi'
 import { AUTH_REQUEST, AUTH_SUCCESS, COLOR_PRIMARY } from '../constants'
 
 import ParticlesConfig from '../ParticlesConfig'
+import Button from '@material-ui/core/Button'
 
 const Login = () => {
   const [username, changeUsername] = useState('')
@@ -70,7 +71,13 @@ const Login = () => {
             <CircleLoader size={60} color={COLOR_PRIMARY} />
           </div>
         ) : (
-          <button type='submit'>Enviar</button>
+          <Button
+            variant='contained'
+            style={{ backgroundColor: COLOR_PRIMARY }}
+            onClick={onSubmit}
+          >
+            Ingresar
+          </Button>
         )}
         <Snackbar
           open={authError}
