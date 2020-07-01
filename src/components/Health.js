@@ -49,13 +49,12 @@ const Health = () => {
   }, [])
 
   useEffect(() => {
-    const time = new Date()
     const interval = setInterval(() => {
       getAppStatus()
       getMediaStatus()
       getAuthStatus()
       changeShowTime(
-        `${time.getHours()}:${time.getMinutes()}:${time.getSeconds()}`
+        `${new Date().getHours()}:${new Date().getMinutes()}:${new Date().getSeconds()}`
       )
     }, 30000)
 
