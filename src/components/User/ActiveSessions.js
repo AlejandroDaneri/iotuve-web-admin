@@ -24,7 +24,9 @@ const ActiveSessions = ({ username }) => {
 
   return (
     <div className='active-sessions'>
-      <h3>Sessiones Activas</h3>
+      <div className='title'>
+        <h3>Sessiones Activas</h3>
+      </div>
       {loading ? (
         <CircleLoader color={COLOR_PRIMARY} size={250} />
       ) : (

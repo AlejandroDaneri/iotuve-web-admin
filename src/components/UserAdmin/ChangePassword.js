@@ -45,7 +45,9 @@ const ChangePassword = ({ username }) => {
 
   return (
     <div className='change-password'>
-      <h2>Cambiar Contraseña</h2>
+      <div className='title'>
+        <h3>Cambiar Contraseña</h3>
+      </div>
 
       <form autoComplete='off'>
         <div

@@ -20,11 +20,30 @@ export const UserWrapper = styled.div`
     justify-content: center;
     align-items: center;
 
+    & .active-sessions {
+      border: 1px solid white;
+      border-radius: 14px;
+      padding: 2%;
+      margin: 1%;
+
+      & .title {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+
     & .change-password {
       border: 1px solid white;
       border-radius: 14px;
       padding: 2%;
       margin: 1%;
+
+      & .title {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
     }
 
     & .perfil {
@@ -43,13 +62,6 @@ export const UserWrapper = styled.div`
         margin: 3%;
       }
     }
-  }
-
-  & .active-sessions {
-    border: 1px solid white;
-    border-radius: 14px;
-    padding: 2%;
-    margin: 1%;
   }
 
   & .row {
