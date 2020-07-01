@@ -10,9 +10,11 @@ import Table from '@material-ui/core/Table'
 import TableHead from '@material-ui/core/TableHead'
 import TableBody from '@material-ui/core/TableBody'
 
+/* Import Components */
+import Modal from '../components/Modal'
+
 /* Import Styled Components */
 import { UsersAdminWrapper } from '../styles/UsersAdminStyled'
-import { StyledModal } from '../styles/ModalStyled'
 import { ButtonEdit, ButtonDelete } from '../styles/ButtonsStyled'
 import { StyledTableRow, StyledTableCell } from '../styles/TableStyled'
 
@@ -21,22 +23,6 @@ import { getUsersAdmin, removeAdminUser } from '../webapi'
 
 /* Import Constants */
 import { AUTH_LOGOUT } from '../constants'
-
-const UserModal = ({ name, modalOpen, changeModalOpen, remove }) => {
-  return (
-    <StyledModal
-      isOpen={modalOpen}
-      onBackgroundClick={null}
-      onEscapeKeydown={null}
-    >
-      <span>Esta seguro que desea borrar el usuario {name}?</span>
-      <div className='actions'>
-        <button onClick={() => changeModalOpen(false)}>Cancelar</button>
-        <button onClick={remove}>Aceptar</button>
-      </div>
-    </StyledModal>
-  )
-}
 
 const AdminUsers = () => {
   const [users, changeUsers] = useState()
@@ -86,7 +72,8 @@ const AdminUsers = () => {
 
   return (
     <UsersAdminWrapper>
-      <UserModal
+      <Modal
+        resource='usuario'
         remove={remove}
         name={selected.username}
         modalOpen={modalOpen}

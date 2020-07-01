@@ -6,9 +6,11 @@ import Table from '@material-ui/core/Table'
 import TableHead from '@material-ui/core/TableHead'
 import TableBody from '@material-ui/core/TableBody'
 import TableRow from '@material-ui/core/TableRow'
-import Modal from 'styled-react-modal'
 import _ from 'lodash'
 import { Snackbar, SnackbarContent } from '@material-ui/core'
+
+/* Import Components */
+import DeleteModal from '../components/Modal'
 
 /* Import Styled Components */
 import { FilesWrapper } from '../styles/FilesStyled'
@@ -20,46 +22,6 @@ import { getVideos, removeVideo } from '../webapi'
 
 /* Import Constants */
 import { AUTH_LOGOUT } from '../constants'
-
-const StyledModal = Modal.styled`
-  display: flex;
-  flex-direction: column;
-  width: 30%;
-  height: 10%;
-  align-items: center;
-  justify-content: center;
-  background-color: #282c34;
-  color: #61dafb;
-
-  & .actions {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    align-items: center;
-    justify-content: center;
-    padding: 1%;
-
-    > button {
-      margin: 1%;
-    }
-  }
-`
-
-const DeleteModal = ({ name, modalOpen, changeModalOpen, remove }) => {
-  return (
-    <StyledModal
-      isOpen={modalOpen}
-      onBackgroundClick={null}
-      onEscapeKeydown={null}
-    >
-      <span>Esta seguro que desea borrar el video {name}?</span>
-      <div className='actions'>
-        <button onClick={() => changeModalOpen(false)}>Cancelar</button>
-        <button onClick={remove}>Aceptar</button>
-      </div>
-    </StyledModal>
-  )
-}
 
 const Files = () => {
   const [files, changeFiles] = useState()
@@ -105,6 +67,7 @@ const Files = () => {
   return (
     <FilesWrapper>
       <DeleteModal
+        resource='video'
         name={selected.name}
         remove={remove}
         modalOpen={modalOpen}

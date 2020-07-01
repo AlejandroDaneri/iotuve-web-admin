@@ -99,6 +99,7 @@ const Users = () => {
   return (
     <UsersWrapper>
       <DeleteModal
+        resource='usuario'
         name={selected.username}
         remove={remove}
         modalOpen={modalOpen}
