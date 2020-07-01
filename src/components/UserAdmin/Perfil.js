@@ -1,8 +1,9 @@
 /* Import Libs */
 import React, { useState, useEffect } from 'react'
 import Button from '@material-ui/core/Button'
-import { useDispatch } from 'react-redux'
+import CircleLoader from 'react-spinners/CircleLoader'
 import { Snackbar, SnackbarContent } from '@material-ui/core'
+import { useDispatch } from 'react-redux'
 
 /* Import Constants */
 import { COLOR_PRIMARY } from '../../constants'
@@ -12,9 +13,8 @@ import { getAdminUser, saveAdminUser } from '../../webapi'
 
 const Perfil = ({ username }) => {
   const dispatch = useDispatch()
-
+  const [loading, changeLoading] = useState(true)
   const [success, changeSuccess] = useState(false)
-
   const [email, changeEmail] = useState()
   const [firstName, changeFirstName] = useState()
   const [lastName, changeLastName] = useState()
@@ -27,6 +27,7 @@ const Perfil = ({ username }) => {
         changeFirstName(data.first_name)
         changeLastName(data.last_name)
         changeEmail(email)
+        changeLoading(false)
       })
       .catch(err => {
         console.error(err)
@@ -50,7 +51,9 @@ const Perfil = ({ username }) => {
       .catch(_ => {})
   }
 
-  return (
+  return loading ? (
+    <CircleLoader color={COLOR_PRIMARY} size={250} />
+  ) : (
     <>
       <div>
         <p />
