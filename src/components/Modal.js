@@ -16,7 +16,7 @@ const DeleteModal = ({
       onEscapeKeydown={null}
     >
       <span>
-        Esta seguro que desea borrar el {resource} {name}?
+        Esta seguro que desea borrar el {resource} <b>{name}</b>?
       </span>
       <div className='actions'>
         <button onClick={() => changeModalOpen(false)}>Cancelar</button>
