@@ -35,7 +35,6 @@ const User = () => {
   useEffect(() => {
     getUser(username)
       .then(response => {
-        console.log(response)
         const { data } = response
         const { username, contact, avatar } = data
         const { email, phone } = contact
