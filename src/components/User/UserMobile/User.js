@@ -7,11 +7,11 @@ import { UserWrapper } from '../../../styles/UserStyled'
 
 /* Import Components */
 import Perfil from './Perfil'
-import ActiveSessions from './ActiveSessions'
+import ActiveSessions from '../ActiveSessions'
 import ChangePassword from '../ChangePassword'
 
 /* Import WebApi */
-import { doChangeUserPassword } from '../../../webapi'
+import { doChangeUserPassword, getUserSessions } from '../../../webapi'
 
 const User = () => {
   const { username } = useParams()
@@ -26,7 +26,7 @@ const User = () => {
           doChangePassword={doChangeUserPassword}
           username={username}
         />
-        <ActiveSessions username={username} />
+        <ActiveSessions getSessions={getUserSessions} username={username} />
       </div>
     </UserWrapper>
   )

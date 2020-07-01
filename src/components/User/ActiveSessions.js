@@ -3,24 +3,21 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import CircleLoader from 'react-spinners/CircleLoader'
 
-/* Import WebApi */
-import { getUserSessions } from '../../../webapi'
-
 /* Import Constants */
-import { COLOR_PRIMARY } from '../../../constants'
+import { COLOR_PRIMARY } from '../../constants'
 
-const ActiveSessions = ({ username }) => {
+const ActiveSessions = ({ username, getSessions }) => {
   const dispatch = useDispatch()
   const [loading, changeLoading] = useState(true)
   const [sessions, changeSessions] = useState([])
 
   useEffect(() => {
-    getUserSessions(username).then(response => {
+    getSessions(username).then(response => {
       const { data } = response
       changeSessions(data)
       changeLoading(false)
     })
-  }, [username, dispatch])
+  }, [username, dispatch, getSessions])
 
   return (
     <div className='active-sessions'>

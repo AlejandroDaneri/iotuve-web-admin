@@ -5,13 +5,13 @@ import { useParams } from 'react-router-dom'
 /* Import Components */
 import Perfil from './Perfil'
 import ChangePassword from '../ChangePassword'
-import ActiveSessions from './ActiveSessions'
+import ActiveSessions from '../ActiveSessions'
 
 /* Import Styled Components */
 import { UserWrapper } from '../../../styles/UserStyled'
 
 /* Import WebApi */
-import { doChangeAdminPassword } from '../../../webapi'
+import { doChangeAdminPassword, getUserAdminSessions } from '../../../webapi'
 
 const UserAdmin = () => {
   const { username } = useParams()
@@ -26,7 +26,10 @@ const UserAdmin = () => {
           doChangePassword={doChangeAdminPassword}
           username={username}
         />
-        <ActiveSessions username={username} />
+        <ActiveSessions
+          getSessions={getUserAdminSessions}
+          username={username}
+        />
       </div>
     </UserWrapper>
   )
