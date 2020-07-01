@@ -19,7 +19,7 @@ import { ButtonEdit, ButtonDelete } from '../styles/ButtonsStyled'
 import { StyledTableRow, StyledTableCell } from '../styles/TableStyled'
 
 /* Import WebApi */
-import { getUsersAdmin, removeAdminUser } from '../webapi'
+import { getUsersAdmin, getUserAdminSessions, removeAdminUser } from '../webapi'
 
 /* Import Constants */
 import { AUTH_LOGOUT } from '../constants'
@@ -33,19 +33,34 @@ const AdminUsers = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    getUsersAdmin()
-      .then(response => {
-        const { data } = response
-        changeUsers(data)
-      })
-      .catch(err => {
-        console.error(err)
-        if (err.response !== 500) {
-          dispatch({
-            type: AUTH_LOGOUT
+    const usersPromise = new Promise((resolve, reject) => {
+      getUsersAdmin()
+        .then(response => {
+          const { data } = response
+          const u = {}
+          data.forEach(user => {
+            u[user.username] = user
           })
-        }
+          changeUsers(u)
+          resolve(u)
+        })
+        .catch(err => {
+          console.error(err)
+          if (err.response !== 500) {
+            dispatch({
+              type: AUTH_LOGOUT
+            })
+          }
+          reject(err)
+        })
+    })
+    usersPromise.then(users => {
+      console.error('Users Promise Ok')
+      Object.keys(users).forEach(username => {
+        console.error(username)
+        getUserAdminSessions(username).then(response => {})
       })
+    })
   }, [dispatch])
 
   function parseTimestamp (timestamp) {
@@ -103,11 +118,12 @@ const AdminUsers = () => {
               <StyledTableCell>Nombre</StyledTableCell>
               <StyledTableCell>Email</StyledTableCell>
               <StyledTableCell>Fecha de creación</StyledTableCell>
+              <StyledTableCell>Online</StyledTableCell>
               <StyledTableCell>Acciones</StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {(users || []).map(user => {
+            {(Object.values(users) || []).map(user => {
               return (
                 <StyledTableRow key={user.id}>
                   <StyledTableCell>{user.username}</StyledTableCell>
@@ -118,6 +134,7 @@ const AdminUsers = () => {
                   <StyledTableCell>
                     {parseTimestamp(user.date_created)}
                   </StyledTableCell>
+                  <StyledTableCell>{user.activeState}</StyledTableCell>
                   <StyledTableCell className='actions'>
                     <Link to={`/user_admin/${user.username}`}>
                       <ButtonEdit className='material-icons'>edit</ButtonEdit>
