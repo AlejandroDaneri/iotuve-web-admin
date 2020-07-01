@@ -17,7 +17,6 @@ const ActiveSessions = ({ username }) => {
   useEffect(() => {
     getUserSessions(username).then(response => {
       const { data } = response
-      console.error(data)
       changeSessions(data)
       changeLoading(false)
     })
