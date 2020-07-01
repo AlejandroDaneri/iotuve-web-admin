@@ -4,6 +4,8 @@ import CircleLoader from 'react-spinners/CircleLoader'
 
 /* Import Styled Components */
 import { HealthWrapper } from '../styles/HealthStyled'
+import ArrowUpwardSharpIcon from '@material-ui/icons/ArrowUpwardSharp'
+import ArrowDownwardSharpIcon from '@material-ui/icons/ArrowDownwardSharp'
 
 /* Import WebApi */
 import { getMediaStatus, getAppStatus, getAuthStatus } from '../webapi'
@@ -43,36 +45,47 @@ const Health = () => {
       })
   }, [])
 
-  return (
-    <HealthWrapper>
-      <h2>Estado</h2>
-      {mediaStatus && appStatus && authStatus ? (
-        <table>
-          <thead>
-            <tr>
-              <th>Server</th>
-              <th>Estado</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Media</td>
-              <td>{mediaStatus}</td>
-            </tr>
-            <tr>
-              <td>App</td>
-              <td>{appStatus}</td>
-            </tr>
-            <tr>
-              <td>Auth</td>
-              <td>{authStatus}</td>
-            </tr>
-          </tbody>
-        </table>
-      ) : (
-        <CircleLoader color={COLOR_PRIMARY} size={250} />
-      )}
-    </HealthWrapper>
+  useEffect(() => {
+    const interval = setInterval(() => {
+      getAppStatus()
+      getMediaStatus()
+      getAuthStatus()
+    }, 10000)
+
+    return () => {
+      clearInterval(interval)
+    }
+  }, [])
+
+  return mediaStatus && appStatus && authStatus ? (
+    <div>
+      <p>
+        Media:{' '}
+        {mediaStatus === 'UP' ? (
+          <ArrowUpwardSharpIcon />
+        ) : (
+          <ArrowDownwardSharpIcon />
+        )}{' '}
+      </p>
+      <p>
+        App:{' '}
+        {appStatus === 'UP' ? (
+          <ArrowUpwardSharpIcon />
+        ) : (
+          <ArrowDownwardSharpIcon />
+        )}
+      </p>
+      <p>
+        Auth:{' '}
+        {authStatus === 'UP' ? (
+          <ArrowUpwardSharpIcon />
+        ) : (
+          <ArrowDownwardSharpIcon />
+        )}
+      </p>
+    </div>
+  ) : (
+    <CircleLoader color='#61dafb' size={150} />
   )
 }
 
