@@ -22,6 +22,7 @@ const LogOut = () => {
   function logOut () {
     doLogOut()
       .then(_ => {
+        console.error('LOG')
         dispatch({
           type: AUTH_LOGOUT
         })
