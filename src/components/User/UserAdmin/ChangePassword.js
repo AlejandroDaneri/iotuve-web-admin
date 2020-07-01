@@ -5,13 +5,13 @@ import Button from '@material-ui/core/Button'
 import { Snackbar, SnackbarContent } from '@material-ui/core'
 
 /* Import WebApi */
-import { doChangeAdminPassword } from '../../webapi'
+import { doChangeAdminPassword } from '../../../webapi'
 
 /* Import StateApi */
-import { getToken } from '../../stateapi/auth'
+import { getToken } from '../../../stateapi/auth'
 
 /* Import Constants */
-import { COLOR_PRIMARY } from '../../constants'
+import { COLOR_PRIMARY } from '../../../constants'
 
 const ChangePassword = ({ username }) => {
   const token = useSelector(getToken)

@@ -6,10 +6,10 @@ import { Snackbar, SnackbarContent } from '@material-ui/core'
 import { useDispatch } from 'react-redux'
 
 /* Import WebApi */
-import { getUser, saveUser } from '../../webapi'
+import { getUser, saveUser } from '../../../webapi'
 
 /* Import Constants */
-import { COLOR_PRIMARY, AUTH_LOGOUT } from '../../constants'
+import { COLOR_PRIMARY, AUTH_LOGOUT } from '../../../constants'
 
 const Perfil = ({ username }) => {
   const dispatch = useDispatch()

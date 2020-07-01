@@ -4,10 +4,10 @@ import { useDispatch } from 'react-redux'
 import CircleLoader from 'react-spinners/CircleLoader'
 
 /* Import WebApi */
-import { getUserAdminSessions } from '../../webapi'
+import { getUserSessions } from '../../../webapi'
 
 /* Import Constants */
-import { COLOR_PRIMARY } from '../../constants'
+import { COLOR_PRIMARY } from '../../../constants'
 
 const ActiveSessions = ({ username }) => {
   const dispatch = useDispatch()
@@ -15,7 +15,7 @@ const ActiveSessions = ({ username }) => {
   const [sessions, changeSessions] = useState([])
 
   useEffect(() => {
-    getUserAdminSessions(username).then(response => {
+    getUserSessions(username).then(response => {
       const { data } = response
       changeSessions(data)
       changeLoading(false)

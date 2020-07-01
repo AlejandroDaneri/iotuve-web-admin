@@ -4,10 +4,10 @@ import { useDispatch } from 'react-redux'
 import CircleLoader from 'react-spinners/CircleLoader'
 
 /* Import WebApi */
-import { getUserSessions } from '../../webapi'
+import { getUserSessions } from '../../../webapi'
 
 /* Import Constants */
-import { COLOR_PRIMARY } from '../../constants'
+import { COLOR_PRIMARY } from '../../../constants'
 
 const ActiveSessions = ({ username }) => {
   const dispatch = useDispatch()
