@@ -10,10 +10,10 @@ import { doChangeAdminPassword, getAdminUser, saveAdminUser } from '../webapi'
 
 /* Import Styled Components */
 import { UserWrapper } from '../styles/UserStyled'
-import { Button } from '../styles/ButtonStyled'
 
 /* Import StateApi */
 import { getToken } from '../stateapi/auth'
+import Button from '@material-ui/core/Button'
 
 const UserAdmin = () => {
   const { username } = useParams()
@@ -121,10 +121,22 @@ const UserAdmin = () => {
           </div>
           <div className='actions'>
             <div className='action'>
-              <Button href='/users_admin'>Cancelar</Button>
+              <Button
+                href='/users_admin'
+                variant='contained'
+                style={{ backgroundColor: '#61dafb' }}
+              >
+                Cancelar
+              </Button>
             </div>
             <div className='action' onClick={() => save()}>
-              <Button href='/users_admin'>Guardar</Button>
+              <Button
+                href='/users_admin'
+                variant='contained'
+                style={{ backgroundColor: '#61dafb' }}
+              >
+                Guardar
+              </Button>
             </div>
           </div>
 
@@ -170,10 +182,25 @@ const UserAdmin = () => {
             </div>
           </form>
 
-          <div className='actions'>
-            <Button disabled={isDisabled} onClick={onSubmit}>
-              Aceptar
-            </Button>
+          <div>
+            {isDisabled() ? (
+              <Button
+                variant='outlined'
+                style={{ borderColor: 'red', color: 'white' }}
+                disabled
+              >
+                Cambiar contraseña
+              </Button>
+            ) : (
+              <Button
+                variant='contained'
+                style={{ backgroundColor: 'red', color: 'white' }}
+                disabled={false}
+                onClick={onSubmit}
+              >
+                Cambiar contraseña
+              </Button>
+            )}
           </div>
 
           <Snackbar
