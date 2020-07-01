@@ -12,7 +12,6 @@ import {
 import Files from './components/Files'
 import Stats from './components/Stats'
 import Login from './components/Login'
-import Health from './components/Health'
 import User from './components/User/User'
 import UserAdmin from './components/UserAdmin/UserAdmin'
 import Users from './components/Users'
