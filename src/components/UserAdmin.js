@@ -15,6 +15,9 @@ import { UserWrapper } from '../styles/UserStyled'
 import { getToken } from '../stateapi/auth'
 import Button from '@material-ui/core/Button'
 
+/* Import Constants */
+import { COLOR_PRIMARY } from '../constants'
+
 const UserAdmin = () => {
   const { username } = useParams()
 
@@ -124,7 +127,7 @@ const UserAdmin = () => {
               <Button
                 href='/users_admin'
                 variant='contained'
-                style={{ backgroundColor: '#61dafb' }}
+                style={{ backgroundColor: COLOR_PRIMARY }}
               >
                 Cancelar
               </Button>
@@ -133,7 +136,7 @@ const UserAdmin = () => {
               <Button
                 href='/users_admin'
                 variant='contained'
-                style={{ backgroundColor: '#61dafb' }}
+                style={{ backgroundColor: COLOR_PRIMARY }}
               >
                 Guardar
               </Button>
@@ -150,7 +153,7 @@ const UserAdmin = () => {
               message='Usuario editado con exito'
               style={{
                 color: 'black',
-                backgroundColor: '#61dafb',
+                backgroundColor: COLOR_PRIMARY,
                 fontSize: '14px'
               }}
             />
@@ -213,14 +216,14 @@ const UserAdmin = () => {
               message='Contraseña cambiada con exito'
               style={{
                 color: 'black',
-                backgroundColor: '#61dafb',
+                backgroundColor: COLOR_PRIMARY,
                 fontSize: '14px'
               }}
             />
           </Snackbar>
         </>
       ) : (
-        <CircleLoader color='#61dafb' size={250} />
+        <CircleLoader color={COLOR_PRIMARY} size={250} />
       )}
     </UserWrapper>
   )

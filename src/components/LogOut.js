@@ -12,7 +12,7 @@ import { getUsername } from '../stateapi/auth'
 import { LogOutWrapper } from '../styles/LogOutStyled'
 
 /* Import Constants */
-import { AUTH_LOGOUT } from '../constants'
+import { AUTH_LOGOUT, COLOR_PRIMARY } from '../constants'
 import { doLogOut } from '../webapi'
 
 const LogOut = () => {
@@ -41,7 +41,7 @@ const LogOut = () => {
       <div className='username'>{username}</div>
       <Tooltip title='Cerrar sesión'>
         <PowerSettingsNewIcon
-          style={{ color: '#61dafb', padding: '2px', marginRight: '10px' }}
+          style={{ color: COLOR_PRIMARY, padding: '2px', marginRight: '10px' }}
           onClick={() => logOut()}
         />
       </Tooltip>

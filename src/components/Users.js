@@ -18,7 +18,7 @@ import { getUsers, getUserSessions, removeUser } from '../webapi'
 import DeleteModal from './Modal'
 
 /* Import Constants */
-import { AUTH_LOGOUT } from '../constants'
+import { AUTH_LOGOUT, COLOR_PRIMARY } from '../constants'
 
 /* Import Styled Components */
 import { UsersWrapper } from '../styles/UsersStyled'
@@ -126,7 +126,7 @@ const Users = () => {
           message='Usuario borrado con exito'
           style={{
             color: 'black',
-            backgroundColor: '#61dafb',
+            backgroundColor: COLOR_PRIMARY,
             fontSize: '14px'
           }}
         />
@@ -159,7 +159,7 @@ const Users = () => {
                     {parseTimestamp(user.date_created)}
                   </StyledTableCell>
                   <StyledTableCell>
-                    {user.activeState || <BeatLoader color='#61dafb' />}
+                    {user.activeState || <BeatLoader color={COLOR_PRIMARY} />}
                   </StyledTableCell>
                   <StyledTableCell className='actions'>
                     <Link to={`/user/${user.username}`}>
@@ -185,7 +185,7 @@ const Users = () => {
           </TableBody>
         </Table>
       ) : (
-        <CircleLoader color='#61dafb' size={250} />
+        <CircleLoader color={COLOR_PRIMARY} size={250} />
       )}
     </UsersWrapper>
   )

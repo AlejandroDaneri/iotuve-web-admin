@@ -9,6 +9,7 @@ import ArrowDownwardSharpIcon from '@material-ui/icons/ArrowDownwardSharp'
 
 /* Import WebApi */
 import { getMediaStatus, getAppStatus, getAuthStatus } from '../webapi'
+import { COLOR_PRIMARY } from '../constants'
 
 const Health = () => {
   const [mediaStatus, changeMediaStatus] = useState('')

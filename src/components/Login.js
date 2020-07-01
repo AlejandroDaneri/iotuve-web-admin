@@ -12,7 +12,7 @@ import { LoginWrapper } from '../styles/LoginFormStyled'
 import { doAuth } from '../webapi'
 
 /* Import Constants */
-import { AUTH_REQUEST, AUTH_SUCCESS } from '../constants'
+import { AUTH_REQUEST, AUTH_SUCCESS, COLOR_PRIMARY } from '../constants'
 
 import ParticlesConfig from '../ParticlesConfig'
 
@@ -67,7 +67,7 @@ const Login = () => {
         />
         {authing ? (
           <div className='loader'>
-            <CircleLoader size={60} color='#61dafb' />
+            <CircleLoader size={60} color={COLOR_PRIMARY} />
           </div>
         ) : (
           <button type='submit'>Enviar</button>
@@ -82,7 +82,7 @@ const Login = () => {
             message='Usuario o Contraseña incorrectos'
             style={{
               color: 'black',
-              backgroundColor: '#61dafb',
+              backgroundColor: COLOR_PRIMARY,
               fontSize: '14px'
             }}
           />

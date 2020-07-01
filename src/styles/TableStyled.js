@@ -1,6 +1,7 @@
 import { withStyles } from '@material-ui/core/styles'
 import TableCell from '@material-ui/core/TableCell'
 import TableRow from '@material-ui/core/TableRow'
+import { COLOR_PRIMARY } from '../constants'
 
 export const StyledTableCell = withStyles(theme => ({
   head: {
@@ -9,7 +10,7 @@ export const StyledTableCell = withStyles(theme => ({
   },
   body: {
     fontSize: 14,
-    color: '#61dafb'
+    color: COLOR_PRIMARY
   }
 }))(TableCell)
 
