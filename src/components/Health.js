@@ -10,13 +10,18 @@ import { getMediaStatus, getAppStatus, getAuthStatus } from '../webapi'
 import { COLOR_PRIMARY } from '../constants'
 import { HealthWrapper } from '../styles/HealthStyled'
 
+function pad (d) {
+  return d < 10 ? '0' + d.toString() : d.toString()
+}
 const Health = () => {
   const time = new Date()
   const [mediaStatus, changeMediaStatus] = useState('')
   const [appStatus, changeAppStatus] = useState('')
   const [authStatus, changeAuthStatus] = useState('')
   const [showTime, changeShowTime] = useState(
-    `${time.getHours()}:${time.getMinutes()}:${time.getSeconds()}`
+    `${pad(time.getHours())}:${pad(time.getMinutes())}:${pad(
+      time.getSeconds()
+    )}`
   )
 
   useEffect(() => {
@@ -54,7 +59,9 @@ const Health = () => {
       getMediaStatus()
       getAuthStatus()
       changeShowTime(
-        `${new Date().getHours()}:${new Date().getMinutes()}:${new Date().getSeconds()}`
+        `${pad(new Date().getHours())}:${pad(new Date().getMinutes())}:${pad(
+          new Date().getSeconds()
+        )}`
       )
     }, 30000)
 

@@ -54,7 +54,6 @@ const App = () => {
             <PrivateRoute path='/user/:username' component={User} />
             <PrivateRoute path='/user_admin/:username' component={UserAdmin} />
             <PrivateRoute path='/users_admin' component={UsersAdmin} />
-            <PrivateRoute path='/health' component={Health} />
             <PrivateRoute path='/stats' component={Stats} />
             <Route path='/change_password' component={ChangePassword} />
           </Switch>
