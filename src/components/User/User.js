@@ -1,10 +1,7 @@
 /* Import Libs */
-import React, { useEffect } from 'react'
-import { useDispatch } from 'react-redux'
-import { useParams } from 'react-router-dom'
+import React from 'react'
 
-/* Import WebApi */
-import { getUserSessions } from '../../webapi'
+import { useParams } from 'react-router-dom'
 
 /* Import Styled Components */
 import { UserWrapper } from '../../styles/UserStyled'
@@ -16,22 +13,13 @@ import ActiveSessions from './ActiveSessions'
 const User = () => {
   const { username } = useParams()
 
-  const dispatch = useDispatch()
-
-  useEffect(() => {
-    getUserSessions(username).then(response => {
-      const { data } = response
-      console.error(data)
-    })
-  }, [username, dispatch])
-
   return (
     <UserWrapper>
       <h2>Usuario: {username}</h2>
 
       <Perfil username={username} />
 
-      <ActiveSessions />
+      <ActiveSessions username={username} />
     </UserWrapper>
   )
 }
