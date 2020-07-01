@@ -2,8 +2,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom'
-import CircleLoader from 'react-spinners/CircleLoader'
-import { Snackbar, SnackbarContent } from '@material-ui/core'
 
 /* Import WebApi */
 import { getUser, saveUser, getUserSessions } from '../../webapi'
@@ -13,9 +11,10 @@ import { UserWrapper } from '../../styles/UserStyled'
 
 /* Import Components */
 import Perfil from './Perfil'
+import ActiveSessions from './ActiveSessions'
 
 /* Import Constants */
-import { AUTH_LOGOUT, COLOR_PRIMARY } from '../../constants'
+import { AUTH_LOGOUT } from '../../constants'
 
 const User = () => {
   const { username } = useParams()
@@ -94,28 +93,11 @@ const User = () => {
         lastName={lastName}
         changeLastName={changeLastName}
         save={save}
+        success={success}
+        changeSuccess={changeSuccess}
       />
 
-      {loading ? (
-        <Snackbar
-          open={success}
-          onClose={() => changeSuccess(false)}
-          anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
-          autoHideDuration={6000}
-        >
-          <SnackbarContent
-            message='Usuario editado con exito'
-            style={{
-              color: 'black',
-              backgroundColor: COLOR_PRIMARY,
-              fontSize: '14px'
-            }}
-          />
-        </Snackbar>
-      ) : (
-        <CircleLoader color={COLOR_PRIMARY} size={250} />
-      )}
-      <h3>Sessiones Activas</h3>
+      <ActiveSessions />
     </UserWrapper>
   )
 }
