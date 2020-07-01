@@ -17,9 +17,10 @@ const User = () => {
     <UserWrapper>
       <h2>Usuario: {username}</h2>
 
-      <Perfil username={username} />
-
-      <ActiveSessions username={username} />
+      <div className='views'>
+        <Perfil username={username} />
+        <ActiveSessions username={username} />
+      </div>
     </UserWrapper>
   )
 }

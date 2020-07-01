@@ -13,20 +13,32 @@ export const UserWrapper = styled.div`
     font-size: 3vmin;
   }
 
-  & .perfil {
-    border: 1px solid white;
-    border-radius: 14px;
-    padding: 2%;
-    margin: 1%;
+  & .views {
+    display: flex;
+    flex-direction: row;
 
-    & .title {
-      display: flex;
-      justify-content: center;
-      align-items: center;
+    & .change-password {
+      border: 1px solid white;
+      border-radius: 14px;
+      padding: 2%;
+      margin: 1%;
     }
 
-    & .field {
-      margin: 3%;
+    & .perfil {
+      border: 1px solid white;
+      border-radius: 14px;
+      padding: 2%;
+      margin: 1%;
+
+      & .title {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      & .field {
+        margin: 3%;
+      }
     }
   }
 
