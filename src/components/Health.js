@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react'
 import CircleLoader from 'react-spinners/CircleLoader'
 
 /* Import Styled Components */
-import { HealthWrapper } from '../styles/HealthStyled'
 import ArrowUpwardSharpIcon from '@material-ui/icons/ArrowUpwardSharp'
 import ArrowDownwardSharpIcon from '@material-ui/icons/ArrowDownwardSharp'
 
