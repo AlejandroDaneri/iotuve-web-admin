@@ -23,6 +23,7 @@ import LogOut from './LogOut'
 
 /* Import StateApi */
 import { isAuthed } from '../stateapi/auth'
+import Health from './Health'
 
 const Sidebar = props => {
   const { location } = props
@@ -38,6 +39,7 @@ const Sidebar = props => {
   if (location.pathname.match(/change_password/)) {
     return null
   }
+
   return (
     <div style={{ display: 'flex' }}>
       {authed && (
@@ -130,6 +132,7 @@ const Sidebar = props => {
               </ListItem>
             </Link>
           </List>
+          <Health />
           <LogOut />
         </Drawer>
       )}
