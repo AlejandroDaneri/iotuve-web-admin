@@ -6,7 +6,12 @@ import CircleLoader from 'react-spinners/CircleLoader'
 import { Snackbar, SnackbarContent } from '@material-ui/core'
 
 /* Import WebApi */
-import { doChangeAdminPassword, getAdminUser, saveAdminUser } from '../webapi'
+import {
+  doChangeAdminPassword,
+  getAdminUser,
+  saveAdminUser,
+  getUserAdminSessions
+} from '../webapi'
 
 /* Import Styled Components */
 import { UserWrapper } from '../styles/UserStyled'
@@ -22,6 +27,7 @@ const UserAdmin = () => {
   const { username } = useParams()
 
   const [user, changeUser] = useState()
+  const [sessions, changeSessions] = useState()
 
   const [email, changeEmail] = useState()
   const [firstName, changeFirstName] = useState()
@@ -54,6 +60,11 @@ const UserAdmin = () => {
           })
         }
       })
+
+    getUserAdminSessions(username).then(response => {
+      const { data } = response
+      changeSessions(data)
+    })
   }, [username, dispatch])
 
   function save () {
@@ -225,6 +236,17 @@ const UserAdmin = () => {
       ) : (
         <CircleLoader color={COLOR_PRIMARY} size={250} />
       )}
+      <h2>Sessiones Activas</h2>
+      {sessions
+        ? sessions.map((session, index) => {
+            return (
+              <div key={index}>
+                <div>Creada: {session.date_created}</div>
+                <div>Expira: {session.expires}</div>
+              </div>
+            )
+          })
+        : 'Loading Sessions'}
     </UserWrapper>
   )
 }
