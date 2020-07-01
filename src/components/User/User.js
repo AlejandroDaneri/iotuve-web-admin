@@ -1,5 +1,5 @@
 /* Import Libs */
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom'
 
@@ -16,8 +16,6 @@ import ActiveSessions from './ActiveSessions'
 const User = () => {
   const { username } = useParams()
 
-  const [success, changeSuccess] = useState(false)
-
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -31,11 +29,7 @@ const User = () => {
     <UserWrapper>
       <h2>Usuario: {username}</h2>
 
-      <Perfil
-        username={username}
-        success={success}
-        changeSuccess={changeSuccess}
-      />
+      <Perfil username={username} />
 
       <ActiveSessions />
     </UserWrapper>
