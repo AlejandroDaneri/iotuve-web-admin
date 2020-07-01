@@ -12,7 +12,7 @@ const DeleteModal = ({
   return (
     <StyledModal
       isOpen={modalOpen}
-      onBackgroundClick={null}
+      onBackgroundClick={() => changeModalOpen(false)}
       onEscapeKeydown={null}
     >
       <span>
