@@ -5,8 +5,6 @@ import CircleLoader from 'react-spinners/CircleLoader'
 import _ from 'lodash'
 import { Link } from 'react-router-dom'
 import { Snackbar, SnackbarContent } from '@material-ui/core'
-import { withStyles } from '@material-ui/core/styles'
-import TableCell from '@material-ui/core/TableCell'
 import TableRow from '@material-ui/core/TableRow'
 import Table from '@material-ui/core/Table'
 import TableHead from '@material-ui/core/TableHead'
@@ -16,34 +14,13 @@ import TableBody from '@material-ui/core/TableBody'
 import { UsersAdminWrapper } from '../styles/UsersAdminStyled'
 import { StyledModal } from '../styles/ModalStyled'
 import { ButtonEdit, ButtonDelete } from '../styles/ButtonsStyled'
+import { StyledTableRow, StyledTableCell } from '../styles/TableStyled'
 
 /* Import WebApi */
 import { getUsersAdmin, removeAdminUser } from '../webapi'
 
 /* Import Constants */
 import { AUTH_LOGOUT } from '../constants'
-
-const StyledTableCell = withStyles(theme => ({
-  head: {
-    backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white
-  },
-  body: {
-    fontSize: 14,
-    color: '#61dafb'
-  }
-}))(TableCell)
-
-const StyledTableRow = withStyles(theme => ({
-  root: {
-    '&:nth-of-type(even)': {
-      backgroundColor: '#343944'
-    },
-    '&:hover': {
-      backgroundColor: '#414855'
-    }
-  }
-}))(TableRow)
 
 const UserModal = ({ name, modalOpen, changeModalOpen, remove }) => {
   return (
