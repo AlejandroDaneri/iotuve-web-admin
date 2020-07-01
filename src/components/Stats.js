@@ -1,9 +1,13 @@
 /* Import Libs */
 import React, { useEffect, useState } from 'react'
+import CircleLoader from 'react-spinners/CircleLoader'
 
 /* Import Styled Components */
 import { StatsWrapper } from '../styles/StatsStyled'
 import { getStats } from '../webapi'
+
+/* Import Constants */
+import { COLOR_PRIMARY } from '../constants'
 
 const Stats = () => {
   const startDate = '2020-04-29'
@@ -58,10 +62,11 @@ const Stats = () => {
   }, [])
   return (
     <StatsWrapper>
-      {!loading && (
+      <h2>Estadisticas</h2>
+      {loading ? (
+        <CircleLoader color={COLOR_PRIMARY} size={250} />
+      ) : (
         <>
-          <h2>Estadisticas</h2>
-
           <div>
             Sesiones Activas: <b>{activeSessions}</b>
           </div>
