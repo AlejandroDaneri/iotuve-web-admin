@@ -13,7 +13,7 @@ import { UserWrapper } from '../styles/UserStyled'
 import { Button } from '../styles/ButtonStyled'
 
 /* Import Constants */
-import { AUTH_LOGOUT } from '../constants'
+import { AUTH_LOGOUT, COLOR_PRIMARY } from '../constants'
 
 const User = () => {
   const { username } = useParams()
@@ -152,14 +152,14 @@ const User = () => {
               message='Usuario editado con exito'
               style={{
                 color: 'black',
-                backgroundColor: '#61dafb',
+                backgroundColor: COLOR_PRIMARY,
                 fontSize: '14px'
               }}
             />
           </Snackbar>
         </>
       ) : (
-        <CircleLoader color='#61dafb' size={250} />
+        <CircleLoader color={COLOR_PRIMARY} size={250} />
       )}
     </UserWrapper>
   )

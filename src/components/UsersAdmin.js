@@ -25,7 +25,7 @@ import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord'
 import { getUsersAdmin, getUserAdminSessions, removeAdminUser } from '../webapi'
 
 /* Import Constants */
-import { AUTH_LOGOUT } from '../constants'
+import { AUTH_LOGOUT, COLOR_PRIMARY } from '../constants'
 
 const AdminUsers = () => {
   const [users, changeUsers] = useState()
@@ -127,7 +127,7 @@ const AdminUsers = () => {
           message='Usuario borrado con exito'
           style={{
             color: 'black',
-            backgroundColor: '#61dafb',
+            backgroundColor: COLOR_PRIMARY,
             fontSize: '14px'
           }}
         />
@@ -158,7 +158,7 @@ const AdminUsers = () => {
                     {parseTimestamp(user.date_created)}
                   </StyledTableCell>
                   <StyledTableCell>
-                    {user.activeState || <BeatLoader color='#61dafb' />}
+                    {user.activeState || <BeatLoader color={COLOR_PRIMARY} />}
                   </StyledTableCell>
                   <StyledTableCell className='actions'>
                     <Link to={`/user_admin/${user.username}`}>
@@ -180,7 +180,7 @@ const AdminUsers = () => {
           </TableBody>
         </Table>
       ) : (
-        <CircleLoader color='#61dafb' size={250} />
+        <CircleLoader color={COLOR_PRIMARY} size={250} />
       )}
     </UsersAdminWrapper>
   )

@@ -21,7 +21,7 @@ import { ButtonDelete } from '../styles/ButtonsStyled'
 import { getVideos, removeVideo } from '../webapi'
 
 /* Import Constants */
-import { AUTH_LOGOUT } from '../constants'
+import { AUTH_LOGOUT, COLOR_PRIMARY } from '../constants'
 
 const Files = () => {
   const [files, changeFiles] = useState()
@@ -83,7 +83,7 @@ const Files = () => {
           message='Usuario borrado con exito'
           style={{
             color: 'black',
-            backgroundColor: '#61dafb',
+            backgroundColor: COLOR_PRIMARY,
             fontSize: '14px'
           }}
         />
@@ -138,7 +138,7 @@ const Files = () => {
           </TableBody>
         </Table>
       ) : (
-        <CircleLoader color='#61dafb' size={250} />
+        <CircleLoader color={COLOR_PRIMARY} size={250} />
       )}
     </FilesWrapper>
   )

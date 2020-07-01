@@ -1,3 +1,5 @@
+import { COLOR_PRIMARY } from './constants'
+
 export default {
   particles: {
     number: {
@@ -8,7 +10,7 @@ export default {
       }
     },
     color: {
-      value: '#61dafb'
+      value: COLOR_PRIMARY
     },
     shape: {
       type: 'circle',
@@ -48,7 +50,7 @@ export default {
     line_linked: {
       enable: true,
       distance: 150,
-      color: '#61dafb',
+      color: COLOR_PRIMARY,
       opacity: 0.4,
       width: 1
     },
