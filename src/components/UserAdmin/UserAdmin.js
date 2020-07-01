@@ -11,22 +11,22 @@ import {
   getAdminUser,
   saveAdminUser,
   getUserAdminSessions
-} from '../webapi'
+} from '../../webapi'
 
 /* Import Styled Components */
-import { UserWrapper } from '../styles/UserStyled'
+import { UserWrapper } from '../../styles/UserStyled'
 
 /* Import StateApi */
-import { getToken } from '../stateapi/auth'
+import { getToken } from '../../stateapi/auth'
 import Button from '@material-ui/core/Button'
 
 /* Import Constants */
-import { COLOR_PRIMARY } from '../constants'
+import { COLOR_PRIMARY } from '../../constants'
 
 const UserAdmin = () => {
   const { username } = useParams()
 
-  const [user, changeUser] = useState()
+  const [loading, changeLoading] = useState(true)
   const [sessions, changeSessions] = useState()
 
   const [email, changeEmail] = useState()
@@ -50,7 +50,7 @@ const UserAdmin = () => {
         changeFirstName(data.first_name)
         changeLastName(data.last_name)
         changeEmail(email)
-        changeUser(data)
+        changeLoading(false)
       })
       .catch(err => {
         console.error(err)
@@ -104,7 +104,7 @@ const UserAdmin = () => {
   return (
     <UserWrapper>
       <h2>Admin: {username}</h2>
-      {user ? (
+      {!loading ? (
         <>
           <div>
             <p />
