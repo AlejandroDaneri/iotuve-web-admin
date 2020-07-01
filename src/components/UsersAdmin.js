@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import CircleLoader from 'react-spinners/CircleLoader'
+import BeatLoader from 'react-spinners/BeatLoader'
 import _ from 'lodash'
 import { Link } from 'react-router-dom'
 import { Snackbar, SnackbarContent } from '@material-ui/core'
@@ -156,7 +157,9 @@ const AdminUsers = () => {
                   <StyledTableCell>
                     {parseTimestamp(user.date_created)}
                   </StyledTableCell>
-                  <StyledTableCell>{user.activeState}</StyledTableCell>
+                  <StyledTableCell>
+                    {user.activeState || <BeatLoader color='#61dafb' />}
+                  </StyledTableCell>
                   <StyledTableCell className='actions'>
                     <Link to={`/user_admin/${user.username}`}>
                       <ButtonEdit className='material-icons'>edit</ButtonEdit>
