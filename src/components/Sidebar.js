@@ -118,19 +118,16 @@ const Sidebar = props => {
           <Divider />
           <Divider />
           <List>
-            <Link to='/health'>
-              <ListItem button>
-                <ListItemIcon className={classes.menuItem}>
-                  <DoneIcon />
-                </ListItemIcon>
-                <Tooltip title='Ver el estado actual de los servidores'>
-                  <ListItemText
-                    className={classes.menuItem}
-                    primary='Estado actual'
-                  />
-                </Tooltip>
-              </ListItem>
-            </Link>
+            <ListItem button>
+              <ListItemIcon className={classes.menuItem}>
+                <DoneIcon />
+              </ListItemIcon>
+
+              <ListItemText
+                className={classes.menuItem}
+                primary='Estado actual'
+              />
+            </ListItem>
           </List>
           <Health />
           <LogOut />
