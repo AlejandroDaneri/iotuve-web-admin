@@ -4,16 +4,13 @@ import { useSelector } from 'react-redux'
 import Button from '@material-ui/core/Button'
 import { Snackbar, SnackbarContent } from '@material-ui/core'
 
-/* Import WebApi */
-import { doChangeUserPassword } from '../../../webapi'
-
 /* Import StateApi */
-import { getToken } from '../../../stateapi/auth'
+import { getToken } from '../../stateapi/auth'
 
 /* Import Constants */
-import { COLOR_PRIMARY } from '../../../constants'
+import { COLOR_PRIMARY } from '../../constants'
 
-const ChangePassword = ({ username }) => {
+const ChangePassword = ({ username, doChangePassword }) => {
   const token = useSelector(getToken)
   const [password, changePassword] = useState('')
   const [confirmPassword, changeConfirmPassword] = useState('')
@@ -21,7 +18,7 @@ const ChangePassword = ({ username }) => {
 
   function onSubmit (e) {
     e.preventDefault()
-    doChangeUserPassword(token, username, password)
+    doChangePassword(token, username, password)
       .then(_ => {
         console.log('Change Password Success')
         changePwdSuccess(true)
