@@ -95,6 +95,21 @@ export function doRecoveryPassword (key, username, password) {
     new_password: password
   })
 }
+
+export function doChangeUserPassword (token, username, password) {
+  return axios.patch(
+    appBaseUrl() + `/api/v1/users/${username}`,
+    {
+      op: 'replace',
+      path: '/password',
+      value: password
+    },
+    {
+      headers: { 'X-Auth-Token': token }
+    }
+  )
+}
+
 export function doChangeAdminPassword (token, username, password) {
   return axios.patch(
     appBaseUrl() + `/api/v1/adminusers/${username}`,

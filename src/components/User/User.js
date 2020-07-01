@@ -9,6 +9,7 @@ import { UserWrapper } from '../../styles/UserStyled'
 /* Import Components */
 import Perfil from './Perfil'
 import ActiveSessions from './ActiveSessions'
+import ChangePassword from './ChangePassword'
 
 const User = () => {
   const { username } = useParams()
@@ -19,6 +20,7 @@ const User = () => {
 
       <div className='views'>
         <Perfil username={username} />
+        <ChangePassword username={username} />
         <ActiveSessions username={username} />
       </div>
     </UserWrapper>
