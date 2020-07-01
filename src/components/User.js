@@ -6,7 +6,7 @@ import CircleLoader from 'react-spinners/CircleLoader'
 import { Snackbar, SnackbarContent } from '@material-ui/core'
 
 /* Import WebApi */
-import { getUser, saveUser } from '../webapi'
+import { getUser, saveUser, getUserSessions } from '../webapi'
 
 /* Import Styled Components */
 import { UserWrapper } from '../styles/UserStyled'
@@ -14,6 +14,101 @@ import { UserWrapper } from '../styles/UserStyled'
 /* Import Constants */
 import { AUTH_LOGOUT, COLOR_PRIMARY } from '../constants'
 import Button from '@material-ui/core/Button'
+
+const Perfil = ({
+  url,
+  loginService,
+  email,
+  changeEmail,
+  phone,
+  changePhone,
+  firstName,
+  changeFirstName,
+  lastName,
+  changeLastName,
+  save
+}) => {
+  return (
+    <div>
+      <div>
+        Avatar
+        <br />
+        <a href={url}>
+          <img alt='Avatar thumb' width='100px' height='100px' src={url} />
+        </a>
+      </div>
+
+      <p />
+
+      <div>
+        <div>Servicio de Login</div>
+        {loginService ? 'Si' : 'No'}
+      </div>
+
+      <p />
+
+      <div>
+        Mail
+        <br />
+        <input value={email} onChange={e => changeEmail(e.target.value)} />
+      </div>
+
+      <p />
+
+      <div>
+        Telefono
+        <br />
+        <input value={phone} onChange={e => changePhone(e.target.value)} />
+      </div>
+
+      <p />
+
+      <div>
+        Nombre
+        <br />
+        <input
+          value={firstName}
+          onChange={e => changeFirstName(e.target.value)}
+        />
+      </div>
+
+      <p />
+
+      <div>
+        Apellido
+        <br />
+        <input
+          value={lastName}
+          onChange={e => changeLastName(e.target.value)}
+        />
+      </div>
+
+      <p />
+
+      <div className='actions'>
+        <div className='action'>
+          <Button
+            href='/users'
+            variant='contained'
+            style={{ backgroundColor: COLOR_PRIMARY }}
+          >
+            Cancelar{' '}
+          </Button>
+        </div>
+
+        <div className='action' onClick={() => save()}>
+          <Button
+            href='/users'
+            variant='contained'
+            style={{ backgroundColor: COLOR_PRIMARY }}
+          >
+            Guardar
+          </Button>
+        </div>
+      </div>
+    </div>
+  )
+}
 
 const User = () => {
   const { username } = useParams()
@@ -54,6 +149,11 @@ const User = () => {
           })
         }
       })
+
+    getUserSessions(username).then(response => {
+      const { data } = response
+      console.error(data)
+    })
   }, [username, dispatch])
 
   function save () {
@@ -74,103 +174,41 @@ const User = () => {
   return (
     <UserWrapper>
       <h2>Usuario: {username}</h2>
-      {user ? (
-        <>
-          <div>
-            <div>
-              Avatar
-              <br />
-              <a href={url}>
-                <img
-                  alt='Avatar thumb'
-                  width='100px'
-                  height='100px'
-                  src={url}
-                />
-              </a>
-            </div>
-            <div>
-              <div>Servicio de Login</div>
-              {loginService ? 'Si' : 'No'}
-            </div>
-            <p />
-            <div>
-              Mail
-              <br />
-              <input
-                value={email}
-                onChange={e => changeEmail(e.target.value)}
-              />
-            </div>
-            <p />
-            <div>
-              Telefono
-              <br />
-              <input
-                value={phone}
-                onChange={e => changePhone(e.target.value)}
-              />
-            </div>
-            <p />
-            <div>
-              Nombre
-              <br />
-              <input
-                value={firstName}
-                onChange={e => changeFirstName(e.target.value)}
-              />
-            </div>
-            <p />
-            <div>
-              Apellido
-              <br />
-              <input
-                value={lastName}
-                onChange={e => changeLastName(e.target.value)}
-              />
-            </div>
-            <p />
-          </div>
-          <div className='actions'>
-            <div className='action'>
-              <Button
-                href='/users'
-                variant='contained'
-                style={{ backgroundColor: COLOR_PRIMARY }}
-              >
-                Cancelar{' '}
-              </Button>
-            </div>
-            <div className='action' onClick={() => save()}>
-              <Button
-                href='/users'
-                variant='contained'
-                style={{ backgroundColor: COLOR_PRIMARY }}
-              >
-                Guardar
-              </Button>
-            </div>
-          </div>
 
-          <Snackbar
-            open={success}
-            onClose={() => changeSuccess(false)}
-            anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
-            autoHideDuration={6000}
-          >
-            <SnackbarContent
-              message='Usuario editado con exito'
-              style={{
-                color: 'black',
-                backgroundColor: COLOR_PRIMARY,
-                fontSize: '14px'
-              }}
-            />
-          </Snackbar>
-        </>
+      <Perfil
+        url={url}
+        loginService={loginService}
+        email={email}
+        changeEmail={changeEmail}
+        phone={phone}
+        changePhone={changePhone}
+        firstName={firstName}
+        changeFirstName={changeFirstName}
+        lastName={lastName}
+        changeLastName={changeLastName}
+        save={save}
+      />
+
+      {user ? (
+        <Snackbar
+          open={success}
+          onClose={() => changeSuccess(false)}
+          anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+          autoHideDuration={6000}
+        >
+          <SnackbarContent
+            message='Usuario editado con exito'
+            style={{
+              color: 'black',
+              backgroundColor: COLOR_PRIMARY,
+              fontSize: '14px'
+            }}
+          />
+        </Snackbar>
       ) : (
         <CircleLoader color={COLOR_PRIMARY} size={250} />
       )}
+      <h3>Sessiones Activas</h3>
     </UserWrapper>
   )
 }
