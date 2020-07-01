@@ -17,6 +17,8 @@ import Modal from '../components/Modal'
 import { UsersAdminWrapper } from '../styles/UsersAdminStyled'
 import { ButtonEdit, ButtonDelete } from '../styles/ButtonsStyled'
 import { StyledTableRow, StyledTableCell } from '../styles/TableStyled'
+import Tooltip from '@material-ui/core/Tooltip'
+import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord'
 
 /* Import WebApi */
 import { getUsersAdmin, getUserAdminSessions, removeAdminUser } from '../webapi'
@@ -58,7 +60,27 @@ const AdminUsers = () => {
       console.error('Users Promise Ok')
       Object.keys(users).forEach(username => {
         console.error(username)
-        getUserAdminSessions(username).then(response => {})
+        getUserAdminSessions(username).then(response => {
+          const { data } = response
+          const activeState =
+            data.length > 0 ? (
+              <Tooltip title='Conectado'>
+                <FiberManualRecordIcon style={{ color: 'green' }} />
+              </Tooltip>
+            ) : (
+              <Tooltip title='Desconectado'>
+                <FiberManualRecordIcon style={{ color: 'red' }} />
+              </Tooltip>
+            )
+          users = {
+            ...users,
+            [username]: {
+              ...users[username],
+              activeState
+            }
+          }
+          changeUsers(users)
+        })
       })
     })
   }, [dispatch])
