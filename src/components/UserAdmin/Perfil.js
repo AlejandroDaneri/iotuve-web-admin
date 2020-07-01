@@ -54,7 +54,11 @@ const Perfil = ({ username }) => {
   return loading ? (
     <CircleLoader color={COLOR_PRIMARY} size={250} />
   ) : (
-    <>
+    <div className='perfil'>
+      <div className='title'>
+        <h3>Perfil</h3>
+      </div>
+
       <div>
         <p />
         <>
@@ -115,7 +119,7 @@ const Perfil = ({ username }) => {
           }}
         />
       </Snackbar>
-    </>
+    </div>
   )
 }
 
