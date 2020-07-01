@@ -3,17 +3,21 @@ import React, { useState, useEffect } from 'react'
 import CircleLoader from 'react-spinners/CircleLoader'
 
 /* Import Styled Components */
-import ArrowUpwardSharpIcon from '@material-ui/icons/ArrowUpwardSharp'
-import ArrowDownwardSharpIcon from '@material-ui/icons/ArrowDownwardSharp'
+import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord'
 
 /* Import WebApi */
 import { getMediaStatus, getAppStatus, getAuthStatus } from '../webapi'
 import { COLOR_PRIMARY } from '../constants'
+import { HealthWrapper } from '../styles/HealthStyled'
 
 const Health = () => {
+  const time = new Date()
   const [mediaStatus, changeMediaStatus] = useState('')
   const [appStatus, changeAppStatus] = useState('')
   const [authStatus, changeAuthStatus] = useState('')
+  const [showTime, changeShowTime] = useState(
+    `${time.getHours()}:${time.getMinutes()}:${time.getSeconds()}`
+  )
 
   useEffect(() => {
     getMediaStatus()
@@ -45,11 +49,15 @@ const Health = () => {
   }, [])
 
   useEffect(() => {
+    const time = new Date()
     const interval = setInterval(() => {
       getAppStatus()
       getMediaStatus()
       getAuthStatus()
-    }, 10000)
+      changeShowTime(
+        `${time.getHours()}:${time.getMinutes()}:${time.getSeconds()}`
+      )
+    }, 30000)
 
     return () => {
       clearInterval(interval)
@@ -57,32 +65,35 @@ const Health = () => {
   }, [])
 
   return mediaStatus && appStatus && authStatus ? (
-    <div>
-      <p>
-        Media:{' '}
-        {mediaStatus === 'UP' ? (
-          <ArrowUpwardSharpIcon />
-        ) : (
-          <ArrowDownwardSharpIcon />
-        )}{' '}
-      </p>
-      <p>
-        App:{' '}
-        {appStatus === 'UP' ? (
-          <ArrowUpwardSharpIcon />
-        ) : (
-          <ArrowDownwardSharpIcon />
-        )}
-      </p>
-      <p>
-        Auth:{' '}
-        {authStatus === 'UP' ? (
-          <ArrowUpwardSharpIcon />
-        ) : (
-          <ArrowDownwardSharpIcon />
-        )}
-      </p>
-    </div>
+    <HealthWrapper>
+      <center>
+        <p>
+          Media:{' '}
+          {mediaStatus === 'UP' ? (
+            <FiberManualRecordIcon style={{ color: 'green' }} />
+          ) : (
+            <FiberManualRecordIcon style={{ color: 'red' }} />
+          )}{' '}
+        </p>
+        <p>
+          App:{' '}
+          {appStatus === 'UP' ? (
+            <FiberManualRecordIcon style={{ color: 'green' }} />
+          ) : (
+            <FiberManualRecordIcon style={{ color: 'red' }} />
+          )}
+        </p>
+        <p>
+          Auth:{' '}
+          {authStatus === 'UP' ? (
+            <FiberManualRecordIcon style={{ color: 'green' }} />
+          ) : (
+            <FiberManualRecordIcon style={{ color: 'red' }} />
+          )}
+        </p>
+        Ult. actualización {showTime}
+      </center>
+    </HealthWrapper>
   ) : (
     <CircleLoader color={COLOR_PRIMARY} size={150} />
   )

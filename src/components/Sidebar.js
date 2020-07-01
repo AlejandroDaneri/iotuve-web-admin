@@ -118,11 +118,10 @@ const Sidebar = props => {
           <Divider />
           <Divider />
           <List>
-            <ListItem button>
+            <ListItem>
               <ListItemIcon className={classes.menuItem}>
                 <DoneIcon />
               </ListItemIcon>
-
               <ListItemText
                 className={classes.menuItem}
                 primary='Estado actual'
