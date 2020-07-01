@@ -1,28 +1,67 @@
 /* Import Libs */
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Button from '@material-ui/core/Button'
 import CircleLoader from 'react-spinners/CircleLoader'
 import { Snackbar, SnackbarContent } from '@material-ui/core'
+import { useDispatch } from 'react-redux'
+
+/* Import WebApi */
+import { getUser, saveUser } from '../../webapi'
 
 /* Import Constants */
-import { COLOR_PRIMARY } from '../../constants'
+import { COLOR_PRIMARY, AUTH_LOGOUT } from '../../constants'
 
-const Perfil = ({
-  loading,
-  url,
-  loginService,
-  email,
-  changeEmail,
-  phone,
-  changePhone,
-  firstName,
-  changeFirstName,
-  lastName,
-  changeLastName,
-  save,
-  success,
-  changeSuccess
-}) => {
+const Perfil = ({ username }) => {
+  const dispatch = useDispatch()
+  const [loading, changeLoading] = useState(true)
+  const [email, changeEmail] = useState()
+  const [phone, changePhone] = useState()
+  const [firstName, changeFirstName] = useState()
+  const [lastName, changeLastName] = useState()
+  const [loginService, changeLoginService] = useState(false)
+  const [url, changeUrl] = useState()
+  const [success, changeSuccess] = useState(false)
+
+  useEffect(() => {
+    getUser(username)
+      .then(response => {
+        const { data } = response
+        const { contact, avatar } = data
+        const { email, phone } = contact
+        const { url } = avatar
+        changeUrl(url)
+        changeEmail(email)
+        changePhone(phone)
+        changeFirstName(data.first_name)
+        changeLastName(data.last_name)
+        changeLoginService(data.login_service)
+        changeLoading(false)
+      })
+      .catch(err => {
+        console.error(err)
+        if (err.response !== 500) {
+          dispatch({
+            type: AUTH_LOGOUT
+          })
+        }
+      })
+  })
+
+  function save () {
+    saveUser(username, {
+      first_name: firstName,
+      last_name: lastName,
+      contact: {
+        email: email,
+        phone: phone
+      }
+    })
+      .then(_ => {
+        changeSuccess(true)
+      })
+      .catch(_ => {})
+  }
+
   return loading ? (
     <CircleLoader color={COLOR_PRIMARY} size={250} />
   ) : (
