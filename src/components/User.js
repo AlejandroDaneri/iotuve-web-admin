@@ -20,7 +20,6 @@ const User = () => {
 
   const [user, changeUser] = useState()
 
-  const [Username, changeUsername] = useState()
   const [email, changeEmail] = useState()
   const [phone, changePhone] = useState()
   const [firstName, changeFirstName] = useState()
@@ -36,12 +35,11 @@ const User = () => {
     getUser(username)
       .then(response => {
         const { data } = response
-        const { username, contact, avatar } = data
+        const { contact, avatar } = data
         const { email, phone } = contact
         const { url } = avatar
         changeUrl(url)
         changeUser(data)
-        changeUsername(username)
         changeEmail(email)
         changePhone(phone)
         changeFirstName(data.first_name)
@@ -75,7 +73,7 @@ const User = () => {
 
   return (
     <UserWrapper>
-      <h2>Usuario: {Username}</h2>
+      <h2>Usuario: {username}</h2>
       {user ? (
         <>
           <div>
