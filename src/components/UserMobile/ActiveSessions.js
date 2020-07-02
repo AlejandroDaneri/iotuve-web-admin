@@ -30,15 +30,18 @@ const ActiveSessions = ({ username }) => {
       {loading ? (
         <CircleLoader color={COLOR_PRIMARY} size={250} />
       ) : (
-        sessions.map((session, index) => {
-          return (
-            <div key={index}>
-              <div>Creada: {session.date_created}</div>
-              <div>Expira: {session.expires}</div>
-              <p />
-            </div>
-          )
-        })
+        <>
+          {sessions.map((session, index) => {
+            return (
+              <div key={index}>
+                <div>Creada: {session.date_created}</div>
+                <div>Expira: {session.expires}</div>
+                <p />
+              </div>
+            )
+          })}
+          {sessions.length === 0 && 'seba'}
+        </>
       )}
     </div>
   )
