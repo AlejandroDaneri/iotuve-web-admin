@@ -76,7 +76,7 @@ const ChangePassword = ({ username, doChangePassword }) => {
         {isDisabled() ? (
           <Button
             variant='outlined'
-            style={{ borderColor: 'red', color: 'white' }}
+            style={{ borderColor: COLOR_PRIMARY, color: 'white' }}
             disabled
           >
             Cambiar contraseña
@@ -84,7 +84,7 @@ const ChangePassword = ({ username, doChangePassword }) => {
         ) : (
           <Button
             variant='contained'
-            style={{ backgroundColor: 'red', color: 'white' }}
+            style={{ backgroundColor: COLOR_PRIMARY, color: 'black' }}
             disabled={false}
             onClick={onSubmit}
           >
