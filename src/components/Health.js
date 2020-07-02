@@ -1,54 +1,112 @@
+/* Import Libs */
 import React, { useState, useEffect } from 'react'
-import { HealthWrapper } from '../styles/HealthStyled'
-import { getMediaStatus, getAppStatus, getAuthStatus } from '../webapi'
 import CircleLoader from 'react-spinners/CircleLoader'
 
+/* Import Styled Components */
+import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord'
+
+/* Import WebApi */
+import { getMediaStatus, getAppStatus, getAuthStatus } from '../webapi'
+import { COLOR_PRIMARY } from '../constants'
+import { HealthWrapper } from '../styles/HealthStyled'
+
+function pad (d) {
+  return d < 10 ? '0' + d.toString() : d.toString()
+}
 const Health = () => {
+  const time = new Date()
   const [mediaStatus, changeMediaStatus] = useState('')
   const [appStatus, changeAppStatus] = useState('')
   const [authStatus, changeAuthStatus] = useState('')
+  const [showTime, changeShowTime] = useState(
+    `${pad(time.getHours())}:${pad(time.getMinutes())}:${pad(
+      time.getSeconds()
+    )}`
+  )
 
   useEffect(() => {
     getMediaStatus()
       .then(_ => {
-        changeMediaStatus('Media Server UP')
+        changeMediaStatus('UP')
       })
       .catch(_ => {
         console.error('Media status request fail')
-        changeMediaStatus('Media Server DOWN')
+        changeMediaStatus('DOWN')
       })
 
     getAppStatus()
       .then(_ => {
-        changeAppStatus('App Server UP')
+        changeAppStatus('UP')
       })
       .catch(_ => {
         console.error('App status request fail')
-        changeAppStatus('App Server DOWN')
+        changeAppStatus('DOWN')
       })
 
     getAuthStatus()
       .then(_ => {
-        changeAuthStatus('Auth Server UP')
+        changeAuthStatus('UP')
       })
       .catch(_ => {
         console.error('App status request fail')
-        changeAuthStatus('Auth Server DOWN')
+        changeAuthStatus('DOWN')
       })
   }, [])
 
-  return (
+  useEffect(() => {
+    const interval = setInterval(() => {
+      getAppStatus()
+      getMediaStatus()
+      getAuthStatus()
+      changeShowTime(
+        `${pad(new Date().getHours())}:${pad(new Date().getMinutes())}:${pad(
+          new Date().getSeconds()
+        )}`
+      )
+    }, 30000)
+
+    return () => {
+      clearInterval(interval)
+    }
+  }, [])
+
+  return mediaStatus && appStatus && authStatus ? (
     <HealthWrapper>
-      <h2>Estado</h2>
-      {mediaStatus && appStatus && authStatus ? (
-        <div className='status'>
-          <div>{mediaStatus}</div>
-          <div>{appStatus}</div>
-          <div>{authStatus}</div>
-        </div>
-      ) : (
-        <CircleLoader color='#61dafb' size={250} />
-      )}
+      <center>
+        <p>
+          Media:{' '}
+          {mediaStatus === 'UP' ? (
+            <FiberManualRecordIcon style={{ color: 'green' }} />
+          ) : (
+            <FiberManualRecordIcon style={{ color: 'red' }} />
+          )}{' '}
+        </p>
+        <p>
+          App:{' '}
+          {appStatus === 'UP' ? (
+            <FiberManualRecordIcon style={{ color: 'green' }} />
+          ) : (
+            <FiberManualRecordIcon style={{ color: 'red' }} />
+          )}
+        </p>
+        <p>
+          Auth:{' '}
+          {authStatus === 'UP' ? (
+            <FiberManualRecordIcon style={{ color: 'green' }} />
+          ) : (
+            <FiberManualRecordIcon style={{ color: 'red' }} />
+          )}
+        </p>
+        Ult. actualización {showTime}
+      </center>
+    </HealthWrapper>
+  ) : (
+    <HealthWrapper>
+      <center>
+        <CircleLoader color={COLOR_PRIMARY} size={150} />
+        <br />
+        Obteniendo datos...
+      </center>
     </HealthWrapper>
   )
 }

@@ -6,6 +6,7 @@ export const LoginWrapper = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
+  min-height: 100vh;
 
   & > h2 {
     font-size: 3vmin;

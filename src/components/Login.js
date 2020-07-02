@@ -1,11 +1,21 @@
+/* Import Libs */
 import React, { useState } from 'react'
-import { LoginWrapper } from '../styles/LoginFormStyled'
-import { doAuth } from '../webapi'
 import { useDispatch } from 'react-redux'
 import CircleLoader from 'react-spinners/CircleLoader'
 import { Snackbar, SnackbarContent } from '@material-ui/core'
 import Particles from 'react-particles-js'
+
+/* Import Styled Components */
+import { LoginWrapper } from '../styles/LoginFormStyled'
+
+/* Import WebApi */
+import { doAuth } from '../webapi'
+
+/* Import Constants */
+import { AUTH_REQUEST, AUTH_SUCCESS, COLOR_PRIMARY } from '../constants'
+
 import ParticlesConfig from '../ParticlesConfig'
+import Button from '@material-ui/core/Button'
 
 const Login = () => {
   const [username, changeUsername] = useState('')
@@ -17,15 +27,16 @@ const Login = () => {
 
   function onSubmit (e) {
     e.preventDefault()
-    dispatch({ type: 'AUTH_REQUEST' })
+    dispatch({ type: AUTH_REQUEST })
     changeAuthing(true)
     doAuth({ username: username, password: password })
       .then(response => {
         const { data } = response
         dispatch({
-          type: 'AUTH_SUCCESS',
+          type: AUTH_SUCCESS,
           payload: {
-            token: data.session_token
+            token: data.session_token,
+            username: data.username
           }
         })
         changeAuthing(false)
@@ -40,7 +51,7 @@ const Login = () => {
   return (
     <LoginWrapper>
       <Particles className='particles' params={ParticlesConfig} />
-      <h2>Iniciar Sesion</h2>
+      <h2>Iniciar sesión</h2>
       <form onSubmit={onSubmit}>
         <input
           name='username'
@@ -57,10 +68,16 @@ const Login = () => {
         />
         {authing ? (
           <div className='loader'>
-            <CircleLoader size={60} color='#61dafb' />
+            <CircleLoader size={60} color={COLOR_PRIMARY} />
           </div>
         ) : (
-          <button type='submit'>Enviar</button>
+          <Button
+            variant='contained'
+            style={{ backgroundColor: COLOR_PRIMARY }}
+            onClick={onSubmit}
+          >
+            Ingresar
+          </Button>
         )}
         <Snackbar
           open={authError}
@@ -69,10 +86,10 @@ const Login = () => {
           autoHideDuration={6000}
         >
           <SnackbarContent
-            message='Usuario o Contraseña incorrectos'
+            message='Usuario o contraseña incorrectos'
             style={{
               color: 'black',
-              backgroundColor: '#61dafb',
+              backgroundColor: COLOR_PRIMARY,
               fontSize: '14px'
             }}
           />

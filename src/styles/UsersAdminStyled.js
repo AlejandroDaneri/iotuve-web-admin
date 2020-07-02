@@ -5,7 +5,10 @@ export const UsersAdminWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  width: calc(100% - 215px);
+  position: absolute;
+  left: 215px;
+  background-color: #282c34;
 
   & > h2 {
     font-size: 3vmin;
@@ -18,7 +21,15 @@ export const UsersAdminWrapper = styled.div`
     > thead {
       > tr {
         > th {
-          border-bottom: 1px solid #61dafb;
+          border-bottom: 1px solid #000000;
+        }
+      }
+    }
+
+    > tbody {
+      > tr {
+        & > td.actions {
+          cursor: pointer;
         }
       }
     }

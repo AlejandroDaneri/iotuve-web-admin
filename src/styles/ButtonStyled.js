@@ -7,6 +7,7 @@ export const Button = styled.div`
   background-color: #61dafb;
   color: black;
   cursor: pointer;
-  width: 80%;
+  width: 12vmin;
   font-size: 2vmin;
+  margin: 1%;
 `

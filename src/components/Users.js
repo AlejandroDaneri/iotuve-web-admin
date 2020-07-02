@@ -1,101 +1,196 @@
+/* Import Libs */
 import React, { useEffect, useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { getUsers, removeUser } from '../webapi'
-import { getToken } from '../stateapi/auth'
-import { UsersWrapper } from '../styles/UsersStyled'
+import { useDispatch } from 'react-redux'
 import CircleLoader from 'react-spinners/CircleLoader'
-import _ from 'lodash'
-import styled from 'styled-components'
+import BeatLoader from 'react-spinners/BeatLoader'
 import { Link } from 'react-router-dom'
+import { Snackbar, SnackbarContent } from '@material-ui/core'
+import Table from '@material-ui/core/Table'
+import TableHead from '@material-ui/core/TableHead'
+import TableRow from '@material-ui/core/TableRow'
+import TableBody from '@material-ui/core/TableBody'
 
-const ButtonDelete = styled.span`
-  color: red;
-`
+/* Import WebApi */
+import { getUsers, getUserSessions, removeUser } from '../webapi'
 
-const ButtonEdit = styled.span`
-  color: brown;
-`
+/* Import Components */
+import DeleteModal from './Modal'
+
+/* Import Constants */
+import { AUTH_LOGOUT, COLOR_PRIMARY } from '../constants'
+
+/* Import Styled Components */
+import { UsersWrapper } from '../styles/UsersStyled'
+import { StyledTableRow, StyledTableCell } from '../styles/TableStyled'
+import { ButtonEdit, ButtonDelete } from '../styles/ButtonsStyled'
+import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord'
+import Tooltip from '@material-ui/core/Tooltip'
 
 const Users = () => {
-  const token = useSelector(getToken)
-  const [users, changeUsers] = useState()
+  const [users, changeUsers] = useState({})
+  const [selected, changeSelected] = useState({})
+  const [modalOpen, changeModalOpen] = useState(false)
+  const [informOpen, changeInformOpen] = useState(false)
 
   const dispatch = useDispatch()
 
   useEffect(() => {
-    getUsers(token)
-      .then(response => {
-        const { data } = response
-        changeUsers(data)
-      })
-      .catch(_ => {
-        dispatch({
-          type: 'AUTH_LOGOUT'
+    const usersPromise = new Promise((resolve, reject) => {
+      getUsers()
+        .then(response => {
+          const { data } = response
+          const u = {}
+          data.forEach(user => {
+            u[user.username] = user
+          })
+          changeUsers(u)
+          resolve(u)
+        })
+        .catch(err => {
+          console.error(err)
+          if (err.response !== 500) {
+            dispatch({
+              type: AUTH_LOGOUT
+            })
+          }
+          reject(err)
+        })
+    })
+
+    usersPromise.then(users => {
+      Object.keys(users).forEach(username => {
+        getUserSessions(username).then(response => {
+          const { data } = response
+          const activeState =
+            data.length > 0 ? (
+              <Tooltip title='Conectado'>
+                <FiberManualRecordIcon style={{ color: 'green' }} />
+              </Tooltip>
+            ) : (
+              <Tooltip title='Desconectado'>
+                <FiberManualRecordIcon style={{ color: 'red' }} />
+              </Tooltip>
+            )
+          users = {
+            ...users,
+            [username]: {
+              ...users[username],
+              activeState
+            }
+          }
+          changeUsers(users)
         })
       })
-  }, [token, dispatch])
+    })
+  }, [dispatch])
 
   function parseTimestamp (timestamp) {
     const date = new Date(timestamp)
     return date.toUTCString()
   }
 
-  function remove (user) {
-    removeUser(token, user.username)
+  function remove () {
+    removeUser(selected.username)
       .then(response => {
-        changeUsers(_.without(users, user))
+        const key = selected.username
+        const { [key]: value, ...withoutSecond } = users
+        changeUsers(withoutSecond)
+        changeModalOpen(false)
+        changeInformOpen(true)
       })
-      .catch(_ => {
-        dispatch({
-          type: 'AUTH_LOGOUT'
-        })
+      .catch(err => {
+        console.error(err)
+        if (err.response !== 500) {
+          dispatch({
+            type: 'AUTH_LOGOUT'
+          })
+        }
       })
   }
 
   return (
     <UsersWrapper>
+      <DeleteModal
+        resource='usuario'
+        name={selected.username}
+        remove={remove}
+        modalOpen={modalOpen}
+        changeModalOpen={changeModalOpen}
+      />
+      <Snackbar
+        open={informOpen}
+        onClose={() => changeInformOpen(false)}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+        autoHideDuration={6000}
+      >
+        <SnackbarContent
+          message='Usuario borrado con exito'
+          style={{
+            color: 'black',
+            backgroundColor: COLOR_PRIMARY,
+            fontSize: '14px'
+          }}
+        />
+      </Snackbar>
       <h2>Usuarios</h2>
-      {users ? (
-        <table>
-          <thead>
-            <tr>
-              <th>Usuario</th>
-              <th>Nombre</th>
-              <th>Email</th>
-              <th>Telefono</th>
-              <th>Fecha de Creacion</th>
-              <th>Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            {(users || []).map(user => {
+      {Object.keys(users).length > 0 ? (
+        <Table>
+          <TableHead>
+            <TableRow>
+              <StyledTableCell>Usuario</StyledTableCell>
+              <StyledTableCell>Nombre</StyledTableCell>
+              <StyledTableCell>Email</StyledTableCell>
+              <StyledTableCell>Teléfono</StyledTableCell>
+              <StyledTableCell>Fecha de creación</StyledTableCell>
+              <StyledTableCell>Online</StyledTableCell>
+              <StyledTableCell>Acciones</StyledTableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {(Object.values(users) || []).map(user => {
               return (
-                <tr key={user.id}>
-                  <td>{user.username}</td>
-                  <td>
+                <StyledTableRow key={user.id}>
+                  <StyledTableCell>{user.username}</StyledTableCell>
+                  <StyledTableCell>
                     {user.first_name} {user.last_name}
-                  </td>
-                  <td>{user.contact.email}</td>
-                  <td>{user.contact.phone}</td>
-                  <td>{parseTimestamp(user.date_created)}</td>
-                  <td className='actions'>
-                    <Link to={`/user/${user.username}`}>
-                      <ButtonEdit className='material-icons'>edit</ButtonEdit>
-                    </Link>
-                    <ButtonDelete
-                      onClick={() => remove(user)}
-                      className='material-icons'
-                    >
-                      delete_forever
-                    </ButtonDelete>
-                  </td>
-                </tr>
+                  </StyledTableCell>
+                  <StyledTableCell>{user.contact.email}</StyledTableCell>
+                  <StyledTableCell>{user.contact.phone}</StyledTableCell>
+                  <StyledTableCell>
+                    {parseTimestamp(user.date_created)}
+                  </StyledTableCell>
+                  <StyledTableCell>
+                    {user.activeState || <BeatLoader color={COLOR_PRIMARY} />}
+                  </StyledTableCell>
+                  <StyledTableCell className='actions'>
+                    <center>
+                      <Link to={`/user/${user.username}`}>
+                        <Tooltip title='Editar usuario'>
+                          <ButtonEdit className='material-icons'>
+                            edit
+                          </ButtonEdit>
+                        </Tooltip>
+                      </Link>
+                      <Tooltip title='Borrar usuario'>
+                        <ButtonDelete
+                          onClick={() => {
+                            changeSelected(user)
+                            changeModalOpen(true)
+                          }}
+                          className='material-icons'
+                        >
+                          delete_forever
+                        </ButtonDelete>
+                      </Tooltip>
+                    </center>
+                  </StyledTableCell>
+                </StyledTableRow>
               )
             })}
-          </tbody>
-        </table>
+          </TableBody>
+        </Table>
       ) : (
-        <CircleLoader color='#61dafb' size={250} />
+        <CircleLoader color={COLOR_PRIMARY} size={250} />
       )}
     </UsersWrapper>
   )

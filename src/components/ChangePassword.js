@@ -1,19 +1,23 @@
+/* Import Libs */
 import React, { useState } from 'react'
 import qs from 'qs'
-import { doChangePassword } from '../webapi'
+
+/* Import WebApi */
+import { doRecoveryPassword } from '../webapi'
+
+/* Import Styled Components */
 import { ChangePasswordWrapper } from '../styles/ChangePasswordStyled'
+import { Button } from '../styles/ButtonStyled'
 
 const ChangePassword = location => {
-  const [username, changeUsername] = useState('')
-  const [password, changePassword] = useState('')
-  const [confirmPassword, changeConfirmPassword] = useState('')
-
-  const { key } = qs.parse(location.location.search, {
+  const { key, username } = qs.parse(location.location.search, {
     ignoreQueryPrefix: true
   })
 
+  const [password, changePassword] = useState('')
+  const [confirmPassword, changeConfirmPassword] = useState('')
+
   function isDisabled () {
-    if (!username) return true
     if (!password) return true
     if (!confirmPassword) return true
     if (password !== confirmPassword) return true
@@ -22,7 +26,7 @@ const ChangePassword = location => {
 
   function onSubmit (e) {
     e.preventDefault()
-    doChangePassword(key, username, password)
+    doRecoveryPassword(key, username, password)
       .then(_ => {
         console.error('Change Password Success')
       })
@@ -34,33 +38,26 @@ const ChangePassword = location => {
   return (
     <ChangePasswordWrapper>
       <h2>Cambiar Contraseña</h2>
-      <form onSubmit={onSubmit} valid={!isDisabled()}>
+
+      <form>
+        <input id='username' value={username} readOnly />
         <input
-          name='username'
-          value={username}
-          onChange={e => changeUsername(e.target.value)}
-          placeholder='Nombre de Usuario'
-        />
-        <input
-          name='password'
+          id='password'
           type='password'
           value={password}
           onChange={e => changePassword(e.target.value)}
           placeholder='Contraseña'
         />
         <input
-          name='confirm-password'
+          id='confirm-password'
           type='password'
           value={confirmPassword}
           onChange={e => changeConfirmPassword(e.target.value)}
           placeholder='Confirmar Contraseña'
         />
-        <input
-          className='submit'
-          type='submit'
-          disabled={isDisabled()}
-          value='Enviar'
-        />
+        <Button disabled={isDisabled} onClick={onSubmit}>
+          Aceptar
+        </Button>
       </form>
     </ChangePasswordWrapper>
   )
