@@ -44,6 +44,13 @@ export const UserWrapper = styled.div`
         justify-content: center;
         align-items: center;
       }
+
+      & .submit-button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 6%;
+      }
     }
 
     & .perfil {

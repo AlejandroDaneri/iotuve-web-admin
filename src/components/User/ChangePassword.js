@@ -72,7 +72,7 @@ const ChangePassword = ({ username, doChangePassword }) => {
         </div>
       </form>
 
-      <div>
+      <div className='submit-button'>
         {isDisabled() ? (
           <Button
             variant='outlined'
