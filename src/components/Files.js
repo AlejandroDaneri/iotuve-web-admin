@@ -80,7 +80,7 @@ const Files = () => {
         autoHideDuration={6000}
       >
         <SnackbarContent
-          message='Usuario borrado con exito'
+          message='Video borrado con exito'
           style={{
             color: 'black',
             backgroundColor: COLOR_PRIMARY,
