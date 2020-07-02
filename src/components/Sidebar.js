@@ -17,6 +17,7 @@ import Divider from '@material-ui/core/Divider'
 import Tooltip from '@material-ui/core/Tooltip'
 import { makeStyles } from '@material-ui/core/styles'
 import { useSelector } from 'react-redux'
+import Logo from '../img_chotuve-icon.png'
 
 /* Import Components */
 import LogOut from './LogOut'
@@ -53,9 +54,22 @@ const Sidebar = props => {
           <div style={{ placeSelf: 'end', padding: '10px' }}>
             <LogOut />
           </div>
-          <h1 className={classes.menuItem}>
-            <center>Web Admin</center>
-          </h1>
+          <a href='/'>
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'row',
+                alignItems: 'center'
+              }}
+            >
+              <div style={{ padding: '5px' }}>
+                <img src={Logo} alt='Chotuve icon' width='35px' height='35px' />
+              </div>
+              <div style={{ paddingLeft: '5px', paddingBottom: '7px' }}>
+                <h1 className={classes.menuItem}>Web Admin</h1>
+              </div>
+            </div>
+          </a>
           <Divider />
           <Divider />
           <List>
