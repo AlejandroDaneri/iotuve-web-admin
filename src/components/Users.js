@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import CircleLoader from 'react-spinners/CircleLoader'
 import BeatLoader from 'react-spinners/BeatLoader'
-import _ from 'lodash'
 import { Link } from 'react-router-dom'
 import { Snackbar, SnackbarContent } from '@material-ui/core'
 import Table from '@material-ui/core/Table'
@@ -93,7 +92,9 @@ const Users = () => {
   function remove () {
     removeUser(selected.username)
       .then(response => {
-        changeUsers(_.without(users, selected))
+        const key = selected.username
+        const { [key]: value, ...withoutSecond } = users
+        changeUsers(withoutSecond)
         changeModalOpen(false)
         changeInformOpen(true)
       })

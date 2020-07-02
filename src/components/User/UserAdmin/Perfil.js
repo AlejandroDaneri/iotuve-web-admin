@@ -84,15 +84,6 @@ const Perfil = ({ username }) => {
         <p />
       </div>
       <div className='actions'>
-        <div className='action'>
-          <Button
-            href='/users_admin'
-            variant='contained'
-            style={{ backgroundColor: COLOR_PRIMARY }}
-          >
-            Cancelar
-          </Button>
-        </div>
         <div className='action' onClick={() => save()}>
           <Button
             href='/users_admin'
