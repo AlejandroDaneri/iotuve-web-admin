@@ -93,7 +93,9 @@ const Users = () => {
   function remove () {
     removeUser(selected.username)
       .then(response => {
-        changeUsers(_.without(users, selected))
+        const key = selected.username
+        const { [key]: value, ...withoutSecond } = users
+        changeUsers(withoutSecond)
         changeModalOpen(false)
         changeInformOpen(true)
       })
