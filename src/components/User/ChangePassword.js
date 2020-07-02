@@ -100,7 +100,7 @@ const ChangePassword = ({ username, doChangePassword }) => {
         autoHideDuration={6000}
       >
         <SnackbarContent
-          message='Contraseña cambiada con exito'
+          message='Contraseña cambiada con éxito'
           style={{
             color: 'black',
             backgroundColor: COLOR_PRIMARY,
