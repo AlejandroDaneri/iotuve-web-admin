@@ -101,7 +101,13 @@ const Health = () => {
       </center>
     </HealthWrapper>
   ) : (
-    <CircleLoader color={COLOR_PRIMARY} size={150} />
+    <HealthWrapper>
+      <center>
+        <CircleLoader color={COLOR_PRIMARY} size={150} />
+        <br />
+        Obteniendo datos...
+      </center>
+    </HealthWrapper>
   )
 }
 

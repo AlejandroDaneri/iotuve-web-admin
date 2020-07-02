@@ -51,7 +51,7 @@ const Login = () => {
   return (
     <LoginWrapper>
       <Particles className='particles' params={ParticlesConfig} />
-      <h2>Iniciar Sesion</h2>
+      <h2>Iniciar sesión</h2>
       <form onSubmit={onSubmit}>
         <input
           name='username'
@@ -86,7 +86,7 @@ const Login = () => {
           autoHideDuration={6000}
         >
           <SnackbarContent
-            message='Usuario o Contraseña incorrectos'
+            message='Usuario o contraseña incorrectos'
             style={{
               color: 'black',
               backgroundColor: COLOR_PRIMARY,

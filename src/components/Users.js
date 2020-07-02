@@ -162,22 +162,26 @@ const Users = () => {
                     {user.activeState || <BeatLoader color={COLOR_PRIMARY} />}
                   </StyledTableCell>
                   <StyledTableCell className='actions'>
-                    <Link to={`/user/${user.username}`}>
-                      <Tooltip title='Editar usuario'>
-                        <ButtonEdit className='material-icons'>edit</ButtonEdit>
+                    <center>
+                      <Link to={`/user/${user.username}`}>
+                        <Tooltip title='Editar usuario'>
+                          <ButtonEdit className='material-icons'>
+                            edit
+                          </ButtonEdit>
+                        </Tooltip>
+                      </Link>
+                      <Tooltip title='Borrar usuario'>
+                        <ButtonDelete
+                          onClick={() => {
+                            changeSelected(user)
+                            changeModalOpen(true)
+                          }}
+                          className='material-icons'
+                        >
+                          delete_forever
+                        </ButtonDelete>
                       </Tooltip>
-                    </Link>
-                    <Tooltip title='Borrar usuario'>
-                      <ButtonDelete
-                        onClick={() => {
-                          changeSelected(user)
-                          changeModalOpen(true)
-                        }}
-                        className='material-icons'
-                      >
-                        delete_forever
-                      </ButtonDelete>
-                    </Tooltip>
+                    </center>
                   </StyledTableCell>
                 </StyledTableRow>
               )

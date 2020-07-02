@@ -22,6 +22,7 @@ import { getVideos, removeVideo } from '../webapi'
 
 /* Import Constants */
 import { AUTH_LOGOUT, COLOR_PRIMARY } from '../constants'
+import Tooltip from '@material-ui/core/Tooltip'
 
 const Files = () => {
   const [files, changeFiles] = useState()
@@ -80,7 +81,7 @@ const Files = () => {
         autoHideDuration={6000}
       >
         <SnackbarContent
-          message='Usuario borrado con exito'
+          message='Video borrado con éxito'
           style={{
             color: 'black',
             backgroundColor: COLOR_PRIMARY,
@@ -95,7 +96,7 @@ const Files = () => {
             <TableRow>
               <StyledTableCell>Archivo</StyledTableCell>
               <StyledTableCell>Nombre</StyledTableCell>
-              <StyledTableCell>Tamaño</StyledTableCell>
+              <StyledTableCell>Tamaño </StyledTableCell>
               <StyledTableCell>Formato</StyledTableCell>
               <StyledTableCell>Fecha de creación</StyledTableCell>
               <StyledTableCell>Acciones</StyledTableCell>
@@ -106,18 +107,20 @@ const Files = () => {
               return (
                 <StyledTableRow key={file.video_id}>
                   <StyledTableCell>
-                    <a href={file.url}>
-                      <img
-                        alt='thumb'
-                        width='80px'
-                        height='40px'
-                        src={file.thumb}
-                      />
-                    </a>
+                    <Tooltip title='Haga click para mostrar el archivo'>
+                      <a href={file.url}>
+                        <img
+                          alt='thumb'
+                          width='80px'
+                          height='40px'
+                          src={file.thumb}
+                        />
+                      </a>
+                    </Tooltip>
                   </StyledTableCell>
                   <StyledTableCell>{file.name}</StyledTableCell>
                   <StyledTableCell>
-                    {(file.size / 1024 / 1024).toPrecision(3)}
+                    {(file.size / 1024 / 1024).toPrecision(3)} MB
                   </StyledTableCell>
                   <StyledTableCell>{file.type}</StyledTableCell>
                   <StyledTableCell>{file.date_created}</StyledTableCell>
