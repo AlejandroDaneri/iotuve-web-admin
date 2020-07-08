@@ -26,6 +26,20 @@ export const UserWrapper = styled.div`
       padding: 2%;
       margin: 1%;
 
+      & .session {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+
+        & .data {
+          font-size: 1.5vmin;
+        }
+
+        & .delete {
+          padding: 2%;
+        }
+      }
+
       & .title {
         display: flex;
         justify-content: center;

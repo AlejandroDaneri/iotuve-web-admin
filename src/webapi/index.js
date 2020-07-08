@@ -69,6 +69,10 @@ export function getUserSessions (username) {
   return axios.get(appBaseUrl() + `/api/v1/users/${username}/sessions`)
 }
 
+export function closeUserSession (sessionId) {
+  return axios.delete(appBaseUrl() + `/api/v1/sessions/${sessionId}`)
+}
+
 export function getUserAdminSessions (username) {
   return axios.get(appBaseUrl() + `/api/v1/adminusers/${username}/sessions`)
 }

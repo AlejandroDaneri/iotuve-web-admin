@@ -6,6 +6,12 @@ import CircleLoader from 'react-spinners/CircleLoader'
 /* Import Constants */
 import { COLOR_PRIMARY } from '../../constants'
 
+/* Import WebApi */
+import { closeUserSession } from '../../webapi'
+
+/* Import Styled Components */
+import { ButtonDelete } from '../../styles/ButtonsStyled'
+
 const ActiveSessions = ({ username, getSessions }) => {
   const dispatch = useDispatch()
   const [loading, changeLoading] = useState(true)
@@ -19,6 +25,12 @@ const ActiveSessions = ({ username, getSessions }) => {
     })
   }, [username, dispatch, getSessions])
 
+  function closeSession (sessionId) {
+    closeUserSession(sessionId).then(_ => {
+      console.error('Close Session Success')
+    })
+  }
+
   return (
     <div className='active-sessions'>
       <div className='title'>
@@ -30,9 +42,23 @@ const ActiveSessions = ({ username, getSessions }) => {
         <>
           {sessions.map((session, index) => {
             return (
-              <div key={index}>
-                <div>Creada: {session.date_created}</div>
-                <div>Expira: {session.expires}</div>
+              <div className='session' key={index}>
+                <div className='data'>
+                  <div>
+                    <b>Creada</b>: {session.date_created}
+                  </div>
+                  <div>
+                    <b>Expira</b>: {session.expires}
+                  </div>
+                </div>
+                <div className='delete'>
+                  <ButtonDelete
+                    className='material-icons'
+                    onClick={() => closeSession(session.id)}
+                  >
+                    delete_forever
+                  </ButtonDelete>
+                </div>
                 <p />
               </div>
             )
