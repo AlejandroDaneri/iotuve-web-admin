@@ -30,6 +30,7 @@ export const UserWrapper = styled.div`
         display: flex;
         flex-direction: row;
         width: 100%;
+        padding: 1%;
 
         & .data {
           font-size: 1.5vmin;
