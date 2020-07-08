@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import CircleLoader from 'react-spinners/CircleLoader'
 import { Snackbar, SnackbarContent } from '@material-ui/core'
+import _ from 'lodash'
 
 /* Import Constants */
 import { COLOR_PRIMARY } from '../../constants'
@@ -27,9 +28,10 @@ const ActiveSessions = ({ username, getSessions }) => {
     })
   }, [username, dispatch, getSessions])
 
-  function closeSession (sessionId) {
-    closeUserSession(sessionId).then(_ => {
+  function closeSession (session) {
+    closeUserSession(session.id).then(response => {
       changeInformOpen(true)
+      changeSessions(_.without(sessions, session))
     })
   }
 
@@ -71,7 +73,7 @@ const ActiveSessions = ({ username, getSessions }) => {
                 <div className='delete'>
                   <ButtonDelete
                     className='material-icons'
-                    onClick={() => closeSession(session.id)}
+                    onClick={() => closeSession(session)}
                   >
                     delete_forever
                   </ButtonDelete>
