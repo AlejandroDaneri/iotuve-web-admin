@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import CircleLoader from 'react-spinners/CircleLoader'
+import { Snackbar, SnackbarContent } from '@material-ui/core'
 
 /* Import Constants */
 import { COLOR_PRIMARY } from '../../constants'
@@ -16,6 +17,7 @@ const ActiveSessions = ({ username, getSessions }) => {
   const dispatch = useDispatch()
   const [loading, changeLoading] = useState(true)
   const [sessions, changeSessions] = useState([])
+  const [informOpen, changeInformOpen] = useState(false)
 
   useEffect(() => {
     getSessions(username).then(response => {
@@ -27,12 +29,27 @@ const ActiveSessions = ({ username, getSessions }) => {
 
   function closeSession (sessionId) {
     closeUserSession(sessionId).then(_ => {
-      console.error('Close Session Success')
+      changeInformOpen(true)
     })
   }
 
   return (
     <div className='active-sessions'>
+      <Snackbar
+        open={informOpen}
+        onClose={() => changeInformOpen(false)}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+        autoHideDuration={6000}
+      >
+        <SnackbarContent
+          message='Session borrada con exito'
+          style={{
+            color: 'black',
+            backgroundColor: COLOR_PRIMARY,
+            fontSize: '14px'
+          }}
+        />
+      </Snackbar>
       <div className='title'>
         <h3>Sessiones Activas</h3>
       </div>

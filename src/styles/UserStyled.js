@@ -37,6 +37,7 @@ export const UserWrapper = styled.div`
 
         & .delete {
           padding: 2%;
+          cursor: pointer;
         }
       }
 
