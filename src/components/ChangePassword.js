@@ -59,24 +59,26 @@ const ChangePassword = location => {
           onChange={e => changeConfirmPassword(e.target.value)}
           placeholder='Confirmar Contraseña'
         />
-        {isDisabled() ? (
-          <Button
-            variant='outlined'
-            style={{ borderColor: COLOR_PRIMARY, color: 'white' }}
-            disabled
-          >
-            Cambiar contraseña
-          </Button>
-        ) : (
-          <Button
-            variant='contained'
-            style={{ backgroundColor: COLOR_PRIMARY, color: 'black' }}
-            disabled={false}
-            onClick={onSubmit}
-          >
-            Cambiar contraseña
-          </Button>
-        )}
+        <div className='chg_pwd_container'>
+          {isDisabled() ? (
+            <Button
+              variant='outlined'
+              style={{ borderColor: COLOR_PRIMARY, color: 'white' }}
+              disabled
+            >
+              Cambiar contraseña
+            </Button>
+          ) : (
+            <Button
+              variant='contained'
+              style={{ backgroundColor: COLOR_PRIMARY, color: 'black' }}
+              disabled={false}
+              onClick={onSubmit}
+            >
+              Cambiar contraseña
+            </Button>
+          )}
+        </div>
       </form>
       <Snackbar
         open={pwdSuccess}
