@@ -69,6 +69,12 @@ const ActiveSessions = ({ username, getSessions }) => {
                   <div>
                     <b>Expira</b>: {session.expires}
                   </div>
+                  <div>
+                    <b>User Agent</b>: {session.user_agent}
+                  </div>
+                  <div>
+                    <b>Request Id</b>: {session.request_id}
+                  </div>
                 </div>
                 <div className='delete'>
                   <ButtonDelete
