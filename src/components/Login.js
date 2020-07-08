@@ -12,7 +12,12 @@ import { LoginWrapper } from '../styles/LoginFormStyled'
 import { doAuth } from '../webapi'
 
 /* Import Constants */
-import { AUTH_REQUEST, AUTH_SUCCESS, COLOR_PRIMARY } from '../constants'
+import {
+  AUTH_REQUEST,
+  AUTH_SUCCESS,
+  COLOR_ERROR,
+  COLOR_PRIMARY
+} from '../constants'
 
 import ParticlesConfig from '../ParticlesConfig'
 import Button from '@material-ui/core/Button'
@@ -89,7 +94,7 @@ const Login = () => {
             message='Usuario o contraseña incorrectos'
             style={{
               color: 'black',
-              backgroundColor: COLOR_PRIMARY,
+              backgroundColor: COLOR_ERROR,
               fontSize: '14px'
             }}
           />

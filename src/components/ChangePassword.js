@@ -9,7 +9,7 @@ import { doRecoveryPassword } from '../webapi'
 import { ChangePasswordWrapper } from '../styles/ChangePasswordStyled'
 import Button from '@material-ui/core/Button'
 import { Snackbar, SnackbarContent } from '@material-ui/core'
-import { COLOR_PRIMARY } from '../constants'
+import { COLOR_PRIMARY, COLOR_ERROR } from '../constants'
 
 const ChangePassword = location => {
   const { key, username } = qs.parse(location.location.search, {
@@ -19,6 +19,7 @@ const ChangePassword = location => {
   const [password, changePassword] = useState('')
   const [confirmPassword, changeConfirmPassword] = useState('')
   const [pwdSuccess, changePwdSuccess] = useState(false)
+  const [showSnackbar, changeShowSnackbar] = useState(false)
 
   function isDisabled () {
     if (!password) return true
@@ -32,9 +33,12 @@ const ChangePassword = location => {
     doRecoveryPassword(key, username, password)
       .then(_ => {
         changePwdSuccess(true)
+        changeShowSnackbar(true)
         console.error('Change Password Success')
       })
       .catch(_ => {
+        changePwdSuccess(false)
+        changeShowSnackbar(true)
         console.error('Change Password Error')
       })
   }
@@ -81,16 +85,20 @@ const ChangePassword = location => {
         </div>
       </form>
       <Snackbar
-        open={pwdSuccess}
+        open={showSnackbar}
         onClose={() => changePwdSuccess(false)}
         anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
         autoHideDuration={6000}
       >
         <SnackbarContent
-          message='Contraseña cambiada con éxito'
+          message={
+            pwdSuccess
+              ? 'Contraseña cambiada con éxito'
+              : 'Error al cambiar la contraseña, intente de nuevo'
+          }
           style={{
             color: 'black',
-            backgroundColor: COLOR_PRIMARY,
+            backgroundColor: pwdSuccess ? COLOR_PRIMARY : COLOR_ERROR,
             fontSize: '14px'
           }}
         />
