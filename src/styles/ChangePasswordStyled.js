@@ -6,7 +6,10 @@ export const ChangePasswordWrapper = styled.div`
   width: 100%;
   justify-content: center;
   align-items: center;
-
+  
+  & .chg_pwd_container {
+    padding: 2%;
+  }
   & > h2 {
     font-size: 3vmin;
   }
