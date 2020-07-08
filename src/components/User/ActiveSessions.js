@@ -29,7 +29,7 @@ const ActiveSessions = ({ username, getSessions }) => {
   }, [username, dispatch, getSessions])
 
   function closeSession (session) {
-    closeUserSession(session.id).then(response => {
+    closeUserSession(session.session_token).then(response => {
       changeInformOpen(true)
       changeSessions(_.without(sessions, session))
     })
