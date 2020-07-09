@@ -8,6 +8,10 @@ import TableBody from '@material-ui/core/TableBody'
 import TableRow from '@material-ui/core/TableRow'
 import _ from 'lodash'
 import { Snackbar, SnackbarContent } from '@material-ui/core'
+import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown'
+import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp'
+import IconButton from '@material-ui/core/IconButton'
+import AddIcon from '@material-ui/icons/Add'
 
 /* Import Components */
 import DeleteModal from '../components/Modal'
@@ -23,12 +27,18 @@ import { getVideos, removeVideo } from '../webapi'
 /* Import Constants */
 import { AUTH_LOGOUT, COLOR_ACTIONS, COLOR_PRIMARY } from '../constants'
 import Tooltip from '@material-ui/core/Tooltip'
+import Collapse from '@material-ui/core/Collapse'
+import Box from '@material-ui/core/Box'
+import Typography from '@material-ui/core/Typography'
 
 const Files = () => {
   const [files, changeFiles] = useState()
+
   const [selected, changeSelected] = useState({})
   const [modalOpen, changeModalOpen] = useState()
   const [informOpen, changeInformOpen] = useState()
+
+  const [openCollapse, changeOpenCollapse] = React.useState(false)
 
   const dispatch = useDispatch()
 
@@ -36,7 +46,7 @@ const Files = () => {
     getVideos()
       .then(response => {
         const { data } = response
-        changeFiles(data.data.map(video => video.media))
+        changeFiles(data.data)
       })
       .catch(err => {
         console.error(err)
@@ -94,6 +104,7 @@ const Files = () => {
         <Table>
           <TableHead>
             <TableRow>
+              <StyledTableCell />
               <StyledTableCell>Archivo</StyledTableCell>
               <StyledTableCell>Nombre</StyledTableCell>
               <StyledTableCell>Tamaño </StyledTableCell>
@@ -105,35 +116,101 @@ const Files = () => {
           <TableBody>
             {(files || []).map(file => {
               return (
-                <StyledTableRow key={file.video_id}>
-                  <StyledTableCell>
-                    <Tooltip title='Haga click para mostrar el archivo'>
-                      <a href={file.url}>
-                        <img
-                          alt='thumb'
-                          width='80px'
-                          height='40px'
-                          src={file.thumb}
-                        />
-                      </a>
-                    </Tooltip>
-                  </StyledTableCell>
-                  <StyledTableCell>{file.name}</StyledTableCell>
-                  <StyledTableCell>
-                    {(file.size / 1024 / 1024).toPrecision(3)} MB
-                  </StyledTableCell>
-                  <StyledTableCell>{file.type}</StyledTableCell>
-                  <StyledTableCell>{file.date_created}</StyledTableCell>
-                  <StyledTableCell>
-                    <DeleteForeverIcon
-                      style={{ color: COLOR_ACTIONS }}
-                      onClick={() => {
-                        changeSelected(file)
-                        changeModalOpen(true)
-                      }}
-                    />
-                  </StyledTableCell>
-                </StyledTableRow>
+                <>
+                  <StyledTableRow key={file.media.video_id}>
+                    <StyledTableCell>
+                      <IconButton
+                        aria-label='expand row'
+                        size='small'
+                        onClick={() => {
+                          changeOpenCollapse(!openCollapse)
+                          changeSelected(file)
+                        }}
+                      >
+                        {openCollapse && selected === file ? (
+                          <KeyboardArrowUpIcon
+                            style={{ color: COLOR_ACTIONS }}
+                          />
+                        ) : (
+                          <KeyboardArrowDownIcon
+                            style={{ color: COLOR_ACTIONS }}
+                          />
+                        )}
+                      </IconButton>
+                    </StyledTableCell>
+                    <StyledTableCell>
+                      <Tooltip title='Haga click para mostrar el archivo'>
+                        <a href={file.media.url}>
+                          <img
+                            alt='thumb'
+                            width='80px'
+                            height='40px'
+                            src={file.media.thumb}
+                          />
+                        </a>
+                      </Tooltip>
+                    </StyledTableCell>
+                    <StyledTableCell>{file.media.name}</StyledTableCell>
+                    <StyledTableCell>
+                      {(file.media.size / 1024 / 1024).toPrecision(3)} MB
+                    </StyledTableCell>
+                    <StyledTableCell>{file.media.type}</StyledTableCell>
+                    <StyledTableCell>{file.date_created}</StyledTableCell>
+                    <StyledTableCell>
+                      <DeleteForeverIcon
+                        style={{ color: COLOR_ACTIONS }}
+                        onClick={() => {
+                          changeSelected(file)
+                          changeModalOpen(true)
+                        }}
+                      />
+                    </StyledTableCell>
+                  </StyledTableRow>
+                  <StyledTableRow>
+                    <StyledTableCell
+                      variant='body'
+                      style={{ paddingBottom: 0, paddingTop: 0 }}
+                      colSpan={7}
+                    >
+                      <Collapse
+                        in={openCollapse && selected === file}
+                        timeout='auto'
+                        unmountOnExit
+                      >
+                        <Box margin={1}>
+                          <Typography variant='h6' gutterBottom component='div'>
+                            Publicación del video
+                          </Typography>
+                          <div
+                            style={{ display: 'flex', flexDirection: 'row' }}
+                          >
+                            <div style={{ width: '100%' }}>
+                              Subido por: {file.user} <br />
+                              Título de la publicación: {file.title} <br />
+                              Descripción: {file.description}
+                              <br />
+                            </div>
+                            <div style={{ width: '100%' }}>
+                              Vistas: {file.count_views} <br />
+                              Likes: {file.count_likes} <br />
+                              Unlikes: {file.count_dislikes} <br />
+                              Visibilidad:{' '}
+                              {file.visibility === 'private'
+                                ? 'Privado'
+                                : 'Público'}{' '}
+                              <br />
+                            </div>
+                            <div style={{ width: '13%' }}>
+                              <Tooltip title='Más informacion'>
+                                <AddIcon />
+                              </Tooltip>
+                            </div>
+                          </div>
+                        </Box>
+                      </Collapse>
+                    </StyledTableCell>
+                  </StyledTableRow>
+                </>
               )
             })}
           </TableBody>
