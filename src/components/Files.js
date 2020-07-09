@@ -75,6 +75,10 @@ const Files = () => {
       })
   }
 
+  function parseTimestamp (timestamp) {
+    const date = new Date(timestamp)
+    return date.toUTCString()
+  }
   return (
     <FilesWrapper>
       <DeleteModal
@@ -155,7 +159,9 @@ const Files = () => {
                       {(file.media.size / 1024 / 1024).toPrecision(3)} MB
                     </StyledTableCell>
                     <StyledTableCell>{file.media.type}</StyledTableCell>
-                    <StyledTableCell>{file.date_created}</StyledTableCell>
+                    <StyledTableCell>
+                      {parseTimestamp(file.date_created)}
+                    </StyledTableCell>
                     <StyledTableCell>
                       <DeleteForeverIcon
                         style={{ color: COLOR_ACTIONS }}
