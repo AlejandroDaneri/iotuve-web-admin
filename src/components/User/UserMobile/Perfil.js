@@ -45,7 +45,7 @@ const Perfil = ({ username }) => {
           })
         }
       })
-  })
+  }, [username, dispatch])
 
   function save () {
     saveUser(username, {
@@ -57,9 +57,12 @@ const Perfil = ({ username }) => {
       }
     })
       .then(_ => {
+        console.log('PUT OK')
         changeSuccess(true)
       })
-      .catch(_ => {})
+      .catch(_ => {
+        console.error('PUT ERROR')
+      })
   }
 
   return (

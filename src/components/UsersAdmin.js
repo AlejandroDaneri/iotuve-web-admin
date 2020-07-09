@@ -58,9 +58,7 @@ const AdminUsers = () => {
         })
     })
     usersPromise.then(users => {
-      console.error('Users Promise Ok')
       Object.keys(users).forEach(username => {
-        console.error(username)
         getUserAdminSessions(username).then(response => {
           const { data } = response
           const activeState =

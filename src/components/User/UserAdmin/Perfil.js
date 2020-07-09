@@ -37,7 +37,7 @@ const Perfil = ({ username }) => {
           })
         }
       })
-  })
+  }, [username, dispatch])
 
   function save () {
     saveAdminUser(username, {
@@ -45,10 +45,13 @@ const Perfil = ({ username }) => {
       last_name: lastName,
       email: email
     })
-      .then(_ => {
+      .then(() => {
+        console.info('Put ok')
         changeSuccess(true)
       })
-      .catch(_ => {})
+      .catch(() => {
+        console.error('Put error')
+      })
   }
 
   return loading ? (
@@ -84,7 +87,7 @@ const Perfil = ({ username }) => {
         <p />
       </div>
       <div className='actions'>
-        <div className='action' onClick={() => save()}>
+        <div onClick={() => save()}>
           <Button
             href='/users_admin'
             variant='contained'
