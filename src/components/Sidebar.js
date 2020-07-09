@@ -136,10 +136,12 @@ const Sidebar = props => {
               <ListItemIcon className={classes.menuItem}>
                 <DoneIcon />
               </ListItemIcon>
-              <ListItemText
-                className={classes.menuItem}
-                primary='Estado actual'
-              />
+              <Tooltip title='Estado actual de los servidores'>
+                <ListItemText
+                  className={classes.menuItem}
+                  primary='Estado actual'
+                />
+              </Tooltip>
             </ListItem>
           </List>
           <Health />
