@@ -89,8 +89,14 @@ export function saveAdminUser (username, user) {
   return axios.put(appBaseUrl() + `/api/v1/adminusers/${username}`, user)
 }
 
-export function getUsersAdmin () {
+export function getAdminUsers () {
   return axios.get(appBaseUrl() + '/api/v1/adminusers')
+}
+
+export function createAdminUser (token, user) {
+  return axios.post(appBaseUrl() + '/api/v1/adminusers', user, {
+    headers: { 'X-Auth-Token': token }
+  })
 }
 
 export function doRecoveryPassword (key, username, password) {

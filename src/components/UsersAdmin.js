@@ -1,10 +1,10 @@
 /* Import Libs */
 import React, { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import CircleLoader from 'react-spinners/CircleLoader'
 import BeatLoader from 'react-spinners/BeatLoader'
 import { Link } from 'react-router-dom'
-import { Snackbar, SnackbarContent } from '@material-ui/core'
+import { Button, Snackbar, SnackbarContent } from '@material-ui/core'
 import TableRow from '@material-ui/core/TableRow'
 import Table from '@material-ui/core/Table'
 import TableHead from '@material-ui/core/TableHead'
@@ -20,7 +20,12 @@ import Tooltip from '@material-ui/core/Tooltip'
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord'
 
 /* Import WebApi */
-import { getUsersAdmin, getUserAdminSessions, removeAdminUser } from '../webapi'
+import {
+  createAdminUser,
+  getAdminUsers,
+  getUserAdminSessions,
+  removeAdminUser
+} from '../webapi'
 
 /* Import Constants */
 import {
@@ -31,8 +36,10 @@ import {
 } from '../constants'
 import EditIcon from '@material-ui/icons/Edit'
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever'
+import { getToken } from '../stateapi/auth'
 
 const AdminUsers = () => {
+  const token = useSelector(getToken)
   const [users, changeUsers] = useState()
   const [selected, changeSelected] = useState({})
   const [modalOpen, changeModalOpen] = useState(false)
@@ -42,7 +49,7 @@ const AdminUsers = () => {
 
   useEffect(() => {
     const usersPromise = new Promise((resolve, reject) => {
-      getUsersAdmin()
+      getAdminUsers()
         .then(response => {
           const { data } = response
           const u = {}
@@ -113,6 +120,18 @@ const AdminUsers = () => {
       })
   }
 
+  function createAdmin () {
+    createAdminUser(token, {
+      username: 'fake_god',
+      password: 'qwerty',
+      first_name: 'fake',
+      last_name: 'god',
+      email: 'fake@god.com'
+    })
+      .then(r => console.info('OK'))
+      .catch(e => console.error('ERROR'))
+  }
+
   return (
     <UsersAdminWrapper>
       <Modal
@@ -139,52 +158,65 @@ const AdminUsers = () => {
       </Snackbar>
       <h2>Usuarios Admin</h2>
       {users ? (
-        <Table>
-          <TableHead>
-            <TableRow>
-              <StyledTableCell>Usuario</StyledTableCell>
-              <StyledTableCell>Nombre</StyledTableCell>
-              <StyledTableCell>Email</StyledTableCell>
-              <StyledTableCell>Fecha de creación</StyledTableCell>
-              <StyledTableCell>Online</StyledTableCell>
-              <StyledTableCell>Acciones</StyledTableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {(Object.values(users) || []).map(user => {
-              return (
-                <StyledTableRow key={user.id}>
-                  <StyledTableCell>{user.username}</StyledTableCell>
-                  <StyledTableCell>
-                    {user.first_name} {user.last_name}
-                  </StyledTableCell>
-                  <StyledTableCell>{user.email}</StyledTableCell>
-                  <StyledTableCell>
-                    {parseTimestamp(user.date_created)}
-                  </StyledTableCell>
-                  <StyledTableCell>
-                    {user.activeState || <BeatLoader color={COLOR_PRIMARY} />}
-                  </StyledTableCell>
-                  <StyledTableCell className='actions'>
-                    <Link to={`/user_admin/${user.username}`}>
-                      <EditIcon style={{ color: COLOR_ACTIONS }} />
-                    </Link>
-                    {user.username !== UNDELETABLE_ADMIN_NAME && (
-                      <DeleteForeverIcon
-                        style={{ color: COLOR_ACTIONS }}
-                        visibility={user.username === 'chotuvegod'}
-                        onClick={() => {
-                          changeSelected(user)
-                          changeModalOpen(true)
-                        }}
-                      />
-                    )}
-                  </StyledTableCell>
-                </StyledTableRow>
-              )
-            })}
-          </TableBody>
-        </Table>
+        <>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <StyledTableCell>Usuario</StyledTableCell>
+                <StyledTableCell>Nombre</StyledTableCell>
+                <StyledTableCell>Email</StyledTableCell>
+                <StyledTableCell>Fecha de creación</StyledTableCell>
+                <StyledTableCell>Online</StyledTableCell>
+                <StyledTableCell>Acciones</StyledTableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {(Object.values(users) || []).map(user => {
+                return (
+                  <StyledTableRow key={user.id}>
+                    <StyledTableCell>{user.username}</StyledTableCell>
+                    <StyledTableCell>
+                      {user.first_name} {user.last_name}
+                    </StyledTableCell>
+                    <StyledTableCell>{user.email}</StyledTableCell>
+                    <StyledTableCell>
+                      {parseTimestamp(user.date_created)}
+                    </StyledTableCell>
+                    <StyledTableCell>
+                      {user.activeState || <BeatLoader color={COLOR_PRIMARY} />}
+                    </StyledTableCell>
+                    <StyledTableCell className='actions'>
+                      <Link to={`/user_admin/${user.username}`}>
+                        <EditIcon style={{ color: COLOR_ACTIONS }} />
+                      </Link>
+                      {user.username !== UNDELETABLE_ADMIN_NAME && (
+                        <DeleteForeverIcon
+                          style={{ color: COLOR_ACTIONS }}
+                          visibility={user.username === 'chotuvegod'}
+                          onClick={() => {
+                            changeSelected(user)
+                            changeModalOpen(true)
+                          }}
+                        />
+                      )}
+                    </StyledTableCell>
+                  </StyledTableRow>
+                )
+              })}
+            </TableBody>
+          </Table>
+          <div>
+            <Button
+              variant='contained'
+              style={{ backgroundColor: COLOR_PRIMARY }}
+              onClick={() => {
+                createAdmin()
+              }}
+            >
+              Crear nuevo admin
+            </Button>
+          </div>
+        </>
       ) : (
         <CircleLoader color={COLOR_PRIMARY} size={250} />
       )}
