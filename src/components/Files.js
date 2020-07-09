@@ -82,7 +82,7 @@ const Files = () => {
   return (
     <FilesWrapper>
       <DeleteModal
-        resource='video'
+        resource='vídeo'
         name={selected.name}
         remove={remove}
         modalOpen={modalOpen}
