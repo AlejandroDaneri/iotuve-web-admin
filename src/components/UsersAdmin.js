@@ -23,7 +23,12 @@ import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord'
 import { getUsersAdmin, getUserAdminSessions, removeAdminUser } from '../webapi'
 
 /* Import Constants */
-import { AUTH_LOGOUT, COLOR_ACTIONS, COLOR_PRIMARY } from '../constants'
+import {
+  AUTH_LOGOUT,
+  COLOR_ACTIONS,
+  COLOR_PRIMARY,
+  UNDELETABLE_ADMIN_NAME
+} from '../constants'
 import EditIcon from '@material-ui/icons/Edit'
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever'
 
@@ -164,13 +169,16 @@ const AdminUsers = () => {
                     <Link to={`/user_admin/${user.username}`}>
                       <EditIcon style={{ color: COLOR_ACTIONS }} />
                     </Link>
-                    <DeleteForeverIcon
-                      style={{ color: COLOR_ACTIONS }}
-                      onClick={() => {
-                        changeSelected(user)
-                        changeModalOpen(true)
-                      }}
-                    />
+                    {user.username !== UNDELETABLE_ADMIN_NAME && (
+                      <DeleteForeverIcon
+                        style={{ color: COLOR_ACTIONS }}
+                        visibility={user.username === 'chotuvegod'}
+                        onClick={() => {
+                          changeSelected(user)
+                          changeModalOpen(true)
+                        }}
+                      />
+                    )}
                   </StyledTableCell>
                 </StyledTableRow>
               )
