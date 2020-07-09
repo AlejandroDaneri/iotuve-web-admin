@@ -15,13 +15,13 @@ import DeleteModal from '../components/Modal'
 /* Import Styled Components */
 import { FilesWrapper } from '../styles/FilesStyled'
 import { StyledTableCell, StyledTableRow } from '../styles/TableStyled'
-import { ButtonDelete } from '../styles/ButtonsStyled'
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever'
 
 /* Import WebApi */
 import { getVideos, removeVideo } from '../webapi'
 
 /* Import Constants */
-import { AUTH_LOGOUT, COLOR_PRIMARY } from '../constants'
+import { AUTH_LOGOUT, COLOR_ACTIONS, COLOR_PRIMARY } from '../constants'
 import Tooltip from '@material-ui/core/Tooltip'
 
 const Files = () => {
@@ -124,16 +124,14 @@ const Files = () => {
                   </StyledTableCell>
                   <StyledTableCell>{file.type}</StyledTableCell>
                   <StyledTableCell>{file.date_created}</StyledTableCell>
-                  <StyledTableCell className='actions'>
-                    <ButtonDelete
+                  <StyledTableCell>
+                    <DeleteForeverIcon
+                      style={{ color: COLOR_ACTIONS }}
                       onClick={() => {
                         changeSelected(file)
                         changeModalOpen(true)
                       }}
-                      className='material-icons'
-                    >
-                      delete_forever
-                    </ButtonDelete>
+                    />
                   </StyledTableCell>
                 </StyledTableRow>
               )

@@ -15,7 +15,6 @@ import Modal from '../components/Modal'
 
 /* Import Styled Components */
 import { UsersAdminWrapper } from '../styles/UsersAdminStyled'
-import { ButtonEdit, ButtonDelete } from '../styles/ButtonsStyled'
 import { StyledTableRow, StyledTableCell } from '../styles/TableStyled'
 import Tooltip from '@material-ui/core/Tooltip'
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord'
@@ -24,7 +23,9 @@ import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord'
 import { getUsersAdmin, getUserAdminSessions, removeAdminUser } from '../webapi'
 
 /* Import Constants */
-import { AUTH_LOGOUT, COLOR_PRIMARY } from '../constants'
+import { AUTH_LOGOUT, COLOR_ACTIONS, COLOR_PRIMARY } from '../constants'
+import EditIcon from '@material-ui/icons/Edit'
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever'
 
 const AdminUsers = () => {
   const [users, changeUsers] = useState()
@@ -163,17 +164,15 @@ const AdminUsers = () => {
                   </StyledTableCell>
                   <StyledTableCell className='actions'>
                     <Link to={`/user_admin/${user.username}`}>
-                      <ButtonEdit className='material-icons'>edit</ButtonEdit>
+                      <EditIcon style={{ color: COLOR_ACTIONS }} />
                     </Link>
-                    <ButtonDelete
+                    <DeleteForeverIcon
+                      style={{ color: COLOR_ACTIONS }}
                       onClick={() => {
                         changeSelected(user)
                         changeModalOpen(true)
                       }}
-                      className='material-icons'
-                    >
-                      delete_forever
-                    </ButtonDelete>
+                    />
                   </StyledTableCell>
                 </StyledTableRow>
               )

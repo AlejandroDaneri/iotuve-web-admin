@@ -17,14 +17,15 @@ import { getUsers, getUserSessions, removeUser } from '../webapi'
 import DeleteModal from './Modal'
 
 /* Import Constants */
-import { AUTH_LOGOUT, COLOR_PRIMARY } from '../constants'
+import { AUTH_LOGOUT, COLOR_ACTIONS, COLOR_PRIMARY } from '../constants'
 
 /* Import Styled Components */
 import { UsersWrapper } from '../styles/UsersStyled'
 import { StyledTableRow, StyledTableCell } from '../styles/TableStyled'
-import { ButtonEdit, ButtonDelete } from '../styles/ButtonsStyled'
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord'
 import Tooltip from '@material-ui/core/Tooltip'
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever'
+import EditIcon from '@material-ui/icons/Edit'
 
 const Users = () => {
   const [users, changeUsers] = useState({})
@@ -162,27 +163,24 @@ const Users = () => {
                   <StyledTableCell>
                     {user.activeState || <BeatLoader color={COLOR_PRIMARY} />}
                   </StyledTableCell>
-                  <StyledTableCell className='actions'>
-                    <center>
-                      <Link to={`/user/${user.username}`}>
-                        <Tooltip title='Editar usuario'>
-                          <ButtonEdit className='material-icons'>
-                            edit
-                          </ButtonEdit>
-                        </Tooltip>
-                      </Link>
-                      <Tooltip title='Borrar usuario'>
-                        <ButtonDelete
-                          onClick={() => {
-                            changeSelected(user)
-                            changeModalOpen(true)
-                          }}
-                          className='material-icons'
-                        >
-                          delete_forever
-                        </ButtonDelete>
+                  <StyledTableCell
+                    className='actions'
+                    style='text-align: center;'
+                  >
+                    <Link to={`/user/${user.username}`}>
+                      <Tooltip title='Editar usuario'>
+                        <EditIcon style={{ color: COLOR_ACTIONS }} />
                       </Tooltip>
-                    </center>
+                    </Link>
+                    <Tooltip title='Borrar usuario'>
+                      <DeleteForeverIcon
+                        style={{ color: COLOR_ACTIONS }}
+                        onClick={() => {
+                          changeSelected(user)
+                          changeModalOpen(true)
+                        }}
+                      />
+                    </Tooltip>
                   </StyledTableCell>
                 </StyledTableRow>
               )
