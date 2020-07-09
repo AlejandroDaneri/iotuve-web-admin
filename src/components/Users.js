@@ -163,10 +163,7 @@ const Users = () => {
                   <StyledTableCell>
                     {user.activeState || <BeatLoader color={COLOR_PRIMARY} />}
                   </StyledTableCell>
-                  <StyledTableCell
-                    className='actions'
-                    style='text-align: center;'
-                  >
+                  <StyledTableCell className='actions'>
                     <Link to={`/user/${user.username}`}>
                       <Tooltip title='Editar usuario'>
                         <EditIcon style={{ color: COLOR_ACTIONS }} />
