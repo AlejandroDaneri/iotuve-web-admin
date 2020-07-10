@@ -1,6 +1,6 @@
 /* Import Libs */
 import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import CircleLoader from 'react-spinners/CircleLoader'
 import BeatLoader from 'react-spinners/BeatLoader'
 import { Link } from 'react-router-dom'
@@ -20,12 +20,7 @@ import Tooltip from '@material-ui/core/Tooltip'
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord'
 
 /* Import WebApi */
-import {
-  createAdminUser,
-  getAdminUsers,
-  getUserAdminSessions,
-  removeAdminUser
-} from '../webapi'
+import { getAdminUsers, getUserAdminSessions, removeAdminUser } from '../webapi'
 
 /* Import Constants */
 import {
@@ -36,13 +31,13 @@ import {
 } from '../constants'
 import EditIcon from '@material-ui/icons/Edit'
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever'
-import { getToken } from '../stateapi/auth'
+import NewAdminModal from './User/UserAdmin/NewAdminModal'
 
 const AdminUsers = () => {
-  const token = useSelector(getToken)
   const [users, changeUsers] = useState()
   const [selected, changeSelected] = useState({})
   const [modalOpen, changeModalOpen] = useState(false)
+  const [newAdminModalOpen, changeNewAdminModalOpen] = useState(false)
   const [informOpen, changeInformOpen] = useState(false)
 
   const dispatch = useDispatch()
@@ -118,18 +113,6 @@ const AdminUsers = () => {
           })
         }
       })
-  }
-
-  function createAdmin () {
-    createAdminUser(token, {
-      username: 'fake_god',
-      password: 'qwerty',
-      first_name: 'fake',
-      last_name: 'god',
-      email: 'fake@god.com'
-    })
-      .then(r => console.info('OK'))
-      .catch(e => console.error('ERROR'))
   }
 
   return (
@@ -210,12 +193,16 @@ const AdminUsers = () => {
               variant='contained'
               style={{ backgroundColor: COLOR_PRIMARY }}
               onClick={() => {
-                createAdmin()
+                changeNewAdminModalOpen(true)
               }}
             >
               Crear nuevo admin
             </Button>
           </div>
+          <NewAdminModal
+            modalOpen={newAdminModalOpen}
+            changeModalOpen={changeNewAdminModalOpen}
+          />
         </>
       ) : (
         <CircleLoader color={COLOR_PRIMARY} size={250} />
