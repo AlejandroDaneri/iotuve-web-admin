@@ -124,15 +124,26 @@ const Stats = () => {
 
             <div className='stat'>
               <h3>Usuarios</h3>
-              <div>
-                Registrados: <b>{registeredUsers}</b>
-              </div>
-              <div>
-                Registrados Activos: <b>{registeredUsersActive}</b>
-              </div>
-              <div>
-                Registrados Cerrados: <b>{registeredUsersClosed}</b>
-              </div>
+              <Pie
+                data={{
+                  labels: [
+                    'Registrados',
+                    'Registrados Activos',
+                    'Registrados Cerrados'
+                  ],
+                  datasets: [
+                    {
+                      data: [
+                        registeredUsers,
+                        registeredUsersActive,
+                        registeredUsersClosed
+                      ],
+                      backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
+                      hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56']
+                    }
+                  ]
+                }}
+              />
               <div>
                 Registrados con Login Service:{' '}
                 <b>{registeredAdminUsersLoginService}</b>
