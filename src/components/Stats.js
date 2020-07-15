@@ -23,7 +23,7 @@ const Stats = () => {
   const [endDate, changeEndDate] = useState(end)
 
   const toString = date => {
-    return `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`
+    return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`
   }
 
   const [loading, changeLoading] = useState(true)
@@ -31,7 +31,6 @@ const Stats = () => {
   const [activeRecovery, changeActiveRecovery] = useState()
   const [activeSessions, changeActiveSessions] = useState()
 
-  const [registeredAdminUsers, changeRegisteredAdminUsers] = useState()
   const [
     registeredAdminUsersActive,
     changeRegisteredAdminUsersActive
@@ -41,7 +40,6 @@ const Stats = () => {
     changeRegisteredAdminUsersClosed
   ] = useState()
 
-  const [registeredUsers, changeRegisteredUsers] = useState()
   const [registeredUsersActive, changeRegisteredUsersActive] = useState()
   const [registeredUsersClosed, changeRegisteredUsersClosed] = useState()
   const [
@@ -58,11 +56,9 @@ const Stats = () => {
         changeActiveRecovery(data.active_recovery)
         changeActiveSessions(data.active_sessions)
 
-        changeRegisteredAdminUsers(data.registered_adminusers)
         changeRegisteredAdminUsersActive(data.registered_adminusers_active)
         changeRegisteredAdminUsersClosed(data.registered_adminusers_closed)
 
-        changeRegisteredUsers(data.registered_users)
         changeRegisteredUsersActive(data.registered_users_active)
         changeRegisteredUsersClosed(data.registered_users_closed)
         changeRegisteredAdminUsersLoginService(
