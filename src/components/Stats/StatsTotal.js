@@ -60,63 +60,65 @@ const StatsTotal = () => {
   }, []) //eslint-disable-line
 
   return (
-    <div className='stats'>
+    <>
       <h2>Totales</h2>
-      {loading ? (
-        <CircleLoader color={COLOR_PRIMARY} size={250} />
-      ) : (
-        <div className='numerical'>
-          <div className='stat'>
-            <h3>Sessiones & Links</h3>
-            <div>
-              Sesiones Activas: <b>{activeSessions}</b>
+      <div className='total'>
+        {loading ? (
+          <CircleLoader color={COLOR_PRIMARY} size={250} />
+        ) : (
+          <>
+            <div className='stat'>
+              <h3>Sessiones & Links</h3>
+              <div>
+                Sesiones Activas: <b>{activeSessions}</b>
+              </div>
+              <div>
+                Links de Recuperar Contraseña Activos: <b>{activeRecovery}</b>
+              </div>
             </div>
-            <div>
-              Links de Recuperar Contraseña Activos: <b>{activeRecovery}</b>
-            </div>
-          </div>
 
-          <div className='stat'>
-            <h3>Usuarios Admin</h3>
-            <Pie
-              data={{
-                labels: ['Registrados Activos', 'Registrados Cerrados'],
-                datasets: [
-                  {
-                    data: [
-                      registeredAdminUsersActive,
-                      registeredAdminUsersClosed
-                    ],
-                    backgroundColor: ['#36A2EB', '#FF6384'],
-                    hoverBackgroundColor: ['#36A2EB', '#FF6384']
-                  }
-                ]
-              }}
-            />
-          </div>
-
-          <div className='stat'>
-            <h3>Usuarios</h3>
-            <Pie
-              data={{
-                labels: ['Registrados Activos', 'Registrados Cerrados'],
-                datasets: [
-                  {
-                    data: [registeredUsersActive, registeredUsersClosed],
-                    backgroundColor: ['#36A2EB', '#FF6384'],
-                    hoverBackgroundColor: ['#36A2EB', '#FF6384']
-                  }
-                ]
-              }}
-            />
-            <div>
-              Registrados con Login Service:{' '}
-              <b>{registeredUsersLoginService}</b>
+            <div className='stat'>
+              <h3>Usuarios Admin</h3>
+              <Pie
+                data={{
+                  labels: ['Registrados Activos', 'Registrados Cerrados'],
+                  datasets: [
+                    {
+                      data: [
+                        registeredAdminUsersActive,
+                        registeredAdminUsersClosed
+                      ],
+                      backgroundColor: ['#36A2EB', '#FF6384'],
+                      hoverBackgroundColor: ['#36A2EB', '#FF6384']
+                    }
+                  ]
+                }}
+              />
             </div>
-          </div>
-        </div>
-      )}
-    </div>
+
+            <div className='stat'>
+              <h3>Usuarios</h3>
+              <Pie
+                data={{
+                  labels: ['Registrados Activos', 'Registrados Cerrados'],
+                  datasets: [
+                    {
+                      data: [registeredUsersActive, registeredUsersClosed],
+                      backgroundColor: ['#36A2EB', '#FF6384'],
+                      hoverBackgroundColor: ['#36A2EB', '#FF6384']
+                    }
+                  ]
+                }}
+              />
+              <div>
+                Registrados con Login Service:{' '}
+                <b>{registeredUsersLoginService}</b>
+              </div>
+            </div>
+          </>
+        )}
+      </div>
+    </>
   )
 }
 

@@ -12,8 +12,10 @@ const Stats = () => {
   return (
     <StatsWrapper>
       <h2>Estadisticas</h2>
-      <StatsTotal />
-      <StatsPartial />
+      <div className='stats'>
+        <StatsTotal />
+        <StatsPartial />
+      </div>
     </StatsWrapper>
   )
 }

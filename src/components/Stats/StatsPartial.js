@@ -37,7 +37,7 @@ const StatsPartial = () => {
   }, []) //eslint-disable-line
 
   return (
-    <div>
+    <div className='partial'>
       <div className='time-range'>
         <div className='date'>
           <h4>Comienzo</h4>

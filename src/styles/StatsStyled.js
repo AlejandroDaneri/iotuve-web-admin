@@ -17,24 +17,29 @@ export const StatsWrapper = styled.div`
     display: flex;
     flex-direction: column;
 
-    & .time-range {
-      display: flex;
-      border: 1px solid white;
-      align-items: center;
-      justify-content: flex-start;
-
-      & .date {
-        margin: 2%;
-      }
-    }
-
-    & .numerical {
+    & .total {
       display: flex;
       flex-direction: row;
 
       & .stat {
         padding: 1%;
       }
+    }
+
+    & .partial {
+      & .time-range {
+        display: flex;
+        border: 1px solid white;
+        align-items: center;
+        justify-content: flex-start;
+
+        & .date {
+          margin: 2%;
+        }
+      }
+    }
+
+    & .numerical {
     }
 
     & .charts {
