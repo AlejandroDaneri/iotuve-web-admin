@@ -15,9 +15,31 @@ export const StatsWrapper = styled.div`
 
   & .stats {
     display: flex;
+    flex-direction: column;
 
-    & .stat {
-      padding: 1%;
+    & .time-range {
+      display: flex;
+      border: 1px solid white;
+      align-items: center;
+      justify-content: flex-start;
+
+      & .date {
+        margin: 2%;
+      }
+    }
+
+    & .numerical {
+      display: flex;
+      flex-direction: row;
+
+      & .stat {
+        padding: 1%;
+      }
+    }
+
+    & .charts {
+      display: flex;
+      width: 100%;
     }
   }
 `

@@ -1,6 +1,9 @@
 /* Import Libs */
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import CircleLoader from 'react-spinners/CircleLoader'
+import DatePicker from 'react-datepicker'
+import 'react-datepicker/dist/react-datepicker.css'
+import Button from '@material-ui/core/Button'
 
 /* Import Styled Components */
 import { StatsWrapper } from '../styles/StatsStyled'
@@ -10,8 +13,17 @@ import { getStats } from '../webapi'
 import { COLOR_PRIMARY } from '../constants'
 
 const Stats = () => {
-  const startDate = '2020-04-29'
-  const endDate = '2020-05-30'
+  const start = new Date()
+  start.setDate(start.getDate() - 5)
+
+  const end = new Date()
+
+  const [startDate, changeStartDate] = useState(start)
+  const [endDate, changeEndDate] = useState(end)
+
+  const toString = date => {
+    return `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`
+  }
 
   const [loading, changeLoading] = useState(true)
 
@@ -36,8 +48,9 @@ const Stats = () => {
     changeRegisteredAdminUsersLoginService
   ] = useState()
 
-  useEffect(() => {
-    getStats(startDate, endDate)
+  const doGetStats = useCallback(() => {
+    changeLoading(true)
+    getStats(toString(startDate), toString(endDate))
       .then(response => {
         const { data } = response
         console.error(data)
@@ -59,7 +72,12 @@ const Stats = () => {
       .catch(_ => {
         console.error('Get Stats Error')
       })
-  }, [])
+  }, []) //eslint-disable-line
+
+  useEffect(() => {
+    doGetStats()
+  }, [doGetStats])
+
   return (
     <StatsWrapper>
       <h2>Estadisticas</h2>
@@ -67,48 +85,87 @@ const Stats = () => {
         <CircleLoader color={COLOR_PRIMARY} size={250} />
       ) : (
         <div className='stats'>
-          <div className='stat'>
-            <h3>Sessiones & Links</h3>
-            <div>
-              Sesiones Activas: <b>{activeSessions}</b>
+          <h2>Totales</h2>
+          <div className='numerical'>
+            <div className='stat'>
+              <h3>Sessiones & Links</h3>
+              <div>
+                Sesiones Activas: <b>{activeSessions}</b>
+              </div>
+              <div>
+                Links de Recuperar Contraseña Activos: <b>{activeRecovery}</b>
+              </div>
             </div>
-            <div>
-              Links de Recuperar Contraseña Activos: <b>{activeRecovery}</b>
+
+            <div className='stat'>
+              <h3>Usuarios Admin</h3>
+              <div>
+                Registrados: <b>{registeredAdminUsers}</b>
+              </div>
+              <div>
+                Registrados Activos: <b>{registeredAdminUsersActive}</b>
+              </div>
+              <div>
+                Registrados Cerrados: <b>{registeredAdminUsersClosed}</b>
+              </div>
+            </div>
+
+            <div className='stat'>
+              <h3>Usuarios</h3>
+              <div>
+                Registrados: <b>{registeredUsers}</b>
+              </div>
+              <div>
+                Registrados Activos: <b>{registeredUsersActive}</b>
+              </div>
+              <div>
+                Registrados Cerrados: <b>{registeredUsersClosed}</b>
+              </div>
+              <div>
+                Registrados con Login Service:{' '}
+                <b>{registeredAdminUsersLoginService}</b>
+              </div>
             </div>
           </div>
 
-          <p />
+          <div className='time-range'>
+            <div className='date'>
+              <h4>Comienzo</h4>
+              <DatePicker
+                selected={startDate}
+                onChange={changeStartDate}
+                showTimeSelect
+                dateFormat='yyyy/MM/dd HH:mm'
+                timeFormat='HH:mm'
+                timeIntervals={15}
+                timeCaption='Time'
+              />
+            </div>
 
-          <div className='stat'>
-            <h3>Usuarios Admin</h3>
-            <div>
-              Registrados: <b>{registeredAdminUsers}</b>
+            <div className='date'>
+              <h4>Final</h4>
+              <DatePicker
+                selected={endDate}
+                onChange={changeEndDate}
+                showTimeSelect
+                dateFormat='yyyy/MM/dd HH:mm'
+                timeFormat='HH:mm'
+                timeIntervals={15}
+                timeCaption='Time'
+              />
             </div>
-            <div>
-              Registrados Activos: <b>{registeredAdminUsersActive}</b>
-            </div>
-            <div>
-              Registrados Cerrados: <b>{registeredAdminUsersClosed}</b>
-            </div>
+
+            <Button
+              variant='contained'
+              style={{ backgroundColor: COLOR_PRIMARY }}
+              onClick={doGetStats}
+            >
+              Obtener
+            </Button>
           </div>
 
-          <p />
-
-          <div className='stat'>
-            <h3>Usuarios</h3>
-            <div>
-              Registrados: <b>{registeredUsers}</b>
-            </div>
-            <div>
-              Registrados Activos: <b>{registeredUsersActive}</b>
-            </div>
-            <div>
-              Registrados Cerrados: <b>{registeredUsersClosed}</b>
-            </div>
-            <div>
-              Registrados con Login Service:{' '}
-              <b>{registeredAdminUsersLoginService}</b>
-            </div>
+          <div className='charts'>
+            <h2>Graficos</h2>
           </div>
         </div>
       )}
