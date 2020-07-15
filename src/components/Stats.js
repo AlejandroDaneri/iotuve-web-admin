@@ -1,5 +1,5 @@
 /* Import Libs */
-import React, { useEffect, useState, useCallback } from 'react'
+import React, { useEffect, useState } from 'react'
 import CircleLoader from 'react-spinners/CircleLoader'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
@@ -12,12 +12,12 @@ import { getStats } from '../webapi'
 /* Import Constants */
 import { COLOR_PRIMARY } from '../constants'
 
+const start = new Date()
+start.setDate(start.getDate() - 5)
+
+const end = new Date()
+
 const Stats = () => {
-  const start = new Date()
-  start.setDate(start.getDate() - 5)
-
-  const end = new Date()
-
   const [startDate, changeStartDate] = useState(start)
   const [endDate, changeEndDate] = useState(end)
 
@@ -48,7 +48,7 @@ const Stats = () => {
     changeRegisteredAdminUsersLoginService
   ] = useState()
 
-  const doGetStats = useCallback(() => {
+  const doGetStats = () => {
     changeLoading(true)
     getStats(toString(startDate), toString(endDate))
       .then(response => {
@@ -72,11 +72,11 @@ const Stats = () => {
       .catch(_ => {
         console.error('Get Stats Error')
       })
-  }, []) //eslint-disable-line
+  }
 
   useEffect(() => {
     doGetStats()
-  }, [doGetStats])
+  }, []) //eslint-disable-line
 
   return (
     <StatsWrapper>
