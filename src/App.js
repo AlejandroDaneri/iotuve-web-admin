@@ -10,7 +10,7 @@ import {
 
 /* Import Components */
 import Files from './components/Files'
-import Stats from './components/Stats'
+import Stats from './components/Stats/Stats'
 import Login from './components/Login'
 import User from './components/User/UserMobile/User'
 import UserAdmin from './components/User/UserAdmin/UserAdmin'
