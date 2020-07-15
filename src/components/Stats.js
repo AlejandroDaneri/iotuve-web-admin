@@ -102,20 +102,15 @@ const Stats = () => {
               <h3>Usuarios Admin</h3>
               <Pie
                 data={{
-                  labels: [
-                    'Registrados',
-                    'Registrados Activos',
-                    'Registrados Cerrados'
-                  ],
+                  labels: ['Registrados Activos', 'Registrados Cerrados'],
                   datasets: [
                     {
                       data: [
-                        registeredAdminUsers,
                         registeredAdminUsersActive,
                         registeredAdminUsersClosed
                       ],
-                      backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
-                      hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56']
+                      backgroundColor: ['#36A2EB', '#FF6384'],
+                      hoverBackgroundColor: ['#36A2EB', '#FF6384']
                     }
                   ]
                 }}
@@ -126,20 +121,12 @@ const Stats = () => {
               <h3>Usuarios</h3>
               <Pie
                 data={{
-                  labels: [
-                    'Registrados',
-                    'Registrados Activos',
-                    'Registrados Cerrados'
-                  ],
+                  labels: ['Registrados Activos', 'Registrados Cerrados'],
                   datasets: [
                     {
-                      data: [
-                        registeredUsers,
-                        registeredUsersActive,
-                        registeredUsersClosed
-                      ],
-                      backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
-                      hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56']
+                      data: [registeredUsersActive, registeredUsersClosed],
+                      backgroundColor: ['#36A2EB', '#FF6384'],
+                      hoverBackgroundColor: ['#36A2EB', '#FF6384']
                     }
                   ]
                 }}
