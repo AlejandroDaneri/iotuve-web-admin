@@ -66,44 +66,51 @@ const Stats = () => {
       {loading ? (
         <CircleLoader color={COLOR_PRIMARY} size={250} />
       ) : (
-        <>
-          <div>
-            Sesiones Activas: <b>{activeSessions}</b>
-          </div>
-          <div>
-            Links de Recuperar Contraseña Activos: <b>{activeRecovery}</b>
-          </div>
-
-          <p />
-
-          <h3>Usuarios Admin</h3>
-          <div>
-            Registrados: <b>{registeredAdminUsers}</b>
-          </div>
-          <div>
-            Registrados Activos: <b>{registeredAdminUsersActive}</b>
-          </div>
-          <div>
-            Registrados Cerrados: <b>{registeredAdminUsersClosed}</b>
+        <div className='stats'>
+          <div className='stat'>
+            <h3>Sessiones & Links</h3>
+            <div>
+              Sesiones Activas: <b>{activeSessions}</b>
+            </div>
+            <div>
+              Links de Recuperar Contraseña Activos: <b>{activeRecovery}</b>
+            </div>
           </div>
 
           <p />
 
-          <h3>Usuarios</h3>
-          <div>
-            Registrados: <b>{registeredUsers}</b>
+          <div className='stat'>
+            <h3>Usuarios Admin</h3>
+            <div>
+              Registrados: <b>{registeredAdminUsers}</b>
+            </div>
+            <div>
+              Registrados Activos: <b>{registeredAdminUsersActive}</b>
+            </div>
+            <div>
+              Registrados Cerrados: <b>{registeredAdminUsersClosed}</b>
+            </div>
           </div>
-          <div>
-            Registrados Activos: <b>{registeredUsersActive}</b>
+
+          <p />
+
+          <div className='stat'>
+            <h3>Usuarios</h3>
+            <div>
+              Registrados: <b>{registeredUsers}</b>
+            </div>
+            <div>
+              Registrados Activos: <b>{registeredUsersActive}</b>
+            </div>
+            <div>
+              Registrados Cerrados: <b>{registeredUsersClosed}</b>
+            </div>
+            <div>
+              Registrados con Login Service:{' '}
+              <b>{registeredAdminUsersLoginService}</b>
+            </div>
           </div>
-          <div>
-            Registrados Cerrados: <b>{registeredUsersClosed}</b>
-          </div>
-          <div>
-            Registrados con Login Service:{' '}
-            <b>{registeredAdminUsersLoginService}</b>
-          </div>
-        </>
+        </div>
       )}
     </StatsWrapper>
   )

@@ -12,4 +12,12 @@ export const StatsWrapper = styled.div`
   & > h2 {
     font-size: 3vmin;
   }
+
+  & .stats {
+    display: flex;
+
+    & .stat {
+      padding: 1%;
+    }
+  }
 `
