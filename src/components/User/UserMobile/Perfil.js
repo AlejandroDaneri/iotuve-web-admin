@@ -144,7 +144,6 @@ const Perfil = ({ username }) => {
           <div className='actions'>
             <div className='action' onClick={() => save()}>
               <Button
-                href='/users'
                 variant='contained'
                 style={{ backgroundColor: COLOR_PRIMARY }}
               >

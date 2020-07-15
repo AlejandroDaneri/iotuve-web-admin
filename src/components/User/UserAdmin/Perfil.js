@@ -89,7 +89,6 @@ const Perfil = ({ username }) => {
       <div className='actions'>
         <div onClick={() => save()}>
           <Button
-            href='/users_admin'
             variant='contained'
             style={{ backgroundColor: COLOR_PRIMARY }}
           >
