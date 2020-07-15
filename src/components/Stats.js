@@ -4,6 +4,7 @@ import CircleLoader from 'react-spinners/CircleLoader'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import Button from '@material-ui/core/Button'
+import { Pie } from 'react-chartjs-2'
 
 /* Import Styled Components */
 import { StatsWrapper } from '../styles/StatsStyled'
@@ -99,15 +100,26 @@ const Stats = () => {
 
             <div className='stat'>
               <h3>Usuarios Admin</h3>
-              <div>
-                Registrados: <b>{registeredAdminUsers}</b>
-              </div>
-              <div>
-                Registrados Activos: <b>{registeredAdminUsersActive}</b>
-              </div>
-              <div>
-                Registrados Cerrados: <b>{registeredAdminUsersClosed}</b>
-              </div>
+              <Pie
+                data={{
+                  labels: [
+                    'Registrados',
+                    'Registrados Activos',
+                    'Registrados Cerrados'
+                  ],
+                  datasets: [
+                    {
+                      data: [
+                        registeredAdminUsers,
+                        registeredAdminUsersActive,
+                        registeredAdminUsersClosed
+                      ],
+                      backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
+                      hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56']
+                    }
+                  ]
+                }}
+              />
             </div>
 
             <div className='stat'>
