@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react'
 import DatePicker from 'react-datepicker'
 import Button from '@material-ui/core/Button'
 import 'react-datepicker/dist/react-datepicker.css'
+import BeatLoader from 'react-spinners/BeatLoader'
 
 /* Import WebApi */
 import { getStats } from '../../webapi'
@@ -17,18 +18,23 @@ const StatsPartial = () => {
   const [startDate, changeStartDate] = useState(generateStart())
   const [endDate, changeEndDate] = useState(generateEnd())
 
+  const [loading, changeLoading] = useState(false)
+
   const toString = date => {
     return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`
   }
 
   const doGetStats = () => {
+    changeLoading(true)
     getStats(toString(startDate), toString(endDate))
       .then(response => {
         const { data } = response
         console.error(data)
+        changeLoading(false)
       })
       .catch(_ => {
         console.error('Get Stats Error')
+        changeLoading(false)
       })
   }
 
@@ -65,13 +71,17 @@ const StatsPartial = () => {
           />
         </div>
 
-        <Button
-          variant='contained'
-          style={{ backgroundColor: COLOR_PRIMARY }}
-          onClick={doGetStats}
-        >
-          Obtener
-        </Button>
+        {loading ? (
+          <BeatLoader color={COLOR_PRIMARY} />
+        ) : (
+          <Button
+            variant='contained'
+            style={{ backgroundColor: COLOR_PRIMARY }}
+            onClick={doGetStats}
+          >
+            Obtener
+          </Button>
+        )}
       </div>
     </div>
   )
