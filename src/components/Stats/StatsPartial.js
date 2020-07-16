@@ -8,7 +8,7 @@ import CircleLoader from 'react-spinners/CircleLoader'
 import { Line } from 'react-chartjs-2'
 
 /* Import WebApi */
-import { getStats } from '../../webapi'
+import { getStatsDaily } from '../../webapi'
 
 /* Import Constants */
 import { COLOR_PRIMARY } from '../../constants'
@@ -28,7 +28,7 @@ const StatsPartial = () => {
 
   const doGetStats = () => {
     changeLoading(true)
-    getStats(toString(startDate), toString(endDate))
+    getStatsDaily(toString(startDate), toString(endDate))
       .then(response => {
         const { data } = response
         changeData(data.daily_stats)

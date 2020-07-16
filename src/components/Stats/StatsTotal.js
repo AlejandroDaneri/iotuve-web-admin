@@ -4,7 +4,7 @@ import { Pie } from 'react-chartjs-2'
 import CircleLoader from 'react-spinners/CircleLoader'
 
 /* Import WebApi */
-import { getStats } from '../../webapi'
+import { getStatsTotal } from '../../webapi'
 
 /* Import Constants */
 import { COLOR_PRIMARY } from '../../constants'
@@ -32,7 +32,7 @@ const StatsTotal = () => {
   ] = useState()
 
   const doGetStats = () => {
-    getStats('2020-04-04', '2020-04-04')
+    getStatsTotal()
       .then(response => {
         const { data } = response
 
