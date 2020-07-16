@@ -100,20 +100,24 @@ const StatsTotal = () => {
                 <h3>Usuarios</h3>
                 <Pie
                   data={{
-                    labels: ['Registrados Activos', 'Registrados Cerrados'],
+                    labels: [
+                      'Registrados Activos',
+                      'Registrados Cerrados',
+                      'Registrados Activos con Login Service'
+                    ],
                     datasets: [
                       {
-                        data: [registeredUsersActive, registeredUsersClosed],
-                        backgroundColor: ['#36A2EB', '#FF6384'],
-                        hoverBackgroundColor: ['#36A2EB', '#FF6384']
+                        data: [
+                          registeredUsersActive - registeredUsersLoginService,
+                          registeredUsersClosed,
+                          registeredUsersLoginService
+                        ],
+                        backgroundColor: ['#36A2EB', '#FF6384', '#FFFF84'],
+                        hoverBackgroundColor: ['#36A2EB', '#FF6384', '#FFFF84']
                       }
                     ]
                   }}
                 />
-                <div>
-                  Registrados con Login Service:{' '}
-                  <b>{registeredUsersLoginService}</b>
-                </div>
               </div>
             </div>
           </>
