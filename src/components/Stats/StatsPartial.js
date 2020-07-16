@@ -13,7 +13,7 @@ import { getStats } from '../../webapi'
 import { COLOR_PRIMARY } from '../../constants'
 
 /* Import Utils */
-import { generateStart, generateEnd } from '../../utils'
+import { generateStart, generateEnd, generateLineConfig } from '../../utils'
 
 const StatsPartial = () => {
   const [startDate, changeStartDate] = useState(generateStart())
@@ -90,90 +90,34 @@ const StatsPartial = () => {
           data={{
             labels: data.map(d => d.date),
             datasets: [
-              {
-                label: 'Requests Users',
-                fill: false,
-                lineTension: 0.1,
-                backgroundColor: 'rgba(75,192,192,0.4)',
-                borderColor: 'rgba(75,192,192,1)',
-                borderCapStyle: 'butt',
-                borderDash: [],
-                borderDashOffset: 0.0,
-                borderJoinStyle: 'miter',
-                pointBorderColor: 'rgba(75,192,192,1)',
-                pointBackgroundColor: '#fff',
-                pointBorderWidth: 1,
-                pointHoverRadius: 5,
-                pointHoverBackgroundColor: 'rgba(75,192,192,1)',
-                pointHoverBorderColor: 'rgba(220,220,220,1)',
-                pointHoverBorderWidth: 2,
-                pointRadius: 1,
-                pointHitRadius: 10,
-                data: data.map(d => d.requests_users)
-              },
-              {
-                label: 'Requests Users Admin',
-                fill: false,
-                lineTension: 0.1,
-                backgroundColor: 'rgba(255,99,132,0.4)',
-                borderColor: 'rgba(255,99,132,1)',
-                borderCapStyle: 'butt',
-                borderDash: [],
-                borderDashOffset: 0.0,
-                borderJoinStyle: 'miter',
-                pointBorderColor: 'rgba(255,99,132,1)',
-                pointBackgroundColor: '#fff',
-                pointBorderWidth: 1,
-                pointHoverRadius: 5,
-                pointHoverBackgroundColor: 'rgba(255,99,132,1)',
-                pointHoverBorderColor: 'rgba(220,220,220,1)',
-                pointHoverBorderWidth: 2,
-                pointRadius: 1,
-                pointHitRadius: 10,
-                data: data.map(d => d.requests_adminusers)
-              },
-              {
-                label: 'Requests Sessions',
-                fill: false,
-                lineTension: 0.1,
-                backgroundColor: 'rgba(255,255,132,0.4)',
-                borderColor: 'rgba(255,255,132,1)',
-                borderCapStyle: 'butt',
-                borderDash: [],
-                borderDashOffset: 0.0,
-                borderJoinStyle: 'miter',
-                pointBorderColor: 'rgba(255,255,132,1)',
-                pointBackgroundColor: '#fff',
-                pointBorderWidth: 1,
-                pointHoverRadius: 5,
-                pointHoverBackgroundColor: 'rgba(255,255,132,1)',
-                pointHoverBorderColor: 'rgba(220,220,220,1)',
-                pointHoverBorderWidth: 2,
-                pointRadius: 1,
-                pointHitRadius: 10,
-                data: data.map(d => d.requests_sessions)
-              },
-              {
-                label: 'Requests Recovery',
-                fill: false,
-                lineTension: 0.1,
-                backgroundColor: 'rgba(0,255,0,0.4)',
-                borderColor: 'rgba(0,255,0,1)',
-                borderCapStyle: 'butt',
-                borderDash: [],
-                borderDashOffset: 0.0,
-                borderJoinStyle: 'miter',
-                pointBorderColor: 'rgba(0,255,0,1)',
-                pointBackgroundColor: '#fff',
-                pointBorderWidth: 1,
-                pointHoverRadius: 5,
-                pointHoverBackgroundColor: 'rgba(0,255,0,1)',
-                pointHoverBorderColor: 'rgba(220,220,220,1)',
-                pointHoverBorderWidth: 2,
-                pointRadius: 1,
-                pointHitRadius: 10,
-                data: data.map(d => d.recovery_requests)
-              }
+              generateLineConfig(
+                75,
+                192,
+                192,
+                'Requests Users',
+                data.map(d => d.requests_users)
+              ),
+              generateLineConfig(
+                255,
+                99,
+                132,
+                'Requests Users Admin',
+                data.map(d => d.requests_adminusers)
+              ),
+              generateLineConfig(
+                255,
+                255,
+                132,
+                'Requests Sessions',
+                data.map(d => d.requests_sessions)
+              ),
+              generateLineConfig(
+                0,
+                255,
+                0,
+                'Requests Recovery',
+                data.map(d => d.recovery_requests)
+              )
             ]
           }}
         />
