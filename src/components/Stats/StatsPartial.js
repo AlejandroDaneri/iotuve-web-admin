@@ -4,6 +4,7 @@ import DatePicker from 'react-datepicker'
 import Button from '@material-ui/core/Button'
 import 'react-datepicker/dist/react-datepicker.css'
 import BeatLoader from 'react-spinners/BeatLoader'
+import CircleLoader from 'react-spinners/CircleLoader'
 import { Line } from 'react-chartjs-2'
 
 /* Import WebApi */
@@ -85,43 +86,47 @@ const StatsPartial = () => {
           </Button>
         )}
       </div>
-      <div className='chart'>
-        <Line
-          data={{
-            labels: data.map(d => d.date),
-            datasets: [
-              generateLineConfig(
-                75,
-                192,
-                192,
-                'Requests Users',
-                data.map(d => d.requests_users)
-              ),
-              generateLineConfig(
-                255,
-                99,
-                132,
-                'Requests Users Admin',
-                data.map(d => d.requests_adminusers)
-              ),
-              generateLineConfig(
-                255,
-                255,
-                132,
-                'Requests Sessions',
-                data.map(d => d.requests_sessions)
-              ),
-              generateLineConfig(
-                0,
-                255,
-                0,
-                'Requests Recovery',
-                data.map(d => d.recovery_requests)
-              )
-            ]
-          }}
-        />
-      </div>
+      {loading ? (
+        <CircleLoader color={COLOR_PRIMARY} size={250} />
+      ) : (
+        <div className='chart'>
+          <Line
+            data={{
+              labels: data.map(d => d.date),
+              datasets: [
+                generateLineConfig(
+                  75,
+                  192,
+                  192,
+                  'Requests Users',
+                  data.map(d => d.requests_users)
+                ),
+                generateLineConfig(
+                  255,
+                  99,
+                  132,
+                  'Requests Users Admin',
+                  data.map(d => d.requests_adminusers)
+                ),
+                generateLineConfig(
+                  255,
+                  255,
+                  132,
+                  'Requests Sessions',
+                  data.map(d => d.requests_sessions)
+                ),
+                generateLineConfig(
+                  0,
+                  255,
+                  0,
+                  'Requests Recovery',
+                  data.map(d => d.recovery_requests)
+                )
+              ]
+            }}
+          />
+        </div>
+      )}
     </div>
   )
 }
