@@ -77,42 +77,43 @@ const StatsTotal = () => {
               </div>
             </div>
 
-            <div className='stat'>
-              <h3>Usuarios Admin</h3>
-              <Pie
-                data={{
-                  labels: ['Registrados Activos', 'Registrados Cerrados'],
-                  datasets: [
-                    {
-                      data: [
-                        registeredAdminUsersActive,
-                        registeredAdminUsersClosed
-                      ],
-                      backgroundColor: ['#36A2EB', '#FF6384'],
-                      hoverBackgroundColor: ['#36A2EB', '#FF6384']
-                    }
-                  ]
-                }}
-              />
-            </div>
-
-            <div className='stat'>
-              <h3>Usuarios</h3>
-              <Pie
-                data={{
-                  labels: ['Registrados Activos', 'Registrados Cerrados'],
-                  datasets: [
-                    {
-                      data: [registeredUsersActive, registeredUsersClosed],
-                      backgroundColor: ['#36A2EB', '#FF6384'],
-                      hoverBackgroundColor: ['#36A2EB', '#FF6384']
-                    }
-                  ]
-                }}
-              />
-              <div>
-                Registrados con Login Service:{' '}
-                <b>{registeredUsersLoginService}</b>
+            <div className='pies'>
+              <div className='pie'>
+                <h3>Usuarios Admin</h3>
+                <Pie
+                  data={{
+                    labels: ['Registrados Activos', 'Registrados Cerrados'],
+                    datasets: [
+                      {
+                        data: [
+                          registeredAdminUsersActive,
+                          registeredAdminUsersClosed
+                        ],
+                        backgroundColor: ['#36A2EB', '#FF6384'],
+                        hoverBackgroundColor: ['#36A2EB', '#FF6384']
+                      }
+                    ]
+                  }}
+                />
+              </div>
+              <div className='pie'>
+                <h3>Usuarios</h3>
+                <Pie
+                  data={{
+                    labels: ['Registrados Activos', 'Registrados Cerrados'],
+                    datasets: [
+                      {
+                        data: [registeredUsersActive, registeredUsersClosed],
+                        backgroundColor: ['#36A2EB', '#FF6384'],
+                        hoverBackgroundColor: ['#36A2EB', '#FF6384']
+                      }
+                    ]
+                  }}
+                />
+                <div>
+                  Registrados con Login Service:{' '}
+                  <b>{registeredUsersLoginService}</b>
+                </div>
               </div>
             </div>
           </>

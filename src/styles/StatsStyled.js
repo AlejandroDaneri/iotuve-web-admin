@@ -8,6 +8,7 @@ export const StatsWrapper = styled.div`
   width: calc(100% - 215px);
   position: absolute;
   left: 215px;
+  background-color: #282c34;
 
   & > h2 {
     font-size: 3vmin;
@@ -16,13 +17,21 @@ export const StatsWrapper = styled.div`
   & .stats {
     display: flex;
     flex-direction: column;
+    width: calc(100% - 215px);
 
     & .total {
       display: flex;
-      flex-direction: row;
+      flex-direction: column;
+      width: 100%;
 
-      & .stat {
+      & .pies {
+        display: flex;
+        width: 100%;
         padding: 1%;
+
+        & .pie {
+          width: 50%;
+        }
       }
     }
 
