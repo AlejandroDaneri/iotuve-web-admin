@@ -131,6 +131,48 @@ const StatsPartial = () => {
                 pointRadius: 1,
                 pointHitRadius: 10,
                 data: data.map(d => d.requests_adminusers)
+              },
+              {
+                label: 'Requests Sessions',
+                fill: false,
+                lineTension: 0.1,
+                backgroundColor: 'rgba(255,255,132,0.4)',
+                borderColor: 'rgba(255,255,132,1)',
+                borderCapStyle: 'butt',
+                borderDash: [],
+                borderDashOffset: 0.0,
+                borderJoinStyle: 'miter',
+                pointBorderColor: 'rgba(255,255,132,1)',
+                pointBackgroundColor: '#fff',
+                pointBorderWidth: 1,
+                pointHoverRadius: 5,
+                pointHoverBackgroundColor: 'rgba(255,255,132,1)',
+                pointHoverBorderColor: 'rgba(220,220,220,1)',
+                pointHoverBorderWidth: 2,
+                pointRadius: 1,
+                pointHitRadius: 10,
+                data: data.map(d => d.requests_sessions)
+              },
+              {
+                label: 'Requests Recovery',
+                fill: false,
+                lineTension: 0.1,
+                backgroundColor: 'rgba(0,255,0,0.4)',
+                borderColor: 'rgba(0,255,0,1)',
+                borderCapStyle: 'butt',
+                borderDash: [],
+                borderDashOffset: 0.0,
+                borderJoinStyle: 'miter',
+                pointBorderColor: 'rgba(0,255,0,1)',
+                pointBackgroundColor: '#fff',
+                pointBorderWidth: 1,
+                pointHoverRadius: 5,
+                pointHoverBackgroundColor: 'rgba(0,255,0,1)',
+                pointHoverBorderColor: 'rgba(220,220,220,1)',
+                pointHoverBorderWidth: 2,
+                pointRadius: 1,
+                pointHitRadius: 10,
+                data: data.map(d => d.recovery_requests)
               }
             ]
           }}
