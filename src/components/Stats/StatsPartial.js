@@ -4,6 +4,7 @@ import DatePicker from 'react-datepicker'
 import Button from '@material-ui/core/Button'
 import 'react-datepicker/dist/react-datepicker.css'
 import BeatLoader from 'react-spinners/BeatLoader'
+import { Line } from 'react-chartjs-2'
 
 /* Import WebApi */
 import { getStats } from '../../webapi'
@@ -17,7 +18,7 @@ import { generateStart, generateEnd } from '../../utils'
 const StatsPartial = () => {
   const [startDate, changeStartDate] = useState(generateStart())
   const [endDate, changeEndDate] = useState(generateEnd())
-
+  const [data, changeData] = useState([])
   const [loading, changeLoading] = useState(false)
 
   const toString = date => {
@@ -29,7 +30,8 @@ const StatsPartial = () => {
     getStats(toString(startDate), toString(endDate))
       .then(response => {
         const { data } = response
-        console.error(data)
+        changeData(data.daily_stats)
+        console.error(data.daily_stats)
         changeLoading(false)
       })
       .catch(_ => {
@@ -82,6 +84,57 @@ const StatsPartial = () => {
             Obtener
           </Button>
         )}
+      </div>
+      <div className='chart'>
+        <Line
+          data={{
+            labels: data.map(d => d.date),
+            datasets: [
+              {
+                label: 'Requests Users',
+                fill: false,
+                lineTension: 0.1,
+                backgroundColor: 'rgba(75,192,192,0.4)',
+                borderColor: 'rgba(75,192,192,1)',
+                borderCapStyle: 'butt',
+                borderDash: [],
+                borderDashOffset: 0.0,
+                borderJoinStyle: 'miter',
+                pointBorderColor: 'rgba(75,192,192,1)',
+                pointBackgroundColor: '#fff',
+                pointBorderWidth: 1,
+                pointHoverRadius: 5,
+                pointHoverBackgroundColor: 'rgba(75,192,192,1)',
+                pointHoverBorderColor: 'rgba(220,220,220,1)',
+                pointHoverBorderWidth: 2,
+                pointRadius: 1,
+                pointHitRadius: 10,
+                data: data.map(d => d.requests_users)
+              },
+              {
+                label: 'Requests Users Admin',
+                fill: false,
+                lineTension: 0.1,
+                backgroundColor: 'rgba(255,99,132,0.4)',
+                borderColor: 'rgba(255,99,132,1)',
+                borderCapStyle: 'butt',
+                borderDash: [],
+                borderDashOffset: 0.0,
+                borderJoinStyle: 'miter',
+                pointBorderColor: 'rgba(255,99,132,1)',
+                pointBackgroundColor: '#fff',
+                pointBorderWidth: 1,
+                pointHoverRadius: 5,
+                pointHoverBackgroundColor: 'rgba(255,99,132,1)',
+                pointHoverBorderColor: 'rgba(220,220,220,1)',
+                pointHoverBorderWidth: 2,
+                pointRadius: 1,
+                pointHitRadius: 10,
+                data: data.map(d => d.requests_adminusers)
+              }
+            ]
+          }}
+        />
       </div>
     </div>
   )
