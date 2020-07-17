@@ -199,6 +199,109 @@ const StatsPartial = () => {
               }}
             />
           </div>
+
+          <div className='chart'>
+            <h1>Actividad de las Cuentas</h1>
+            <Line
+              data={{
+                labels: data.map(d => d.date),
+                datasets: [
+                  generateLineConfig(
+                    0,
+                    0,
+                    255,
+                    'Usuarios Nuevos',
+                    data.map(d => d.users_new)
+                  ),
+                  generateLineConfig(
+                    0,
+                    255,
+                    0,
+                    'Usuarios Borrados',
+                    data.map(d => d.users_deleted)
+                  ),
+                  generateLineConfig(
+                    255,
+                    0,
+                    0,
+                    'Recuperaciones de Contraseña',
+                    data.map(d => d.recovery_requests)
+                  )
+                ]
+              }}
+            />
+          </div>
+
+          <div className='chart'>
+            <h1>Actividad de los Usuarios</h1>
+            <Line
+              data={{
+                labels: data.map(d => d.date),
+                datasets: [
+                  generateLineConfig(
+                    0,
+                    0,
+                    255,
+                    'Sesiones Abiertas',
+                    data.map(d => d.sessions_opened)
+                  ),
+                  generateLineConfig(
+                    0,
+                    255,
+                    0,
+                    'Sesiones Cerradas',
+                    data.map(d => d.sessions_closed)
+                  )
+                ]
+              }}
+            />
+          </div>
+
+          <div className='chart'>
+            <h1>Errores en las Requests</h1>
+            <Line
+              data={{
+                labels: data.map(d => d.date),
+                datasets: [
+                  generateLineConfig(
+                    255,
+                    0,
+                    0,
+                    '400',
+                    data.map(d => d.requests_error_400)
+                  ),
+                  generateLineConfig(
+                    0,
+                    255,
+                    0,
+                    '401',
+                    data.map(d => d.requests_error_401)
+                  ),
+                  generateLineConfig(
+                    0,
+                    0,
+                    255,
+                    '404',
+                    data.map(d => d.requests_error_404)
+                  ),
+                  generateLineConfig(
+                    255,
+                    255,
+                    255,
+                    '405',
+                    data.map(d => d.requests_error_404)
+                  ),
+                  generateLineConfig(
+                    100,
+                    100,
+                    20,
+                    '500',
+                    data.map(d => d.requests_error_404)
+                  )
+                ]
+              }}
+            />
+          </div>
         </>
       )}
     </div>
