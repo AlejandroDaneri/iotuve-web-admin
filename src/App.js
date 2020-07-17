@@ -11,6 +11,8 @@ import {
 /* Import Components */
 import Files from './components/Files'
 import Stats from './components/Stats/Stats'
+import StatsDaily from './components/Stats/StatsDaily'
+import StatsTotal from './components/Stats/StatsTotal'
 import Login from './components/Login'
 import User from './components/User/UserMobile/User'
 import UserAdmin from './components/User/UserAdmin/UserAdmin'
@@ -54,6 +56,8 @@ const App = () => {
             <PrivateRoute path='/user_admin/:username' component={UserAdmin} />
             <PrivateRoute path='/users_admin' component={UsersAdmin} />
             <PrivateRoute path='/stats' component={Stats} />
+            <PrivateRoute path='/stats_daily' component={StatsDaily} />
+            <PrivateRoute path='/stats_total' component={StatsTotal} />
             <Route path='/change_password' component={ChangePassword} />
           </Switch>
         </div>

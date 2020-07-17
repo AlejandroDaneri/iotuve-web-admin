@@ -7,6 +7,9 @@ import BeatLoader from 'react-spinners/BeatLoader'
 import CircleLoader from 'react-spinners/CircleLoader'
 import { Line } from 'react-chartjs-2'
 
+/* Import Styled Components */
+import { StatWrapper } from '../../styles/StatStyled'
+
 /* Import WebApi */
 import { getStatsDaily } from '../../webapi'
 
@@ -47,7 +50,8 @@ const StatsPartial = () => {
   }, []) //eslint-disable-line
 
   return (
-    <div className='partial'>
+    <StatWrapper>
+      <h1>Estadisticas por Dia</h1>
       <div className='time-range'>
         <div className='date'>
           <h4>Comienzo</h4>
@@ -87,14 +91,15 @@ const StatsPartial = () => {
           </Button>
         )}
       </div>
+
       {loading ? (
         <CircleLoader color={COLOR_PRIMARY} size={250} />
       ) : (
         <>
           <div className='chart'>
-            <h1>
+            <h2>
               Request de: Usuarios | Admines | Sessiones | Recuperar Contraseña
-            </h1>
+            </h2>
             <Line
               data={{
                 labels: data.map(d => d.date),
@@ -133,7 +138,7 @@ const StatsPartial = () => {
           </div>
 
           <div className='chart'>
-            <h1>Requests Total</h1>
+            <h2>Requests Total</h2>
             <Line
               data={{
                 labels: data.map(d => d.date),
@@ -151,7 +156,7 @@ const StatsPartial = () => {
           </div>
 
           <div className='chart'>
-            <h1>Request por Minuto</h1>
+            <h2>Request por Minuto</h2>
             <Line
               data={{
                 labels: data.map(d => d.date),
@@ -169,7 +174,7 @@ const StatsPartial = () => {
           </div>
 
           <div className='chart'>
-            <h1>Tiempos de respuesta de las requests</h1>
+            <h2>Tiempos de respuesta de las requests</h2>
             <Line
               data={{
                 labels: data.map(d => d.date),
@@ -201,7 +206,7 @@ const StatsPartial = () => {
           </div>
 
           <div className='chart'>
-            <h1>Actividad de las Cuentas</h1>
+            <h2>Actividad de las Cuentas</h2>
             <Line
               data={{
                 labels: data.map(d => d.date),
@@ -233,7 +238,7 @@ const StatsPartial = () => {
           </div>
 
           <div className='chart'>
-            <h1>Actividad de los Usuarios</h1>
+            <h2>Actividad de los Usuarios</h2>
             <Line
               data={{
                 labels: data.map(d => d.date),
@@ -258,7 +263,7 @@ const StatsPartial = () => {
           </div>
 
           <div className='chart'>
-            <h1>Errores en las Requests</h1>
+            <h2>Errores en las Requests</h2>
             <Line
               data={{
                 labels: data.map(d => d.date),
@@ -304,7 +309,7 @@ const StatsPartial = () => {
           </div>
         </>
       )}
-    </div>
+    </StatWrapper>
   )
 }
 

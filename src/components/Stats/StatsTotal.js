@@ -6,6 +6,9 @@ import CircleLoader from 'react-spinners/CircleLoader'
 /* Import WebApi */
 import { getStatsTotal } from '../../webapi'
 
+/* Import Styled Components */
+import { StatWrapper } from '../../styles/StatStyled'
+
 /* Import Constants */
 import { COLOR_PRIMARY } from '../../constants'
 
@@ -60,70 +63,68 @@ const StatsTotal = () => {
   }, []) //eslint-disable-line
 
   return (
-    <>
-      <h2>Totales</h2>
-      <div className='total'>
-        {loading ? (
-          <CircleLoader color={COLOR_PRIMARY} size={250} />
-        ) : (
+    <StatWrapper>
+      <h1>Estadisticas Totales</h1>
+      {loading ? (
+        <CircleLoader color={COLOR_PRIMARY} size={250} />
+      ) : (
+        <>
           <>
-            <div className='stat'>
-              <h3>Sessiones & Links</h3>
-              <div>
-                Sesiones Activas: <b>{activeSessions}</b>
-              </div>
-              <div>
-                Links de Recuperar Contraseña Activos: <b>{activeRecovery}</b>
-              </div>
+            <h3>Sessiones & Links</h3>
+            <div>
+              Sesiones Activas: <b>{activeSessions}</b>
             </div>
-
-            <div className='pies'>
-              <div className='pie'>
-                <h3>Usuarios Admin</h3>
-                <Pie
-                  data={{
-                    labels: ['Registrados Activos', 'Registrados Cerrados'],
-                    datasets: [
-                      {
-                        data: [
-                          registeredAdminUsersActive,
-                          registeredAdminUsersClosed
-                        ],
-                        backgroundColor: ['#36A2EB', '#FF6384'],
-                        hoverBackgroundColor: ['#36A2EB', '#FF6384']
-                      }
-                    ]
-                  }}
-                />
-              </div>
-              <div className='pie'>
-                <h3>Usuarios</h3>
-                <Pie
-                  data={{
-                    labels: [
-                      'Registrados Activos',
-                      'Registrados Cerrados',
-                      'Registrados Activos con Login Service'
-                    ],
-                    datasets: [
-                      {
-                        data: [
-                          registeredUsersActive - registeredUsersLoginService,
-                          registeredUsersClosed,
-                          registeredUsersLoginService
-                        ],
-                        backgroundColor: ['#36A2EB', '#FF6384', '#FFFF84'],
-                        hoverBackgroundColor: ['#36A2EB', '#FF6384', '#FFFF84']
-                      }
-                    ]
-                  }}
-                />
-              </div>
+            <div>
+              Links de Recuperar Contraseña Activos: <b>{activeRecovery}</b>
             </div>
           </>
-        )}
-      </div>
-    </>
+
+          <>
+            <div className='chart'>
+              <h3>Usuarios Admin</h3>
+              <Pie
+                data={{
+                  labels: ['Registrados Activos', 'Registrados Cerrados'],
+                  datasets: [
+                    {
+                      data: [
+                        registeredAdminUsersActive,
+                        registeredAdminUsersClosed
+                      ],
+                      backgroundColor: ['#36A2EB', '#FF6384'],
+                      hoverBackgroundColor: ['#36A2EB', '#FF6384']
+                    }
+                  ]
+                }}
+              />
+            </div>
+            <div className='chart'>
+              <h3>Usuarios</h3>
+              <Pie
+                data={{
+                  labels: [
+                    'Registrados Activos',
+                    'Registrados Cerrados',
+                    'Registrados Activos con Login Service'
+                  ],
+                  datasets: [
+                    {
+                      data: [
+                        registeredUsersActive - registeredUsersLoginService,
+                        registeredUsersClosed,
+                        registeredUsersLoginService
+                      ],
+                      backgroundColor: ['#36A2EB', '#FF6384', '#FFFF84'],
+                      hoverBackgroundColor: ['#36A2EB', '#FF6384', '#FFFF84']
+                    }
+                  ]
+                }}
+              />
+            </div>
+          </>
+        </>
+      )}
+    </StatWrapper>
   )
 }
 
