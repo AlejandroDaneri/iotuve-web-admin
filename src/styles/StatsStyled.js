@@ -14,56 +14,23 @@ export const StatsWrapper = styled.div`
     font-size: 3vmin;
   }
 
-  & .stats {
+  & .options {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
     width: calc(100% - 215px);
 
-    & .total {
+    & .option {
       display: flex;
       flex-direction: column;
-      width: 100%;
-
-      & .pies {
-        display: flex;
-        width: 100%;
-        padding: 1%;
-
-        & .pie {
-          width: 50%;
-        }
-      }
-    }
-
-    & .partial {
-      display: flex;
-      flex-direction: column;
+      justify-content: center;
       align-items: center;
-      width: 100%;
+      margin: 3%;
 
-      & .time-range {
-        display: flex;
-        border: 1px solid white;
-        align-items: center;
-        justify-content: flex-start;
-        width: 100%;
-
-        & .date {
-          margin: 2%;
-        }
+      & .picture {
+        margin-bottom: 4%;
       }
-
-      & .chart {
-        width: 70%;
-      }
-    }
-
-    & .numerical {
-    }
-
-    & .charts {
-      display: flex;
-      width: 100%;
     }
   }
 `
