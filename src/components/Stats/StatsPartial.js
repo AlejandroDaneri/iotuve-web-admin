@@ -142,7 +142,7 @@ const StatsPartial = () => {
                     75,
                     192,
                     192,
-                    'Requests Por Minuto',
+                    'Total de requests',
                     data.map(d => d.requests_number)
                   )
                 ]
