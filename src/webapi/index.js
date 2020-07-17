@@ -152,6 +152,6 @@ export function getStatsTotal () {
 
 export function getStatsDaily (startDate, endDate) {
   return axios.get(
-    `${authBaseUrl()}/stats_daily?startdate=${startDate}&enddate=${endDate}`
+    `${authBaseUrl()}/stats_daily?startdate=${startDate}&enddate=${endDate}&sortascending=true`
   )
 }
