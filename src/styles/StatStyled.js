@@ -26,6 +26,17 @@ export const StatWrapper = styled.div`
     }
   }
 
+  & .charts {
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+    padding-top: 4%;
+
+    & .chart {
+      width: 50%;
+    }
+  }
+
   & .chart {
     width: 90%;
   }

@@ -79,7 +79,7 @@ const StatsTotal = () => {
             </div>
           </>
 
-          <>
+          <div className='charts'>
             <div className='chart'>
               <h3>Usuarios Admin</h3>
               <Pie
@@ -121,7 +121,7 @@ const StatsTotal = () => {
                 }}
               />
             </div>
-          </>
+          </div>
         </>
       )}
     </StatWrapper>
