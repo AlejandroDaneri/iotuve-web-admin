@@ -31,6 +31,7 @@ const StatsPartial = () => {
     getStatsDaily(toString(startDate), toString(endDate))
       .then(response => {
         const { data } = response
+        console.error(data.daily_stats)
         changeData(data.daily_stats)
         console.error(data.daily_stats)
         changeLoading(false)
@@ -89,43 +90,116 @@ const StatsPartial = () => {
       {loading ? (
         <CircleLoader color={COLOR_PRIMARY} size={250} />
       ) : (
-        <div className='chart'>
-          <Line
-            data={{
-              labels: data.map(d => d.date),
-              datasets: [
-                generateLineConfig(
-                  75,
-                  192,
-                  192,
-                  'Requests Users',
-                  data.map(d => d.requests_users)
-                ),
-                generateLineConfig(
-                  255,
-                  99,
-                  132,
-                  'Requests Users Admin',
-                  data.map(d => d.requests_adminusers)
-                ),
-                generateLineConfig(
-                  255,
-                  255,
-                  132,
-                  'Requests Sessions',
-                  data.map(d => d.requests_sessions)
-                ),
-                generateLineConfig(
-                  0,
-                  255,
-                  0,
-                  'Requests Recovery',
-                  data.map(d => d.recovery_requests)
-                )
-              ]
-            }}
-          />
-        </div>
+        <>
+          <div className='chart'>
+            <h1>
+              Request de: Usuarios | Admines | Sessiones | Recuperar Contraseña
+            </h1>
+            <Line
+              data={{
+                labels: data.map(d => d.date),
+                datasets: [
+                  generateLineConfig(
+                    75,
+                    192,
+                    192,
+                    'Requests Users',
+                    data.map(d => d.requests_users)
+                  ),
+                  generateLineConfig(
+                    255,
+                    99,
+                    132,
+                    'Requests Users Admin',
+                    data.map(d => d.requests_adminusers)
+                  ),
+                  generateLineConfig(
+                    255,
+                    255,
+                    132,
+                    'Requests Sessions',
+                    data.map(d => d.requests_sessions)
+                  ),
+                  generateLineConfig(
+                    0,
+                    255,
+                    0,
+                    'Requests Recovery',
+                    data.map(d => d.recovery_requests)
+                  )
+                ]
+              }}
+            />
+          </div>
+
+          <div className='chart'>
+            <h1>Requests Total</h1>
+            <Line
+              data={{
+                labels: data.map(d => d.date),
+                datasets: [
+                  generateLineConfig(
+                    75,
+                    192,
+                    192,
+                    'Requests Por Minuto',
+                    data.map(d => d.requests_number)
+                  )
+                ]
+              }}
+            />
+          </div>
+
+          <div className='chart'>
+            <h1>Request por Minuto</h1>
+            <Line
+              data={{
+                labels: data.map(d => d.date),
+                datasets: [
+                  generateLineConfig(
+                    75,
+                    192,
+                    192,
+                    'Requests Por Minuto',
+                    data.map(d => d.requests_per_minute)
+                  )
+                ]
+              }}
+            />
+          </div>
+
+          <div className='chart'>
+            <h1>Tiempos de respuesta de las requests</h1>
+            <Line
+              data={{
+                labels: data.map(d => d.date),
+                datasets: [
+                  generateLineConfig(
+                    255,
+                    0,
+                    0,
+                    'Tiempo Maximo',
+                    data.map(d => d.response_time_max)
+                  ),
+                  generateLineConfig(
+                    0,
+                    255,
+                    0,
+                    'Tiempo Promedio',
+                    data.map(d => d.response_time_avg)
+                  ),
+                  generateLineConfig(
+                    0,
+                    0,
+                    255,
+                    'Tiempo Minimo',
+                    data.map(d => d.response_time_min)
+                  )
+                ]
+              }}
+            />
+          </div>
+        </>
       )}
     </div>
   )
