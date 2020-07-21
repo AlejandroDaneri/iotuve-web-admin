@@ -3,7 +3,7 @@ import CircleLoader from 'react-spinners/CircleLoader'
 import { AUTH_LOGOUT, COLOR_PRIMARY } from '../constants'
 import { getComments } from '../webapi'
 import { useDispatch } from 'react-redux'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { CommentsWrapper } from '../styles/CommentsStyled'
 
 const Comments = () => {
@@ -53,8 +53,12 @@ const Comments = () => {
                   <br />
                   <div style={{ display: 'flex', flexDirection: 'column' }}>
                     <p style={{ fontSize: 'small', paddingLeft: '5px' }}>
-                      {comment.user}
-                      {'______'}
+                      <Link
+                        to={`/user/${comment.user}`}
+                        style={{ color: 'white' }}
+                      >
+                        {comment.user}
+                      </Link>{' '}
                       {parseTimestamp(comment.date_updated)}
                     </p>
                   </div>
