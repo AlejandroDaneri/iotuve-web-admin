@@ -70,21 +70,21 @@ const StatsTotal = () => {
       ) : (
         <>
           <>
-            <h3>Sessiones & Links</h3>
+            <h3>Links y sesiones</h3>
             <div>
-              Sesiones Activas: <b>{activeSessions}</b>
+              Sesiones activas: <b>{activeSessions}</b>
             </div>
             <div>
-              Links de Recuperar Contraseña Activos: <b>{activeRecovery}</b>
+              Links de recuperar contraseña activos: <b>{activeRecovery}</b>
             </div>
           </>
 
           <div className='charts'>
             <div className='chart'>
-              <h3>Usuarios Admin</h3>
+              <h3>Admins</h3>
               <Pie
                 data={{
-                  labels: ['Registrados Activos', 'Registrados Cerrados'],
+                  labels: ['Activos', 'Con cuenta cerrada'],
                   datasets: [
                     {
                       data: [
@@ -103,9 +103,9 @@ const StatsTotal = () => {
               <Pie
                 data={{
                   labels: [
-                    'Registrados Activos',
-                    'Registrados Cerrados',
-                    'Registrados Activos con Login Service'
+                    'Activos',
+                    'Con cuenta cerrada',
+                    'Registrados con login service'
                   ],
                   datasets: [
                     {
