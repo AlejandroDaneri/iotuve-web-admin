@@ -1,11 +1,12 @@
 /* Import Libs */
 import React, { useState, useEffect } from 'react'
-import DatePicker from 'react-datepicker'
+import DatePicker, { registerLocale } from 'react-datepicker'
 import Button from '@material-ui/core/Button'
 import 'react-datepicker/dist/react-datepicker.css'
 import BeatLoader from 'react-spinners/BeatLoader'
 import CircleLoader from 'react-spinners/CircleLoader'
 import { Line } from 'react-chartjs-2'
+import { es } from 'date-fns/esm/locale'
 
 /* Import Styled Components */
 import { StatWrapper } from '../../styles/StatStyled'
@@ -20,6 +21,7 @@ import { COLOR_PRIMARY } from '../../constants'
 import { generateStart, generateEnd, generateLineConfig } from '../../utils'
 
 const StatsPartial = () => {
+  registerLocale('es', es)
   const [startDate, changeStartDate] = useState(generateStart())
   const [endDate, changeEndDate] = useState(generateEnd())
   const [data, changeData] = useState([])
@@ -51,18 +53,15 @@ const StatsPartial = () => {
 
   return (
     <StatWrapper>
-      <h1>Estadisticas por Dia</h1>
+      <h1>Estadísticas por día</h1>
       <div className='time-range'>
         <div className='date'>
           <h4>Comienzo</h4>
           <DatePicker
             selected={startDate}
             onChange={changeStartDate}
-            showTimeSelect
-            dateFormat='yyyy/MM/dd HH:mm'
-            timeFormat='HH:mm'
-            timeIntervals={15}
-            timeCaption='Time'
+            dateFormat='dd/MM/yyyy'
+            locale='es'
           />
         </div>
 
@@ -71,11 +70,8 @@ const StatsPartial = () => {
           <DatePicker
             selected={endDate}
             onChange={changeEndDate}
-            showTimeSelect
-            dateFormat='yyyy/MM/dd HH:mm'
-            timeFormat='HH:mm'
-            timeIntervals={15}
-            timeCaption='Time'
+            dateFormat='dd/MM/yyyy'
+            locale='es'
           />
         </div>
 
@@ -97,9 +93,7 @@ const StatsPartial = () => {
       ) : (
         <>
           <div className='chart'>
-            <h2>
-              Request de: Usuarios | Admines | Sessiones | Recuperar Contraseña
-            </h2>
+            <h2>Requests recibidas</h2>
             <Line
               data={{
                 labels: data.map(d => d.date),
@@ -108,29 +102,29 @@ const StatsPartial = () => {
                     75,
                     192,
                     192,
-                    'Requests Users',
+                    'Requests users',
                     data.map(d => d.requests_users)
                   ),
                   generateLineConfig(
                     255,
                     99,
                     132,
-                    'Requests Users Admin',
+                    'Requests admins',
                     data.map(d => d.requests_adminusers)
                   ),
                   generateLineConfig(
                     255,
                     255,
                     132,
-                    'Requests Sessions',
+                    'Requests sessions',
                     data.map(d => d.requests_sessions)
                   ),
                   generateLineConfig(
                     0,
                     255,
                     0,
-                    'Requests Recovery',
-                    data.map(d => d.recovery_requests)
+                    'Requests recovery',
+                    data.map(d => d.requests_recovery)
                   )
                 ]
               }}
@@ -138,7 +132,7 @@ const StatsPartial = () => {
           </div>
 
           <div className='chart'>
-            <h2>Requests Total</h2>
+            <h2>Requests totales</h2>
             <Line
               data={{
                 labels: data.map(d => d.date),
@@ -147,7 +141,7 @@ const StatsPartial = () => {
                     75,
                     192,
                     192,
-                    'Total de requests',
+                    'Requests',
                     data.map(d => d.requests_number)
                   )
                 ]
@@ -156,7 +150,7 @@ const StatsPartial = () => {
           </div>
 
           <div className='chart'>
-            <h2>Request por Minuto</h2>
+            <h2>Request promedio por minuto</h2>
             <Line
               data={{
                 labels: data.map(d => d.date),
@@ -165,7 +159,7 @@ const StatsPartial = () => {
                     75,
                     192,
                     192,
-                    'Requests Por Minuto',
+                    'Requests',
                     data.map(d => d.requests_per_minute)
                   )
                 ]
@@ -174,7 +168,7 @@ const StatsPartial = () => {
           </div>
 
           <div className='chart'>
-            <h2>Tiempos de respuesta de las requests</h2>
+            <h2>Tiempo de respuesta en las requests</h2>
             <Line
               data={{
                 labels: data.map(d => d.date),
@@ -183,21 +177,21 @@ const StatsPartial = () => {
                     255,
                     0,
                     0,
-                    'Tiempo Maximo',
+                    'Tiempo máximo',
                     data.map(d => d.response_time_max)
                   ),
                   generateLineConfig(
                     0,
                     255,
                     0,
-                    'Tiempo Promedio',
+                    'Tiempo promedio',
                     data.map(d => d.response_time_avg)
                   ),
                   generateLineConfig(
                     0,
                     0,
                     255,
-                    'Tiempo Minimo',
+                    'Tiempo mínimo',
                     data.map(d => d.response_time_min)
                   )
                 ]
@@ -206,7 +200,7 @@ const StatsPartial = () => {
           </div>
 
           <div className='chart'>
-            <h2>Actividad de las Cuentas</h2>
+            <h2>Actividad en las cuentas</h2>
             <Line
               data={{
                 labels: data.map(d => d.date),
@@ -215,21 +209,21 @@ const StatsPartial = () => {
                     0,
                     0,
                     255,
-                    'Usuarios Nuevos',
+                    'Usuarios nuevos',
                     data.map(d => d.users_new)
                   ),
                   generateLineConfig(
                     0,
                     255,
                     0,
-                    'Usuarios Borrados',
+                    'Usuarios borrados',
                     data.map(d => d.users_deleted)
                   ),
                   generateLineConfig(
                     255,
                     0,
                     0,
-                    'Recuperaciones de Contraseña',
+                    'Recuperaciones de contraseña',
                     data.map(d => d.recovery_requests)
                   )
                 ]
@@ -238,7 +232,7 @@ const StatsPartial = () => {
           </div>
 
           <div className='chart'>
-            <h2>Actividad de los Usuarios</h2>
+            <h2>Actividad de los usuarios</h2>
             <Line
               data={{
                 labels: data.map(d => d.date),
@@ -247,14 +241,14 @@ const StatsPartial = () => {
                     0,
                     0,
                     255,
-                    'Sesiones Abiertas',
+                    'Sesiones abiertas',
                     data.map(d => d.sessions_opened)
                   ),
                   generateLineConfig(
                     0,
                     255,
                     0,
-                    'Sesiones Cerradas',
+                    'Sesiones cerradas',
                     data.map(d => d.sessions_closed)
                   )
                 ]
@@ -263,7 +257,7 @@ const StatsPartial = () => {
           </div>
 
           <div className='chart'>
-            <h2>Errores en las Requests</h2>
+            <h2>Errores en las requests</h2>
             <Line
               data={{
                 labels: data.map(d => d.date),
@@ -272,36 +266,36 @@ const StatsPartial = () => {
                     255,
                     0,
                     0,
-                    '400',
+                    '400: Bad request',
                     data.map(d => d.requests_error_400)
                   ),
                   generateLineConfig(
                     0,
                     255,
                     0,
-                    '401',
+                    '401: Unauthorized',
                     data.map(d => d.requests_error_401)
                   ),
                   generateLineConfig(
                     0,
                     0,
                     255,
-                    '404',
+                    '404: Not Found',
                     data.map(d => d.requests_error_404)
                   ),
                   generateLineConfig(
                     255,
                     255,
                     255,
-                    '405',
-                    data.map(d => d.requests_error_404)
+                    '405: Method Not Allowed ',
+                    data.map(d => d.requests_error_405)
                   ),
                   generateLineConfig(
                     100,
                     100,
                     20,
-                    '500',
-                    data.map(d => d.requests_error_404)
+                    '500: Internal Server Error',
+                    data.map(d => d.requests_error_500)
                   )
                 ]
               }}
