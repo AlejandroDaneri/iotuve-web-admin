@@ -6,7 +6,6 @@ import React, { useState } from 'react'
 import { getToken } from '../../../stateapi/auth'
 import { useSelector } from 'react-redux'
 
-// TODO: poner snackbar para dar feedback
 const NewAdminModal = ({ modalOpen, changeModalOpen }) => {
   const token = useSelector(getToken)
   const [username, setUsername] = useState('')

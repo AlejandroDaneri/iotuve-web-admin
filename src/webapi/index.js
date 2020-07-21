@@ -34,7 +34,11 @@ export function authBaseUrl () {
 }
 
 export function getVideos () {
-  return axios.get(appBaseUrl() + '/api/v1/videos')
+  return axios.get(appBaseUrl() + '/api/v1/videos', {
+    params: {
+      limit: 50
+    }
+  })
 }
 
 export function getMediaStatus () {
