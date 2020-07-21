@@ -40,6 +40,14 @@ export function getVideos () {
     }
   })
 }
+export function getComments (id) {
+  return axios.get(appBaseUrl() + '/api/v1/comments', {
+    params: {
+      video: id,
+      limit: 50
+    }
+  })
+}
 
 export function getMediaStatus () {
   return axios.get(mediaBaseUrl() + '/status')

@@ -20,6 +20,7 @@ import Users from './components/Users'
 import UsersAdmin from './components/UsersAdmin'
 import ChangePassword from './components/ChangePassword'
 import Sidebar from './components/Sidebar'
+import Comments from './components/Comments'
 
 /* Import StateApi */
 import { isAuthed, isAuthing } from './stateapi/auth'
@@ -50,6 +51,7 @@ const App = () => {
           <Sidebar />
           <Switch>
             {!authed && <Route exact path='/' component={Login} />}
+            <PrivateRoute path='/files/:video_id' component={Comments} />
             <PrivateRoute path='/files' component={Files} />
             <PrivateRoute path='/users' component={Users} />
             <PrivateRoute path='/user/:username' component={User} />

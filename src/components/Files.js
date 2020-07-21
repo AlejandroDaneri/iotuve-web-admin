@@ -30,6 +30,7 @@ import Tooltip from '@material-ui/core/Tooltip'
 import Collapse from '@material-ui/core/Collapse'
 import Box from '@material-ui/core/Box'
 import Typography from '@material-ui/core/Typography'
+import { Link } from 'react-router-dom'
 
 const Files = () => {
   const [files, changeFiles] = useState()
@@ -207,9 +208,11 @@ const Files = () => {
                               <br />
                             </div>
                             <div style={{ width: '13%' }}>
-                              <Tooltip title='Más informacion'>
-                                <AddIcon />
-                              </Tooltip>
+                              <Link to={`/files/${file.media.video_id}`}>
+                                <Tooltip title='Más información'>
+                                  <AddIcon style={{ color: COLOR_PRIMARY }} />
+                                </Tooltip>
+                              </Link>
                             </div>
                           </div>
                         </Box>
