@@ -158,6 +158,10 @@ export function removeAdminUser (username) {
   return axios.delete(appBaseUrl() + `/api/v1/adminusers/${username}`)
 }
 
+export function removeComment (id) {
+  return axios.delete(appBaseUrl() + `/api/v1/comments/${id}`)
+}
+
 export function getStatsTotal () {
   return axios.get(`${authBaseUrl()}/stats_total`)
 }

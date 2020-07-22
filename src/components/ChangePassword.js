@@ -34,12 +34,10 @@ const ChangePassword = location => {
       .then(_ => {
         changePwdSuccess(true)
         changeShowSnackbar(true)
-        console.error('Change Password Success')
       })
       .catch(_ => {
         changePwdSuccess(false)
         changeShowSnackbar(true)
-        console.error('Change Password Error')
       })
   }
 

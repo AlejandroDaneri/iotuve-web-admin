@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import CircleLoader from 'react-spinners/CircleLoader'
-import { AUTH_LOGOUT, COLOR_ACTIONS, COLOR_PRIMARY } from '../constants'
-import { getComments } from '../webapi'
+import {
+  AUTH_LOGOUT,
+  COLOR_ACTIONS,
+  COLOR_ERROR,
+  COLOR_PRIMARY
+} from '../constants'
+import { getComments, removeComment } from '../webapi'
 import { useDispatch } from 'react-redux'
 import { Link, useParams } from 'react-router-dom'
 import { CommentsWrapper } from '../styles/CommentsStyled'
@@ -13,12 +18,16 @@ import TableCell from '@material-ui/core/TableCell'
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever'
 import Tooltip from '@material-ui/core/Tooltip'
 import DeleteModal from './Modal'
+import { Snackbar, SnackbarContent } from '@material-ui/core'
 
 const Comments = () => {
   const { video_id: videoID } = useParams()
 
   const [comments, setComments] = useState()
   const [openModal, setOpenModal] = useState(false)
+  const [rmvSuccess, setRmvSuccess] = useState(false)
+  const [showSnackbar, setShowSnackbar] = useState(false)
+  const [selected, changeSelected] = useState({})
 
   const dispatch = useDispatch()
 
@@ -62,13 +71,45 @@ const Comments = () => {
     return date.toUTCString()
   }
 
+  function doRemoveComment () {
+    removeComment(selected.id)
+      .then(() => {
+        setRmvSuccess(true)
+        setShowSnackbar(true)
+      })
+      .catch(() => {
+        setRmvSuccess(false)
+        setShowSnackbar(true)
+      })
+  }
+
   return (
     <CommentsWrapper>
       <DeleteModal
         resource='comentario'
         modalOpen={openModal}
         changeModalOpen={setOpenModal}
+        remove={doRemoveComment}
       />
+      <Snackbar
+        open={showSnackbar}
+        onClose={() => setRmvSuccess(false)}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+        autoHideDuration={6000}
+      >
+        <SnackbarContent
+          message={
+            rmvSuccess
+              ? 'Comentario borrado con éxito'
+              : 'Error al borrar el comentario, intente de nuevo'
+          }
+          style={{
+            color: 'black',
+            backgroundColor: rmvSuccess ? COLOR_PRIMARY : COLOR_ERROR,
+            fontSize: '14px'
+          }}
+        />
+      </Snackbar>
       <h2>Comentarios</h2>
       {comments ? (
         <Table>
@@ -113,6 +154,7 @@ const Comments = () => {
                       <DeleteForeverIcon
                         style={{ color: COLOR_ACTIONS }}
                         onClick={() => {
+                          changeSelected(comment)
                           setOpenModal(true)
                         }}
                       />
