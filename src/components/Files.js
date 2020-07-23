@@ -35,7 +35,7 @@ import { Link } from 'react-router-dom'
 const Files = () => {
   const [files, changeFiles] = useState()
 
-  const [selected, changeSelected] = useState({})
+  const [selected, changeSelected] = useState({ media: {} })
   const [modalOpen, changeModalOpen] = useState()
   const [informOpen, changeInformOpen] = useState()
 
@@ -60,7 +60,7 @@ const Files = () => {
   }, [dispatch])
 
   function remove () {
-    removeVideo(selected.video_id)
+    removeVideo(selected.media.video_id)
       .then(response => {
         changeFiles(_.without(files, selected))
         changeModalOpen(false)
@@ -84,7 +84,7 @@ const Files = () => {
     <FilesWrapper>
       <DeleteModal
         resource='vídeo'
-        name={selected.name}
+        name={selected.media.name}
         remove={remove}
         modalOpen={modalOpen}
         changeModalOpen={changeModalOpen}
