@@ -6,7 +6,7 @@ import React, { useState } from 'react'
 import { getToken } from '../../../stateapi/auth'
 import { useSelector } from 'react-redux'
 
-const NewAdminModal = ({ modalOpen, changeModalOpen }) => {
+const NewAdminModal = ({ modalOpen, changeModalOpen, refresh }) => {
   const token = useSelector(getToken)
   const [username, setUsername] = useState('')
   const [pwd, setPwd] = useState('')
@@ -40,6 +40,7 @@ const NewAdminModal = ({ modalOpen, changeModalOpen }) => {
       .then(r => {
         setError(false)
         setInfoOpen(true)
+        refresh()
       })
       .catch(e => {
         setError(true)

@@ -42,28 +42,29 @@ const AdminUsers = () => {
 
   const dispatch = useDispatch()
 
-  useEffect(() => {
-    const usersPromise = new Promise((resolve, reject) => {
-      getAdminUsers()
-        .then(response => {
-          const { data } = response
-          const u = {}
-          data.forEach(user => {
-            u[user.username] = user
+  const usersPromise = new Promise((resolve, reject) => {
+    getAdminUsers()
+      .then(response => {
+        const { data } = response
+        const u = {}
+        data.forEach(user => {
+          u[user.username] = user
+        })
+        changeUsers(u)
+        resolve(u)
+      })
+      .catch(err => {
+        console.error(err)
+        if (err.response !== 500) {
+          dispatch({
+            type: AUTH_LOGOUT
           })
-          changeUsers(u)
-          resolve(u)
-        })
-        .catch(err => {
-          console.error(err)
-          if (err.response !== 500) {
-            dispatch({
-              type: AUTH_LOGOUT
-            })
-          }
-          reject(err)
-        })
-    })
+        }
+        reject(err)
+      })
+  })
+
+  function refresh () {
     usersPromise.then(users => {
       Object.keys(users).forEach(username => {
         getUserAdminSessions(username).then(response => {
@@ -89,7 +90,11 @@ const AdminUsers = () => {
         })
       })
     })
-  }, [dispatch])
+  }
+
+  useEffect(() => {
+    refresh()
+  }, [])
 
   function parseTimestamp (timestamp) {
     const date = new Date(timestamp)
@@ -202,6 +207,7 @@ const AdminUsers = () => {
           <NewAdminModal
             modalOpen={newAdminModalOpen}
             changeModalOpen={changeNewAdminModalOpen}
+            refresh={refresh}
           />
         </>
       ) : (
