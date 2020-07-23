@@ -164,13 +164,15 @@ const Files = () => {
                       {parseTimestamp(file.date_created)}
                     </StyledTableCell>
                     <StyledTableCell>
-                      <DeleteForeverIcon
-                        style={{ color: COLOR_ACTIONS }}
-                        onClick={() => {
-                          changeSelected(file)
-                          changeModalOpen(true)
-                        }}
-                      />
+                      <Tooltip title='Borrar video'>
+                        <DeleteForeverIcon
+                          style={{ color: COLOR_ACTIONS }}
+                          onClick={() => {
+                            changeSelected(file)
+                            changeModalOpen(true)
+                          }}
+                        />
+                      </Tooltip>
                     </StyledTableCell>
                   </StyledTableRow>
                   <StyledTableRow>

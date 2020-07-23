@@ -19,6 +19,7 @@ import DeleteForeverIcon from '@material-ui/icons/DeleteForever'
 import Tooltip from '@material-ui/core/Tooltip'
 import DeleteModal from './Modal'
 import { Snackbar, SnackbarContent } from '@material-ui/core'
+import _ from 'lodash'
 
 const Comments = () => {
   const { video_id: videoID } = useParams()
@@ -50,7 +51,6 @@ const Comments = () => {
   }))(TableRow)
 
   useEffect(() => {
-    console.log(videoID)
     getComments(videoID)
       .then(response => {
         const { data } = response
@@ -74,8 +74,10 @@ const Comments = () => {
   function doRemoveComment () {
     removeComment(selected.id)
       .then(() => {
+        setComments(_.without(comments, selected))
         setRmvSuccess(true)
         setShowSnackbar(true)
+        setOpenModal(false)
       })
       .catch(() => {
         setRmvSuccess(false)
