@@ -42,29 +42,28 @@ const AdminUsers = () => {
 
   const dispatch = useDispatch()
 
-  const usersPromise = new Promise((resolve, reject) => {
-    getAdminUsers()
-      .then(response => {
-        const { data } = response
-        const u = {}
-        data.forEach(user => {
-          u[user.username] = user
-        })
-        changeUsers(u)
-        resolve(u)
-      })
-      .catch(err => {
-        console.error(err)
-        if (err.response !== 500) {
-          dispatch({
-            type: AUTH_LOGOUT
-          })
-        }
-        reject(err)
-      })
-  })
-
   function refresh () {
+    const usersPromise = new Promise((resolve, reject) => {
+      getAdminUsers()
+        .then(response => {
+          const { data } = response
+          const u = {}
+          data.forEach(user => {
+            u[user.username] = user
+          })
+          changeUsers(u)
+          resolve(u)
+        })
+        .catch(err => {
+          console.error(err)
+          if (err.response !== 500) {
+            dispatch({
+              type: AUTH_LOGOUT
+            })
+          }
+          reject(err)
+        })
+    })
     usersPromise.then(users => {
       Object.keys(users).forEach(username => {
         getUserAdminSessions(username).then(response => {
@@ -92,9 +91,12 @@ const AdminUsers = () => {
     })
   }
 
-  useEffect(() => {
-    refresh()
-  }, [])
+  useEffect(
+    () => {
+      refresh()
+    },
+    [] // eslint-disable-line
+  )
 
   function parseTimestamp (timestamp) {
     const date = new Date(timestamp)
