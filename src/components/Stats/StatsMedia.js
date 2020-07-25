@@ -17,7 +17,7 @@ import { getMediaStats } from '../../webapi'
 import { COLOR_PRIMARY } from '../../constants'
 
 /* Import Utils */
-import { generateBarConfig } from '../../utils'
+import { generateBarConfig, barOptions } from '../../utils'
 
 const StatsPartial = () => {
   registerLocale('es', es)
@@ -58,7 +58,7 @@ const StatsPartial = () => {
                     75,
                     192,
                     192,
-                    'cantidad',
+                    'Cantidad',
                     data.most_viewed.map(x => x.count_views)
                   )
                 ]
@@ -75,11 +75,12 @@ const StatsPartial = () => {
                     75,
                     192,
                     192,
-                    'cantidad',
+                    'Cantidad',
                     data.top_active_users.map(x => x.count)
                   )
                 ]
               }}
+              options={barOptions()}
             />
           </div>
           <div className='chart'>
@@ -92,11 +93,12 @@ const StatsPartial = () => {
                     75,
                     192,
                     192,
-                    'cantidad',
+                    'Cantidad',
                     data.top_writer_users.map(x => x.count)
                   )
                 ]
               }}
+              options={barOptions()}
             />
           </div>
           <div className='chart'>
@@ -109,11 +111,12 @@ const StatsPartial = () => {
                     75,
                     192,
                     192,
-                    'cantidad',
+                    'Cantidad',
                     data.top_likes.map(x => x.count_likes)
                   )
                 ]
               }}
+              options={barOptions()}
             />
           </div>
           <div className='chart'>
@@ -126,11 +129,12 @@ const StatsPartial = () => {
                     75,
                     192,
                     192,
-                    'cantidad',
+                    'Cantidad',
                     data.top_dislikes.map(x => x.count_dislikes)
                   )
                 ]
               }}
+              options={barOptions()}
             />
           </div>
           <div className='chart'>
@@ -143,11 +147,12 @@ const StatsPartial = () => {
                     75,
                     192,
                     192,
-                    'cantidad',
+                    'Cantidad',
                     data.top_disliker.map(x => x.count)
                   )
                 ]
               }}
+              options={barOptions()}
             />
           </div>
           <div className='chart'>
@@ -160,11 +165,12 @@ const StatsPartial = () => {
                     75,
                     192,
                     192,
-                    'cantidad',
+                    'Cantidad',
                     data.top_liker.map(x => x.count)
                   )
                 ]
               }}
+              options={barOptions()}
             />
           </div>
           <div className='chart'>

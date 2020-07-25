@@ -44,3 +44,16 @@ export const generateBarConfig = (r, g, b, title, data) => {
     data: data
   }
 }
+export const barOptions = () => {
+  return {
+    scales: {
+      xAxes: [
+        {
+          ticks: {
+            suggestedMin: 0
+          }
+        }
+      ]
+    }
+  }
+}

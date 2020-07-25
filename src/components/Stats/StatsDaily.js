@@ -228,6 +228,17 @@ const StatsPartial = () => {
                   )
                 ]
               }}
+              options={{
+                scales: {
+                  yAxes: [
+                    {
+                      ticks: {
+                        suggestedMin: 0
+                      }
+                    }
+                  ]
+                }
+              }}
             />
           </div>
 
