@@ -32,3 +32,15 @@ export const generateLineConfig = (r, g, b, title, data) => {
     data: data
   }
 }
+
+export const generateBarConfig = (r, g, b, title, data) => {
+  return {
+    label: title,
+    backgroundColor: `rgba(${r},${g},${b},0.4)`,
+    borderColor: `rgba(${r},${g},${b},1)`,
+    borderWidth: 1,
+    hoverBackgroundColor: `rgba(${r},${g},${b},1)`,
+    hoverBorderColor: 'rgba(220,220,220,1)',
+    data: data
+  }
+}

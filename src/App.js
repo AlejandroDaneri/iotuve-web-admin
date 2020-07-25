@@ -27,6 +27,7 @@ import { isAuthed, isAuthing } from './stateapi/auth'
 
 /* Import Styled Components */
 import { AppWrapper } from './styles/AppStyled'
+import StatsMedia from './components/Stats/StatsMedia'
 
 const PrivateRoute = ({ ...rest }) => {
   const authed = useSelector(isAuthed)
@@ -60,6 +61,7 @@ const App = () => {
             <PrivateRoute path='/stats' component={Stats} />
             <PrivateRoute path='/stats_daily' component={StatsDaily} />
             <PrivateRoute path='/stats_total' component={StatsTotal} />
+            <PrivateRoute path='/stats_media' component={StatsMedia} />
             <Route path='/change_password' component={ChangePassword} />
           </Switch>
         </div>

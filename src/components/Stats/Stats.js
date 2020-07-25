@@ -80,33 +80,12 @@ const Stats = () => {
               }}
             />
           </div>
-          <Link to='/stats_total'>
+          <Link to='/stats_media'>
             <Button
               variant='contained'
               style={{ backgroundColor: COLOR_PRIMARY }}
             >
               Totales
-            </Button>
-          </Link>
-        </div>
-        <div className='option'>
-          <div className='picture'>
-            <Line
-              data={{
-                labels: [''],
-                datasets: [
-                  generateLineConfig(75, 192, 192, '', [20, 30, 40]),
-                  generateLineConfig(255, 99, 132, '', [10, 40, 40])
-                ]
-              }}
-            />
-          </div>
-          <Link to='/stats_daily'>
-            <Button
-              variant='contained'
-              style={{ backgroundColor: COLOR_PRIMARY }}
-            >
-              Por rango de tiempo
             </Button>
           </Link>
         </div>

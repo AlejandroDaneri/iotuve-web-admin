@@ -171,3 +171,6 @@ export function getStatsDaily (startDate, endDate) {
     `${authBaseUrl()}/stats_daily?startdate=${startDate}&enddate=${endDate}&sortascending=true`
   )
 }
+export function getMediaStats () {
+  return axios.get(`${appBaseUrl()}/statss`)
+}
