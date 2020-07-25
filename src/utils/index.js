@@ -1,6 +1,6 @@
 export const generateStart = () => {
   const start = new Date()
-  start.setDate(start.getDate() - 5)
+  start.setDate(start.getDate() - 15)
   return start
 }
 
