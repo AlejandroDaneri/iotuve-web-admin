@@ -172,5 +172,5 @@ export function getStatsDaily (startDate, endDate) {
   )
 }
 export function getMediaStats () {
-  return axios.get(`${appBaseUrl()}/statss`)
+  return axios.get(`${appBaseUrl()}/stats`)
 }
