@@ -4,7 +4,7 @@ import { registerLocale } from 'react-datepicker'
 
 import 'react-datepicker/dist/react-datepicker.css'
 import CircleLoader from 'react-spinners/CircleLoader'
-import { HorizontalBar, Pie } from 'react-chartjs-2'
+import { Doughnut, HorizontalBar } from 'react-chartjs-2'
 import { es } from 'date-fns/esm/locale'
 
 /* Import Styled Components */
@@ -17,7 +17,7 @@ import { getMediaStats } from '../../webapi'
 import { COLOR_PRIMARY } from '../../constants'
 
 /* Import Utils */
-import { generateBarConfig, barOptions } from '../../utils'
+import { generateBarConfig, barOptions, DoughnutOptions } from '../../utils'
 
 const StatsPartial = () => {
   registerLocale('es', es)
@@ -48,8 +48,9 @@ const StatsPartial = () => {
         <CircleLoader color={COLOR_PRIMARY} size={250} />
       ) : (
         <>
+          <h2> Videos, comentarios y likes</h2>
           <div className='chart'>
-            <h2>Top 10 videos más vistos</h2>
+            <h2>Videos más vistos</h2>
             <HorizontalBar
               data={{
                 labels: data.most_viewed.map(x => x.title),
@@ -63,18 +64,19 @@ const StatsPartial = () => {
                   )
                 ]
               }}
+              options={barOptions()}
             />
           </div>
           <div className='chart'>
-            <h2>Top 10 usuarios más activos (vistas)</h2>
+            <h2>Usuarios más activos (vistas)</h2>
             <HorizontalBar
               data={{
                 labels: data.top_active_users.map(x => x._id),
                 datasets: [
                   generateBarConfig(
-                    75,
-                    192,
-                    192,
+                    230,
+                    92,
+                    0,
                     'Cantidad',
                     data.top_active_users.map(x => x.count)
                   )
@@ -84,15 +86,15 @@ const StatsPartial = () => {
             />
           </div>
           <div className='chart'>
-            <h2>Top 10 usuarios más activos (comentarios)</h2>
+            <h2>Usuarios más activos (comentarios)</h2>
             <HorizontalBar
               data={{
                 labels: data.top_writer_users.map(x => x._id),
                 datasets: [
                   generateBarConfig(
-                    75,
-                    192,
-                    192,
+                    0,
+                    255,
+                    128,
                     'Cantidad',
                     data.top_writer_users.map(x => x.count)
                   )
@@ -102,15 +104,15 @@ const StatsPartial = () => {
             />
           </div>
           <div className='chart'>
-            <h2>Top 10 videos con mas reacciones positivas</h2>
+            <h2>Videos con mas reacciones positivas</h2>
             <HorizontalBar
               data={{
                 labels: data.top_likes.map(x => x.title),
                 datasets: [
                   generateBarConfig(
-                    75,
-                    192,
-                    192,
+                    71,
+                    209,
+                    71,
                     'Cantidad',
                     data.top_likes.map(x => x.count_likes)
                   )
@@ -120,15 +122,15 @@ const StatsPartial = () => {
             />
           </div>
           <div className='chart'>
-            <h2>Top 10 videos con mas reacciones negativas</h2>
+            <h2>Videos con mas reacciones negativas</h2>
             <HorizontalBar
               data={{
                 labels: data.top_dislikes.map(x => x.title),
                 datasets: [
                   generateBarConfig(
-                    75,
-                    192,
-                    192,
+                    255,
+                    51,
+                    51,
                     'Cantidad',
                     data.top_dislikes.map(x => x.count_dislikes)
                   )
@@ -138,15 +140,15 @@ const StatsPartial = () => {
             />
           </div>
           <div className='chart'>
-            <h2>Top 10 usuarios que dieron mas dislikes</h2>
+            <h2>Usuarios que dieron mas dislikes</h2>
             <HorizontalBar
               data={{
                 labels: data.top_disliker.map(x => x._id),
                 datasets: [
                   generateBarConfig(
-                    75,
-                    192,
-                    192,
+                    122,
+                    122,
+                    82,
                     'Cantidad',
                     data.top_disliker.map(x => x.count)
                   )
@@ -156,7 +158,7 @@ const StatsPartial = () => {
             />
           </div>
           <div className='chart'>
-            <h2>Top 10 usuarios que dieron mas likes</h2>
+            <h2>Usuarios que dieron mas likes</h2>
             <HorizontalBar
               data={{
                 labels: data.top_liker.map(x => x._id),
@@ -174,33 +176,37 @@ const StatsPartial = () => {
             />
           </div>
           <div className='chart'>
-            <h2>Cantidad de solicitudes de amistad</h2>
-            <Pie
+            <h2>Estado de las solicitudes de amistad</h2>
+            <Doughnut
               data={{
                 labels: ['Aprobadas', 'Pendientes'],
                 datasets: [
                   {
                     data: [data.approved_friends, data.pending_friends],
-                    backgroundColor: ['#36A2EB', '#FF6384'],
-                    hoverBackgroundColor: ['#36A2EB', '#FF6384']
+                    backgroundColor: ['#42eb36', '#FF6384'],
+                    hoverBackgroundColor: ['#42eb36', '#FF6384'],
+                    borderWidth: 0
                   }
                 ]
               }}
+              options={DoughnutOptions()}
             />
           </div>
           <div className='chart'>
-            <h2>Distribucion de visibilidad en los videos</h2>
-            <Pie
+            <h2>Distribución de visibilidad en los videos</h2>
+            <Doughnut
               data={{
                 labels: ['Publico', 'Privado'],
                 datasets: [
                   {
                     data: data.visibility.map(x => x.count),
-                    backgroundColor: ['#36A2EB', '#FF6384'],
-                    hoverBackgroundColor: ['#36A2EB', '#FF6384']
+                    backgroundColor: ['#dcdee0', '#685c5c'],
+                    hoverBackgroundColor: ['#dcdee0', '#685c5c'],
+                    borderWidth: 0
                   }
                 ]
               }}
+              options={DoughnutOptions()}
             />
           </div>
         </>

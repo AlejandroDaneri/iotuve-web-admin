@@ -2,7 +2,7 @@
 import React from 'react'
 import Button from '@material-ui/core/Button'
 import { Link } from 'react-router-dom'
-import { Pie, Line } from 'react-chartjs-2'
+import { Pie, Line, Doughnut } from 'react-chartjs-2'
 
 /* Import Styled Components */
 import { StatsWrapper } from '../../styles/StatsStyled'
@@ -27,7 +27,8 @@ const Stats = () => {
                   {
                     data: [40, 60],
                     backgroundColor: ['#36A2EB', '#FF6384'],
-                    hoverBackgroundColor: ['#36A2EB', '#FF6384']
+                    hoverBackgroundColor: ['#36A2EB', '#FF6384'],
+                    borderWidth: 0
                   }
                 ]
               }}
@@ -64,17 +65,18 @@ const Stats = () => {
           </Link>
         </div>
       </div>
-      <h4> Videos, comentarios, likes</h4>
+      <h4> Videos, comentarios y likes</h4>
       <div className='options'>
         <div className='option'>
           <div className='picture'>
-            <Pie
+            <Doughnut
               data={{
                 datasets: [
                   {
-                    data: [40, 60],
-                    backgroundColor: ['#36A2EB', '#FF6384'],
-                    hoverBackgroundColor: ['#36A2EB', '#FF6384']
+                    data: [55, 45],
+                    backgroundColor: ['#36eb5d', '#c1a927'],
+                    hoverBackgroundColor: ['#36A2EB', '#FF6384'],
+                    borderWidth: 0
                   }
                 ]
               }}

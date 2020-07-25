@@ -18,7 +18,12 @@ import { getStatsDaily } from '../../webapi'
 import { COLOR_PRIMARY } from '../../constants'
 
 /* Import Utils */
-import { generateStart, generateEnd, generateLineConfig } from '../../utils'
+import {
+  generateStart,
+  generateEnd,
+  generateLineConfig,
+  barOptions
+} from '../../utils'
 
 const StatsPartial = () => {
   registerLocale('es', es)
@@ -128,6 +133,7 @@ const StatsPartial = () => {
                   )
                 ]
               }}
+              options={barOptions()}
             />
           </div>
 
@@ -146,6 +152,7 @@ const StatsPartial = () => {
                   )
                 ]
               }}
+              options={barOptions()}
             />
           </div>
 
@@ -164,6 +171,7 @@ const StatsPartial = () => {
                   )
                 ]
               }}
+              options={barOptions()}
             />
           </div>
 
@@ -196,6 +204,7 @@ const StatsPartial = () => {
                   )
                 ]
               }}
+              options={barOptions()}
             />
           </div>
 
@@ -228,17 +237,7 @@ const StatsPartial = () => {
                   )
                 ]
               }}
-              options={{
-                scales: {
-                  yAxes: [
-                    {
-                      ticks: {
-                        suggestedMin: 0
-                      }
-                    }
-                  ]
-                }
-              }}
+              options={barOptions()}
             />
           </div>
 
@@ -264,6 +263,7 @@ const StatsPartial = () => {
                   )
                 ]
               }}
+              options={barOptions()}
             />
           </div>
 
@@ -310,6 +310,7 @@ const StatsPartial = () => {
                   )
                 ]
               }}
+              options={barOptions()}
             />
           </div>
         </>

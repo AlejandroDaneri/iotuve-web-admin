@@ -5,10 +5,10 @@ export const generateStart = () => {
 }
 
 export const generateEnd = () => {
-  const end = new Date()
-  return end
+  return new Date()
 }
 
+export const axisColor = '#bbb9b9'
 export const generateLineConfig = (r, g, b, title, data) => {
   return {
     label: title,
@@ -46,14 +46,42 @@ export const generateBarConfig = (r, g, b, title, data) => {
 }
 export const barOptions = () => {
   return {
+    legend: {
+      display: true,
+      labels: {
+        fontColor: 'rgb(255,255,255)',
+        fontSize: 13
+      }
+    },
     scales: {
       xAxes: [
         {
           ticks: {
+            fontColor: axisColor,
+            suggestedMin: 0
+          }
+        }
+      ],
+      yAxes: [
+        {
+          ticks: {
+            fontColor: axisColor,
+            fontSize: 13,
             suggestedMin: 0
           }
         }
       ]
+    }
+  }
+}
+
+export const DoughnutOptions = () => {
+  return {
+    legend: {
+      display: true,
+      labels: {
+        fontColor: 'rgb(255,255,255)'
+      }
     }
   }
 }

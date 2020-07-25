@@ -11,6 +11,7 @@ import { StatWrapper } from '../../styles/StatStyled'
 
 /* Import Constants */
 import { COLOR_PRIMARY } from '../../constants'
+import { DoughnutOptions } from '../../utils'
 
 const StatsTotal = () => {
   const [activeRecovery, changeActiveRecovery] = useState()
@@ -81,7 +82,9 @@ const StatsTotal = () => {
 
           <div className='charts'>
             <div className='chart'>
-              <h3>Admins</h3>
+              <center>
+                <h3>Admins</h3>
+              </center>
               <Pie
                 data={{
                   labels: ['Activos', 'Con cuenta cerrada'],
@@ -92,14 +95,18 @@ const StatsTotal = () => {
                         registeredAdminUsersClosed
                       ],
                       backgroundColor: ['#36A2EB', '#FF6384'],
-                      hoverBackgroundColor: ['#36A2EB', '#FF6384']
+                      hoverBackgroundColor: ['#36A2EB', '#FF6384'],
+                      borderWidth: 0
                     }
                   ]
                 }}
+                options={DoughnutOptions()}
               />
             </div>
             <div className='chart'>
-              <h3>Usuarios</h3>
+              <center>
+                <h3>Usuarios</h3>
+              </center>
               <Pie
                 data={{
                   labels: [
@@ -115,10 +122,12 @@ const StatsTotal = () => {
                         registeredUsersLoginService
                       ],
                       backgroundColor: ['#36A2EB', '#FF6384', '#FFFF84'],
-                      hoverBackgroundColor: ['#36A2EB', '#FF6384', '#FFFF84']
+                      hoverBackgroundColor: ['#36A2EB', '#FF6384', '#FFFF84'],
+                      borderWidth: 0
                     }
                   ]
                 }}
+                options={DoughnutOptions()}
               />
             </div>
           </div>
