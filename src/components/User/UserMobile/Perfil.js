@@ -57,12 +57,9 @@ const Perfil = ({ username }) => {
       }
     })
       .then(_ => {
-        console.log('PUT OK')
         changeSuccess(true)
       })
-      .catch(_ => {
-        console.error('PUT ERROR')
-      })
+      .catch(_ => {})
   }
 
   return (
