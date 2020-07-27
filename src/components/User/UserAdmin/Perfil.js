@@ -13,6 +13,8 @@ import { getAdminUser, saveAdminUser } from '../../../webapi'
 
 const Perfil = ({ username }) => {
   const dispatch = useDispatch()
+
+  const [error, changeError] = useState(false)
   const [loading, changeLoading] = useState(true)
   const [success, changeSuccess] = useState(false)
   const [email, changeEmail] = useState()
@@ -48,7 +50,9 @@ const Perfil = ({ username }) => {
       .then(() => {
         changeSuccess(true)
       })
-      .catch(() => {})
+      .catch(err => {
+        err.response && err.response.status === 400 && changeError(true)
+      })
   }
 
   return loading ? (
@@ -93,6 +97,22 @@ const Perfil = ({ username }) => {
           </Button>
         </div>
       </div>
+
+      <Snackbar
+        open={error}
+        onClose={() => changeError(false)}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+        autoHideDuration={6000}
+      >
+        <SnackbarContent
+          message='Perfil no editado'
+          style={{
+            color: 'black',
+            backgroundColor: 'red',
+            fontSize: '14px'
+          }}
+        />
+      </Snackbar>
 
       <Snackbar
         open={success}
