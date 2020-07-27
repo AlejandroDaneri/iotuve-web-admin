@@ -46,12 +46,9 @@ const Perfil = ({ username }) => {
       email: email
     })
       .then(() => {
-        console.info('Put ok')
         changeSuccess(true)
       })
-      .catch(() => {
-        console.error('Put error')
-      })
+      .catch(() => {})
   }
 
   return loading ? (
