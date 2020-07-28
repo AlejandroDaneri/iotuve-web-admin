@@ -103,55 +103,67 @@ const Comments = () => {
       {comments ? (
         <Table>
           <TableBody>
-            {(comments || []).map(comment => {
-              return (
-                <StyledTableRow key={comment.id}>
-                  <StyledTableCell>
-                    <>
-                      <div
-                        style={{
-                          display: 'flex',
-                          flexDirection: 'column',
-                          alignSelf: 'flex-start',
-                          paddingLeft: '5px'
-                        }}
-                      >
-                        <p>
-                          {comment.content}
-                          <br />
-                          <div
-                            style={{ display: 'flex', flexDirection: 'column' }}
-                          >
-                            <p
-                              style={{ fontSize: 'small', paddingLeft: '5px' }}
+            {comments.length <= 0 ? (
+              <center>
+                <h3>No hay comentarios en la publicación</h3>
+              </center>
+            ) : (
+              comments.map(comment => {
+                return (
+                  <StyledTableRow key={comment.id}>
+                    <StyledTableCell>
+                      <>
+                        <div
+                          style={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignSelf: 'flex-start',
+                            paddingLeft: '5px'
+                          }}
+                        >
+                          <p>
+                            {comment.content}
+                            <br />
+                            <div
+                              style={{
+                                display: 'flex',
+                                flexDirection: 'column'
+                              }}
                             >
-                              <Link
-                                to={`/user/${comment.user}`}
-                                style={{ color: 'white' }}
+                              <p
+                                style={{
+                                  fontSize: 'small',
+                                  paddingLeft: '5px'
+                                }}
                               >
-                                {comment.user}
-                              </Link>{' '}
-                              {parseTimestamp(comment.date_updated)}
-                            </p>
-                          </div>
-                        </p>
-                      </div>
-                    </>
-                  </StyledTableCell>
-                  <StyledTableCell>
-                    <Tooltip title='Eliminar comentario'>
-                      <DeleteForeverIcon
-                        style={{ color: COLOR_ACTIONS }}
-                        onClick={() => {
-                          changeSelected(comment)
-                          setOpenModal(true)
-                        }}
-                      />
-                    </Tooltip>
-                  </StyledTableCell>
-                </StyledTableRow>
-              )
-            })}
+                                <Link
+                                  to={`/user/${comment.user}`}
+                                  style={{ color: 'white' }}
+                                >
+                                  {comment.user}
+                                </Link>{' '}
+                                {parseTimestamp(comment.date_updated)}
+                              </p>
+                            </div>
+                          </p>
+                        </div>
+                      </>
+                    </StyledTableCell>
+                    <StyledTableCell>
+                      <Tooltip title='Eliminar comentario'>
+                        <DeleteForeverIcon
+                          style={{ color: COLOR_ACTIONS }}
+                          onClick={() => {
+                            changeSelected(comment)
+                            setOpenModal(true)
+                          }}
+                        />
+                      </Tooltip>
+                    </StyledTableCell>
+                  </StyledTableRow>
+                )
+              })
+            )}
           </TableBody>
         </Table>
       ) : (

@@ -124,7 +124,7 @@ const AdminUsers = () => {
         autoHideDuration={6000}
       >
         <SnackbarContent
-          message='Usuario borrado con exito'
+          message='Usuario borrado con éxito'
           style={{
             color: 'black',
             backgroundColor: COLOR_PRIMARY,
@@ -132,7 +132,7 @@ const AdminUsers = () => {
           }}
         />
       </Snackbar>
-      <h2>Usuarios Admin</h2>
+      <h2>Administradores</h2>
       {users ? (
         <>
           <Table>
@@ -168,7 +168,7 @@ const AdminUsers = () => {
                       {user.username !== UNDELETABLE_ADMIN_NAME && (
                         <DeleteForeverIcon
                           style={{ color: COLOR_ACTIONS }}
-                          visibility={user.username === 'chotuvegod'}
+                          visibility={user.username === UNDELETABLE_ADMIN_NAME}
                           onClick={() => {
                             changeSelected(user)
                             changeModalOpen(true)

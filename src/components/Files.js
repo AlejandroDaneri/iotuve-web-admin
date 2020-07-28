@@ -211,7 +211,7 @@ const Files = () => {
                             </div>
                             <div style={{ width: '13%' }}>
                               <Link to={`/files/${file.media.video_id}`}>
-                                <Tooltip title='Más información'>
+                                <Tooltip title='Comentarios de la publicación'>
                                   <AddIcon style={{ color: COLOR_PRIMARY }} />
                                 </Tooltip>
                               </Link>
