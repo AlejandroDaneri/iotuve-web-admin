@@ -1,6 +1,5 @@
 /* Import Libs */
 import React, { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
 import CircleLoader from 'react-spinners/CircleLoader'
 import BeatLoader from 'react-spinners/BeatLoader'
 import { Link } from 'react-router-dom'
@@ -24,7 +23,6 @@ import { getAdminUsers, getUserAdminSessions, removeAdminUser } from '../webapi'
 
 /* Import Constants */
 import {
-  AUTH_LOGOUT,
   COLOR_ACTIONS,
   COLOR_PRIMARY,
   UNDELETABLE_ADMIN_NAME
@@ -40,8 +38,6 @@ const AdminUsers = () => {
   const [newAdminModalOpen, changeNewAdminModalOpen] = useState(false)
   const [informOpen, changeInformOpen] = useState(false)
 
-  const dispatch = useDispatch()
-
   function refresh () {
     const usersPromise = new Promise((resolve, reject) => {
       getAdminUsers()
@@ -56,11 +52,6 @@ const AdminUsers = () => {
         })
         .catch(err => {
           console.error(err)
-          if (err.response !== 500) {
-            dispatch({
-              type: AUTH_LOGOUT
-            })
-          }
           reject(err)
         })
     })
@@ -114,11 +105,6 @@ const AdminUsers = () => {
       })
       .catch(err => {
         console.error(err)
-        if (err.response !== 500) {
-          dispatch({
-            type: AUTH_LOGOUT
-          })
-        }
       })
   }
 

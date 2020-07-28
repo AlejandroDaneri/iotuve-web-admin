@@ -29,11 +29,6 @@ const LogOut = () => {
       })
       .catch(err => {
         console.error(err)
-        if (err.response !== 500) {
-          dispatch({
-            type: AUTH_LOGOUT
-          })
-        }
       })
   }
 

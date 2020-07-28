@@ -1,13 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import CircleLoader from 'react-spinners/CircleLoader'
-import {
-  AUTH_LOGOUT,
-  COLOR_ACTIONS,
-  COLOR_ERROR,
-  COLOR_PRIMARY
-} from '../constants'
+import { COLOR_ACTIONS, COLOR_ERROR, COLOR_PRIMARY } from '../constants'
 import { getComments, removeComment } from '../webapi'
-import { useDispatch } from 'react-redux'
 import { Link, useParams } from 'react-router-dom'
 import { CommentsWrapper } from '../styles/CommentsStyled'
 import Table from '@material-ui/core/Table'
@@ -29,8 +23,6 @@ const Comments = () => {
   const [rmvSuccess, setRmvSuccess] = useState(false)
   const [showSnackbar, setShowSnackbar] = useState(false)
   const [selected, changeSelected] = useState({})
-
-  const dispatch = useDispatch()
 
   const StyledTableCell = withStyles(theme => ({
     body: {
@@ -58,13 +50,8 @@ const Comments = () => {
       })
       .catch(err => {
         console.error(err)
-        if (err.response !== 500) {
-          dispatch({
-            type: AUTH_LOGOUT
-          })
-        }
       })
-  }, [dispatch, videoID])
+  }, [videoID])
 
   function parseTimestamp (timestamp) {
     const date = new Date(timestamp)

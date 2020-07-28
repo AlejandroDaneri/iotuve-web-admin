@@ -10,7 +10,6 @@ import { getUserSessions } from '../../../webapi'
 import { COLOR_PRIMARY } from '../../../constants'
 
 const ActiveSessions = ({ username }) => {
-  const dispatch = useDispatch()
   const [loading, changeLoading] = useState(true)
   const [sessions, changeSessions] = useState([])
 
@@ -20,7 +19,7 @@ const ActiveSessions = ({ username }) => {
       changeSessions(data)
       changeLoading(false)
     })
-  }, [username, dispatch])
+  }, [username])
 
   return (
     <div className='active-sessions'>
