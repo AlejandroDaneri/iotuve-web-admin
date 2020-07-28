@@ -17,7 +17,7 @@ import { getUsers, getUserSessions, removeUser } from '../webapi'
 import DeleteModal from './Modal'
 
 /* Import Constants */
-import { AUTH_LOGOUT, COLOR_ACTIONS, COLOR_PRIMARY } from '../constants'
+import { COLOR_ACTIONS, COLOR_PRIMARY } from '../constants'
 
 /* Import Styled Components */
 import { UsersWrapper } from '../styles/UsersStyled'
@@ -48,12 +48,6 @@ const Users = () => {
           resolve(u)
         })
         .catch(err => {
-          console.error(err)
-          if (err.response !== 500) {
-            dispatch({
-              type: AUTH_LOGOUT
-            })
-          }
           reject(err)
         })
     })
@@ -99,14 +93,7 @@ const Users = () => {
         changeModalOpen(false)
         changeInformOpen(true)
       })
-      .catch(err => {
-        console.error(err)
-        if (err.response !== 500) {
-          dispatch({
-            type: 'AUTH_LOGOUT'
-          })
-        }
-      })
+      .catch(_ => {})
   }
 
   return (
