@@ -1,12 +1,14 @@
 /* Import Libs */
-import React from 'react'
-import { useSelector } from 'react-redux'
+import React, { useState, useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Redirect
 } from 'react-router-dom'
+import { Snackbar, SnackbarContent } from '@material-ui/core'
+import axios from 'axios'
 
 /* Import Components */
 import Files from './components/Files'
@@ -29,6 +31,9 @@ import { isAuthed, isAuthing } from './stateapi/auth'
 import { AppWrapper } from './styles/AppStyled'
 import StatsMedia from './components/Stats/StatsMedia'
 
+/* Import Constants */
+import { AUTH_LOGOUT } from './constants'
+
 const PrivateRoute = ({ ...rest }) => {
   const authed = useSelector(isAuthed)
   const authing = useSelector(isAuthing)
@@ -44,6 +49,23 @@ const PrivateRoute = ({ ...rest }) => {
 
 const App = () => {
   const authed = useSelector(isAuthed)
+  const dispatch = useDispatch()
+  const [error, changeError] = useState(false)
+
+  useEffect(() => {
+    axios.interceptors.response.use(
+      response => response,
+      error => {
+        if (error.response !== 500) {
+          changeError(true)
+          dispatch({
+            type: AUTH_LOGOUT
+          })
+        }
+        return Promise.reject(error)
+      }
+    )
+  }, [dispatch])
 
   return (
     <AppWrapper>
@@ -66,6 +88,22 @@ const App = () => {
           </Switch>
         </div>
       </Router>
+
+      <Snackbar
+        open={error}
+        onClose={() => changeError(false)}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+        autoHideDuration={6000}
+      >
+        <SnackbarContent
+          message='Sesion Expirada'
+          style={{
+            color: 'black',
+            backgroundColor: 'red',
+            fontSize: '14px'
+          }}
+        />
+      </Snackbar>
     </AppWrapper>
   )
 }

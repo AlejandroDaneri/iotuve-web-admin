@@ -2,26 +2,12 @@ import axios from 'axios'
 
 import { store } from '../index'
 
-import { AUTH_LOGOUT } from '../constants'
-
 axios.interceptors.request.use(config => {
   config.headers['X-Admin'] = 'true'
   config.headers['X-Client-ID'] = '38d1fcaf-3a8b-4dfe-9ca4-2e0473b442ba'
   config.headers['X-Auth-Token'] = store.getState().auth.token
   return config
 })
-
-axios.interceptors.response.use(
-  response => response,
-  error => {
-    if (error.response !== 500) {
-      store.dispatch({
-        type: AUTH_LOGOUT
-      })
-    }
-    return Promise.reject(error)
-  }
-)
 
 const APP_SERVER = process.env.REACT_APP_APP_SERVER
 const MEDIA_SERVER = process.env.REACT_APP_MEDIA_SERVER
