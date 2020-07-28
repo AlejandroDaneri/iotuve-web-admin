@@ -159,7 +159,9 @@ const Files = () => {
                     <StyledTableCell>
                       {(file.media.size / 1024 / 1024).toPrecision(3)} MB
                     </StyledTableCell>
-                    <StyledTableCell>{file.media.type}</StyledTableCell>
+                    <StyledTableCell>{`.${file.media.type.substring(
+                      6
+                    )}`}</StyledTableCell>
                     <StyledTableCell>
                       {parseTimestamp(file.date_created)}
                     </StyledTableCell>

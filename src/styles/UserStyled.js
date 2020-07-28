@@ -18,10 +18,10 @@ export const UserWrapper = styled.div`
     flex-direction: row;
     width: 100%;
     justify-content: center;
-    align-items: center;
+    align-items: begin;
 
     & .active-sessions {
-      border: 1px solid white;
+      border: 1px solid gray;
       border-radius: 14px;
       padding: 2%;
       margin: 1%;
@@ -50,7 +50,7 @@ export const UserWrapper = styled.div`
     }
 
     & .change-password {
-      border: 1px solid white;
+      border: 1px solid gray;
       border-radius: 14px;
       padding: 2%;
       margin: 1%;
@@ -70,7 +70,7 @@ export const UserWrapper = styled.div`
     }
 
     & .perfil {
-      border: 1px solid white;
+      border: 1px solid gray;
       border-radius: 14px;
       padding: 2%;
       margin: 1%;

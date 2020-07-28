@@ -35,6 +35,10 @@ const ActiveSessions = ({ username, getSessions }) => {
     })
   }
 
+  function parseTimestamp (timestamp) {
+    const date = new Date(timestamp)
+    return date.toUTCString()
+  }
   return (
     <div className='active-sessions'>
       <Snackbar
@@ -53,7 +57,7 @@ const ActiveSessions = ({ username, getSessions }) => {
         />
       </Snackbar>
       <div className='title'>
-        <h3>Sessiones Activas</h3>
+        <h3>Sessiones activas</h3>
       </div>
       {loading ? (
         <CircleLoader color={COLOR_PRIMARY} size={250} />
@@ -64,13 +68,13 @@ const ActiveSessions = ({ username, getSessions }) => {
               <div className='session' key={index}>
                 <div className='data'>
                   <div>
-                    <b>Creada</b>: {session.date_created}
+                    <b>Creada</b>: {parseTimestamp(session.date_created)}
                   </div>
                   <div>
-                    <b>Expira</b>: {session.expires}
+                    <b>Expira</b>: {parseTimestamp(session.expires)}
                   </div>
                   <div>
-                    <b>User Agent</b>: {session.user_agent}
+                    <b>User agent</b>: {session.user_agent}
                   </div>
                   <div>
                     <b>Request Id</b>: {session.request_id}
@@ -88,7 +92,7 @@ const ActiveSessions = ({ username, getSessions }) => {
               </div>
             )
           })}
-          {sessions.length === 0 && 'No hay'}
+          {sessions.length === 0 && 'No tiene sesiones activas'}
         </>
       )}
     </div>
