@@ -45,81 +45,90 @@ const Perfil = ({ username }) => {
       })
   }
 
-  return loading ? (
-    <CircleLoader color={COLOR_PRIMARY} size={250} />
-  ) : (
-    <div className='perfil'>
-      <div className='title'>
-        <h3>Perfil</h3>
-      </div>
-
-      <div>
-        <p />
-        <>
-          <div>Mail</div>
-          <input value={email} onChange={e => changeEmail(e.target.value)} />
-        </>
-        <p />
-        <>
-          <div>Nombre</div>
-          <input
-            value={firstName}
-            onChange={e => changeFirstName(e.target.value)}
-          />
-        </>
-        <p />
-        <>
-          <div>Apellido</div>
-          <input
-            value={lastName}
-            onChange={e => changeLastName(e.target.value)}
-          />
-        </>
-        <p />
-      </div>
-      <div className='actions'>
-        <div onClick={() => save()}>
-          <Button
-            variant='contained'
-            style={{ backgroundColor: COLOR_PRIMARY }}
-          >
-            Guardar
-          </Button>
+  return (
+    <>
+      <div className='perfil'>
+        <div className='title'>
+          <h3>Perfil</h3>
         </div>
+        {loading ? (
+          <CircleLoader color={COLOR_PRIMARY} size={250} />
+        ) : (
+          <>
+            <div>
+              <p />
+              <>
+                <div>Mail</div>
+                <input
+                  value={email}
+                  onChange={e => changeEmail(e.target.value)}
+                />
+              </>
+              <p />
+              <>
+                <div>Nombre</div>
+                <input
+                  value={firstName}
+                  onChange={e => changeFirstName(e.target.value)}
+                />
+              </>
+              <p />
+              <>
+                <div>Apellido</div>
+                <input
+                  value={lastName}
+                  onChange={e => changeLastName(e.target.value)}
+                />
+              </>
+              <p />
+            </div>
+
+            <div className='actions'>
+              <div onClick={() => save()}>
+                <Button
+                  variant='contained'
+                  style={{ backgroundColor: COLOR_PRIMARY }}
+                >
+                  Guardar
+                </Button>
+              </div>
+            </div>
+
+            <Snackbar
+              open={error}
+              onClose={() => changeError(false)}
+              anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+              autoHideDuration={6000}
+            >
+              <SnackbarContent
+                message='Perfil no editado'
+                style={{
+                  color: 'black',
+                  backgroundColor: 'red',
+                  fontSize: '14px'
+                }}
+              />
+            </Snackbar>
+
+            <Snackbar
+              open={success}
+              onClose={() => changeSuccess(false)}
+              anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+              autoHideDuration={6000}
+            >
+              <SnackbarContent
+                message='Usuario editado con exito'
+                style={{
+                  color: 'black',
+                  backgroundColor: COLOR_PRIMARY,
+                  fontSize: '14px'
+                }}
+              />
+            </Snackbar>
+          </>
+        )}
       </div>
-
-      <Snackbar
-        open={error}
-        onClose={() => changeError(false)}
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
-        autoHideDuration={6000}
-      >
-        <SnackbarContent
-          message='Perfil no editado'
-          style={{
-            color: 'black',
-            backgroundColor: 'red',
-            fontSize: '14px'
-          }}
-        />
-      </Snackbar>
-
-      <Snackbar
-        open={success}
-        onClose={() => changeSuccess(false)}
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
-        autoHideDuration={6000}
-      >
-        <SnackbarContent
-          message='Usuario editado con exito'
-          style={{
-            color: 'black',
-            backgroundColor: COLOR_PRIMARY,
-            fontSize: '14px'
-          }}
-        />
-      </Snackbar>
-    </div>
+    </>
   )
 }
 
