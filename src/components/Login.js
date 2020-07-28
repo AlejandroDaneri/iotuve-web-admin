@@ -47,7 +47,6 @@ const Login = () => {
         changeAuthing(false)
       })
       .catch(_ => {
-        console.error('Auth Fail')
         changeAuthing(false)
         changeAuthError(true)
       })

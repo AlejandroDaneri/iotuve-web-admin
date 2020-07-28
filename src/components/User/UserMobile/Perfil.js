@@ -22,19 +22,21 @@ const Perfil = ({ username }) => {
   const [success, changeSuccess] = useState(false)
 
   useEffect(() => {
-    getUser(username).then(response => {
-      const { data } = response
-      const { contact, avatar } = data
-      const { email, phone } = contact
-      const { url } = avatar
-      changeUrl(url)
-      changeEmail(email)
-      changePhone(phone)
-      changeFirstName(data.first_name)
-      changeLastName(data.last_name)
-      changeLoginService(data.login_service)
-      changeLoading(false)
-    })
+    getUser(username)
+      .then(response => {
+        const { data } = response
+        const { contact, avatar } = data
+        const { email, phone } = contact
+        const { url } = avatar
+        changeUrl(url)
+        changeEmail(email)
+        changePhone(phone)
+        changeFirstName(data.first_name)
+        changeLastName(data.last_name)
+        changeLoginService(data.login_service)
+        changeLoading(false)
+      })
+      .catch(_ => {})
   }, [username])
 
   function save () {

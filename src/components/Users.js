@@ -54,27 +54,29 @@ const Users = () => {
 
     usersPromise.then(users => {
       Object.keys(users).forEach(username => {
-        getUserSessions(username).then(response => {
-          const { data } = response
-          const activeState =
-            data.length > 0 ? (
-              <Tooltip title='Conectado'>
-                <FiberManualRecordIcon style={{ color: 'green' }} />
-              </Tooltip>
-            ) : (
-              <Tooltip title='Desconectado'>
-                <FiberManualRecordIcon style={{ color: 'red' }} />
-              </Tooltip>
-            )
-          users = {
-            ...users,
-            [username]: {
-              ...users[username],
-              activeState
+        getUserSessions(username)
+          .then(response => {
+            const { data } = response
+            const activeState =
+              data.length > 0 ? (
+                <Tooltip title='Conectado'>
+                  <FiberManualRecordIcon style={{ color: 'green' }} />
+                </Tooltip>
+              ) : (
+                <Tooltip title='Desconectado'>
+                  <FiberManualRecordIcon style={{ color: 'red' }} />
+                </Tooltip>
+              )
+            users = {
+              ...users,
+              [username]: {
+                ...users[username],
+                activeState
+              }
             }
-          }
-          changeUsers(users)
-        })
+            changeUsers(users)
+          })
+          .catch(_ => {})
       })
     })
   }, [dispatch])

@@ -55,7 +55,6 @@ const StatsTotal = () => {
       })
       .catch(_ => {
         changeLoading(false)
-        console.error('Get Stats Error')
       })
   }
 

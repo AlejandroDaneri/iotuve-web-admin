@@ -48,9 +48,7 @@ const Comments = () => {
         const { data } = response
         setComments(data.data)
       })
-      .catch(err => {
-        console.error(err)
-      })
+      .catch(_ => {})
   }, [videoID])
 
   function parseTimestamp (timestamp) {
@@ -66,7 +64,7 @@ const Comments = () => {
         setShowSnackbar(true)
         setOpenModal(false)
       })
-      .catch(() => {
+      .catch(_ => {
         setRmvSuccess(false)
         setShowSnackbar(true)
       })

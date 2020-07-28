@@ -48,11 +48,13 @@ const Files = () => {
   }, [])
 
   function remove () {
-    removeVideo(selected.media.video_id).then(response => {
-      changeFiles(_.without(files, selected))
-      changeModalOpen(false)
-      changeInformOpen(true)
-    })
+    removeVideo(selected.media.video_id)
+      .then(response => {
+        changeFiles(_.without(files, selected))
+        changeModalOpen(false)
+        changeInformOpen(true)
+      })
+      .catch(_ => {})
   }
 
   function parseTimestamp (timestamp) {

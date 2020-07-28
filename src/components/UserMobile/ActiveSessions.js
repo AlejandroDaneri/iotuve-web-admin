@@ -14,11 +14,13 @@ const ActiveSessions = ({ username }) => {
   const [sessions, changeSessions] = useState([])
 
   useEffect(() => {
-    getUserSessions(username).then(response => {
-      const { data } = response
-      changeSessions(data)
-      changeLoading(false)
-    })
+    getUserSessions(username)
+      .then(response => {
+        const { data } = response
+        changeSessions(data)
+        changeLoading(false)
+      })
+      .catch(_ => {})
   }, [username])
 
   return (

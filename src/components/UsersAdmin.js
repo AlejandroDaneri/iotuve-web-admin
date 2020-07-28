@@ -51,35 +51,36 @@ const AdminUsers = () => {
           resolve(u)
         })
         .catch(err => {
-          console.error(err)
           reject(err)
         })
     })
-    usersPromise.then(users => {
-      Object.keys(users).forEach(username => {
-        getUserAdminSessions(username).then(response => {
-          const { data } = response
-          const activeState =
-            data.length > 0 ? (
-              <Tooltip title='Conectado'>
-                <FiberManualRecordIcon style={{ color: 'green' }} />
-              </Tooltip>
-            ) : (
-              <Tooltip title='Desconectado'>
-                <FiberManualRecordIcon style={{ color: 'red' }} />
-              </Tooltip>
-            )
-          users = {
-            ...users,
-            [username]: {
-              ...users[username],
-              activeState
+    usersPromise
+      .then(users => {
+        Object.keys(users).forEach(username => {
+          getUserAdminSessions(username).then(response => {
+            const { data } = response
+            const activeState =
+              data.length > 0 ? (
+                <Tooltip title='Conectado'>
+                  <FiberManualRecordIcon style={{ color: 'green' }} />
+                </Tooltip>
+              ) : (
+                <Tooltip title='Desconectado'>
+                  <FiberManualRecordIcon style={{ color: 'red' }} />
+                </Tooltip>
+              )
+            users = {
+              ...users,
+              [username]: {
+                ...users[username],
+                activeState
+              }
             }
-          }
-          changeUsers(users)
+            changeUsers(users)
+          })
         })
       })
-    })
+      .catch(_ => {})
   }
 
   useEffect(
@@ -103,9 +104,7 @@ const AdminUsers = () => {
         changeModalOpen(false)
         changeInformOpen(true)
       })
-      .catch(err => {
-        console.error(err)
-      })
+      .catch(_ => {})
   }
 
   return (

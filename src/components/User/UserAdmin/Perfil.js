@@ -19,14 +19,16 @@ const Perfil = ({ username }) => {
   const [lastName, changeLastName] = useState()
 
   useEffect(() => {
-    getAdminUser(username).then(response => {
-      const { data } = response
-      const { email } = data
-      changeFirstName(data.first_name)
-      changeLastName(data.last_name)
-      changeEmail(email)
-      changeLoading(false)
-    })
+    getAdminUser(username)
+      .then(response => {
+        const { data } = response
+        const { email } = data
+        changeFirstName(data.first_name)
+        changeLastName(data.last_name)
+        changeEmail(email)
+        changeLoading(false)
+      })
+      .catch(_ => {})
   }, [username])
 
   function save () {
