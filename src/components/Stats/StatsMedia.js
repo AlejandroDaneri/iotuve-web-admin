@@ -33,7 +33,6 @@ const StatsPartial = () => {
         changeLoading(false)
       })
       .catch(_ => {
-        console.error('Get Stats Error')
         changeLoading(false)
       })
   }

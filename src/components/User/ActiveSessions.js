@@ -21,18 +21,22 @@ const ActiveSessions = ({ username, getSessions }) => {
   const [informOpen, changeInformOpen] = useState(false)
 
   useEffect(() => {
-    getSessions(username).then(response => {
-      const { data } = response
-      changeSessions(data)
-      changeLoading(false)
-    })
+    getSessions(username)
+      .then(response => {
+        const { data } = response
+        changeSessions(data)
+        changeLoading(false)
+      })
+      .catch(_ => {})
   }, [username, dispatch, getSessions])
 
   function closeSession (session) {
-    closeUserSession(session.session_token).then(response => {
-      changeInformOpen(true)
-      changeSessions(_.without(sessions, session))
-    })
+    closeUserSession(session.session_token)
+      .then(response => {
+        changeInformOpen(true)
+        changeSessions(_.without(sessions, session))
+      })
+      .catch(_ => {})
   }
 
   function parseTimestamp (timestamp) {

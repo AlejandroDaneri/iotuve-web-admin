@@ -3,16 +3,14 @@ import React, { useState, useEffect } from 'react'
 import Button from '@material-ui/core/Button'
 import CircleLoader from 'react-spinners/CircleLoader'
 import { Snackbar, SnackbarContent } from '@material-ui/core'
-import { useDispatch } from 'react-redux'
 
 /* Import WebApi */
 import { getUser, saveUser } from '../../../webapi'
 
 /* Import Constants */
-import { COLOR_PRIMARY, AUTH_LOGOUT } from '../../../constants'
+import { COLOR_PRIMARY } from '../../../constants'
 
 const Perfil = ({ username }) => {
-  const dispatch = useDispatch()
   const [loading, changeLoading] = useState(true)
   const [email, changeEmail] = useState()
   const [phone, changePhone] = useState()
@@ -37,14 +35,7 @@ const Perfil = ({ username }) => {
         changeLoginService(data.login_service)
         changeLoading(false)
       })
-      .catch(err => {
-        console.error(err)
-        if (err.response !== 500) {
-          dispatch({
-            type: AUTH_LOGOUT
-          })
-        }
-      })
+      .catch(_ => {})
   })
 
   function save () {

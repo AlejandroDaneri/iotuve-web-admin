@@ -2,6 +2,8 @@ import axios from 'axios'
 
 import { store } from '../index'
 
+import { AUTH_LOGOUT } from '../constants'
+
 axios.interceptors.request.use(
   config => {
     config.headers['X-Admin'] = 'true'
@@ -10,6 +12,11 @@ axios.interceptors.request.use(
     return config
   },
   error => {
+    if (error.response !== 500) {
+      store.dispatch({
+        type: AUTH_LOGOUT
+      })
+    }
     return Promise.reject(error)
   }
 )

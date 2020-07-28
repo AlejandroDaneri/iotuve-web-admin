@@ -109,7 +109,10 @@ const Sidebar = props => {
                   <SupervisorAccountIcon />
                 </ListItemIcon>
                 <Tooltip title='Ver los administradores que están registrados'>
-                  <ListItemText className={classes.menuItem} primary='Admins' />
+                  <ListItemText
+                    className={classes.menuItem}
+                    primary='Administradores'
+                  />
                 </Tooltip>
               </ListItem>
             </Link>

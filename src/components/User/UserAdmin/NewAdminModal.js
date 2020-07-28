@@ -42,7 +42,7 @@ const NewAdminModal = ({ modalOpen, changeModalOpen, refresh }) => {
         setInfoOpen(true)
         refresh()
       })
-      .catch(e => {
+      .catch(_ => {
         setError(true)
         setInfoOpen(true)
       })

@@ -17,7 +17,7 @@ import { getUsers, getUserSessions, removeUser } from '../webapi'
 import DeleteModal from './Modal'
 
 /* Import Constants */
-import { AUTH_LOGOUT, COLOR_ACTIONS, COLOR_PRIMARY } from '../constants'
+import { COLOR_ACTIONS, COLOR_PRIMARY } from '../constants'
 
 /* Import Styled Components */
 import { UsersWrapper } from '../styles/UsersStyled'
@@ -48,39 +48,35 @@ const Users = () => {
           resolve(u)
         })
         .catch(err => {
-          console.error(err)
-          if (err.response !== 500) {
-            dispatch({
-              type: AUTH_LOGOUT
-            })
-          }
           reject(err)
         })
     })
 
     usersPromise.then(users => {
       Object.keys(users).forEach(username => {
-        getUserSessions(username).then(response => {
-          const { data } = response
-          const activeState =
-            data.length > 0 ? (
-              <Tooltip title='Conectado'>
-                <FiberManualRecordIcon style={{ color: 'green' }} />
-              </Tooltip>
-            ) : (
-              <Tooltip title='Desconectado'>
-                <FiberManualRecordIcon style={{ color: 'red' }} />
-              </Tooltip>
-            )
-          users = {
-            ...users,
-            [username]: {
-              ...users[username],
-              activeState
+        getUserSessions(username)
+          .then(response => {
+            const { data } = response
+            const activeState =
+              data.length > 0 ? (
+                <Tooltip title='Conectado'>
+                  <FiberManualRecordIcon style={{ color: 'green' }} />
+                </Tooltip>
+              ) : (
+                <Tooltip title='Desconectado'>
+                  <FiberManualRecordIcon style={{ color: 'red' }} />
+                </Tooltip>
+              )
+            users = {
+              ...users,
+              [username]: {
+                ...users[username],
+                activeState
+              }
             }
-          }
-          changeUsers(users)
-        })
+            changeUsers(users)
+          })
+          .catch(_ => {})
       })
     })
   }, [dispatch])
@@ -99,14 +95,7 @@ const Users = () => {
         changeModalOpen(false)
         changeInformOpen(true)
       })
-      .catch(err => {
-        console.error(err)
-        if (err.response !== 500) {
-          dispatch({
-            type: 'AUTH_LOGOUT'
-          })
-        }
-      })
+      .catch(_ => {})
   }
 
   return (

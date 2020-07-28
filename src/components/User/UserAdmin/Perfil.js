@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react'
 import Button from '@material-ui/core/Button'
 import CircleLoader from 'react-spinners/CircleLoader'
 import { Snackbar, SnackbarContent } from '@material-ui/core'
-import { useDispatch } from 'react-redux'
 
 /* Import Constants */
 import { COLOR_PRIMARY } from '../../../constants'
@@ -12,8 +11,6 @@ import { COLOR_PRIMARY } from '../../../constants'
 import { getAdminUser, saveAdminUser } from '../../../webapi'
 
 const Perfil = ({ username }) => {
-  const dispatch = useDispatch()
-
   const [error, changeError] = useState(false)
   const [loading, changeLoading] = useState(true)
   const [success, changeSuccess] = useState(false)
@@ -31,15 +28,8 @@ const Perfil = ({ username }) => {
         changeEmail(email)
         changeLoading(false)
       })
-      .catch(err => {
-        console.error(err)
-        if (err.response !== 500) {
-          dispatch({
-            type: 'AUTH_LOGOUT'
-          })
-        }
-      })
-  }, [username, dispatch])
+      .catch(_ => {})
+  }, [username])
 
   function save () {
     saveAdminUser(username, {

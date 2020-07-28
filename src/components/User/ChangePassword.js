@@ -27,9 +27,7 @@ const ChangePassword = ({ username, doChangePassword }) => {
         changePassword('')
         changeConfirmPassword('')
       })
-      .catch(_ => {
-        console.error('Change Password Error')
-      })
+      .catch(_ => {})
   }
 
   function isDisabled () {

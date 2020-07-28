@@ -45,7 +45,6 @@ const Health = () => {
         changeMediaStatus('UP')
       })
       .catch(_ => {
-        console.error('Media status request fail')
         changeMediaStatus('DOWN')
       })
 
@@ -54,7 +53,6 @@ const Health = () => {
         changeAppStatus('UP')
       })
       .catch(_ => {
-        console.error('App status request fail')
         changeAppStatus('DOWN')
       })
 
@@ -63,7 +61,6 @@ const Health = () => {
         changeAuthStatus('UP')
       })
       .catch(_ => {
-        console.error('App status request fail')
         changeAuthStatus('DOWN')
       })
   }, [])

@@ -1,6 +1,5 @@
 /* Import Libs */
 import React, { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
 import CircleLoader from 'react-spinners/CircleLoader'
 import Table from '@material-ui/core/Table'
 import TableHead from '@material-ui/core/TableHead'
@@ -25,7 +24,7 @@ import DeleteForeverIcon from '@material-ui/icons/DeleteForever'
 import { getVideos, removeVideo } from '../webapi'
 
 /* Import Constants */
-import { AUTH_LOGOUT, COLOR_ACTIONS, COLOR_PRIMARY } from '../constants'
+import { COLOR_ACTIONS, COLOR_PRIMARY } from '../constants'
 import Tooltip from '@material-ui/core/Tooltip'
 import Collapse from '@material-ui/core/Collapse'
 import Box from '@material-ui/core/Box'
@@ -41,23 +40,12 @@ const Files = () => {
 
   const [openCollapse, changeOpenCollapse] = React.useState(false)
 
-  const dispatch = useDispatch()
-
   useEffect(() => {
-    getVideos()
-      .then(response => {
-        const { data } = response
-        changeFiles(data.data)
-      })
-      .catch(err => {
-        console.error(err)
-        if (err.response !== 500) {
-          dispatch({
-            type: AUTH_LOGOUT
-          })
-        }
-      })
-  }, [dispatch])
+    getVideos().then(response => {
+      const { data } = response
+      changeFiles(data.data)
+    })
+  }, [])
 
   function remove () {
     removeVideo(selected.media.video_id)
@@ -66,14 +54,7 @@ const Files = () => {
         changeModalOpen(false)
         changeInformOpen(true)
       })
-      .catch(err => {
-        console.error(err)
-        if (err.response !== 500) {
-          dispatch({
-            type: 'AUTH_LOGOUT'
-          })
-        }
-      })
+      .catch(_ => {})
   }
 
   function parseTimestamp (timestamp) {
