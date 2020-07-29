@@ -82,7 +82,7 @@ const StatsTotal = () => {
           <div className='charts'>
             <div className='chart'>
               <center>
-                <h3>Admins</h3>
+                <h3>Administradores</h3>
               </center>
               <Pie
                 data={{
