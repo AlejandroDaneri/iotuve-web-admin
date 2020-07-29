@@ -180,7 +180,7 @@ const AdminUsers = () => {
               })}
             </TableBody>
           </Table>
-          <div>
+          <div className='add'>
             <Button
               variant='contained'
               style={{ backgroundColor: COLOR_PRIMARY }}
