@@ -106,28 +106,28 @@ const StatsPartial = () => {
                     75,
                     192,
                     192,
-                    'Requests users',
+                    'Requests usuarios',
                     data.map(d => d.requests_users)
                   ),
                   generateLineConfig(
                     255,
                     99,
                     132,
-                    'Requests admins',
+                    'Requests administradores',
                     data.map(d => d.requests_adminusers)
                   ),
                   generateLineConfig(
                     255,
                     255,
                     132,
-                    'Requests sessions',
+                    'Requests sesiones',
                     data.map(d => d.requests_sessions)
                   ),
                   generateLineConfig(
                     0,
                     255,
                     0,
-                    'Requests recovery',
+                    'Requests recuperar contraseña',
                     data.map(d => d.requests_recovery)
                   )
                 ]
