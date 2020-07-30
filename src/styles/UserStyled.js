@@ -21,6 +21,7 @@ export const UserWrapper = styled.div`
     align-items: begin;
 
     & .active-sessions {
+      width: 40%;
       border: 1px solid gray;
       border-radius: 14px;
       padding: 2%;
@@ -70,10 +71,15 @@ export const UserWrapper = styled.div`
     }
 
     & .perfil {
+      width: 20%;
       border: 1px solid gray;
       border-radius: 14px;
       padding: 2%;
       margin: 1%;
+
+      & .input {
+        width: 100%;
+      }
 
       & .title {
         display: flex;

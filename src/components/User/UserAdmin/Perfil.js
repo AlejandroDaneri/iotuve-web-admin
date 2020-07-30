@@ -60,6 +60,7 @@ const Perfil = ({ username }) => {
               <>
                 <div>Mail</div>
                 <input
+                  className='input'
                   value={email}
                   onChange={e => changeEmail(e.target.value)}
                 />
@@ -68,6 +69,7 @@ const Perfil = ({ username }) => {
               <>
                 <div>Nombre</div>
                 <input
+                  className='input'
                   value={firstName}
                   onChange={e => changeFirstName(e.target.value)}
                 />
@@ -76,6 +78,7 @@ const Perfil = ({ username }) => {
               <>
                 <div>Apellido</div>
                 <input
+                  className='input'
                   value={lastName}
                   onChange={e => changeLastName(e.target.value)}
                 />
