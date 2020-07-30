@@ -56,7 +56,10 @@ const App = () => {
     axios.interceptors.response.use(
       response => response,
       error => {
-        if (error.response !== 500) {
+        if (
+          error.response !== 500 &&
+          error.response.data.message.includes('session')
+        ) {
           changeError(true)
           dispatch({
             type: AUTH_LOGOUT
@@ -96,7 +99,7 @@ const App = () => {
         autoHideDuration={6000}
       >
         <SnackbarContent
-          message='Sesion Expirada'
+          message='Sesión expirada'
           style={{
             color: 'black',
             backgroundColor: 'red',
