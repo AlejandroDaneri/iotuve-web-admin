@@ -16,10 +16,11 @@ export const StatWrapper = styled.div`
 
   & .time-range {
     display: flex;
-    border: 1px solid white;
+    border: 1px solid gray;
     align-items: center;
     justify-content: flex-start;
-    width: 100%;
+    width: 70%;
+    margin: 2%;
 
     & .date {
       margin: 2%;
