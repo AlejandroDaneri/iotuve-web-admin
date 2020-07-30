@@ -55,36 +55,36 @@ const Perfil = ({ username }) => {
           <CircleLoader color={COLOR_PRIMARY} size={250} />
         ) : (
           <>
-            <div>
+            <>
               <p />
-              <>
+              <div className='field'>
                 <div>Mail</div>
                 <input
                   className='input'
                   value={email}
                   onChange={e => changeEmail(e.target.value)}
                 />
-              </>
+              </div>
               <p />
-              <>
+              <div className='field'>
                 <div>Nombre</div>
                 <input
                   className='input'
                   value={firstName}
                   onChange={e => changeFirstName(e.target.value)}
                 />
-              </>
+              </div>
               <p />
-              <>
+              <div className='field'>
                 <div>Apellido</div>
                 <input
                   className='input'
                   value={lastName}
                   onChange={e => changeLastName(e.target.value)}
                 />
-              </>
+              </div>
               <p />
-            </div>
+            </>
 
             <div className='actions'>
               <div onClick={() => save()}>

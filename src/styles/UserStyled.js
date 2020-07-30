@@ -24,7 +24,6 @@ export const UserWrapper = styled.div`
       display: flex;
       flex-direction: column;
       width: 40%;
-      justify-content: center;
       align-items: center;
       border: 1px solid gray;
       border-radius: 14px;
@@ -75,14 +74,25 @@ export const UserWrapper = styled.div`
     }
 
     & .perfil {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
       width: 20%;
       border: 1px solid gray;
       border-radius: 14px;
       padding: 2%;
       margin: 1%;
 
-      & .input {
+      & .field {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
         width: 100%;
+
+        & .input {
+          width: 100%;
+        }
       }
 
       & .title {
