@@ -80,7 +80,9 @@ const Comments = () => {
       />
       <Snackbar
         open={showSnackbar}
-        onClose={() => setRmvSuccess(false)}
+        onClose={() => {
+          setShowSnackbar(false)
+        }}
         anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
         autoHideDuration={6000}
       >
