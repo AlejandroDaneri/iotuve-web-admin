@@ -23,7 +23,6 @@ const Stats = () => {
           <div className='picture'>
             <Pie
               data={{
-                labels: ['', ''],
                 datasets: [
                   {
                     data: [40, 60],
@@ -48,11 +47,15 @@ const Stats = () => {
           <div className='picture'>
             <Line
               data={{
-                labels: ['', ''],
                 datasets: [
                   generateLineConfig(75, 192, 192, '', [20, 30, 40]),
                   generateLineConfig(255, 99, 132, '', [10, 40, 40])
                 ]
+              }}
+              options={{
+                legend: {
+                  display: false
+                }
               }}
             />
           </div>
@@ -72,7 +75,6 @@ const Stats = () => {
           <div className='picture'>
             <Doughnut
               data={{
-                labels: ['', ''],
                 datasets: [
                   {
                     data: [55, 45],
