@@ -41,9 +41,7 @@ const StatsPartial = () => {
     getStatsDaily(toString(startDate), toString(endDate))
       .then(response => {
         const { data } = response
-        console.error(data.daily_stats)
         changeData(data.daily_stats)
-        console.error(data.daily_stats)
         changeLoading(false)
       })
       .catch(_ => {
