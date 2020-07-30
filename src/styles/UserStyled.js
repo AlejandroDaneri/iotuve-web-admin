@@ -21,7 +21,11 @@ export const UserWrapper = styled.div`
     align-items: begin;
 
     & .active-sessions {
+      display: flex;
+      flex-direction: column;
       width: 40%;
+      justify-content: center;
+      align-items: center;
       border: 1px solid gray;
       border-radius: 14px;
       padding: 2%;
