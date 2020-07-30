@@ -64,7 +64,7 @@ const StatsTotal = () => {
 
   return (
     <StatWrapper>
-      <h1>Estadisticas Totales</h1>
+      <h1>Estadísticas</h1>
       {loading ? (
         <CircleLoader color={COLOR_PRIMARY} size={250} />
       ) : (

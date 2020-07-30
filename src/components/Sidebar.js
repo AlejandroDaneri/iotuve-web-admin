@@ -126,7 +126,7 @@ const Sidebar = props => {
                 <Tooltip title='Ver estadísticas de los servidores'>
                   <ListItemText
                     className={classes.menuItem}
-                    primary='Estadisticas'
+                    primary='Estadísticas'
                   />
                 </Tooltip>
               </ListItem>
