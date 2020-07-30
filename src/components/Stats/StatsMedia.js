@@ -24,6 +24,8 @@ const StatsPartial = () => {
   const [data, changeData] = useState([])
   const [loading, changeLoading] = useState(true)
 
+  const visibilityTags = { public: 'Público', private: 'Privado' }
+
   const doGetStats = () => {
     changeLoading(true)
     getMediaStats()
@@ -195,12 +197,12 @@ const StatsPartial = () => {
             <h2>Distribución de visibilidad en los videos</h2>
             <Doughnut
               data={{
-                labels: ['Publico', 'Privado'],
+                labels: data.visibility.map(x => visibilityTags[x._id]),
                 datasets: [
                   {
                     data: data.visibility.map(x => x.count),
-                    backgroundColor: ['#dcdee0', '#685c5c'],
-                    hoverBackgroundColor: ['#dcdee0', '#685c5c'],
+                    backgroundColor: ['#685c5c', '#dcdee0'],
+                    hoverBackgroundColor: ['#685c5c', '#dcdee0'],
                     borderWidth: 0
                   }
                 ]
