@@ -1,6 +1,8 @@
 /* Import Libs */
 import React from 'react'
 import { StyledModal } from '../styles/ModalStyled'
+import { Button } from '@material-ui/core'
+import { COLOR_PRIMARY } from '../constants'
 
 const DeleteModal = ({
   name,
@@ -16,11 +18,23 @@ const DeleteModal = ({
       onEscapeKeydown={null}
     >
       <span>
-        Esta seguro que desea borrar el {resource} <b>{name}</b>?
+        ¿Está seguro que desea borrar el {resource} <b>{name}</b>?
       </span>
       <div className='actions'>
-        <button onClick={() => changeModalOpen(false)}>Cancelar</button>
-        <button onClick={remove}>Aceptar</button>
+        <Button
+          variant='contained'
+          style={{ backgroundColor: COLOR_PRIMARY }}
+          onClick={() => changeModalOpen(false)}
+        >
+          Cancelar
+        </Button>
+        <Button
+          variant='contained'
+          style={{ backgroundColor: COLOR_PRIMARY }}
+          onClick={remove}
+        >
+          Aceptar
+        </Button>
       </div>
     </StyledModal>
   )

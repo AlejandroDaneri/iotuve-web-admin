@@ -3,16 +3,15 @@ import React, { useState, useEffect } from 'react'
 import Button from '@material-ui/core/Button'
 import CircleLoader from 'react-spinners/CircleLoader'
 import { Snackbar, SnackbarContent } from '@material-ui/core'
-import { useDispatch } from 'react-redux'
 
 /* Import WebApi */
 import { getUser, saveUser } from '../../../webapi'
 
 /* Import Constants */
-import { COLOR_PRIMARY, AUTH_LOGOUT } from '../../../constants'
+import { COLOR_PRIMARY } from '../../../constants'
 
 const Perfil = ({ username }) => {
-  const dispatch = useDispatch()
+  const [error, changeError] = useState(false)
   const [loading, changeLoading] = useState(true)
   const [email, changeEmail] = useState()
   const [phone, changePhone] = useState()
@@ -37,15 +36,8 @@ const Perfil = ({ username }) => {
         changeLoginService(data.login_service)
         changeLoading(false)
       })
-      .catch(err => {
-        console.error(err)
-        if (err.response !== 500) {
-          dispatch({
-            type: AUTH_LOGOUT
-          })
-        }
-      })
-  })
+      .catch(_ => {})
+  }, [username])
 
   function save () {
     saveUser(username, {
@@ -59,7 +51,9 @@ const Perfil = ({ username }) => {
       .then(_ => {
         changeSuccess(true)
       })
-      .catch(_ => {})
+      .catch(err => {
+        err.response && err.response.status === 400 && changeError(true)
+      })
   }
 
   return (
@@ -141,7 +135,6 @@ const Perfil = ({ username }) => {
           <div className='actions'>
             <div className='action' onClick={() => save()}>
               <Button
-                href='/users'
                 variant='contained'
                 style={{ backgroundColor: COLOR_PRIMARY }}
               >
@@ -149,6 +142,22 @@ const Perfil = ({ username }) => {
               </Button>
             </div>
           </div>
+
+          <Snackbar
+            open={error}
+            onClose={() => changeError(false)}
+            anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+            autoHideDuration={6000}
+          >
+            <SnackbarContent
+              message='Perfil no editado'
+              style={{
+                color: 'black',
+                backgroundColor: 'red',
+                fontSize: '14px'
+              }}
+            />
+          </Snackbar>
 
           <Snackbar
             open={success}

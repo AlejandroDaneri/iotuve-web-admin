@@ -7,7 +7,9 @@ import { doRecoveryPassword } from '../webapi'
 
 /* Import Styled Components */
 import { ChangePasswordWrapper } from '../styles/ChangePasswordStyled'
-import { Button } from '../styles/ButtonStyled'
+import Button from '@material-ui/core/Button'
+import { Snackbar, SnackbarContent } from '@material-ui/core'
+import { COLOR_PRIMARY, COLOR_ERROR } from '../constants'
 
 const ChangePassword = location => {
   const { key, username } = qs.parse(location.location.search, {
@@ -16,6 +18,8 @@ const ChangePassword = location => {
 
   const [password, changePassword] = useState('')
   const [confirmPassword, changeConfirmPassword] = useState('')
+  const [pwdSuccess, changePwdSuccess] = useState(false)
+  const [showSnackbar, changeShowSnackbar] = useState(false)
 
   function isDisabled () {
     if (!password) return true
@@ -28,10 +32,12 @@ const ChangePassword = location => {
     e.preventDefault()
     doRecoveryPassword(key, username, password)
       .then(_ => {
-        console.error('Change Password Success')
+        changePwdSuccess(true)
+        changeShowSnackbar(true)
       })
       .catch(_ => {
-        console.error('Change Password Error')
+        changePwdSuccess(false)
+        changeShowSnackbar(true)
       })
   }
 
@@ -55,10 +61,46 @@ const ChangePassword = location => {
           onChange={e => changeConfirmPassword(e.target.value)}
           placeholder='Confirmar Contraseña'
         />
-        <Button disabled={isDisabled} onClick={onSubmit}>
-          Aceptar
-        </Button>
+        <div className='chg_pwd_container'>
+          {isDisabled() ? (
+            <Button
+              variant='outlined'
+              style={{ borderColor: COLOR_PRIMARY, color: 'white' }}
+              disabled
+            >
+              Cambiar contraseña
+            </Button>
+          ) : (
+            <Button
+              variant='contained'
+              style={{ backgroundColor: COLOR_PRIMARY, color: 'black' }}
+              disabled={false}
+              onClick={onSubmit}
+            >
+              Cambiar contraseña
+            </Button>
+          )}
+        </div>
       </form>
+      <Snackbar
+        open={showSnackbar}
+        onClose={() => changePwdSuccess(false)}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+        autoHideDuration={6000}
+      >
+        <SnackbarContent
+          message={
+            pwdSuccess
+              ? 'Contraseña cambiada con éxito'
+              : 'Error al cambiar la contraseña, intente de nuevo'
+          }
+          style={{
+            color: 'black',
+            backgroundColor: pwdSuccess ? COLOR_PRIMARY : COLOR_ERROR,
+            fontSize: '14px'
+          }}
+        />
+      </Snackbar>
     </ChangePasswordWrapper>
   )
 }

@@ -108,8 +108,11 @@ const Sidebar = props => {
                 <ListItemIcon className={classes.menuItem}>
                   <SupervisorAccountIcon />
                 </ListItemIcon>
-                <Tooltip title='Ver los admins que están registrados'>
-                  <ListItemText className={classes.menuItem} primary='Admins' />
+                <Tooltip title='Ver los administradores que están registrados'>
+                  <ListItemText
+                    className={classes.menuItem}
+                    primary='Administradores'
+                  />
                 </Tooltip>
               </ListItem>
             </Link>
@@ -123,7 +126,7 @@ const Sidebar = props => {
                 <Tooltip title='Ver estadísticas de los servidores'>
                   <ListItemText
                     className={classes.menuItem}
-                    primary='Estadisticas'
+                    primary='Estadísticas'
                   />
                 </Tooltip>
               </ListItem>
@@ -136,10 +139,12 @@ const Sidebar = props => {
               <ListItemIcon className={classes.menuItem}>
                 <DoneIcon />
               </ListItemIcon>
-              <ListItemText
-                className={classes.menuItem}
-                primary='Estado actual'
-              />
+              <Tooltip title='Estado actual de los servidores'>
+                <ListItemText
+                  className={classes.menuItem}
+                  primary='Estado actual'
+                />
+              </Tooltip>
             </ListItem>
           </List>
           <Health />

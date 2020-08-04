@@ -18,7 +18,7 @@ const UserAdmin = () => {
 
   return (
     <UserWrapper>
-      <h2>Admin: {username}</h2>
+      <h2>Administrador: {username}</h2>
 
       <div className='views'>
         <Perfil username={username} />

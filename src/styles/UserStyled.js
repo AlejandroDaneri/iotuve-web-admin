@@ -18,13 +18,33 @@ export const UserWrapper = styled.div`
     flex-direction: row;
     width: 100%;
     justify-content: center;
-    align-items: center;
+    align-items: begin;
 
     & .active-sessions {
-      border: 1px solid white;
+      display: flex;
+      flex-direction: column;
+      width: 40%;
+      align-items: center;
+      border: 1px solid gray;
       border-radius: 14px;
       padding: 2%;
       margin: 1%;
+
+      & .session {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        padding: 1%;
+
+        & .data {
+          font-size: 1.5vmin;
+        }
+
+        & .delete {
+          padding: 2%;
+          cursor: pointer;
+        }
+      }
 
       & .title {
         display: flex;
@@ -34,7 +54,7 @@ export const UserWrapper = styled.div`
     }
 
     & .change-password {
-      border: 1px solid white;
+      border: 1px solid gray;
       border-radius: 14px;
       padding: 2%;
       margin: 1%;
@@ -54,10 +74,26 @@ export const UserWrapper = styled.div`
     }
 
     & .perfil {
-      border: 1px solid white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 20%;
+      border: 1px solid gray;
       border-radius: 14px;
       padding: 2%;
       margin: 1%;
+
+      & .field {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        width: 100%;
+
+        & .input {
+          width: 100%;
+        }
+      }
 
       & .title {
         display: flex;

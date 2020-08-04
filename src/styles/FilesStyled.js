@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 
 export const FilesWrapper = styled.div`
+  background-color: #282c34;
   display: flex;
   flex-direction: column;
   justify-content: center;

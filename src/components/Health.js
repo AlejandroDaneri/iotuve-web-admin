@@ -24,13 +24,27 @@ const Health = () => {
     )}`
   )
 
+  function status (service, status) {
+    return (
+      <div className='containerStatus'>
+        <div className='serviceName'>{service}: </div>
+        <div className='service'>
+          {status === 'UP' ? (
+            <FiberManualRecordIcon style={{ color: 'green' }} />
+          ) : (
+            <FiberManualRecordIcon style={{ color: 'red' }} />
+          )}
+        </div>
+      </div>
+    )
+  }
+
   useEffect(() => {
     getMediaStatus()
       .then(_ => {
         changeMediaStatus('UP')
       })
       .catch(_ => {
-        console.error('Media status request fail')
         changeMediaStatus('DOWN')
       })
 
@@ -39,7 +53,6 @@ const Health = () => {
         changeAppStatus('UP')
       })
       .catch(_ => {
-        console.error('App status request fail')
         changeAppStatus('DOWN')
       })
 
@@ -48,7 +61,6 @@ const Health = () => {
         changeAuthStatus('UP')
       })
       .catch(_ => {
-        console.error('App status request fail')
         changeAuthStatus('DOWN')
       })
   }, [])
@@ -73,30 +85,10 @@ const Health = () => {
   return mediaStatus && appStatus && authStatus ? (
     <HealthWrapper>
       <center>
-        <p>
-          Media:{' '}
-          {mediaStatus === 'UP' ? (
-            <FiberManualRecordIcon style={{ color: 'green' }} />
-          ) : (
-            <FiberManualRecordIcon style={{ color: 'red' }} />
-          )}{' '}
-        </p>
-        <p>
-          App:{' '}
-          {appStatus === 'UP' ? (
-            <FiberManualRecordIcon style={{ color: 'green' }} />
-          ) : (
-            <FiberManualRecordIcon style={{ color: 'red' }} />
-          )}
-        </p>
-        <p>
-          Auth:{' '}
-          {authStatus === 'UP' ? (
-            <FiberManualRecordIcon style={{ color: 'green' }} />
-          ) : (
-            <FiberManualRecordIcon style={{ color: 'red' }} />
-          )}
-        </p>
+        {status('Media', mediaStatus)}
+        {status('App', appStatus)}
+        {status('Auth', authStatus)}
+        <br />
         Ult. actualización {showTime}
       </center>
     </HealthWrapper>

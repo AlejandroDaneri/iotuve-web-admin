@@ -10,6 +10,10 @@ export const UsersAdminWrapper = styled.div`
   left: 215px;
   background-color: #282c34;
 
+  & .add {
+    margin: 3%;
+  }
+
   & > h2 {
     font-size: 3vmin;
   }

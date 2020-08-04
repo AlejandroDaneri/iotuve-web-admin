@@ -2,17 +2,12 @@ import axios from 'axios'
 
 import { store } from '../index'
 
-axios.interceptors.request.use(
-  config => {
-    config.headers['X-Admin'] = 'true'
-    config.headers['X-Client-ID'] = '38d1fcaf-3a8b-4dfe-9ca4-2e0473b442ba'
-    config.headers['X-Auth-Token'] = store.getState().auth.token
-    return config
-  },
-  error => {
-    return Promise.reject(error)
-  }
-)
+axios.interceptors.request.use(config => {
+  config.headers['X-Admin'] = 'true'
+  config.headers['X-Client-ID'] = '38d1fcaf-3a8b-4dfe-9ca4-2e0473b442ba'
+  config.headers['X-Auth-Token'] = store.getState().auth.token
+  return config
+})
 
 const APP_SERVER = process.env.REACT_APP_APP_SERVER
 const MEDIA_SERVER = process.env.REACT_APP_MEDIA_SERVER
@@ -34,7 +29,19 @@ export function authBaseUrl () {
 }
 
 export function getVideos () {
-  return axios.get(appBaseUrl() + '/api/v1/videos')
+  return axios.get(appBaseUrl() + '/api/v1/videos', {
+    params: {
+      limit: 50
+    }
+  })
+}
+export function getComments (id) {
+  return axios.get(appBaseUrl() + '/api/v1/comments', {
+    params: {
+      video: id,
+      limit: 50
+    }
+  })
 }
 
 export function getMediaStatus () {
@@ -69,6 +76,10 @@ export function getUserSessions (username) {
   return axios.get(appBaseUrl() + `/api/v1/users/${username}/sessions`)
 }
 
+export function closeUserSession (sessionId) {
+  return axios.delete(appBaseUrl() + `/api/v1/sessions/${sessionId}`)
+}
+
 export function getUserAdminSessions (username) {
   return axios.get(appBaseUrl() + `/api/v1/adminusers/${username}/sessions`)
 }
@@ -85,8 +96,14 @@ export function saveAdminUser (username, user) {
   return axios.put(appBaseUrl() + `/api/v1/adminusers/${username}`, user)
 }
 
-export function getUsersAdmin () {
+export function getAdminUsers () {
   return axios.get(appBaseUrl() + '/api/v1/adminusers')
+}
+
+export function createAdminUser (token, user) {
+  return axios.post(appBaseUrl() + '/api/v1/adminusers', user, {
+    headers: { 'X-Auth-Token': token }
+  })
 }
 
 export function doRecoveryPassword (key, username, password) {
@@ -136,8 +153,19 @@ export function removeAdminUser (username) {
   return axios.delete(appBaseUrl() + `/api/v1/adminusers/${username}`)
 }
 
-export function getStats (startDate, endDate) {
+export function removeComment (id) {
+  return axios.delete(appBaseUrl() + `/api/v1/comments/${id}`)
+}
+
+export function getStatsTotal () {
+  return axios.get(`${authBaseUrl()}/stats_total`)
+}
+
+export function getStatsDaily (startDate, endDate) {
   return axios.get(
-    `${authBaseUrl()}/stats?startdate=${startDate}&enddate=${endDate}`
+    `${authBaseUrl()}/stats_daily?startdate=${startDate}&enddate=${endDate}&sortascending=true`
   )
+}
+export function getMediaStats () {
+  return axios.get(`${appBaseUrl()}/stats`)
 }

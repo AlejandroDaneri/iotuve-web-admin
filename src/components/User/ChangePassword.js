@@ -27,9 +27,7 @@ const ChangePassword = ({ username, doChangePassword }) => {
         changePassword('')
         changeConfirmPassword('')
       })
-      .catch(_ => {
-        console.error('Change Password Error')
-      })
+      .catch(_ => {})
   }
 
   function isDisabled () {
@@ -43,7 +41,7 @@ const ChangePassword = ({ username, doChangePassword }) => {
   return (
     <div className='change-password'>
       <div className='title'>
-        <h3>Cambiar Contraseña</h3>
+        <h3>Cambiar contraseña</h3>
       </div>
 
       <form autoComplete='off'>
@@ -54,7 +52,7 @@ const ChangePassword = ({ username, doChangePassword }) => {
             padding: '10px'
           }}
         >
-          <div>Nueva Contraseña</div>
+          <div>Nueva contraseña</div>
           <input
             id='new_pwd'
             type='password'
@@ -63,7 +61,7 @@ const ChangePassword = ({ username, doChangePassword }) => {
 
           <p />
 
-          <div>Repita Nueva Contraseña</div>
+          <div>Repita nueva contraseña</div>
           <input
             id='chk_pwd'
             type='password'

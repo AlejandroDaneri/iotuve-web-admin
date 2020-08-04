@@ -11,6 +11,9 @@ export const StyledTableCell = withStyles(theme => ({
   body: {
     fontSize: 14,
     color: COLOR_PRIMARY
+  },
+  root: {
+    borderBottom: 'none'
   }
 }))(TableCell)
 
